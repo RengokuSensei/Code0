@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research and Reading</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>My Research and Reading</h1>
+    </header>
+    <main>
+        <section id="auth">
+            <h2>Login or Register</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <button type="submit" id="login-btn">Login</button>
+                <button type="button" id="register-btn">Register</button>
+            </form>
+            <button id="logout-btn" style="display: none;">Logout</button>
+        </section>
+        <section id="create-post">
+            <h2>Create a New Post</h2>
+            <form id="post-form">
+                <label for="post-type">Type:</label>
+                <select id="post-type" name="type">
+                    <option value="research">Research</option>
+                    <option value="reading">Reading</option>
+                </select>
+                <br>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+                <br>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+                <br>
+                <label for="summary">Summary:</label>
+                <textarea id="summary" name="summary" required></textarea>
+                <br>
+                <button type="submit">Create Post</button>
+            </form>
+        </section>
+        <section id="research">
+            <h2>Research</h2>
+            <div id="research-posts"></div>
+        </section>
+        <section id="reading">
+            <h2>Reading Stuff</h2>
+            <div id="reading-posts"></div>
+        </section>
+        <section id="notes" style="display: none;">
+            <h2>My Notes</h2>
+            <ul id="notes-list"></ul>
+            <form id="note-form">
+                <textarea id="note-input" required></textarea>
+                <button type="submit">Add Note</button>
+            </form>
+        </section>
+        <section id="ebook-reader" style="display: none;">
+            <h2>E-Book Reader</h2>
+            <input type="file" id="ebook-upload" accept=".pdf,.epub">
+            <div id="viewer"></div>
+        </section>
+        <section id="chat">
+            <h2>Real-Time Chat</h2>
+            <ul id="messages"></ul>
+            <form id="chat-form" action="">
+                <input id="chat-input" autocomplete="off" /><button>Send</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
