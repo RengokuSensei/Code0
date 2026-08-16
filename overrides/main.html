@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+<!-- 
+  =============================================================
+  ADVANCED ANALYSIS - Custom HTML Overrides Template
+  =============================================================
+  You can inject custom <head>, <script>, or <body> elements here.
+-->
+
+{% block extrahead %}
+  <!-- Add custom meta tags, web fonts, or verification tokens here -->
+  <meta name="author" content="Aditya">
+  {{ super() }}
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <!-- Add custom analytics or external scripts here -->
+{% endblock %}

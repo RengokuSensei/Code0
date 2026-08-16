@@ -1,0 +1,137 @@
+site_name: ADVANCED ANALYSIS
+site_description: Deep technical insights, research, and data-driven analysis by Aditya.
+site_author: aditya
+
+# Repository & Edit Links (can be customized once linked to your GitHub repo)
+repo_name: ADVANCED_ANALYSIS
+repo_url: https://github.com
+
+# Copyright & Licensing in Footer
+copyright: Copyright &copy; 2026 Aditya &mdash; ADVANCED ANALYSIS
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  
+  # Icons & Logo
+  icon:
+    logo: material/chart-line
+    repo: fontawesome/brands/github
+  
+  # Modern color scheme with auto/manual dark mode toggle
+  palette:
+    # Light Mode
+    - scheme: default
+      primary: custom
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Dark Mode
+    - scheme: slate
+      primary: custom
+      accent: purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  # Modern Material Typography
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+  # Material Theme UX Features
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tooltips
+    - header.autohide
+
+# Extra Assets (Custom CSS & JS)
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/extra.js
+
+# Social Links in Footer
+extra:
+  social:
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@ADVANCED_ANALYSIS
+      name: YouTube | @ADVANCED_ANALYSIS
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/advanced_analysis/
+      name: Instagram | @advanced_analysis
+    - icon: fontawesome/brands/github
+      link: https://github.com
+      name: GitHub
+
+# Markdown Parser Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Navigation Structure
+nav:
+  - Home: index.md
+  - Research & Analysis:
+      - Overview: analysis/index.md
+      - Methodologies: analysis/methodology.md
+      - Case Studies: analysis/case-studies.md
+  - Guides & Insights:
+      - Quick Start: guides/getting-started.md
+      - Architecture & Frameworks: guides/architecture.md
+  - About:
+      - Overview: about/index.md
+      - Author: about/author.md
