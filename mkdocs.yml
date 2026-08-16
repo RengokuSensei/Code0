@@ -1,10 +1,10 @@
 site_name: ADVANCED ANALYSIS
-site_description: Deep technical insights, research, and data-driven analysis by Aditya.
+site_description: Deep technical insights, research, reading summaries, and data-driven analysis by Aditya.
 site_author: aditya
 
-# Repository & Edit Links (can be customized once linked to your GitHub repo)
-repo_name: ADVANCED_ANALYSIS
-repo_url: https://github.com
+# GitHub Repository Links
+repo_name: RengokuSensei/Code0
+repo_url: https://github.com/RengokuSensei/Code0
 
 # Copyright & Licensing in Footer
 copyright: Copyright &copy; 2026 Aditya &mdash; ADVANCED ANALYSIS
@@ -79,8 +79,8 @@ extra:
       link: https://www.instagram.com/advanced_analysis/
       name: Instagram | @advanced_analysis
     - icon: fontawesome/brands/github
-      link: https://github.com
-      name: GitHub
+      link: https://github.com/RengokuSensei/Code0
+      name: GitHub | RengokuSensei/Code0
 
 # Markdown Parser Extensions
 markdown_extensions:
@@ -129,6 +129,13 @@ nav:
       - Overview: analysis/index.md
       - Methodologies: analysis/methodology.md
       - Case Studies: analysis/case-studies.md
+  - Reading & Library:
+      - Overview: reading/index.md
+      - Book Summaries: reading/books.md
+      - Research Papers: reading/papers.md
+      - Interactive Reader: reading/reader.md
+  - Workspace:
+      - Research Scratchpad: workspace/notes.md
   - Guides & Insights:
       - Quick Start: guides/getting-started.md
       - Architecture & Frameworks: guides/architecture.md

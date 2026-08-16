@@ -11,6 +11,7 @@
   --aa-gradient-hero: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
   --aa-card-border: rgba(226, 232, 240, 0.8);
   --aa-card-bg: rgba(255, 255, 255, 0.75);
+  --aa-input-bg: #ffffff;
 }
 
 [data-md-color-scheme="slate"] {
@@ -22,6 +23,7 @@
   --aa-gradient-hero: linear-gradient(135deg, #6366f1 0%, #38bdf8 100%);
   --aa-card-border: rgba(255, 255, 255, 0.08);
   --aa-card-bg: rgba(17, 24, 39, 0.6);
+  --aa-input-bg: #111827;
 }
 
 /* Base smoothing and typography */
@@ -89,7 +91,7 @@ body, .md-typeset {
 /* Custom Grid Cards */
 .aa-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
   margin: 2rem 0;
 }
@@ -166,12 +168,185 @@ body, .md-typeset {
   border-color: transparent;
 }
 
-/* Rounded sleek code blocks */
-.md-typeset pre > code {
-  border-radius: 0.5rem;
+/* --------------------------------------------------------------------------
+   Reader & Notes Workspace Components
+   -------------------------------------------------------------------------- */
+
+/* PDF Reader */
+.aa-reader-container {
+  margin: 1.5rem 0;
 }
 
-/* Footer polish */
-.md-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+.aa-reader-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.aa-upload-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+  background: var(--md-accent-fg-color);
+  color: #ffffff !important;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.aa-upload-label:hover {
+  opacity: 0.9;
+}
+
+.aa-file-status {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.aa-viewer-box {
+  border-radius: 8px;
+  border: 1px solid var(--aa-card-border);
+  background: var(--aa-card-bg);
+  min-height: 400px;
+}
+
+.aa-placeholder-content {
+  text-align: center;
+  padding: 5rem 2rem;
+}
+
+/* Notes Scratchpad Workspace */
+.aa-notes-workspace {
+  margin: 1.5rem 0;
+  border: 1px solid var(--aa-card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--aa-card-bg);
+}
+
+.aa-notes-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--aa-card-border);
+  background: var(--aa-card-bg);
+}
+
+.aa-tool-btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--aa-card-border);
+  background: var(--aa-input-bg);
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aa-tool-btn:hover {
+  border-color: var(--md-accent-fg-color);
+}
+
+.aa-tool-btn.danger:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.aa-notes-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 450px;
+}
+
+@media (max-width: 768px) {
+  .aa-notes-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aa-notes-sidebar {
+  border-right: 1px solid var(--aa-card-border);
+  padding: 0.75rem;
+}
+
+.aa-sidebar-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+  padding: 0 0.5rem;
+}
+
+.aa-notes-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.aa-note-item {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.25rem;
+  transition: background 0.15s ease;
+}
+
+.aa-note-item:hover {
+  background: var(--md-accent-fg-color--transparent);
+}
+
+.aa-note-item.active {
+  background: var(--md-accent-fg-color);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.aa-notes-editor-area {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.aa-note-title {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: 1px solid var(--aa-card-border);
+  border-radius: 6px;
+  background: var(--aa-input-bg);
+  color: inherit;
+  margin-bottom: 0.75rem;
+}
+
+.aa-note-textarea {
+  width: 100%;
+  flex: 1;
+  min-height: 350px;
+  padding: 0.75rem;
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border: 1px solid var(--aa-card-border);
+  border-radius: 6px;
+  background: var(--aa-input-bg);
+  color: inherit;
+  resize: vertical;
+}
+
+.aa-note-title:focus,
+.aa-note-textarea:focus {
+  outline: none;
+  border-color: var(--md-accent-fg-color);
 }

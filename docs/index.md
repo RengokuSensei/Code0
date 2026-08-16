@@ -1,12 +1,12 @@
 ---
 title: Welcome to ADVANCED ANALYSIS
-description: Deep technical insights, research, and data-driven analysis by Aditya.
+description: Deep technical insights, research, reading notes, and data-driven analysis by Aditya.
 ---
 
 <div class="aa-hero">
   <div class="aa-hero-title">ADVANCED ANALYSIS</div>
   <div class="aa-hero-subtitle">
-    A modern hub for deep technical research, architectural breakdowns, data science explorations, and actionable engineering insights.
+    A modern engineering and research hub for deep technical breakdowns, curated reading notes, in-browser paper analysis, and systems insights.
   </div>
   <div class="aa-social-bar">
     <a href="https://www.youtube.com/@ADVANCED_ANALYSIS" target="_blank" rel="noopener noreferrer" class="aa-social-btn youtube">
@@ -21,18 +21,23 @@ description: Deep technical insights, research, and data-driven analysis by Adit
   </div>
 </div>
 
-## Explore Topics
+## Explore Topics & Tools
 
 <div class="aa-grid">
   <a href="analysis/" class="aa-card">
     <span class="aa-card-icon">📊</span>
     <div class="aa-card-title">Research & Analysis</div>
-    <p class="aa-card-desc">Comprehensive reports, benchmark breakdowns, and quantitative studies.</p>
+    <p class="aa-card-desc">Quantitative studies, algorithmic breakdowns, and real-world system benchmarks.</p>
   </a>
-  <a href="guides/getting-started/" class="aa-card">
-    <span class="aa-card-icon">⚡</span>
-    <div class="aa-card-title">Guides & Insights</div>
-    <p class="aa-card-desc">Practical implementation blueprints, engineering walkthroughs, and setup guides.</p>
+  <a href="reading/" class="aa-card">
+    <span class="aa-card-icon">📚</span>
+    <div class="aa-card-title">Reading & Library</div>
+    <p class="aa-card-desc">Curated book summaries, seminal research papers, and interactive document reader.</p>
+  </a>
+  <a href="workspace/notes/" class="aa-card">
+    <span class="aa-card-icon">📝</span>
+    <div class="aa-card-title">Research Scratchpad</div>
+    <p class="aa-card-desc">Private browser-saved markdown workspace to capture thoughts and export notes.</p>
   </a>
   <a href="about/author/" class="aa-card">
     <span class="aa-card-icon">🚀</span>
@@ -46,14 +51,14 @@ description: Deep technical insights, research, and data-driven analysis by Adit
 ## Featured Highlights
 
 === "💡 What We Cover"
-    - **Quantitative Systems Analysis**: Deep evaluations of distributed systems, algorithms, and performance profiles.
-    - **Data-Driven Insights**: Evidence-based comparisons of emerging tech stacks and developer tooling.
-    - **Visual Explanations**: Interactive diagrams, benchmarks, and curated code samples.
+    - **Empirical Systems Research**: Deep evaluations of distributed architectures and data systems.
+    - **Literature Syntheses**: Distilled takeaways from foundational computer science books and whitepapers.
+    - **Interactive Tools**: In-browser document reading and local client-side scratchpads.
 
 === "🛠️ Built With Modern Tech"
     ```yaml
     platform: MkDocs Material
-    hosting: GitHub Pages (Free Tier)
+    repository: github.com/RengokuSensei/Code0
     author: Aditya
     typography: Inter & JetBrains Mono
     status: Online & Live
