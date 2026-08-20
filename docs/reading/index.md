@@ -1,15 +1,20 @@
 ---
 title: Reading & Library Hub
-description: Curated reading lists, seminal papers, book summaries, and analytical digests by Aditya.
+description: Curated reading lists, seminal papers, chemistry simulations, book summaries, and analytical digests by Aditya.
 ---
 
 # 📚 Reading & Library Hub
 
-Welcome to the **Reading & Library Hub** of **ADVANCED ANALYSIS**. This section houses curated book notes, literature reviews, whitepapers, and our interactive document reader.
+Welcome to the **Reading & Library Hub** of **ADVANCED ANALYSIS**. This section houses curated book notes, chemistry & physics models, literature reviews, whitepapers, and our interactive document reader.
 
 ---
 
 <div class="aa-grid">
+  <a href="chemistry/atom/" class="aa-card">
+    <span class="aa-card-icon">⚛️</span>
+    <div class="aa-card-title">Chemistry: Atom & Orbitals</div>
+    <p class="aa-card-desc">Interactive electron configurations, quantum energy states, and 3D atomic orbital visualizer.</p>
+  </a>
   <a href="books/" class="aa-card">
     <span class="aa-card-icon">📖</span>
     <div class="aa-card-title">Book Summaries</div>
@@ -30,6 +35,10 @@ Welcome to the **Reading & Library Hub** of **ADVANCED ANALYSIS**. This section 
 ---
 
 ## 🏷️ Active Reading Categories
+
+=== "⚛️ Chemistry & Atomic Sciences"
+    - **[Atomic Orbitals & Periodic Table](chemistry/atom.md)** &mdash; *Interactive 118-Element Quantum Visualizer*
+    - **Electronic Configurations & Shells** &mdash; *Aufbau, Pauli Exclusion & Hund's Rule Analysis*
 
 === "🖥️ Distributed Systems & Computing"
     - **Designing Data-Intensive Applications** &mdash; *Martin Kleppmann*

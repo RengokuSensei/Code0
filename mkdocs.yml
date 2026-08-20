@@ -132,6 +132,9 @@ nav:
       - Case Studies: analysis/case-studies.md
   - Reading & Library:
       - Overview: reading/index.md
+      - Chemistry:
+          - Overview: reading/chemistry/index.md
+          - Atom & Orbitals: reading/chemistry/atom.md
       - Book Summaries: reading/books.md
       - Research Papers: reading/papers.md
       - Interactive Reader: reading/reader.md
