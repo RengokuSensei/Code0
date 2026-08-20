@@ -22,6 +22,14 @@ theme:
   
   # Modern color scheme with auto/manual dark mode toggle
   palette:
+    # Dark Mode (default)
+    - scheme: slate
+      primary: custom
+      accent: purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
     # Light Mode
     - scheme: default
       primary: custom
@@ -29,14 +37,6 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-
-    # Dark Mode
-    - scheme: slate
-      primary: custom
-      accent: purple
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
 
   # Modern Material Typography
   font:
@@ -123,13 +123,9 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
 
-# Navigation Structure
+# Navigation Structure — Minimalist
 nav:
   - Home: index.md
-  - Research & Analysis:
-      - Overview: analysis/index.md
-      - Methodologies: analysis/methodology.md
-      - Case Studies: analysis/case-studies.md
   - Reading & Library:
       - Overview: reading/index.md
       - Chemistry:
@@ -140,9 +136,6 @@ nav:
       - Interactive Reader: reading/reader.md
   - Workspace:
       - Research Scratchpad: workspace/notes.md
-  - Guides & Insights:
-      - Quick Start: guides/getting-started.md
-      - Architecture & Frameworks: guides/architecture.md
   - About:
       - Overview: about/index.md
       - Author: about/author.md

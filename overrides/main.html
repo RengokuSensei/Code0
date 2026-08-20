@@ -4,12 +4,13 @@
   =============================================================
   ADVANCED ANALYSIS - Custom HTML Overrides Template
   =============================================================
-  You can inject custom <head>, <script>, or <body> elements here.
+  Wallpaper layer, cursor glow, and particles are injected via JS.
 -->
 
 {% block extrahead %}
-  <!-- Add custom meta tags, web fonts, or verification tokens here -->
+  <!-- Author & site meta -->
   <meta name="author" content="Aditya">
+  <meta name="site-url" content="{{ config.site_url }}">
   {{ super() }}
 {% endblock %}
 

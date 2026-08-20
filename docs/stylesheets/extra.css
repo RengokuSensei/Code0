@@ -1,168 +1,293 @@
 /* ==========================================================================
-   ADVANCED ANALYSIS - Modern Custom Styling
+   ADVANCED ANALYSIS - MKDOCS MATERIAL CUSTOM THEME
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   0. CSS Variables & Theme Defaults
+   -------------------------------------------------------------------------- */
 :root {
-  --md-primary-fg-color: #0f172a;
-  --md-primary-fg-color--light: #1e293b;
-  --md-primary-fg-color--dark: #020617;
-  --md-accent-fg-color: #6366f1;
-  --md-accent-fg-color--transparent: rgba(99, 102, 241, 0.1);
-  --aa-gradient-hero: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
-  --aa-card-border: rgba(226, 232, 240, 0.8);
-  --aa-card-bg: rgba(255, 255, 255, 0.75);
-  --aa-input-bg: #ffffff;
+  /* Dynamic Accent Colors (Updated via JS) */
+  --aa-accent-h: 240;
+  --aa-accent-s: 70%;
+  --aa-accent-l: 60%;
+  --aa-accent-color: hsl(var(--aa-accent-h), var(--aa-accent-s), var(--aa-accent-l));
+  
+  /* Fallbacks for older browsers */
+  --aa-fallback-bg: #0f1423;
+  --aa-fallback-text: #ffffff;
+  
+  /* Glassmorphism Constants */
+  --aa-glass-blur: blur(16px);
+  --aa-glass-saturate: saturate(180%);
 }
 
+/* Light Mode (default scheme) */
+[data-md-color-scheme="default"] {
+  --aa-wallpaper-overlay: rgba(255, 255, 255, 0.25);
+  --aa-glass-bg: rgba(255, 255, 255, 0.55);
+  --aa-glass-border: rgba(0, 0, 0, 0.08);
+  --aa-header-bg: rgba(255, 255, 255, 0.7);
+  --aa-text-color: #1a1a1a;
+  --aa-text-muted: rgba(26, 26, 26, 0.75);
+  --aa-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --aa-hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  
+  /* MkDocs Overrides */
+  --md-primary-fg-color: var(--aa-accent-color);
+  --md-accent-fg-color: var(--aa-accent-color);
+  --md-default-bg-color: transparent;
+  --md-default-fg-color: var(--aa-text-color);
+}
+
+/* Dark Mode (slate scheme) - DEFAULT */
 [data-md-color-scheme="slate"] {
-  --md-primary-fg-color: #0b0f19;
-  --md-primary-fg-color--light: #151c2e;
-  --md-primary-fg-color--dark: #070a12;
-  --md-accent-fg-color: #818cf8;
-  --md-accent-fg-color--transparent: rgba(129, 140, 248, 0.15);
-  --aa-gradient-hero: linear-gradient(135deg, #6366f1 0%, #38bdf8 100%);
-  --aa-card-border: rgba(255, 255, 255, 0.08);
-  --aa-card-bg: rgba(17, 24, 39, 0.6);
-  --aa-input-bg: #111827;
+  --aa-wallpaper-overlay: rgba(0, 0, 0, 0.45);
+  --aa-glass-bg: rgba(15, 20, 35, 0.55);
+  --aa-glass-border: rgba(255, 255, 255, 0.08);
+  --aa-header-bg: rgba(10, 15, 25, 0.75);
+  --aa-text-color: #f5f5f5;
+  --aa-text-muted: rgba(245, 245, 245, 0.75);
+  --aa-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --aa-hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  
+  /* MkDocs Overrides */
+  --md-primary-fg-color: var(--aa-accent-color);
+  --md-accent-fg-color: var(--aa-accent-color);
+  --md-default-bg-color: transparent;
+  --md-default-fg-color: var(--aa-text-color);
 }
 
-/* Base smoothing and typography */
+/* --------------------------------------------------------------------------
+   1. Typography & Global Styles
+   -------------------------------------------------------------------------- */
 body, .md-typeset {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: -0.011em;
+  transition: color 0.5s ease, background-color 0.5s ease;
+  background-color: transparent !important; /* Let wallpaper show through */
 }
 
-/* Header & Navigation Bar Polish */
+
+
+/* --------------------------------------------------------------------------
+   2. Dynamic Wallpaper Background
+   -------------------------------------------------------------------------- */
+.aa-wallpaper-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.aa-wallpaper-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--aa-wallpaper-overlay);
+  transition: background 0.5s ease;
+}
+
+/* --------------------------------------------------------------------------
+   3. Glassmorphism MkDocs Overrides
+   -------------------------------------------------------------------------- */
 .md-header {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background-color: var(--md-primary-fg-color);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--aa-header-bg) !important;
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  -webkit-backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  box-shadow: 0 1px 0 var(--aa-glass-border), var(--aa-shadow) !important;
 }
 
 .md-tabs {
-  background-color: var(--md-primary-fg-color--light);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--aa-header-bg) !important;
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  -webkit-backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  border-bottom: 1px solid var(--aa-glass-border);
 }
 
-/* Hero Section Component */
+.md-main__inner {
+  margin-top: 2rem;
+}
+
+/* Make all MkDocs containers transparent for wallpaper visibility */
+.md-main,
+.md-content,
+.md-sidebar {
+  background: transparent !important;
+}
+
+.md-content__inner {
+  background: var(--aa-glass-bg);
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  -webkit-backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  border: 1px solid var(--aa-glass-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 0 0 2rem;
+  box-shadow: var(--aa-shadow);
+}
+
+/* Homepage: don't double-glass since hero & cards are already glass panels */
+.md-content__inner:has(.aa-hero) {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Glassmorphic footer */
+.md-footer {
+  background: var(--aa-header-bg) !important;
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  -webkit-backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  border-top: 1px solid var(--aa-glass-border);
+}
+
+/* --------------------------------------------------------------------------
+   4. Hero Section (.aa-hero)
+   -------------------------------------------------------------------------- */
 .aa-hero {
   position: relative;
-  padding: 3.5rem 2rem 2.5rem;
+  background: var(--aa-glass-bg);
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  -webkit-backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  border: 1px solid var(--aa-glass-border);
   border-radius: 1rem;
-  margin-bottom: 2.5rem;
-  background: var(--aa-card-bg);
-  border: 1px solid var(--aa-card-border);
-  backdrop-filter: blur(8px);
+  padding: 3rem 2rem;
+  margin-bottom: 3rem;
+  box-shadow: var(--aa-shadow);
   overflow: hidden;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  text-align: center;
 }
 
 .aa-hero::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: var(--aa-gradient-hero);
+  background: linear-gradient(90deg, transparent, var(--aa-accent-color), transparent);
 }
 
 .aa-hero-title {
-  font-size: 2.4rem;
+  font-size: 2.5rem;
   font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
-  margin-bottom: 0.75rem;
-  background: var(--aa-gradient-hero);
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--aa-text-color), var(--aa-accent-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .aa-hero-subtitle {
-  font-size: 1.15rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
   opacity: 0.85;
-  max-width: 650px;
-  margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-/* Custom Grid Cards */
+/* --------------------------------------------------------------------------
+   5. Card Grid & Cards (.aa-grid, .aa-card)
+   -------------------------------------------------------------------------- */
 .aa-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
-  margin: 2rem 0;
+  margin-bottom: 3rem;
 }
 
 .aa-card {
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  background: var(--aa-card-bg);
-  border: 1px solid var(--aa-card-border);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  text-decoration: none !important;
-  color: inherit !important;
+  position: relative;
+  background: var(--aa-glass-bg);
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  -webkit-backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  border: 1px solid var(--aa-glass-border);
+  border-radius: 1rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  text-decoration: none !important;
+  color: inherit !important;
+  transform-style: preserve-3d;
+  transition: transform 0.3s cubic-bezier(0.03,0.98,0.52,0.99), box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--aa-shadow);
 }
 
 .aa-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 20px -6px rgba(0, 0, 0, 0.1);
-  border-color: var(--md-accent-fg-color);
+  border-color: var(--aa-accent-color);
+  box-shadow: 0 0 20px rgba(var(--aa-accent-h), var(--aa-accent-s), var(--aa-accent-l), 0.2), var(--aa-hover-shadow);
+  /* Transform tilt is handled by JS, but this provides a fallback lift */
+  transform: translateY(-5px);
 }
 
 .aa-card-icon {
   font-size: 1.8rem;
-  margin-bottom: 0.75rem;
-  display: inline-block;
+  margin-bottom: 1.2rem;
+  color: var(--aa-accent-color);
+  /* Apply 3d translation for parallax effect if JS tilt is active */
+  transform: translateZ(20px);
 }
 
 .aa-card-title {
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  transform: translateZ(10px);
 }
 
 .aa-card-desc {
   font-size: 0.92rem;
-  line-height: 1.5;
   opacity: 0.75;
-  margin: 0;
+  line-height: 1.5;
+  flex-grow: 1;
+  transform: translateZ(5px);
 }
 
-/* Social Badges Pill Bar */
+/* --------------------------------------------------------------------------
+   6. Social Buttons (.aa-social-bar, .aa-social-btn)
+   -------------------------------------------------------------------------- */
 .aa-social-bar {
   display: flex;
+  gap: 1rem;
+  justify-content: center;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 0.85rem;
-  margin-top: 1.25rem;
+  margin: 2rem 0;
 }
 
 .aa-social-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.55rem 1.15rem;
-  font-size: 0.88rem;
-  font-weight: 600;
+  gap: 0.75rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 9999px;
+  background: var(--aa-glass-bg);
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  -webkit-backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  border: 1px solid var(--aa-glass-border);
+  color: var(--aa-text-color) !important;
   text-decoration: none !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid var(--aa-card-border);
-  background: var(--aa-card-bg);
-  color: inherit !important;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: var(--aa-shadow);
 }
 
 .aa-social-btn svg {
   width: 19px;
   height: 19px;
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.aa-social-btn:hover {
+  transform: translateY(-2px);
 }
 
 .aa-social-btn:hover svg {
@@ -170,61 +295,236 @@ body, .md-typeset {
 }
 
 .aa-social-btn.youtube:hover {
-  background: #ff0000 !important;
+  background: #ff0000;
   color: #ffffff !important;
   border-color: #ff0000;
-  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.35);
-  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
 }
 
 .aa-social-btn.instagram:hover {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   color: #ffffff !important;
   border-color: transparent;
-  box-shadow: 0 4px 15px rgba(225, 48, 108, 0.35);
-  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(220, 39, 67, 0.4);
 }
 
 .aa-social-btn.profile:hover {
-  background: var(--md-accent-fg-color) !important;
+  background: var(--aa-accent-color);
   color: #ffffff !important;
-  border-color: var(--md-accent-fg-color);
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
-  transform: translateY(-2px);
+  border-color: var(--aa-accent-color);
+  box-shadow: 0 5px 15px hsla(var(--aa-accent-h), var(--aa-accent-s), var(--aa-accent-l), 0.4);
 }
 
 /* --------------------------------------------------------------------------
-   Reader & Notes Workspace Components
+   7. Magnetic Cursor Glow
    -------------------------------------------------------------------------- */
+#aa-cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(var(--aa-accent-h), var(--aa-accent-s), var(--aa-accent-l), 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: screen;
+}
 
-/* PDF Reader */
+body.aa-cursor-active #aa-cursor-glow {
+  opacity: 0.6;
+}
+
+[data-md-color-scheme="default"] #aa-cursor-glow {
+  mix-blend-mode: multiply; /* Better visibility in light mode */
+}
+
+/* --------------------------------------------------------------------------
+   8. Floating Particles
+   -------------------------------------------------------------------------- */
+.aa-particle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.15);
+  animation: aa-float-up linear infinite;
+  z-index: -1; /* Above wallpaper, below content */
+}
+
+[data-md-color-scheme="default"] .aa-particle {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+@keyframes aa-float-up {
+  0% {
+    transform: translateY(120vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Scroll Reveal Animations
+   -------------------------------------------------------------------------- */
+.aa-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.aa-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   10. Custom Scrollbar
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsla(var(--aa-accent-h), var(--aa-accent-s), var(--aa-accent-l), 0.3);
+  border-radius: 9999px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsla(var(--aa-accent-h), var(--aa-accent-s), var(--aa-accent-l), 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   11. Navigation Link Animations
+   -------------------------------------------------------------------------- */
+.md-tabs__link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.md-tabs__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--aa-accent-color);
+  transition: width 0.3s ease;
+}
+
+.md-tabs__link:hover::after {
+  width: 100%;
+}
+
+.md-tabs__item--active .md-tabs__link {
+  background: hsla(var(--aa-accent-h), var(--aa-accent-s), var(--aa-accent-l), 0.15);
+  border-radius: 9999px;
+  padding: 0.2rem 1rem;
+  margin-top: -0.2rem;
+}
+
+.md-tabs__item--active .md-tabs__link::after {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   12. Wallpaper Info Badge
+   -------------------------------------------------------------------------- */
+.aa-wallpaper-badge {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--aa-glass-bg);
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  -webkit-backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  border: 1px solid var(--aa-glass-border);
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  z-index: 100;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: auto;
+  cursor: help;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: var(--aa-shadow);
+}
+
+.aa-wallpaper-badge:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.aa-wallpaper-badge::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--aa-accent-color);
+  box-shadow: 0 0 5px var(--aa-accent-color);
+}
+
+/* --------------------------------------------------------------------------
+   13. PDF Reader Styles
+   -------------------------------------------------------------------------- */
 .aa-reader-container {
-  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--aa-glass-bg);
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  border: 1px solid var(--aa-glass-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--aa-shadow);
+  height: 80vh;
+  min-height: 500px;
 }
 
 .aa-reader-controls {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--aa-glass-border);
 }
 
 .aa-upload-label {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.6rem 1.2rem;
-  background: var(--md-accent-fg-color);
-  color: #ffffff !important;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.9rem;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  padding: 0.5rem 1rem;
+  background: hsla(var(--aa-accent-h), var(--aa-accent-s), var(--aa-accent-l), 0.2);
+  color: var(--aa-text-color);
+  border: 1px solid var(--aa-accent-color);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 .aa-upload-label:hover {
-  opacity: 0.9;
+  background: var(--aa-accent-color);
+  color: #fff;
 }
 
 .aa-file-status {
@@ -233,179 +533,236 @@ body, .md-typeset {
 }
 
 .aa-viewer-box {
-  border-radius: 8px;
-  border: 1px solid var(--aa-card-border);
-  background: var(--aa-card-bg);
-  min-height: 400px;
+  flex: 1;
+  border: 1px solid var(--aa-glass-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+  background: rgba(0,0,0,0.2);
+}
+
+[data-md-color-scheme="default"] .aa-viewer-box {
+  background: rgba(255,255,255,0.4);
 }
 
 .aa-placeholder-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--aa-text-muted);
+  font-style: italic;
+  padding: 2rem;
   text-align: center;
-  padding: 5rem 2rem;
 }
 
-/* Notes Scratchpad Workspace */
+/* --------------------------------------------------------------------------
+   14. Notes Workspace
+   -------------------------------------------------------------------------- */
 .aa-notes-workspace {
-  margin: 1.5rem 0;
-  border: 1px solid var(--aa-card-border);
-  border-radius: 8px;
+  background: var(--aa-glass-bg);
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  border: 1px solid var(--aa-glass-border);
+  border-radius: 1rem;
+  box-shadow: var(--aa-shadow);
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  min-height: 500px;
   overflow: hidden;
-  background: var(--aa-card-bg);
 }
 
 .aa-notes-toolbar {
   display: flex;
   gap: 0.5rem;
-  padding: 0.75rem;
-  border-bottom: 1px solid var(--aa-card-border);
-  background: var(--aa-card-bg);
+  padding: 1rem;
+  border-bottom: 1px solid var(--aa-glass-border);
+  background: rgba(0,0,0,0.1);
+}
+
+[data-md-color-scheme="default"] .aa-notes-toolbar {
+  background: rgba(255,255,255,0.3);
 }
 
 .aa-tool-btn {
-  padding: 0.45rem 0.9rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border-radius: 6px;
-  border: 1px solid var(--aa-card-border);
-  background: var(--aa-input-bg);
-  color: inherit;
+  background: var(--aa-glass-bg);
+  border: 1px solid var(--aa-glass-border);
+  color: var(--aa-text-color);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.3rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .aa-tool-btn:hover {
-  border-color: var(--md-accent-fg-color);
-}
-
-.aa-tool-btn.danger:hover {
-  border-color: #ef4444;
-  color: #ef4444;
+  border-color: var(--aa-accent-color);
+  background: hsla(var(--aa-accent-h), var(--aa-accent-s), var(--aa-accent-l), 0.1);
 }
 
 .aa-notes-layout {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  min-height: 450px;
-}
-
-@media (max-width: 768px) {
-  .aa-notes-layout {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex: 1;
+  overflow: hidden;
 }
 
 .aa-notes-sidebar {
-  border-right: 1px solid var(--aa-card-border);
-  padding: 0.75rem;
+  width: 250px;
+  border-right: 1px solid var(--aa-glass-border);
+  display: flex;
+  flex-direction: column;
+  background: rgba(0,0,0,0.05);
+}
+
+[data-md-color-scheme="default"] .aa-notes-sidebar {
+  background: rgba(255,255,255,0.1);
 }
 
 .aa-sidebar-title {
-  font-size: 0.8rem;
+  padding: 1rem;
   font-weight: 700;
+  border-bottom: 1px solid var(--aa-glass-border);
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  opacity: 0.6;
-  margin-bottom: 0.5rem;
-  padding: 0 0.5rem;
 }
 
 .aa-notes-list {
-  list-style: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
 }
 
 .aa-note-item {
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--aa-glass-border);
   cursor: pointer;
+  transition: background 0.3s ease;
   font-size: 0.9rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 0.25rem;
-  transition: background 0.15s ease;
 }
 
 .aa-note-item:hover {
-  background: var(--md-accent-fg-color--transparent);
+  background: hsla(var(--aa-accent-h), var(--aa-accent-s), var(--aa-accent-l), 0.1);
 }
 
 .aa-note-item.active {
-  background: var(--md-accent-fg-color);
+  background: var(--aa-accent-color);
   color: #ffffff;
   font-weight: 600;
 }
 
 .aa-notes-editor-area {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .aa-note-title {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  font-size: 1.1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--aa-text-color);
+  font-size: 1.5rem;
   font-weight: 700;
-  border: 1px solid var(--aa-card-border);
-  border-radius: 6px;
-  background: var(--aa-input-bg);
-  color: inherit;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.aa-note-title:focus {
+  border-color: var(--aa-accent-color);
 }
 
 .aa-note-textarea {
-  width: 100%;
   flex: 1;
-  min-height: 350px;
-  padding: 0.75rem;
-  font-family: var(--md-code-font-family, monospace);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  border: 1px solid var(--aa-card-border);
-  border-radius: 6px;
-  background: var(--aa-input-bg);
-  color: inherit;
-  resize: vertical;
-}
-
-.aa-note-title:focus,
-.aa-note-textarea:focus {
+  background: transparent;
+  border: none;
+  color: var(--aa-text-color);
+  resize: none;
   outline: none;
-  border-color: var(--md-accent-fg-color);
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-/* Embedded Interactive Apps (e.g. Atomic Orbitals) */
+/* --------------------------------------------------------------------------
+   15. Embedded Apps
+   -------------------------------------------------------------------------- */
 .aa-app-container {
-  margin: 1.5rem 0 2rem;
-  border-radius: 12px;
-  border: 1px solid var(--aa-card-border);
+  background: var(--aa-glass-bg);
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
+  border: 1px solid var(--aa-glass-border);
+  border-radius: 1rem;
+  box-shadow: var(--aa-shadow);
   overflow: hidden;
-  background: #0b1220;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .aa-app-toolbar {
+  padding: 0.75rem 1rem;
+  background: rgba(0,0,0,0.1);
+  border-bottom: 1px solid var(--aa-glass-border);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1.25rem;
-  background: #121b2e;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+[data-md-color-scheme="default"] .aa-app-toolbar {
+  background: rgba(255,255,255,0.3);
 }
 
 .aa-app-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  color: #e8ecf3;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--aa-text-color);
 }
 
 .aa-app-iframe {
   width: 100%;
-  height: 820px;
+  height: 600px;
   border: none;
-  display: block;
+  background: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   16. Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  .aa-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .aa-hero {
+    padding: 2rem 1rem;
+  }
+  
+  .aa-hero-title {
+    font-size: 2rem;
+  }
+  
+  #aa-cursor-glow {
+    display: none !important;
+  }
+  
+  .aa-notes-layout {
+    flex-direction: column;
+  }
+  
+  .aa-notes-sidebar {
+    width: 100%;
+    height: 150px;
+    border-right: none;
+    border-bottom: 1px solid var(--aa-glass-border);
+  }
+  
+  .aa-wallpaper-badge {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.3rem 0.6rem;
+  }
 }
