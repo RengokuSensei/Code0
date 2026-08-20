@@ -15,9 +15,12 @@ const WALLPAPERS = [
  * Utility to get the base site URL dynamically
  */
 function getSiteRoot() {
-  if (typeof __md_scope !== 'undefined') return __md_scope;
+  // __md_scope is a URL object in MkDocs Material, not a string
+  if (typeof __md_scope !== 'undefined') {
+    return __md_scope instanceof URL ? __md_scope.pathname : String(__md_scope);
+  }
   const base = document.querySelector('base');
-  if (base) return base.href;
+  if (base) return new URL(base.href).pathname;
   return '/';
 }
 
@@ -61,6 +64,7 @@ function changeWallpaper(isInitial = false) {
   // Ensure we don't duplicate slashes
   const cleanRoot = siteRoot.endsWith('/') ? siteRoot : siteRoot + '/';
   const imgUrl = `${cleanRoot}assets/wallpapers/${selected}`;
+  console.log('[AA] Loading wallpaper:', selected, '| URL:', imgUrl);
   
   const img = new Image();
   img.crossOrigin = "Anonymous";
@@ -436,13 +440,23 @@ function initPage() {
   initCardTilt();
 }
 
-// Global inits (run once)
-initWallpaper();
-initCursorGlow();
-initParticles();
-initWallpaperBadge();
+function initGlobal() {
+  console.log('[AA] Initializing wallpaper engine...');
+  initWallpaper();
+  initCursorGlow();
+  initParticles();
+  initWallpaperBadge();
+  console.log('[AA] Global init complete.');
+}
 
-// Per-page inits
+// Ensure body exists before inserting elements
+if (document.body) {
+  initGlobal();
+} else {
+  document.addEventListener('DOMContentLoaded', initGlobal);
+}
+
+// Per-page inits (MkDocs Material instant navigation)
 if (typeof document$ !== 'undefined') {
   document$.subscribe(() => {
     changeWallpaper(); // new wallpaper on each page
