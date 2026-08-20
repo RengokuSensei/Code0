@@ -791,25 +791,109 @@ body.aa-cursor-active #aa-cursor-glow {
 }
 
 /* --------------------------------------------------------------------------
-   16. Responsive Adjustments
+   16. Mobile Navigation — Opaque Backgrounds (Critical Fix)
    -------------------------------------------------------------------------- */
+
+/* Mobile nav drawer must be OPAQUE — override the transparency rules */
+[data-md-color-scheme="slate"] .md-nav--primary,
+[data-md-color-scheme="slate"] .md-nav--primary .md-nav,
+[data-md-color-scheme="slate"] .md-nav--primary .md-nav__item,
+[data-md-color-scheme="slate"] .md-sidebar--primary {
+  background: #1a1f2e !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+[data-md-color-scheme="default"] .md-nav--primary,
+[data-md-color-scheme="default"] .md-nav--primary .md-nav,
+[data-md-color-scheme="default"] .md-nav--primary .md-nav__item,
+[data-md-color-scheme="default"] .md-sidebar--primary {
+  background: #f5f5f5 !important;
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Mobile nav title bar (the header inside the drawer) */
+[data-md-color-scheme="slate"] .md-nav--primary .md-nav__title {
+  background: #141828 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-md-color-scheme="default"] .md-nav--primary .md-nav__title {
+  background: #e8e8e8 !important;
+  color: #000000 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Nav links inside mobile drawer */
+.md-nav--primary .md-nav__link {
+  color: inherit !important;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+/* Active nav link in mobile */
+.md-nav--primary .md-nav__link--active,
+.md-nav--primary .md-nav__link:hover {
+  color: var(--aa-accent-color) !important;
+}
+
+/* Mobile search overlay */
+[data-md-color-scheme="slate"] .md-search__form,
+[data-md-color-scheme="slate"] .md-search-result {
+  background: #1a1f2e !important;
+}
+
+[data-md-color-scheme="default"] .md-search__form,
+[data-md-color-scheme="default"] .md-search-result {
+  background: #f5f5f5 !important;
+}
+
+/* Dialog/overlay backgrounds */
+.md-dialog {
+  background: var(--aa-glass-bg) !important;
+  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate) !important;
+}
+
+/* --------------------------------------------------------------------------
+   17. Responsive Layout
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 76.1875em) {
+  /* MkDocs Material mobile breakpoint for nav drawer */
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    background: inherit !important;
+  }
+}
+
 @media screen and (max-width: 768px) {
+  /* Grid layout */
   .aa-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
+  /* Hero adjustments */
   .aa-hero {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
+    margin-bottom: 1.5rem;
   }
   
   .aa-hero-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   
+  .aa-hero-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  /* Disable desktop-only effects */
   #aa-cursor-glow {
     display: none !important;
   }
   
+  #aa-particles-container {
+    display: none !important;
+  }
+  
+  /* Notes workspace mobile */
   .aa-notes-layout {
     flex-direction: column;
   }
@@ -821,9 +905,67 @@ body.aa-cursor-active #aa-cursor-glow {
     border-bottom: 1px solid var(--aa-glass-border);
   }
   
+  /* Wallpaper badge smaller on mobile */
   .aa-wallpaper-badge {
-    bottom: 1rem;
-    right: 1rem;
-    padding: 0.3rem 0.6rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.65rem;
+  }
+
+  /* Cards — no 3D tilt on mobile, simpler hover */
+  .aa-card {
+    transform: none !important;
+  }
+
+  /* Social bar wrapping */
+  .aa-social-bar {
+    gap: 0.6rem;
+  }
+
+  /* Content glass panel — less padding on mobile */
+  .md-content__inner {
+    padding: 1rem;
+    border-radius: 0.75rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   18. Performance & Fluidity
+   -------------------------------------------------------------------------- */
+
+/* Hardware-accelerated transitions for smooth scrolling and animations */
+.aa-card,
+.aa-hero,
+.aa-social-btn,
+.aa-wallpaper-layer {
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .aa-reveal {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .aa-particle {
+    display: none !important;
+  }
+  
+  .aa-wallpaper-layer {
+    transition: none !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
   }
 }
