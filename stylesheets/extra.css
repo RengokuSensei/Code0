@@ -65,7 +65,22 @@ body, .md-typeset {
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: -0.011em;
   transition: color 0.5s ease, background-color 0.5s ease;
-  background-color: transparent !important; /* Let wallpaper show through */
+}
+
+/* Force ALL MkDocs containers transparent so wallpaper shows */
+body,
+body[data-md-color-scheme="slate"],
+body[data-md-color-scheme="default"],
+.md-body,
+.md-container,
+.md-main,
+.md-main__inner,
+.md-content,
+.md-sidebar,
+.md-sidebar__scrollwrap,
+.md-typeset {
+  background-color: transparent !important;
+  background: transparent !important;
 }
 
 
@@ -110,13 +125,6 @@ body, .md-typeset {
 
 .md-main__inner {
   margin-top: 2rem;
-}
-
-/* Make all MkDocs containers transparent for wallpaper visibility */
-.md-main,
-.md-content,
-.md-sidebar {
-  background: transparent !important;
 }
 
 .md-content__inner {
