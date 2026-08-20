@@ -15,14 +15,14 @@ Explore the electronic configurations, quantum shells, subshell energy levels, a
       <span style="font-size: 1.2rem;">🔬</span> <strong>Atomic Orbitals Visualizer</strong>
     </div>
     <div class="aa-app-actions">
-      <a href="../../assets/interactive/atomic_orbitals.html" target="_blank" rel="noopener noreferrer" class="aa-tool-btn">
+      <a href="../atomic_orbitals.html" target="_blank" rel="noopener noreferrer" class="aa-tool-btn">
         ⛶ Open Fullscreen
       </a>
     </div>
   </div>
 
   <iframe 
-    src="../../assets/interactive/atomic_orbitals.html" 
+    src="../atomic_orbitals.html" 
     class="aa-app-iframe"
     title="Atomic Orbitals Interactive Visualizer"
     allow="fullscreen"
