@@ -44,6 +44,7 @@ Every prompt is dissected across **8 dimensions**:
 | # | Prompt Name | Source | Date Added | Key Educational Adaptations |
 |---|-------------|--------|------------|-----------------------------|
 | 1 | [KIMI — GRIDO1 Racing Systems](prompt-001-kimi-grido1.md) | [GetLayers.ai](https://www.getlayers.ai/docs) | 2026-10-05 | Telemetry HUD → live formula meters; Circuit trace → reaction/orbital paths; 3D helmet shader → orbital density cross-sections |
+| 2 | [Spatial Hand-Tracked Hologram & Specimen Scrubber](prompt-002-spatial-hand-scrubber.md) | Community / Vision Pipeline | 2026-10-05 | Hand tracking turntable → 3D molecular/physics inspection; Pinch-zoom → atomic shell peeling; Screen-blend floating renders |
 
 ---
 
@@ -51,8 +52,9 @@ Every prompt is dissected across **8 dimensions**:
 
 ```
 docs/prompt-library/
-├── README.md                    ← Central index & North Star principles
-├── prompt-001-kimi-grido1.md    ← Full 8-dimension analysis + raw prompt
+├── README.md                               ← Central index & North Star principles
+├── prompt-001-kimi-grido1.md               ← Full 8-dimension analysis + raw prompt
+├── prompt-002-spatial-hand-scrubber.md     ← Full 8-dimension analysis + raw prompt
 └── (future prompts...)
 ```
 
