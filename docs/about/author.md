@@ -13,16 +13,18 @@ description: Background, philosophy, and curiosity matrix of Aditya, creator of 
     <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #02d2e3; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem;">ARCHITECT &bull; RESEARCHER</div>
     <h2 style="margin: 0; font-size: 2rem; font-family: 'Space Grotesk', sans-serif; font-weight: 800;">Aditya</h2>
     <p style="margin: 0.5rem 0 0 0; color: #95a3c2; font-size: 1.05rem;">
-      B.Sc. Zoology &bull; Data Analyst &bull; UPSC Civil Services Aspirant
+      B.Sc. Zoology &bull; M.Sc. Geography (Open Univ.) &bull; UPSC Optional: Anthropology &bull; Data Analyst
     </p>
   </div>
 </div>
 
-## The Journey & Academic Background
+## The Journey & Academic Pillars
 
-- **B.Sc. in Zoology:** Graduated with a foundational degree in Zoology. Studying the animal kingdom, comparative physiology, evolutionary mechanisms, and cellular energetics gave me a lifelong intuition for how complex, self-organizing systems function in nature.
-- **Data Analytics:** Currently advancing through comprehensive Data Analytics. Merging biological intuition with quantitative statistical modeling, algorithmic thinking, and empirical data analysis allows me to approach large-scale problems—from macroeconomic indicators to planetary climate anomalies—with mathematical precision.
-- **UPSC Civil Services Preparation:** Preparing for the UPSC Civil Services Examination. The vastness of the syllabus—spanning ancient to modern history, constitutional law, international geopolitics, economic planning, and ethics—demands a radical learning strategy. Rather than relying on passive memorization, I am transforming the entire syllabus into living, interactive computational models here on **ADVANCED ANALYSIS**.
+- **🦴 UPSC Optional Subject: Anthropology:** My chosen optional for the UPSC Civil Services. Blending physical paleoanthropology (primate fossil lineages, hominid skeletal evolution, Mendelian genetics) with socio-cultural ethnography (kinship systems, Indian village structures, tribal welfare policies, and 5th/6th Schedule constitutional safeguards). It bridges biological science directly into public administration and human governance.
+- **🌍 M.Sc. in Geography (Open University):** Currently pursuing a Master of Science in Geography. Mastering physical geomorphology, atmospheric circulation systems, climatological oscillations (El Niño/IOD), oceanography, and spatial economic geography across regional and global scales. This equips my research with a planetary geographical canvas.
+- **🦎 B.Sc. in Zoology:** Graduated with a foundational degree in Zoology. Deep study of animal taxonomy, comparative vertebrate physiology, cellular bioenergetics, genetics, and ecology provided a rigorous empirical understanding of living, adaptive systems.
+- **📊 Data Analytics:** Actively advancing through Data Analytics. Translating qualitative humanities and complex administrative concepts into statistical models, spatial data visualization, and computational simulations.
+- **🏛️ The UPSC Living Codex:** Transforming the entire UPSC Civil Services syllabus—spanning cosmic evolution (Big Bang, stellar nucleosynthesis), planetary geology, ancient and modern world history, constitutional law, and macroeconomic policy—into living, interactive simulations right here on **ADVANCED ANALYSIS**.
 
 ---
 

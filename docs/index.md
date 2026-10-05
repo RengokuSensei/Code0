@@ -8,8 +8,8 @@ template: home.html
 
 Welcome to **ADVANCED ANALYSIS**, the living knowledge terminal created by **Aditya**.
 
-- **Creator:** Aditya (B.Sc. Zoology &bull; Data Analyst &bull; UPSC Civil Services Aspirant)
-- **Mission:** Transforming the entire UPSC syllabus into interactive 3D simulations and explorable explanations.
+- **Creator:** Aditya (B.Sc. Zoology &bull; M.Sc. Geography &bull; UPSC Optional: Anthropology &bull; Data Analyst)
+- **Mission:** Transforming the entire UPSC Civil Services syllabus into interactive 3D simulations and living explorable explanations.
 - **Scope:** From the Big Bang (13.8 Billion Years Ago) to contemporary Indian constitutional governance.
 
 *Explore the interactive experience on the homepage or visit [About Aditya](about/author.md).*
