@@ -4,17 +4,33 @@
   =============================================================
   ADVANCED ANALYSIS - Custom HTML Overrides Template
   =============================================================
-  Wallpaper layer, cursor glow, and particles are injected via JS.
 -->
 
 {% block extrahead %}
   <!-- Author & site meta -->
   <meta name="author" content="Aditya">
   <meta name="site-url" content="{{ config.site_url }}">
+
+  <!-- Fonts: Oswald & Space Grotesk (GetLayers Standard) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- ES Module Import Map for Three.js and Lenis -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/",
+      "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.mjs"
+    }
+  }
+  </script>
+
   {{ super() }}
 {% endblock %}
 
 {% block scripts %}
   {{ super() }}
-  <!-- Add custom analytics or external scripts here -->
+  <script type="module" src="{{ base_url }}/javascripts/getlayers-init.js"></script>
 {% endblock %}

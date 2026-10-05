@@ -1,40 +1,335 @@
 ---
-title: Welcome to ADVANCED ANALYSIS
-description: Deep technical insights, research, reading notes, and data-driven analysis by Aditya.
+title: ADVANCED ANALYSIS — Creative Research Terminal
+description: Deep technical insights, physics simulations, research reading notes, and data-driven analysis by Aditya.
+template: home.html
 ---
 
-<div class="aa-hero">
-  <div class="aa-hero-title">ADVANCED ANALYSIS</div>
-  <div class="aa-hero-subtitle">
-    Research hub for deep technical breakdowns, curated reading, and interactive tools.
-  </div>
-  <div class="aa-social-bar">
-    <a href="https://www.youtube.com/@ADVANCED_ANALYSIS" target="_blank" rel="noopener noreferrer" class="aa-social-btn youtube" title="Visit YouTube Channel">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-    </a>
-    <a href="https://www.instagram.com/advanced_analysis/" target="_blank" rel="noopener noreferrer" class="aa-social-btn instagram" title="Follow on Instagram">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-    </a>
-    <a href="about/author/" class="aa-social-btn profile" title="About Aditya">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-    </a>
-  </div>
-</div>
+<div class="gl-home-root">
 
-<div class="aa-grid">
-  <a href="reading/" class="aa-card">
-    <span class="aa-card-icon">📚</span>
-    <div class="aa-card-title">Reading & Library</div>
-    <p class="aa-card-desc">Curated book summaries, Chemistry & Atomic simulations, and research papers.</p>
-  </a>
-  <a href="workspace/notes/" class="aa-card">
-    <span class="aa-card-icon">📝</span>
-    <div class="aa-card-title">Research Scratchpad</div>
-    <p class="aa-card-desc">Private browser-saved markdown workspace to capture thoughts and export notes.</p>
-  </a>
-  <a href="about/author/" class="aa-card">
-    <span class="aa-card-icon">🚀</span>
-    <div class="aa-card-title">Connect</div>
-    <p class="aa-card-desc">Find Aditya on YouTube, Instagram, and explore the open-source project on GitHub.</p>
-  </a>
+  <!-- Loading Veil -->
+  <div class="gl-veil" role="status" aria-label="Loading Advanced Analysis">
+    <div class="gl-veil-symbol">
+      <svg viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+        <circle cx="50" cy="50" r="28" stroke="currentColor" stroke-width="2" fill="none"/>
+        <circle cx="50" cy="50" r="6" fill="#02d2e3"/>
+      </svg>
+    </div>
+    <div class="gl-veil-title">ADVANCED ANALYSIS</div>
+    <div class="gl-veil-meter">
+      <div class="gl-veil-meter-fill"></div>
+    </div>
+  </div>
+
+  <!-- Sticky Stack Container -->
+  <div class="gl-sticky-stack" data-sticky-stack>
+
+    <!-- BLOCK 1: HERO -->
+    <section class="gl-sticky-layer" data-sticky-layer data-hero>
+      <div class="gl-sticky-layer-inner">
+        <canvas id="gl-hero-canvas" class="gl-hero-canvas" aria-hidden="true"></canvas>
+
+        <!-- Masthead -->
+        <header class="gl-masthead">
+          <a href="./" class="gl-brand-logo" aria-label="Advanced Analysis Home">
+            <svg class="gl-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+            <span class="gl-brand-text">ADVANCED ANALYSIS</span>
+          </a>
+
+          <ul class="gl-nav-center">
+            <li><a href="reading/" class="gl-nav-link">Reading & Library</a></li>
+            <li><a href="reading/chemistry/atom/" class="gl-nav-link">Atomic Orbitals</a></li>
+            <li><a href="workspace/notes/" class="gl-nav-link">Workspace</a></li>
+            <li><a href="about/author/" class="gl-nav-link">About Aditya</a></li>
+          </ul>
+
+          <a href="workspace/notes/" class="gl-nav-terminal">
+            [ LAB TERMINAL &rarr; ]
+          </a>
+        </header>
+
+        <!-- Hero Middle: Identity & Bracket Panels -->
+        <div class="gl-hero-middle">
+          <div class="gl-identity-rail">
+            <div class="gl-identity-tag">RESEARCH_NODE_001</div>
+            <h1 class="gl-identity-name" data-reveal="true" data-reveal-mode="word" data-reveal-delay="180">
+              ADVANCED ANALYSIS
+            </h1>
+            <ul class="gl-meta-list">
+              <li class="gl-meta-item">
+                <span class="gl-meta-icon">&loz;</span>
+                <span>DIRECTOR / ADITYA</span>
+              </li>
+              <li class="gl-meta-item">
+                <span class="gl-meta-icon">&loz;</span>
+                <span>QUANTUM MECHANICS &amp; DEEP TECH</span>
+              </li>
+              <li class="gl-meta-item">
+                <span class="gl-meta-icon">&loz;</span>
+                <span>AUTONOMOUS EXPLORATION_2026</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="gl-panels-col">
+            <!-- Bracket Panel 1: Current Sprint -->
+            <div class="gl-bracket-panel">
+              <svg class="gl-bracket gl-bracket-tl" viewBox="0 0 10.5 10.5"><path d="M0 0.5H10V10.5"/></svg>
+              <svg class="gl-bracket gl-bracket-tr" viewBox="0 0 10.5 10.5"><path d="M0 0.5H10V10.5"/></svg>
+              <svg class="gl-bracket gl-bracket-bl" viewBox="0 0 10.5 10.5"><path d="M0 0.5H10V10.5"/></svg>
+              <svg class="gl-bracket gl-bracket-br" viewBox="0 0 10.5 10.5"><path d="M0 0.5H10V10.5"/></svg>
+
+              <div class="gl-panel-eyebrow">ACTIVE SIMULATION</div>
+              <div class="gl-panel-content">
+                <strong>ATOMIC ORBITALS</strong>
+                <span>HYDROGEN WAVEFUNCTIONS &bull; 3D QUANTUM FIELD</span>
+              </div>
+            </div>
+
+            <!-- Bracket Panel 2: Stats -->
+            <div class="gl-bracket-panel">
+              <svg class="gl-bracket gl-bracket-tl" viewBox="0 0 10.5 10.5"><path d="M0 0.5H10V10.5"/></svg>
+              <svg class="gl-bracket gl-bracket-tr" viewBox="0 0 10.5 10.5"><path d="M0 0.5H10V10.5"/></svg>
+              <svg class="gl-bracket gl-bracket-bl" viewBox="0 0 10.5 10.5"><path d="M0 0.5H10V10.5"/></svg>
+              <svg class="gl-bracket gl-bracket-br" viewBox="0 0 10.5 10.5"><path d="M0 0.5H10V10.5"/></svg>
+
+              <div class="gl-panel-eyebrow">TERMINAL STATS</div>
+              <div class="gl-stat-grid">
+                <div class="gl-stat-item">
+                  <span class="gl-stat-dt">PAPERS</span>
+                  <span class="gl-stat-dd" data-reveal="true" data-reveal-mode="letter">12</span>
+                </div>
+                <div class="gl-stat-item">
+                  <span class="gl-stat-dt">TOOLS</span>
+                  <span class="gl-stat-dd" data-reveal="true" data-reveal-mode="letter">03</span>
+                </div>
+                <div class="gl-stat-item">
+                  <span class="gl-stat-dt">NOTES</span>
+                  <span class="gl-stat-dd" data-reveal="true" data-reveal-mode="letter">142</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Actions Foot -->
+        <footer class="gl-hero-foot">
+          <a href="reading/chemistry/atom/" class="gl-trailer-cta">
+            <span class="gl-play-icon">&#9658;</span>
+            <div>
+              <div style="font-weight: 600; font-size: 0.9rem; text-transform: uppercase;">LAUNCH 3D ORBITALS</div>
+              <div style="color: var(--gl-foreground-muted); font-size: 0.75rem; font-family: var(--font-mono);">INTERACTIVE WEBM</div>
+            </div>
+          </a>
+
+          <!-- Chamfered Button CTA -->
+          <a href="reading/" class="gl-chamfer-btn">
+            <svg class="gl-chamfer-svg" viewBox="0 0 220 50" preserveAspectRatio="none">
+              <path class="gl-chamfer-body" d="M220 42L212.932 50H0V0H220V42Z"/>
+              <path class="gl-chamfer-flood" d="M220 42L212.932 50H0V0H220V42Z"/>
+              <path class="gl-chamfer-ring" d="M220 42L212.932 50H0V0H220V42Z"/>
+              <path class="gl-chamfer-brackets" d="M205 49.5H213L219.5 42V36 M212 0.5H219.5V7 M8 0.5H0.5V7 M7.5 49.5H0.5V42.5"/>
+            </svg>
+            <span class="gl-chamfer-label">ENTER ARCHIVE</span>
+            <svg class="gl-chamfer-arrow" viewBox="0 0 14 11" fill="none">
+              <path d="M0 5.5H13M8 10.5L13 5.5L8 0.5" stroke-width="1.5"/>
+            </svg>
+          </a>
+
+          <div class="gl-socials-row">
+            <a href="https://www.youtube.com/@ADVANCED_ANALYSIS" target="_blank" rel="noopener noreferrer" class="gl-social-link">YOUTUBE</a>
+            <a href="https://www.instagram.com/advanced_analysis/" target="_blank" rel="noopener noreferrer" class="gl-social-link">INSTAGRAM</a>
+            <a href="https://github.com/RengokuSensei/Code0" target="_blank" rel="noopener noreferrer" class="gl-social-link">GITHUB</a>
+          </div>
+        </footer>
+
+      </div>
+    </section>
+
+    <!-- BLOCK 2: TRAJECTORY & ANALYTICAL MATRIX -->
+    <section class="gl-sticky-layer" data-sticky-layer data-trajectory>
+      <div class="gl-sticky-layer-inner">
+        <canvas id="gl-dissolve-canvas" class="gl-dissolve-canvas" aria-hidden="true"></canvas>
+
+        <div class="gl-trajectory-stage">
+          <canvas id="gl-halftone-canvas" class="gl-halftone-canvas" aria-hidden="true"></canvas>
+          <canvas id="gl-stage-canvas" class="gl-stage-canvas"></canvas>
+
+          <div class="gl-trajectory-header">
+            <h2 class="gl-trajectory-title" data-reveal="true" data-reveal-mode="word">
+              RESEARCH TRAJECTORY.
+            </h2>
+            <div class="gl-trajectory-rule"></div>
+            <p class="gl-trajectory-desc">
+              Every milestone advances fundamental theory into executable simulations. Here is the trajectory map of current investigations.
+            </p>
+          </div>
+
+          <!-- Progress Plate -->
+          <div class="gl-progress-plate">
+            <div class="gl-plate-badge">
+              <div class="gl-plate-globe">
+                <svg viewBox="0 0 37 23">
+                  <ellipse cx="18.5" cy="11.5" rx="18" ry="11" stroke-width="1"/>
+                  <line x1="0.5" y1="11.5" x2="36.5" y2="11.5" stroke-width="1"/>
+                  <ellipse cx="18.5" cy="11.5" rx="8" ry="11" stroke-width="1"/>
+                </svg>
+              </div>
+              <div class="gl-plate-badge-text">NODE <span>/ 2026</span></div>
+            </div>
+
+            <div class="gl-plate-stats">
+              <div class="gl-plate-row">
+                <dt>STAGE 01</dt>
+                <dd>QUANTUM WAVEFUNCTIONS</dd>
+              </div>
+              <div class="gl-plate-row">
+                <dt>STAGE 02</dt>
+                <dd>STATISTICAL ANALYSIS</dd>
+              </div>
+              <div class="gl-plate-row">
+                <dt>STAGE 03</dt>
+                <dd>NEURAL ARCHITECTURE</dd>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOCK 3: RESEARCH ARCHIVE TIMELINE -->
+    <section class="gl-sticky-layer" data-sticky-layer data-timeline>
+      <div class="gl-sticky-layer-inner">
+        <div class="gl-timeline-container">
+          <div class="gl-timeline-rail">
+            <div class="gl-timeline-thread"></div>
+          </div>
+
+          <!-- Plate 1 -->
+          <div class="gl-timeline-row">
+            <div class="gl-timeline-left">
+              <div class="gl-timeline-plate">
+                <div class="gl-plate-year">2024</div>
+                <h3 class="gl-plate-title">MATHEMATICS &amp; MECHANICS</h3>
+                <p class="gl-plate-desc">Foundational exploration into vector calculus, differential geometries, and classical Hamiltonian physics.</p>
+                <a href="reading/books/" class="gl-plate-link">EXPLORE READING &rarr;</a>
+              </div>
+            </div>
+            <div class="gl-timeline-marker"></div>
+            <div class="gl-timeline-right"></div>
+          </div>
+
+          <!-- Plate 2 -->
+          <div class="gl-timeline-row">
+            <div class="gl-timeline-left"></div>
+            <div class="gl-timeline-marker"></div>
+            <div class="gl-timeline-right">
+              <div class="gl-timeline-plate">
+                <div class="gl-plate-year">2025</div>
+                <h3 class="gl-plate-title">ATOMIC SIMULATIONS</h3>
+                <p class="gl-plate-desc">Development of real-time 3D WebGL spherical harmonic solvers visualizing hydrogen electron orbitals.</p>
+                <a href="reading/chemistry/atom/" class="gl-plate-link">LAUNCH SIMULATOR &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Plate 3 -->
+          <div class="gl-timeline-row">
+            <div class="gl-timeline-left">
+              <div class="gl-timeline-plate">
+                <div class="gl-plate-year">2026</div>
+                <h3 class="gl-plate-title">DEEP LEARNING DYNAMICS</h3>
+                <p class="gl-plate-desc">Investigating attention maps, kernel engineering, and autonomous agent coordination workflows.</p>
+                <a href="reading/papers/" class="gl-plate-link">READ PAPERS &rarr;</a>
+              </div>
+            </div>
+            <div class="gl-timeline-marker"></div>
+            <div class="gl-timeline-right"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- BLOCK 4: INTERACTIVE LABORATORY -->
+  <section data-laboratory>
+    <div class="gl-lab-header">
+      <h2 class="gl-lab-title">EXPERIMENTAL LABS.</h2>
+    </div>
+
+    <div class="gl-lab-strip">
+      <a href="reading/chemistry/atom/" class="gl-lab-card">
+        <div>
+          <div class="gl-lab-card-badge">WEBGL SIMULATION</div>
+          <h3 class="gl-lab-card-title">ATOMIC ORBITALS</h3>
+          <p class="gl-lab-card-desc">Interactive electron probability density visualizer with radial wavefunctions and angular harmonics.</p>
+        </div>
+        <div class="gl-lab-card-cta">OPEN VISUALIZER &rarr;</div>
+      </a>
+
+      <a href="reading/reader/" class="gl-lab-card">
+        <div>
+          <div class="gl-lab-card-badge">EDITORIAL TOOL</div>
+          <h3 class="gl-lab-card-title">IN-BROWSER READER</h3>
+          <p class="gl-lab-card-desc">Distraction-free reading environment optimized for deep research breakdowns and monographs.</p>
+        </div>
+        <div class="gl-lab-card-cta">LAUNCH READER &rarr;</div>
+      </a>
+
+      <a href="workspace/notes/" class="gl-lab-card">
+        <div>
+          <div class="gl-lab-card-badge">PRIVATE WORKSPACE</div>
+          <h3 class="gl-lab-card-title">RESEARCH SCRATCHPAD</h3>
+          <p class="gl-lab-card-desc">Browser-persisted markdown laboratory for capturing real-time insights, notes, and derivations.</p>
+        </div>
+        <div class="gl-lab-card-cta">ACCESS WORKSPACE &rarr;</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- BLOCK 5: TERMINAL SIGN-OFF -->
+  <footer data-terminal>
+    <div class="gl-terminal-panel">
+      <div class="gl-terminal-grid">
+        <div>
+          <div class="gl-terminal-brand">ADVANCED ANALYSIS</div>
+          <p class="gl-terminal-tagline">
+            Dedicated to deep technical understanding, rigorous analytical clarity, and scientific visualization.
+          </p>
+        </div>
+
+        <div class="gl-terminal-col">
+          <h4>NAVIGATION</h4>
+          <ul class="gl-terminal-links">
+            <li><a href="reading/">Reading &amp; Library</a></li>
+            <li><a href="reading/chemistry/atom/">3D Simulations</a></li>
+            <li><a href="workspace/notes/">Research Scratchpad</a></li>
+            <li><a href="about/author/">About Aditya</a></li>
+          </ul>
+        </div>
+
+        <div class="gl-terminal-col">
+          <h4>CONNECT</h4>
+          <ul class="gl-terminal-links">
+            <li><a href="https://www.youtube.com/@ADVANCED_ANALYSIS" target="_blank" rel="noopener noreferrer">YouTube Channel</a></li>
+            <li><a href="https://www.instagram.com/advanced_analysis/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://github.com/RengokuSensei/Code0" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gl-terminal-foot">
+        <div>&copy; 2026 ADITYA &mdash; ADVANCED ANALYSIS. ALL RIGHTS RESERVED.</div>
+        <div>DESIGNED WITH GETLAYERS ARCHITECTURE</div>
+      </div>
+    </div>
+  </footer>
+
 </div>

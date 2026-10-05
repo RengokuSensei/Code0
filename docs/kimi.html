@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KIMI — GRIDO1 Racing Systems / Kimi Antonelli</title>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/",
+      "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.mjs"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --raw-color-ice-50: #f7fafb;
+      --raw-color-ice-100: #ebeef1;
+      --raw-color-ice-200: #dfe5e9;
+      --raw-color-steel-400: #b6c1c8;
+      --raw-color-ink-950: #090a0b;
+      --raw-color-ink-900: #0e0f14;
+      --raw-color-ink-800: #1b1d24;
+      --raw-color-ink-700: #2a2d36;
+      --raw-color-slate-500: #7a7a7a;
+      --raw-color-slate-600: #4d4d4d;
+      --raw-color-slate-900: #1e1e1e;
+      --raw-color-cyan-400: #02d2e3;
+      --raw-color-cyan-alpha-25: rgb(2 210 227 / 0.25);
+      --raw-color-white: #ffffff;
+
+      --background: var(--raw-color-ice-50);
+      --foreground: var(--raw-color-ink-950);
+      --surface-dark: var(--raw-color-ink-900);
+      --surface-black: var(--raw-color-ink-950);
+      --accent: var(--raw-color-cyan-400);
+
+      --font-sans: "Space Grotesk", system-ui, sans-serif;
+      --font-display: "Oswald", Impact, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .sticky-stack {
+      position: relative;
+      background: var(--surface-black);
+      width: 100%;
+    }
+
+    .sticky-layer {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .sticky-inner {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      transform-origin: center center;
+    }
+
+    .sticky-shade {
+      position: absolute;
+      inset: 0;
+      background: var(--surface-black);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 40;
+    }
+
+    /* Hero */
+    [data-hero] {
+      background: var(--background);
+      color: var(--foreground);
+      padding: 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 20;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    nav a {
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: var(--foreground);
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    .garage-link {
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--foreground);
+    }
+
+    .hero-middle {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 3rem 0;
+    }
+
+    .driver-id {
+      font-size: 0.875rem;
+      letter-spacing: 0.15em;
+      color: var(--raw-color-slate-500);
+      margin-bottom: 0.5rem;
+    }
+
+    .driver-name {
+      font-family: var(--font-display);
+      font-size: 6rem;
+      font-weight: 700;
+      line-height: 0.95;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .meta-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 1.125rem;
+      text-transform: uppercase;
+    }
+
+    .bracket-panel {
+      position: relative;
+      padding: 1.25rem;
+      background: rgba(247, 250, 251, 0.7);
+      backdrop-filter: blur(8px);
+      width: 15rem;
+    }
+
+    .bracket-panel-corner {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 1.5px solid var(--foreground);
+    }
+    .c-tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+    .c-tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+    .c-bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+    .c-br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+    .hero-foot {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cta-button {
+      padding: 0.8rem 2rem;
+      background: var(--surface-dark);
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+      transition: background 200ms ease, color 200ms ease;
+    }
+
+    .cta-button:hover {
+      background: var(--accent);
+      color: var(--surface-black);
+    }
+
+    /* Season Block */
+    [data-season] {
+      background: var(--surface-black);
+      color: var(--raw-color-white);
+      padding: 4rem 3rem;
+    }
+
+    #dissolve-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 35vh;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .season-title {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+    }
+
+    #trace-canvas {
+      width: 100%;
+      height: 550px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sticky-stack">
+
+    <!-- Block 1: Hero -->
+    <section class="sticky-layer" data-hero>
+      <div class="sticky-inner">
+        <canvas id="hero-canvas"></canvas>
+
+        <header>
+          <div class="logo">GRIDO1 RACING SYSTEMS</div>
+          <nav>
+            <ul>
+              <li><a href="#driver">Driver</a></li>
+              <li><a href="#season">Season</a></li>
+              <li><a href="#journal">Journal</a></li>
+              <li><a href="#store">Store</a></li>
+            </ul>
+          </nav>
+          <a href="#garage" class="garage-link">[ GARAGE &rarr; ]</a>
+        </header>
+
+        <div class="hero-middle">
+          <div>
+            <div class="driver-id">DRIVER_012</div>
+            <h1 class="driver-name">KIMI<br>ANTONELLI</h1>
+            <ul class="meta-list">
+              <li>&bull; ITALY</li>
+              <li>&bull; ROOKIE SEASON_2026</li>
+              <li>&bull; MERCEDES-AMG F1 TEAM</li>
+            </ul>
+          </div>
+
+          <div class="bracket-panel">
+            <span class="bracket-panel-corner c-tl"></span>
+            <span class="bracket-panel-corner c-tr"></span>
+            <span class="bracket-panel-corner c-bl"></span>
+            <span class="bracket-panel-corner c-br"></span>
+            <div style="font-size: 0.75rem; color: var(--accent); margin-bottom: 0.5rem; font-weight: 700;">NEXT RACE</div>
+            <div style="font-weight: 700; text-transform: uppercase; font-size: 1.1rem;">BELGIAN GP</div>
+            <div style="font-size: 0.85rem; color: var(--raw-color-slate-500); text-transform: uppercase;">SPA-FRANCORCHAMPS &bull; 27 JUL 2026</div>
+          </div>
+        </div>
+
+        <footer class="hero-foot">
+          <div>WATCH TRAILER 01:26</div>
+          <a href="#profile" class="cta-button">VIEW PROFILE &rarr;</a>
+          <div>INST / X / YOUTUBE</div>
+        </footer>
+
+        <div class="sticky-shade"></div>
+      </div>
+    </section>
+
+    <!-- Block 2: Season -->
+    <section class="sticky-layer" data-season>
+      <div class="sticky-inner">
+        <canvas id="dissolve-canvas"></canvas>
+
+        <h2 class="season-title">THE SEASON<br>SO FAR.</h2>
+        <p style="max-width: 25rem; font-size: 1.1rem; color: var(--raw-color-steel-400); text-transform: uppercase; margin-bottom: 2rem;">
+          Every race is a step forward. Here is how the season is shaping up.
+        </p>
+
+        <canvas id="trace-canvas"></canvas>
+
+        <div class="sticky-shade"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <script type="module">
+    import * as THREE from "three";
+    import Lenis from "lenis";
+
+    // Smooth Scroll
+    const lenis = new Lenis({ smoothWheel: true });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Hero WebGL Scene (Procedural Contours + Helmet Mesh)
+    const canvas = document.getElementById("hero-canvas");
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 0, 6.5);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+    // Contour shader plane
+    const bgMat = new THREE.ShaderMaterial({
+      vertexShader: `
+        varying vec2 vUv;
+        void main() { vUv = uv; gl_Position = vec4(position.xy, 0.99, 1.0); }
+      `,
+      fragmentShader: `
+        uniform float uTime;
+        varying vec2 vUv;
+        void main() {
+          vec2 p = (vUv - 0.5) * 4.0;
+          float t = uTime * 0.8;
+          float f = sin(p.x * 1.0 + t * 0.4) * 0.5 + sin(p.y * 0.85 - t * 0.35) * 0.45;
+          float line = 1.0 - smoothstep(0.0, 0.04, abs(fract(f * 2.5) - 0.5));
+          vec3 bg = vec3(0.968, 0.98, 0.984);
+          vec3 stroke = vec3(0.87, 0.9, 0.92);
+          gl_FragColor = vec4(mix(bg, stroke, line * 0.8), 1.0);
+        }
+      `,
+      uniforms: { uTime: { value: 0 } }
+    });
+    const bg = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), bgMat);
+    scene.add(bg);
+
+    // 3D Helmet Wireframe & Core
+    const helmetGeo = new THREE.SphereGeometry(1.6, 32, 24);
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0x02d2e3, wireframe: true, transparent: true, opacity: 0.35 });
+    const helmet = new THREE.Mesh(helmetGeo, wireMat);
+    helmet.scale.set(1, 1.25, 1.15);
+    scene.add(helmet);
+
+    let mouseX = 0, mouseY = 0;
+    window.addEventListener("pointermove", (e) => {
+      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    window.addEventListener("resize", () => {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    });
+
+    // Animate Hero
+    function animate(time) {
+      bgMat.uniforms.uTime.value = time * 0.001;
+      helmet.rotation.y = time * 0.0003 + mouseX * 0.4;
+      helmet.rotation.x = -mouseY * 0.3;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+
+    // Circuit Canvas
+    const traceCanvas = document.getElementById("trace-canvas");
+    const ctx = traceCanvas.getContext("2d");
+    function resizeTrace() {
+      traceCanvas.width = traceCanvas.clientWidth * 2;
+      traceCanvas.height = traceCanvas.clientHeight * 2;
+      ctx.scale(2, 2);
+    }
+    resizeTrace();
+    window.addEventListener("resize", resizeTrace);
+
+    const circuit = [[100, 300], [250, 150], [450, 120], [650, 200], [800, 150], [950, 250], [900, 420], [700, 480], [400, 450], [200, 400], [100, 300]];
+    let lap = 0;
+    function renderTrace() {
+      ctx.clearRect(0, 0, traceCanvas.width, traceCanvas.height);
+      ctx.beginPath();
+      ctx.moveTo(circuit[0][0], circuit[0][1]);
+      for (let i = 1; i < circuit.length; i++) ctx.lineTo(circuit[i][0], circuit[i][1]);
+      ctx.strokeStyle = "#4d4d4d";
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      lap = (lap + 0.002) % 1;
+      const count = Math.floor(lap * (circuit.length - 1));
+      ctx.beginPath();
+      ctx.moveTo(circuit[0][0], circuit[0][1]);
+      for (let i = 1; i <= count; i++) ctx.lineTo(circuit[i][0], circuit[i][1]);
+      ctx.strokeStyle = "#02d2e3";
+      ctx.lineWidth = 5;
+      ctx.stroke();
+
+      requestAnimationFrame(renderTrace);
+    }
+    requestAnimationFrame(renderTrace);
+
+    // Sticky Stack Solver
+    const layers = document.querySelectorAll(".sticky-layer");
+    window.addEventListener("scroll", () => {
+      const vh = window.innerHeight;
+      for (let i = 0; i < layers.length - 1; i++) {
+        const next = layers[i + 1];
+        const inner = layers[i].querySelector(".sticky-inner");
+        const shade = layers[i].querySelector(".sticky-shade");
+        const p = Math.min(1, Math.max(0, 1 - next.getBoundingClientRect().top / vh));
+        inner.style.transform = p > 0 ? `scale(${1 - 0.1 * p})` : "";
+        shade.style.opacity = `${0.55 * p}`;
+      }
+    });
+  </script>
+</body>
+</html>

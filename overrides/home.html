@@ -1,0 +1,43 @@
+{% extends "main.html" %}
+
+{# Suppress documentation header on the custom home page #}
+{% block header %}
+{% endblock %}
+
+{# Suppress site navigation sidebar on the custom home page #}
+{% block site_nav %}
+{% endblock %}
+
+{# Suppress table of contents on the custom home page #}
+{% block toc %}
+{% endblock %}
+
+{# Suppress documentation footer on the custom home page #}
+{% block footer %}
+{% endblock %}
+
+{# Full-bleed container without default max-width limits #}
+{% block content %}
+  <style>
+    .md-main__inner {
+      margin: 0 !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+    .md-content {
+      margin: 0 !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+    .md-content__inner {
+      margin: 0 !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+    .gl-home-root {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+    }
+  </style>
+  {{ page.content }}
+{% endblock %}
