@@ -46,6 +46,7 @@ Every prompt is dissected across **8 dimensions**:
 | 1 | [KIMI — GRIDO1 Racing Systems](prompt-001-kimi-grido1.md) | [GetLayers.ai](https://www.getlayers.ai/docs) | 2026-10-05 | Telemetry HUD → live formula meters; Circuit trace → reaction/orbital paths; 3D helmet shader → orbital density cross-sections |
 | 2 | [Spatial Hand-Tracked Hologram & Specimen Scrubber](prompt-002-spatial-hand-scrubber.md) | Community / Vision Pipeline | 2026-10-05 | Hand tracking turntable → 3D molecular/physics inspection; Pinch-zoom → atomic shell peeling; Screen-blend floating renders |
 | 3 | [Sprite-Sheet Gaze Engine & Cursor Tracking](prompt-003-sprite-sheet-gaze-tracking.md) | Community / Kinetic Sprite Pipeline | 2026-10-05 | Zero-latency cursor tracking → eye optics/accommodation; Dipole compass deflection; Volumetric confocal cell slicing |
+| 4 | [Procedural Spline Mask & State-Reveal Hero](prompt-004-procedural-spline-reveal.md) | Community / Organic Math Masking | 2026-10-05 | X-Ray state peeling → macroscopic surface vs atomic lattice; Stress tensor visualization; Biochemical capsid peeling |
 
 ---
 
@@ -57,6 +58,7 @@ docs/prompt-library/
 ├── prompt-001-kimi-grido1.md               ← Full 8-dimension analysis + raw prompt
 ├── prompt-002-spatial-hand-scrubber.md     ← Full 8-dimension analysis + raw prompt
 ├── prompt-003-sprite-sheet-gaze-tracking.md← Full 8-dimension analysis + raw prompt
+├── prompt-004-procedural-spline-reveal.md  ← Full 8-dimension analysis + raw prompt
 └── (future prompts...)
 ```
 
