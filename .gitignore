@@ -14,3 +14,7 @@ site/
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Prompt Vault & Local Research (Never push to GitHub)
+prompt_vault/
+docs/prompt-library/
