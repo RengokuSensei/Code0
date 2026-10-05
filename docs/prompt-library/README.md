@@ -52,6 +52,9 @@ Every prompt is dissected across **8 dimensions**:
 | 7 | [2.5D Multi-Plane Parallax & Deep Scenic Journey](prompt-007-multi-plane-parallax-geography.md) | Rare Air / Cinematic Ladakh | 2026-10-05 | Multi-plane altitude descent → mountain orogeny & geology; Tectonic plate collisions; Atmospheric lapse rates |
 | 8 | [Chromatic Video Sampling & Living Biology](prompt-008-chromatic-video-darken-biology.md) | Kingfisher Cinematic Specimen | 2026-10-05 | `mix-blend-mode: darken` taxonomic depth; Biomimetic engineering (Shinkansen beak); 1x1 canvas auto-palette sampling |
 | 9 | [Monsoon: Split-Luminance Atmospheric Video & React](prompt-009-monsoon-split-luminance-react.md) | Pathway Style / Full React Spec | 2026-10-05 | Split-luminance viewport → meteorology & atmospheric storm cycles; Frosted island capsule navbar; React 19 + Tailwind v4 scaffold |
+| 10 | [Feather Atlas: Interactive 3D Biological Field Guide](prompt-010-feather-atlas-3d-biology.md) | [MotionSites.ai](https://motionsites.ai/) | 2026-10-05 | 3D specimen inspection → comparative zoology & morphology; Circadian day/dusk lighting shifts; 520% microscopic lens zoom |
+| 11 | [Halden: Stripe-Style Morphing Dropdown Navigator](prompt-011-halden-morphing-dropdown.md) | [MotionSites.ai](https://motionsites.ai/) | 2026-10-05 | Adaptive morphing glass container → curriculum & discipline navigator; Directional blur crossfading; Hover topic preview cards |
+| 12 | [Design World: 6-Band Chromatic Dispersion & Optics](prompt-012-design-world-chromatic-dispersion.md) | [MotionSites.ai](https://motionsites.ai/) | 2026-10-05 | Two-pass screen-space refraction → physical optics & Snell's Law; 6-band Cauchy wavelength dispersion; Cauchy prism splitting |
 
 ---
 
@@ -69,6 +72,9 @@ docs/prompt-library/
 ├── prompt-007-multi-plane-parallax-geography.md ← Full 8-dimension analysis + raw prompt
 ├── prompt-008-chromatic-video-darken-biology.md ← Full 8-dimension analysis + raw prompt
 ├── prompt-009-monsoon-split-luminance-react.md ← Full 8-dimension analysis + raw prompt
+├── prompt-010-feather-atlas-3d-biology.md  ← Full 8-dimension analysis + raw prompt
+├── prompt-011-halden-morphing-dropdown.md  ← Full 8-dimension analysis + raw prompt
+├── prompt-012-design-world-chromatic-dispersion.md ← Full 8-dimension analysis + raw prompt
 └── (future prompts...)
 ```
 
