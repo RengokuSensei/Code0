@@ -23,37 +23,35 @@
 
 /* Light Mode (default scheme) */
 [data-md-color-scheme="default"] {
-  --aa-wallpaper-overlay: rgba(255, 255, 255, 0.25);
-  --aa-glass-bg: rgba(255, 255, 255, 0.55);
+  --aa-glass-bg: rgba(255, 255, 255, 0.85);
   --aa-glass-border: rgba(0, 0, 0, 0.08);
-  --aa-header-bg: rgba(255, 255, 255, 0.7);
-  --aa-text-color: #1a1a1a;
-  --aa-text-muted: rgba(26, 26, 26, 0.75);
-  --aa-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  --aa-hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  --aa-header-bg: rgba(255, 255, 255, 0.95);
+  --aa-text-color: #090a0b;
+  --aa-text-muted: rgba(9, 10, 11, 0.75);
+  --aa-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --aa-hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
   
   /* MkDocs Overrides */
-  --md-primary-fg-color: var(--aa-accent-color);
-  --md-accent-fg-color: var(--aa-accent-color);
-  --md-default-bg-color: transparent;
+  --md-primary-fg-color: #02d2e3;
+  --md-accent-fg-color: #02d2e3;
+  --md-default-bg-color: #f7fafb;
   --md-default-fg-color: var(--aa-text-color);
 }
 
 /* Dark Mode (slate scheme) - DEFAULT */
 [data-md-color-scheme="slate"] {
-  --aa-wallpaper-overlay: rgba(0, 0, 0, 0.45);
-  --aa-glass-bg: rgba(15, 20, 35, 0.55);
+  --aa-glass-bg: rgba(14, 15, 20, 0.85);
   --aa-glass-border: rgba(255, 255, 255, 0.08);
-  --aa-header-bg: rgba(10, 15, 25, 0.75);
-  --aa-text-color: #f5f5f5;
-  --aa-text-muted: rgba(245, 245, 245, 0.75);
+  --aa-header-bg: rgba(9, 10, 11, 0.95);
+  --aa-text-color: #f7fafb;
+  --aa-text-muted: rgba(247, 250, 251, 0.75);
   --aa-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   --aa-hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
   
   /* MkDocs Overrides */
-  --md-primary-fg-color: var(--aa-accent-color);
-  --md-accent-fg-color: var(--aa-accent-color);
-  --md-default-bg-color: transparent;
+  --md-primary-fg-color: #02d2e3;
+  --md-accent-fg-color: #02d2e3;
+  --md-default-bg-color: #090a0b;
   --md-default-fg-color: var(--aa-text-color);
 }
 
@@ -64,23 +62,19 @@ body, .md-typeset {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: -0.011em;
-  transition: color 0.5s ease, background-color 0.5s ease;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-/* Force ALL MkDocs containers transparent so wallpaper shows */
-body,
 body[data-md-color-scheme="slate"],
+[data-md-color-scheme="slate"] .md-container,
+[data-md-color-scheme="slate"] .md-main {
+  background-color: #090a0b !important;
+}
+
 body[data-md-color-scheme="default"],
-.md-body,
-.md-container,
-.md-main,
-.md-main__inner,
-.md-content,
-.md-sidebar,
-.md-sidebar__scrollwrap,
-.md-typeset {
-  background-color: transparent !important;
-  background: transparent !important;
+[data-md-color-scheme="default"] .md-container,
+[data-md-color-scheme="default"] .md-main {
+  background-color: #f7fafb !important;
 }
 
 /* Sidebar & breadcrumb text visibility */
@@ -112,26 +106,7 @@ body[data-md-color-scheme="default"],
 
 
 
-/* --------------------------------------------------------------------------
-   2. Dynamic Wallpaper Background
-   -------------------------------------------------------------------------- */
-.aa-wallpaper-layer {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: opacity 1.2s ease-in-out;
-}
 
-.aa-wallpaper-layer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--aa-wallpaper-overlay);
-  transition: background 0.5s ease;
-}
 
 /* --------------------------------------------------------------------------
    3. Glassmorphism MkDocs Overrides
@@ -378,39 +353,6 @@ body.aa-cursor-active #aa-cursor-glow {
 }
 
 /* --------------------------------------------------------------------------
-   8. Floating Particles
-   -------------------------------------------------------------------------- */
-.aa-particle {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  background: rgba(255, 255, 255, 0.15);
-  animation: aa-float-up linear infinite;
-  z-index: -1; /* Above wallpaper, below content */
-}
-
-[data-md-color-scheme="default"] .aa-particle {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-@keyframes aa-float-up {
-  0% {
-    transform: translateY(120vh) translateX(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-10vh) translateX(20px);
-    opacity: 0;
-  }
-}
-
-/* --------------------------------------------------------------------------
    9. Scroll Reveal Animations
    -------------------------------------------------------------------------- */
 .aa-reveal {
@@ -505,46 +447,6 @@ body.aa-cursor-active #aa-cursor-glow {
 
 .md-tabs__item--active .md-tabs__link::after {
   display: none;
-}
-
-/* --------------------------------------------------------------------------
-   12. Wallpaper Info Badge
-   -------------------------------------------------------------------------- */
-.aa-wallpaper-badge {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  background: var(--aa-glass-bg);
-  backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
-  -webkit-backdrop-filter: var(--aa-glass-blur) var(--aa-glass-saturate);
-  border: 1px solid var(--aa-glass-border);
-  padding: 0.4rem 0.8rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  z-index: 100;
-  opacity: 0.6;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: auto;
-  cursor: help;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: var(--aa-shadow);
-}
-
-.aa-wallpaper-badge:hover {
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-.aa-wallpaper-badge::before {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--aa-accent-color);
-  box-shadow: 0 0 5px var(--aa-accent-color);
 }
 
 /* --------------------------------------------------------------------------
@@ -906,14 +808,7 @@ body.aa-cursor-active #aa-cursor-glow {
   }
   
   /* Wallpaper badge smaller on mobile */
-  .aa-wallpaper-badge {
-    bottom: 0.5rem;
-    right: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.65rem;
-  }
-
-  /* Cards — no 3D tilt on mobile, simpler hover */
+/* Cards — no 3D tilt on mobile, simpler hover */
   .aa-card {
     transform: none !important;
   }
@@ -937,8 +832,7 @@ body.aa-cursor-active #aa-cursor-glow {
 /* Hardware-accelerated transitions for smooth scrolling and animations */
 .aa-card,
 .aa-hero,
-.aa-social-btn,
-.aa-wallpaper-layer {
+.aa-social-btn {
   will-change: transform, opacity;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -956,16 +850,10 @@ html {
     opacity: 1 !important;
     transform: none !important;
   }
-  
-  .aa-particle {
-    display: none !important;
-  }
-  
-  .aa-wallpaper-layer {
-    transition: none !important;
-  }
+
   
   html {
     scroll-behavior: auto;
   }
 }
+
