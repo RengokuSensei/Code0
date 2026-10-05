@@ -1,0 +1,1521 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Deep technical insights, research, reading summaries, and data-driven analysis by Aditya.">
+      
+      
+        <meta name="author" content="aditya">
+      
+      
+        <link rel="canonical" href="https://rengokusensei.github.io/Code0/prompt-library/prompt-004-procedural-spline-reveal/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Prompt #004 — Procedural Spline Mask & State-Reveal Hero Engine - ADVANCED ANALYSIS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/getlayers.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <!-- Author & site meta -->
+  <meta name="author" content="Aditya">
+  <meta name="site-url" content="https://rengokusensei.github.io/Code0/">
+
+  <!-- Fonts: Oswald & Space Grotesk (GetLayers Standard) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- ES Module Import Map for Three.js and Lenis -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/",
+      "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.mjs"
+    }
+  }
+  </script>
+
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prompt-004-procedural-spline-mask-state-reveal-hero-engine" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ADVANCED ANALYSIS" class="md-header__button md-logo" aria-label="ADVANCED ANALYSIS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m16 11.78 4.24-7.33 1.73 1-5.23 9.05-6.51-3.75L5.46 19H22v2H2V3h2v14.54L9.5 8z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ADVANCED ANALYSIS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Prompt #004 — Procedural Spline Mask &amp; State-Reveal Hero Engine
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/RengokuSensei/Code0" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    RengokuSensei/Code0
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reading/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reading & Library
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../workspace/notes/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Workspace
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../about/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  About
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ADVANCED ANALYSIS" class="md-nav__button md-logo" aria-label="ADVANCED ANALYSIS" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m16 11.78 4.24-7.33 1.73 1-5.23 9.05-6.51-3.75L5.46 19H22v2H2V3h2v14.54L9.5 8z"/></svg>
+
+    </a>
+    ADVANCED ANALYSIS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/RengokuSensei/Code0" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    RengokuSensei/Code0
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reading/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reading & Library
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reading & Library
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reading/chemistry/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chemistry
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Chemistry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reading/chemistry/atom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atom & Orbitals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reading/books/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Book Summaries
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reading/papers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research Papers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reading/reader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interactive Reader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workspace
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Workspace
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../workspace/notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research Scratchpad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../about/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    About
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/author/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Author
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-raw-4-step-prompt-pipeline-preserved" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Raw 4-Step Prompt Pipeline (Preserved)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Raw 4-Step Prompt Pipeline (Preserved)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-strict-compositional-geometry-anchor-image-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Strict Compositional &amp; Geometry Anchor (Image Generation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-pixel-aligned-state-delta-damage-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Pixel-Aligned State Delta / Damage Layer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-expression-micro-feature-delta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Expression &amp; Micro-Feature Delta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-procedural-spline-reveal-hero-engine-frontend-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Procedural Spline Reveal Hero Engine (Frontend Implementation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dimension-1-architectural-blueprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimension 1 — Architectural Blueprint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dimension-2-visual-language-typographic-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimension 2 — Visual Language &amp; Typographic Math
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dimension-3-mathematics-splines-physics-recipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimension 3 — Mathematics, Splines &amp; Physics Recipes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dimension 3 — Mathematics, Splines &amp; Physics Recipes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-organic-polar-harmonic-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Organic Polar Harmonic Equation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-closed-catmull-rom-spline-to-cubic-bezier-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Closed Catmull-Rom Spline to Cubic Bézier Conversion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-geometric-shrinkage-law-eliminating-the-8-bit-alpha-ghost-trap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Geometric Shrinkage Law (Eliminating the 8-Bit Alpha Ghost Trap)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-frame-rate-independent-follower-arc-length-stamping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Frame-Rate Independent Follower &amp; Arc-Length Stamping
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dimension-4-layout-canvas-mathematics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimension 4 — Layout &amp; Canvas Mathematics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dimension-5-critical-performance-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimension 5 — Critical Performance Rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dimension-6-interaction-attractor-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimension 6 — Interaction &amp; Attractor State
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dimension-7-prompt-engineering-patterns-why-this-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimension 7 — Prompt Engineering Patterns: Why This Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dimension-8-educational-explorable-translation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimension 8 — Educational &amp; Explorable Translation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dimension 8 — Educational &amp; Explorable Translation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-advanced-analysis-will-use-the-procedural-spline-reveal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How ADVANCED ANALYSIS Will Use the Procedural Spline Reveal:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reusable-elements-for-future-site-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reusable Elements for Future Site Integration
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="prompt-004-procedural-spline-mask-state-reveal-hero-engine">Prompt #004 — Procedural Spline Mask &amp; State-Reveal Hero Engine<a class="headerlink" href="#prompt-004-procedural-spline-mask-state-reveal-hero-engine" title="Permanent link">&para;</a></h1>
+<ul>
+<li><strong>Type:</strong> 4-Step Generative Multimodal Pipeline (Geometric Anchor <span class="arithmatex">\(\to\)</span> Entropy/Damage Delta <span class="arithmatex">\(\to\)</span> Facial Expression Micro-Delta <span class="arithmatex">\(\to\)</span> Procedural Spline Reveal Hero)</li>
+<li><strong>Primary Technologies:</strong> Diffusion Composition Clamping, Parametric Polar Harmonics, Closed Catmull-Rom Splines to Cubic Beziers, Distance-Based Stamp Interpolation, Dual-Layer Canvas Masking</li>
+<li><strong>Date Studied:</strong> 2026-10-05</li>
+<li><strong>Core Educational Value:</strong> <strong>Interactive X-Ray &amp; Multi-State Comparator</strong> — Slicing or peeling between two aligned physical states (e.g. macro surface vs. atomic lattice, unstressed vs. finite-element stress map, anatomy vs. skeletal system, pristine crystal vs. dislocation defects) with zero-ghosting procedural masking.</li>
+</ul>
+<hr />
+<h2 id="the-raw-4-step-prompt-pipeline-preserved">The Raw 4-Step Prompt Pipeline (Preserved)<a class="headerlink" href="#the-raw-4-step-prompt-pipeline-preserved" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-strict-compositional-geometry-anchor-image-generation">Step 1: Strict Compositional &amp; Geometry Anchor (Image Generation)<a class="headerlink" href="#step-1-strict-compositional-geometry-anchor-image-generation" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>A single 3D animated film still, Pixar / Illumination style. Not photography.
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>STYLE: stylized 3D character animation render. Matte surfaces, simplified chunky geometry with rounded edges. Soft even global illumination. No harsh shadows, no depth-of-field blur, no photographic grain. Every object — sofa, curtain, lamp, plant — modelled in the same cartoon 3D language as the character.
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>BACKGROUND: one flat wall in vivid saturated cobalt blue, edge to edge. Bold, poster-like colour. Completely plain — no texture, no gradient, no pattern.
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>COMPOSITION, 16:9 horizontal:
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>- A cream sofa dead centre, spanning the middle 40% of the frame width, its back 42% down from the top and its feet at 84% down
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>- The character sitting upright on the centre cushion, horizontally centred. Head starts 17% down from the top, paws reach 70% down — it fills just over half the frame height
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>- One cream curtain panel directly behind the sofa only, no wider than the sofa
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>- A small wall sconce mounted HIGH on the wall to the left
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>- One small round potted plant on the floor to the right of the sofa
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>- Nothing else. The lower-left quarter stays empty wall and bare floor
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>CHARACTER: sitting upright, front paws together, tail curled around the paws, looking straight into camera, wide innocent eyes, calm and still.
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>CAMERA: straight on, eye level, everything sharp edge to edge, no blur.
+</span></code></pre></div>
+<h3 id="step-2-pixel-aligned-state-delta-damage-layer">Step 2: Pixel-Aligned State Delta / Damage Layer<a class="headerlink" href="#step-2-pixel-aligned-state-delta-damage-layer" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Using the attached image, keep the CHARACTER and the CAMERA completely unchanged — identical pose, position, size, fur and face, same angle, same lighting, same render style. It has not moved a single pixel.
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Keep every other object in EXACTLY the same position and size. Do not move, resize, redesign or replace anything. Do not add any new object. Only add damage:
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>- WALL: the wallpaper has been clawed off in ragged vertical strips across the whole wall, peeling and curling away, exposing a clashing hot magenta pink underneath. At least 85% of the wall is now pink. Same flat poster-like colour, no texture
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>- SOFA: same sofa, same place — deep claw gashes across the seat and arms, chunky cartoon foam stuffing bursting out, one cushion split open
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>- CURTAIN: same curtain, same place — half torn down, hanging diagonally off its rail, a long rip through it
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>- WALL SCONCE: same lamp, same place — knocked crooked, hanging by its wire
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>- PLANT: same plant, same pot, same place — tipped over, soil spilled in a small arc, two leaves snapped off
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>- A few puffs of stuffing on the floor, one drifting mid-air
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>The floor also turns magenta pink. The lower-left quarter stays clear of debris.
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>16:9 horizontal, same stylized 3D animated render.
+</span></code></pre></div>
+<h3 id="step-3-expression-micro-feature-delta">Step 3: Expression &amp; Micro-Feature Delta<a class="headerlink" href="#step-3-expression-micro-feature-delta" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Using the attached image, change ONLY the character's facial expression. Everything else stays pixel-identical — the room, the damage, the lighting, and the character's body, pose, paws, tail and head position. Do not move or resize the head.
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>New expression — smug and guilty:
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>- Eyes narrowed to confident half-lidded slits instead of wide and round, same position and same size
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>- A closed-mouth smirk curling up higher on one side
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>- One small pointed fang poking out over the lower lip on the raised side
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>- One eyebrow raised slightly higher than the other
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>It looks pleased with itself and completely unrepentant. Same render style, 16:9.
+</span></code></pre></div>
+<h3 id="step-4-procedural-spline-reveal-hero-engine-frontend-implementation">Step 4: Procedural Spline Reveal Hero Engine (Frontend Implementation)<a class="headerlink" href="#step-4-procedural-spline-reveal-hero-engine-frontend-implementation" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Build me a full-screen hero section as one self-contained HTML file, with a grunge-brush hover reveal effect using the two images attached.
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>TWO IMAGES, stacked: the clean one on top, the wrecked one underneath. Same size, same crop. Moving the cursor wipes holes in the top image and reveals the one below.
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>THE BRUSH — do not use a PNG:
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>- Draw the blob procedurally. Walk 360 degrees around a point; radius = base radius
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  * (1 + 0.085*sin(3a + t) + 0.048*sin(5a - 1.15t) + 0.022*sin(9a + 0.6t))
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>- Join the samples with a closed Catmull-Rom spline emitted as beziers, NOT straight lines. Straight lines make it look like a jagged polygon
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>- Base radius = 19% of the smaller viewport dimension
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>THE TRAIL — it must SHRINK, not fade:
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>- Keep every stamp in an array with its birth time
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>- Every frame, clear the mask and redraw all stamps at FULL opacity, each at radius * (1 - age/2.7s)^0.85. Drop stamps older than 2.7s
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>- Do NOT fade the mask with destination-out alpha decay. Integer rounding traps the alpha around 10/255 and leaves a permanent 4% ghost of the lower image everywhere the cursor has been
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>THE CURSOR — it should glide, not snap:
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>- Keep a smoothed follower that chases the pointer each frame: k = 1 - (1 - 0.17)^(dt * 60);  sx += (tx - sx) * k
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>- Lay stamps along the FOLLOWER's path at fixed distance intervals (every 9% of a radius travelled), not once per frame, so fast moves leave a continuous trail
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>- Snap the follower to the pointer on pointerenter
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>WHEN THE CURSOR LEAVES: park one blob over an empty area and slowly morph it, so people know the hero is interactive before they touch it.
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>LAYOUT: full viewport, no page margin. Logo and nav top-left, pill button top-right. Eyebrow pill and a huge three-line all-caps headline bottom-left. Two pill buttons bottom-right. White text. Headline at 3.8% of viewport width, line-height 0.88, letter-spacing -0.03em.
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>Draw both images with object-fit: cover maths so nothing stretches. Do not put a blur filter on the mask canvas — it destroys the frame rate.
+</span></code></pre></div>
+<hr />
+<h2 id="dimension-1-architectural-blueprint">Dimension 1 — Architectural Blueprint<a class="headerlink" href="#dimension-1-architectural-blueprint" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Dual-Layer Canvas Compositing Architecture:</strong></li>
+<li><strong>Bottom Layer:</strong> Canvas or <code>&lt;img&gt;</code> rendering State B (the damaged / X-Ray / underlying layer).</li>
+<li><strong>Top Layer:</strong> Canvas rendering State A (pristine / surface layer).</li>
+<li><strong>Mask Layer:</strong> An offscreen or directly composited mask canvas operating via <code>globalCompositeOperation = 'destination-out'</code> (or <code>source-in</code>).</li>
+<li><strong>Zero Asset Dependency:</strong></li>
+<li>The organic reveal brush is computed purely through mathematical sine wave harmonics—<strong>no raster PNG textures or external SVG files</strong>.</li>
+<li><strong>Memory &amp; Frame Budget:</strong></li>
+<li>Active stamps are stored as lightweight structs <code>{x, y, birthTime, initialRadius}</code> in a typed array.</li>
+<li>Stamps older than <span class="arithmatex">\(2.7\text{s}\)</span> are garbage-collected every tick.</li>
+</ul>
+<hr />
+<h2 id="dimension-2-visual-language-typographic-math">Dimension 2 — Visual Language &amp; Typographic Math<a class="headerlink" href="#dimension-2-visual-language-typographic-math" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>High-Impact Condensed Editorial Headline:</strong></li>
+<li>Font size: <code>3.8vw</code> (fluidly tied to viewport width).</li>
+<li>Extreme leading: <code>line-height: 0.88</code> (chunky, interlocking display).</li>
+<li>Negative tracking: <code>letter-spacing: -0.03em</code>.</li>
+<li><strong>Vivid Color Dissonance:</strong></li>
+<li>State A: Calm, saturated Cobalt Blue (<code>#0047AB</code>) + Cream (<code>#FFFDD0</code>).</li>
+<li>State B: High-energy Hot Magenta Pink (<code>#FF007F</code>).</li>
+<li>The stark chromatic contrast makes the procedural brush reveal dramatically pop.</li>
+</ul>
+<hr />
+<h2 id="dimension-3-mathematics-splines-physics-recipes">Dimension 3 — Mathematics, Splines &amp; Physics Recipes<a class="headerlink" href="#dimension-3-mathematics-splines-physics-recipes" title="Permanent link">&para;</a></h2>
+<h3 id="1-organic-polar-harmonic-equation">1. Organic Polar Harmonic Equation<a class="headerlink" href="#1-organic-polar-harmonic-equation" title="Permanent link">&para;</a></h3>
+<p>The boundary of the brush blob is modulated around <span class="arithmatex">\(360^\circ\)</span> (<span class="arithmatex">\(\theta \in [0, 2\pi]\)</span>) by three interfering harmonic sine waves:
+$<span class="arithmatex">\(r(\theta, t) = R_{\text{base}} \cdot \left[1 + 0.085\sin(3\theta + t) + 0.048\sin(5\theta - 1.15t) + 0.022\sin(9\theta + 0.6t)\right]\)</span>$
+* Mode 3 (<span class="arithmatex">\(3\theta\)</span>): Macro organic tri-lobe asymmetry.
+* Mode 5 (<span class="arithmatex">\(5\theta\)</span>): Medium edge undulating ripple with phase counter-rotation (<span class="arithmatex">\(-1.15t\)</span>).
+* Mode 9 (<span class="arithmatex">\(9\theta\)</span>): Fine high-frequency liquid perimeter turbulence.</p>
+<h3 id="2-closed-catmull-rom-spline-to-cubic-bezier-conversion">2. Closed Catmull-Rom Spline to Cubic Bézier Conversion<a class="headerlink" href="#2-closed-catmull-rom-spline-to-cubic-bezier-conversion" title="Permanent link">&para;</a></h3>
+<p>To avoid the angular polygon look of <code>lineTo</code>, adjacent control points <span class="arithmatex">\(P_{i-1}, P_i, P_{i+1}, P_{i+2}\)</span> are converted to cubic Bézier control points (<span class="arithmatex">\(C_1, C_2\)</span>):
+$<span class="arithmatex">\(C_1 = P_i + \frac{P_{i+1} - P_{i-1}}{6}\)</span>$
+$<span class="arithmatex">\(C_2 = P_{i+1} - \frac{P_{i+2} - P_i}{6}\)</span>$
+Emitted natively via <code>ctx.bezierCurveTo(C1.x, C1.y, C2.x, C2.y, P_{i+1}.x, P_{i+1}.y)</code>.</p>
+<h3 id="3-geometric-shrinkage-law-eliminating-the-8-bit-alpha-ghost-trap">3. Geometric Shrinkage Law (Eliminating the 8-Bit Alpha Ghost Trap)<a class="headerlink" href="#3-geometric-shrinkage-law-eliminating-the-8-bit-alpha-ghost-trap" title="Permanent link">&para;</a></h3>
+<p>Most beginners implement canvas trails by drawing semi-transparent rectangles (<code>ctx.fillStyle = 'rgba(0,0,0,0.05)'</code>) or fading alpha. <strong>This creates a notorious bug:</strong>
+Due to 8-bit channel quantization (<span class="arithmatex">\(\text{round}(A \times 0.95)\)</span>), values below <span class="arithmatex">\(10/255\)</span> truncate to an asymptote, leaving a <strong>permanent 4% ghost smear</strong>.
+<strong>The Prompt's Solution:</strong> Keep every stamp at <span class="arithmatex">\(100\%\)</span> full opacity, and shrink its geometry over time:
+$<span class="arithmatex">\(R(t) = R_{\text{base}} \cdot \left(1 - \frac{\text{age}}{2.7\text{s}}\right)^{0.85}\)</span>$
+The power exponent <span class="arithmatex">\(0.85\)</span> creates an initial lingering hold followed by a rapid terminal collapse.</p>
+<h3 id="4-frame-rate-independent-follower-arc-length-stamping">4. Frame-Rate Independent Follower &amp; Arc-Length Stamping<a class="headerlink" href="#4-frame-rate-independent-follower-arc-length-stamping" title="Permanent link">&para;</a></h3>
+<p>Cursor smoothing:
+$<span class="arithmatex">\(k = 1 - (1 - 0.17)^{dt \cdot 60}\)</span>$
+$<span class="arithmatex">\(S_{x} = S_{x} + (T_{x} - S_{x}) \cdot k\)</span>$
+<strong>Distance-Interval Stamping:</strong>
+Stamps are laid down every <span class="arithmatex">\(\Delta d = 0.09 \times R_{\text{base}}\)</span> along the vector path rather than once per frame. This ensures that even during ultra-fast cursor swipes, the trail forms an unbroken fluid tube without discrete gaps.</p>
+<hr />
+<h2 id="dimension-4-layout-canvas-mathematics">Dimension 4 — Layout &amp; Canvas Mathematics<a class="headerlink" href="#dimension-4-layout-canvas-mathematics" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Manual <code>object-fit: cover</code> Canvas Transform:</strong>
+  <div class="language-javascript highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">imgRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kd">const</span><span class="w"> </span><span class="nx">screenRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kd">let</span><span class="w"> </span><span class="nx">renderW</span><span class="p">,</span><span class="w"> </span><span class="nx">renderH</span><span class="p">,</span><span class="w"> </span><span class="nx">offsetX</span><span class="p">,</span><span class="w"> </span><span class="nx">offsetY</span><span class="p">;</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">screenRatio</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nx">imgRatio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nx">renderW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="nx">renderH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">imgRatio</span><span class="p">;</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nx">offsetX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="nx">offsetY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">renderH</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="nx">renderH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="nx">renderW</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">imgRatio</span><span class="p">;</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">  </span><span class="nx">offsetX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">renderW</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">  </span><span class="nx">offsetY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="p">}</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="nx">offsetX</span><span class="p">,</span><span class="w"> </span><span class="nx">offsetY</span><span class="p">,</span><span class="w"> </span><span class="nx">renderW</span><span class="p">,</span><span class="w"> </span><span class="nx">renderH</span><span class="p">);</span>
+</span></code></pre></div>
+  Both top and bottom images are mapped with identical transforms so their coordinates align down to the sub-pixel.</li>
+</ul>
+<hr />
+<h2 id="dimension-5-critical-performance-rules">Dimension 5 — Critical Performance Rules<a class="headerlink" href="#dimension-5-critical-performance-rules" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Filter Ban:</strong> <em>"Do not put a blur filter on the mask canvas — it destroys the frame rate."</em>
+  CSS <code>filter: blur(...)</code> or canvas <code>ctx.filter = 'blur(...)'</code> forces the browser GPU to perform an expensive multi-pass Gaussian blur over millions of pixels every frame, dropping FPS from 60 to 18.
+  Instead, the smooth aesthetic is achieved organically through the <strong>sub-divided Catmull-Rom spline curves</strong>.</li>
+</ul>
+<hr />
+<h2 id="dimension-6-interaction-attractor-state">Dimension 6 — Interaction &amp; Attractor State<a class="headerlink" href="#dimension-6-interaction-attractor-state" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Autonomous Attractor (Idle Breathing):</strong>
+  When the mouse exits the window (<code>pointerleave</code>), the engine parks a single harmonic blob over a quiet area and continuously oscillates its phase <span class="arithmatex">\(t\)</span>. This acts as a visual prompt signaling interactivity to the user before they touch anything.</li>
+<li><strong>Instant Snap on Return:</strong> On <code>pointerenter</code>, the follower coordinates jump directly to <span class="arithmatex">\((x, y)\)</span> to avoid a jarring rubber-band sweep across the screen.</li>
+</ul>
+<hr />
+<h2 id="dimension-7-prompt-engineering-patterns-why-this-works">Dimension 7 — Prompt Engineering Patterns: Why This Works<a class="headerlink" href="#dimension-7-prompt-engineering-patterns-why-this-works" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Percentage Clamping in Compositional Prompts:</strong>
+   Notice the mathematical precision in Step 1:
+   <em>"Sofa spanning middle 40% of frame width, back 42% down, feet at 84% down... head 17% down, paws 70% down."</em>
+   By using exact percentage coordinates rather than adjectives like "centered" or "medium-sized", the AI diffusion model locks the geometry identically across iterations.</li>
+<li><strong>Deep Technical Cause-and-Effect Explanations:</strong>
+   The author tells the AI <em>why</em> a particular design pattern must be followed:</li>
+<li><em>"Do NOT fade the mask with destination-out alpha decay. Integer rounding traps the alpha around 10/255 and leaves a permanent 4% ghost."</em>
+   When an AI is given the technical failure mechanism, it doesn't revert to common lazy fallbacks.</li>
+</ol>
+<hr />
+<h2 id="dimension-8-educational-explorable-translation">Dimension 8 — Educational &amp; Explorable Translation<a class="headerlink" href="#dimension-8-educational-explorable-translation" title="Permanent link">&para;</a></h2>
+<h3 id="how-advanced-analysis-will-use-the-procedural-spline-reveal">How ADVANCED ANALYSIS Will Use the Procedural Spline Reveal:<a class="headerlink" href="#how-advanced-analysis-will-use-the-procedural-spline-reveal" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Interactive Mechanism</th>
+<th style="text-align: left;">Educational &amp; Scientific Application</th>
+<th style="text-align: left;">How It "Shows Everything Happening"</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Dual-State Spline Peeling</strong></td>
+<td style="text-align: left;"><strong>Macroscopic Surface vs. Atomic Lattice</strong></td>
+<td style="text-align: left;">As the reader studies a paragraph on <em>Metallic Bonding</em>, hovering their mouse peels away the polished copper surface to reveal the underlying FCC crystal lattice and electron sea.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>X-Ray Structural Inspector</strong></td>
+<td style="text-align: left;"><strong>Biochemical Anatomy &amp; Protein Complexes</strong></td>
+<td style="text-align: left;">Peeling through a virus capsid (e.g. Bacteriophage T4) to inspect the internal double-stranded DNA genome coiled inside.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Harmonic Shrinking Trail</strong></td>
+<td style="text-align: left;"><strong>Finite Element Stress / Heat Dissipation</strong></td>
+<td style="text-align: left;">Hovering over an aerodynamic wing or turbine blade reveals the internal von Mises stress tensor field, which organically closes up behind the cursor.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Idle Attractor Breathing</strong></td>
+<td style="text-align: left;"><strong>Live Quantum Fluctuation Callout</strong></td>
+<td style="text-align: left;">A gently pulsing procedural harmonic blob hovers over an active reaction center or active site on an enzyme, inviting the student to interact.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="reusable-elements-for-future-site-integration">Reusable Elements for Future Site Integration<a class="headerlink" href="#reusable-elements-for-future-site-integration" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Element</th>
+<th style="text-align: left;">Category</th>
+<th style="text-align: left;">Priority</th>
+<th style="text-align: left;">Target AA Page</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Catmull-Rom Spline Canvas Generator</strong></td>
+<td style="text-align: left;">Math / Rendering</td>
+<td style="text-align: left;">🔥 High</td>
+<td style="text-align: left;">Organic particle &amp; wave visualizers</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Distance-Based Stamp Interpolator</strong></td>
+<td style="text-align: left;">Motion Physics</td>
+<td style="text-align: left;">🔥 High</td>
+<td style="text-align: left;">Fluid mouse trails on all canvases</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Geometric Shrinking Mask Engine</strong></td>
+<td style="text-align: left;">Compositing</td>
+<td style="text-align: left;">🔥 High</td>
+<td style="text-align: left;">X-Ray state comparators &amp; interactive diagrams</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Idle Attractor Breathing Engine</strong></td>
+<td style="text-align: left;">UI / Discovery</td>
+<td style="text-align: left;">Medium</td>
+<td style="text-align: left;">Calling attention to explorable simulations</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Last updated: 2026-10-05</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 Aditya &mdash; ADVANCED ANALYSIS
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.youtube.com/@ADVANCED_ANALYSIS" target="_blank" rel="noopener" title="YouTube | @ADVANCED_ANALYSIS" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.instagram.com/advanced_analysis/" target="_blank" rel="noopener" title="Instagram | @advanced_analysis" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/RengokuSensei/Code0" target="_blank" rel="noopener" title="GitHub | RengokuSensei/Code0" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tooltips", "header.autohide"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+  
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+    
+  <script type="module" src="../../javascripts/getlayers-init.js"></script>
+
+  </body>
+</html>
