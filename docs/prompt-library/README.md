@@ -47,6 +47,7 @@ Every prompt is dissected across **8 dimensions**:
 | 2 | [Spatial Hand-Tracked Hologram & Specimen Scrubber](prompt-002-spatial-hand-scrubber.md) | Community / Vision Pipeline | 2026-10-05 | Hand tracking turntable → 3D molecular/physics inspection; Pinch-zoom → atomic shell peeling; Screen-blend floating renders |
 | 3 | [Sprite-Sheet Gaze Engine & Cursor Tracking](prompt-003-sprite-sheet-gaze-tracking.md) | Community / Kinetic Sprite Pipeline | 2026-10-05 | Zero-latency cursor tracking → eye optics/accommodation; Dipole compass deflection; Volumetric confocal cell slicing |
 | 4 | [Procedural Spline Mask & State-Reveal Hero](prompt-004-procedural-spline-reveal.md) | Community / Organic Math Masking | 2026-10-05 | X-Ray state peeling → macroscopic surface vs atomic lattice; Stress tensor visualization; Biochemical capsid peeling |
+| 5 | [Spatial Gamified Learning & Atmospheric Portal](prompt-005-spatial-gamified-learning.md) | Bruno Simon / Igloo / Thé Vert Menthe | 2026-10-05 | Space probe sandbox → physical navigation of curriculum; Feeling gravitational/Coulomb forces; Atmospheric portal loading |
 
 ---
 
@@ -59,6 +60,7 @@ docs/prompt-library/
 ├── prompt-002-spatial-hand-scrubber.md     ← Full 8-dimension analysis + raw prompt
 ├── prompt-003-sprite-sheet-gaze-tracking.md← Full 8-dimension analysis + raw prompt
 ├── prompt-004-procedural-spline-reveal.md  ← Full 8-dimension analysis + raw prompt
+├── prompt-005-spatial-gamified-learning.md ← Full 8-dimension analysis + raw prompt
 └── (future prompts...)
 ```
 
