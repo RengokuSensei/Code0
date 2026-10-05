@@ -50,6 +50,7 @@ Every prompt is dissected across **8 dimensions**:
 | 5 | [Spatial Gamified Learning & Atmospheric Portal](prompt-005-spatial-gamified-learning.md) | Bruno Simon / Igloo / Thé Vert Menthe | 2026-10-05 | Space probe sandbox → physical navigation of curriculum; Feeling gravitational/Coulomb forces; Atmospheric portal loading |
 | 6 | [Liquid Buttons, SDF Metaballs & Autonomous Setup](prompt-006-liquid-buttons-sdf-metaballs.md) | Kunal Chaudhary / SDF WebGL | 2026-10-05 | SDF `smin` fluid blending → covalent molecular bonding; Viscous droplet coalescence; Cellular mitosis & membrane fusion |
 | 7 | [2.5D Multi-Plane Parallax & Deep Scenic Journey](prompt-007-multi-plane-parallax-geography.md) | Rare Air / Cinematic Ladakh | 2026-10-05 | Multi-plane altitude descent → mountain orogeny & geology; Tectonic plate collisions; Atmospheric lapse rates |
+| 8 | [Chromatic Video Sampling & Living Biology](prompt-008-chromatic-video-darken-biology.md) | Kingfisher Cinematic Specimen | 2026-10-05 | `mix-blend-mode: darken` taxonomic depth; Biomimetic engineering (Shinkansen beak); 1x1 canvas auto-palette sampling |
 
 ---
 
@@ -65,6 +66,7 @@ docs/prompt-library/
 ├── prompt-005-spatial-gamified-learning.md ← Full 8-dimension analysis + raw prompt
 ├── prompt-006-liquid-buttons-sdf-metaballs.md ← Full 8-dimension analysis + raw prompt
 ├── prompt-007-multi-plane-parallax-geography.md ← Full 8-dimension analysis + raw prompt
+├── prompt-008-chromatic-video-darken-biology.md ← Full 8-dimension analysis + raw prompt
 └── (future prompts...)
 ```
 
