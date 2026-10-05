@@ -77,8 +77,11 @@ extra:
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/@ADVANCED_ANALYSIS
       name: YouTube | @ADVANCED_ANALYSIS
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/oOlIOo_b0t
+      name: Telegram | @oOlIOo_b0t
     - icon: fontawesome/brands/instagram
-      link: https://www.instagram.com/advanced_analysis/
+      link: https://www.instagram.com/advanced_analysis?stkn=YjU2Y3Roczh4ZXkw
       name: Instagram | @advanced_analysis
     - icon: fontawesome/brands/github
       link: https://github.com/RengokuSensei/Code0
