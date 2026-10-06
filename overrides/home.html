@@ -702,7 +702,7 @@
       color: var(--ink-dim);
     }
 
-    /* SECTION 2: COSMIC CONTINUUM DUAL-ROW SCROLL MARQUEE */
+        /* SECTION 2: COSMIC CONTINUUM DUAL-ROW SCROLL MARQUEE */
     .marquee-section {
       padding: 90px 0 70px 0;
       position: relative;
@@ -739,30 +739,287 @@
       border: 1px solid var(--line-strong);
       position: relative;
       background: #000;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .marquee-card:hover {
       transform: translateY(-4px) scale(1.02);
-      border-color: var(--accent-mint);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 12px 30px rgba(0, 242, 254, 0.22);
     }
     .marquee-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.5s ease;
     }
-    .marquee-card-label {
+    .marquee-card:hover img {
+      transform: scale(1.05);
+    }
+    .marquee-card-overlay {
       position: absolute;
-      bottom: 10px;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(6, 9, 22, 0.2) 0%, rgba(6, 9, 22, 0.45) 45%, rgba(5, 7, 16, 0.94) 100%);
+      pointer-events: none;
+    }
+    .marquee-card-archive {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(7, 9, 19, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      color: var(--ink-dim);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .marquee-card-archive .pulse-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent-mint);
+      box-shadow: 0 0 6px var(--accent-mint);
+    }
+    .marquee-card-cta {
+      position: absolute;
+      top: 10px;
       left: 12px;
       padding: 3px 8px;
       border-radius: 4px;
-      background: rgba(7, 9, 19, 0.85);
+      background: rgba(0, 242, 254, 0.15);
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: all 0.25s ease;
+    }
+    .marquee-card:hover .marquee-card-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .marquee-card-meta {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .marquee-card-num {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      line-height: 1;
+      opacity: 0.9;
+    }
+    .marquee-card-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .marquee-card-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: 0.02em;
+    }
+    .marquee-card-sub {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.64rem;
+      color: var(--ink-dim);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+
+    /* EVIDENCE INSPECTOR MODAL */
+    .evidence-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 6, 14, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .evidence-modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .evidence-modal-box {
+      width: 100%;
+      max-width: 960px;
+      max-height: 90vh;
+      background: linear-gradient(135deg, rgba(16, 21, 46, 0.96), rgba(9, 12, 28, 0.98));
+      border: 1px solid var(--accent-cyan);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 242, 254, 0.2);
+      border-radius: calc(var(--radius) * 1.5);
+      overflow-y: auto;
+      position: relative;
+      transform: scale(0.95) translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .evidence-modal-backdrop.open .evidence-modal-box {
+      transform: scale(1) translateY(0);
+    }
+    .evidence-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line-strong);
+      color: #fff;
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      z-index: 10;
+    }
+    .evidence-modal-close:hover {
+      background: rgba(255, 60, 60, 0.2);
+      border-color: rgba(255, 60, 60, 0.5);
+      color: #ff6b6b;
+      transform: rotate(90deg);
+    }
+    .evidence-modal-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1.35fr;
+      min-height: 480px;
+    }
+    @media (max-width: 860px) {
+      .evidence-modal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .evidence-modal-visual {
+      position: relative;
+      background: #000;
+      min-height: 300px;
+      overflow: hidden;
+      border-right: 1px solid var(--line);
+    }
+    .evidence-modal-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .evidence-modal-tag {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      background: rgba(4, 7, 18, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 6px;
       font-family: "JetBrains Mono", monospace;
       font-size: 0.68rem;
+      color: var(--accent-mint);
+    }
+    .evidence-modal-content {
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+    .evidence-modal-eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
       color: var(--accent-cyan);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .evidence-modal-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .evidence-modal-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .evidence-modal-desc {
+      font-size: 0.92rem;
+      color: var(--ink);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    .evidence-modal-provenance {
+      background: rgba(6, 9, 20, 0.65);
       border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      margin-bottom: 24px;
+    }
+    .prov-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      color: var(--ink-dim);
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .prov-val {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.76rem;
+      color: var(--accent-cyan);
+    }
+    .evidence-modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    .modal-nav-btns {
+      display: flex;
+      gap: 8px;
+    }
+    @keyframes cardPulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.8), 0 20px 40px rgba(0,0,0,0.5); }
+      50% { box-shadow: 0 0 35px 10px rgba(0, 242, 254, 0.6), 0 20px 40px rgba(0,0,0,0.5); border-color: var(--accent-cyan); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0), 0 20px 40px rgba(0,0,0,0.5); }
+    }
+    .sticky-card.highlight-pulse {
+      animation: cardPulseGlow 2.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* SECTION 3: 3D PERSPECTIVE SCROLLYTELLING SECTION */
@@ -1339,14 +1596,14 @@
       </div>
     </section>
 
-    <!-- 2. COSMIC CONTINUUM DUAL-ROW SCROLL MARQUEE (Motionsites 21-Asset Engine) -->
+        <!-- 2. COSMIC CONTINUUM DUAL-ROW SCROLL MARQUEE (Empirical Scientific Archives & Evidence) -->
     <section class="marquee-section" id="marquee">
       <div class="container">
         <div class="marquee-header">
-          <div class="section-eyebrow">CHRONOLOGICAL COSMIC SPINE</div>
-          <h2 class="section-title">13.8 Billion Years of Evolution in Motion</h2>
-          <p class="section-lead" style="margin: 0 auto;">
-            As you navigate, the timeline streams through the physical accretion of planets, biological emergence, and neural algorithmic intelligence.
+          <div class="section-eyebrow">CHRONOLOGICAL COSMIC SPINE &bull; EMPIRICAL ARCHIVES</div>
+          <h2 class="section-title">13.8 Billion Years: From Singularity to the Sovereign Republic</h2>
+          <p class="section-lead" style="margin: 0 auto; max-width: 800px;">
+            Authentic scientific observations and archaeological artifacts curated from NASA, ALMA, USGS, Archaeological Survey of India, and the National Archives. Click any milestone to inspect empirical provenance and UPSC syllabus linkages.
           </p>
         </div>
       </div>
@@ -1354,56 +1611,556 @@
       <div class="marquee-track-wrap">
         <!-- Row 1: Translates RIGHT on scroll -->
         <div class="marquee-row" id="marquee-row-1">
-          <!-- 11 items tripled for seamless infinite scroll -->
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" alt="Cosmic Origin" loading="lazy"><span class="marquee-card-label">01. BIG BANG (13.8 Ga)</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif" alt="Accretion" loading="lazy"><span class="marquee-card-label">02. PLANETARY ACCRETION</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif" alt="Atmosphere" loading="lazy"><span class="marquee-card-label">03. PRIMORDIAL ATMOSPHERE</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif" alt="Organic Chemistry" loading="lazy"><span class="marquee-card-label">04. PREBIOTIC SYNTHESIS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" alt="Prokaryotes" loading="lazy"><span class="marquee-card-label">05. CELLULAR MITOSIS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif" alt="Cambrian Explosion" loading="lazy"><span class="marquee-card-label">06. CAMBRIAN FAUNA</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Vertebrates" loading="lazy"><span class="marquee-card-label">07. VERTEBRATE PHYLOGENY</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" alt="Geomorphology" loading="lazy"><span class="marquee-card-label">08. TECTONIC OROGENY</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif" alt="Climatology" loading="lazy"><span class="marquee-card-label">09. MONSOON CIRCULATION</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif" alt="Hominids" loading="lazy"><span class="marquee-card-label">10. HOMINID BIPEDALISM</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif" alt="Civilization" loading="lazy"><span class="marquee-card-label">11. URBAN HARAPPAN POLIS</span></div>
-          <!-- Repeat block 2 -->
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif" alt="Cosmic Origin" loading="lazy"><span class="marquee-card-label">01. BIG BANG (13.8 Ga)</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif" alt="Accretion" loading="lazy"><span class="marquee-card-label">02. PLANETARY ACCRETION</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif" alt="Atmosphere" loading="lazy"><span class="marquee-card-label">03. PRIMORDIAL ATMOSPHERE</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif" alt="Organic Chemistry" loading="lazy"><span class="marquee-card-label">04. PREBIOTIC SYNTHESIS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif" alt="Prokaryotes" loading="lazy"><span class="marquee-card-label">05. CELLULAR MITOSIS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif" alt="Cambrian Explosion" loading="lazy"><span class="marquee-card-label">06. CAMBRIAN FAUNA</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif" alt="Vertebrates" loading="lazy"><span class="marquee-card-label">07. VERTEBRATE PHYLOGENY</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif" alt="Geomorphology" loading="lazy"><span class="marquee-card-label">08. TECTONIC OROGENY</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif" alt="Climatology" loading="lazy"><span class="marquee-card-label">09. MONSOON CIRCULATION</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif" alt="Hominids" loading="lazy"><span class="marquee-card-label">10. HOMINID BIPEDALISM</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif" alt="Civilization" loading="lazy"><span class="marquee-card-label">11. URBAN HARAPPAN POLIS</span></div>
+          <div class="marquee-card" data-evidence-index="0" role="button" tabindex="0" aria-label="Inspect 01. BIG BANG & COSMIC DAWN scientific evidence">
+            <img src="assets/evidence/01-big-bang.jpg" alt="01. BIG BANG & COSMIC DAWN" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>NASA / WMAP & ESA</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">01</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">01. BIG BANG & COSMIC DAWN</div>
+                <div class="marquee-card-sub">13.8 Ga Epoch &bull; Cosmic Microwave Background • Relic Radiation</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="1" role="button" tabindex="0" aria-label="Inspect 02. PLANETARY ACCRETION scientific evidence">
+            <img src="assets/evidence/02-planetary-accretion.jpg" alt="02. PLANETARY ACCRETION" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>ALMA / ESO / NAOJ</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">02</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">02. PLANETARY ACCRETION</div>
+                <div class="marquee-card-sub">4.56 Ga Epoch &bull; Circumstellar Disk • Protoplanet Sweeping</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="2" role="button" tabindex="0" aria-label="Inspect 03. PRIMORDIAL ATMOSPHERE scientific evidence">
+            <img src="assets/evidence/03-primordial-atmosphere.jpg" alt="03. PRIMORDIAL ATMOSPHERE" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>NASA Apollo 17</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">03</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">03. PRIMORDIAL ATMOSPHERE</div>
+                <div class="marquee-card-sub">4.0–3.8 Ga Epoch &bull; Hadean Degassing • Hydrosphere Condensation</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="3" role="button" tabindex="0" aria-label="Inspect 04. PREBIOTIC SYNTHESIS scientific evidence">
+            <img src="assets/evidence/04-prebiotic-synthesis.jpg" alt="04. PREBIOTIC SYNTHESIS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>NOAA Ocean Exploration</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">04</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">04. PREBIOTIC SYNTHESIS</div>
+                <div class="marquee-card-sub">3.8 Ga Epoch &bull; Deep Sea Alkaline Vents • Chemoautotrophy</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="4" role="button" tabindex="0" aria-label="Inspect 05. STROMATOLITES & MITOSIS scientific evidence">
+            <img src="assets/evidence/05-cellular-stromatolite.jpg" alt="05. STROMATOLITES & MITOSIS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Shark Bay Reserve, Australia</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">05</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">05. STROMATOLITES & MITOSIS</div>
+                <div class="marquee-card-sub">3.5 Ga Epoch &bull; Great Oxidation Event • Biogenic Oxygen</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="5" role="button" tabindex="0" aria-label="Inspect 06. CAMBRIAN FAUNA scientific evidence">
+            <img src="assets/evidence/06-cambrian-fauna.jpg" alt="06. CAMBRIAN FAUNA" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Burgess Shale / ROM</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">06</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">06. CAMBRIAN FAUNA</div>
+                <div class="marquee-card-sub">541–485 Ma Epoch &bull; Bilateral Body Plans • Mineralized Exoskeletons</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="6" role="button" tabindex="0" aria-label="Inspect 07. VERTEBRATE PHYLOGENY scientific evidence">
+            <img src="assets/evidence/07-vertebrate-phylogeny.jpg" alt="07. VERTEBRATE PHYLOGENY" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Academy of Natural Sciences</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">07</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">07. VERTEBRATE PHYLOGENY</div>
+                <div class="marquee-card-sub">375 Ma Epoch &bull; Fish-to-Tetrapod Transition • Fin-to-Limb Homology</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="7" role="button" tabindex="0" aria-label="Inspect 08. TECTONIC OROGENY scientific evidence">
+            <img src="assets/evidence/08-tectonic-orogeny.jpg" alt="08. TECTONIC OROGENY" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>NASA Earth Observatory</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">08</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">08. TECTONIC OROGENY</div>
+                <div class="marquee-card-sub">55 Ma–Present &bull; Continental Convergence • Himalayan Uplift</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="8" role="button" tabindex="0" aria-label="Inspect 09. MONSOON CIRCULATION scientific evidence">
+            <img src="assets/evidence/09-monsoon-circulation.jpg" alt="09. MONSOON CIRCULATION" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>IMD / ISRO & NASA</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">09</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">09. MONSOON CIRCULATION</div>
+                <div class="marquee-card-sub">Holocene Dynamics &bull; ITCZ Migration • Somali Jet & Walker Circulation</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="9" role="button" tabindex="0" aria-label="Inspect 10. HOMINID BIPEDALISM scientific evidence">
+            <img src="assets/evidence/10-hominid-bipedalism.jpg" alt="10. HOMINID BIPEDALISM" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>National Museum of Ethiopia</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">10</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">10. HOMINID BIPEDALISM</div>
+                <div class="marquee-card-sub">3.2 Ma Epoch &bull; Habitual Bipedalism • Pelvic & Femoral Adaptations</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="10" role="button" tabindex="0" aria-label="Inspect 11. URBAN HARAPPAN POLIS scientific evidence">
+            <img src="assets/evidence/11-harappan-polis.jpg" alt="11. URBAN HARAPPAN POLIS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Archaeological Survey of India</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">11</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">11. URBAN HARAPPAN POLIS</div>
+                <div class="marquee-card-sub">2600–1900 BCE &bull; Grid Urbanism • Hydraulic Engineering & Standardization</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="0" role="button" tabindex="0" aria-label="Inspect 01. BIG BANG & COSMIC DAWN scientific evidence">
+            <img src="assets/evidence/01-big-bang.jpg" alt="01. BIG BANG & COSMIC DAWN" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>NASA / WMAP & ESA</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">01</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">01. BIG BANG & COSMIC DAWN</div>
+                <div class="marquee-card-sub">13.8 Ga Epoch &bull; Cosmic Microwave Background • Relic Radiation</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="1" role="button" tabindex="0" aria-label="Inspect 02. PLANETARY ACCRETION scientific evidence">
+            <img src="assets/evidence/02-planetary-accretion.jpg" alt="02. PLANETARY ACCRETION" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>ALMA / ESO / NAOJ</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">02</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">02. PLANETARY ACCRETION</div>
+                <div class="marquee-card-sub">4.56 Ga Epoch &bull; Circumstellar Disk • Protoplanet Sweeping</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="2" role="button" tabindex="0" aria-label="Inspect 03. PRIMORDIAL ATMOSPHERE scientific evidence">
+            <img src="assets/evidence/03-primordial-atmosphere.jpg" alt="03. PRIMORDIAL ATMOSPHERE" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>NASA Apollo 17</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">03</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">03. PRIMORDIAL ATMOSPHERE</div>
+                <div class="marquee-card-sub">4.0–3.8 Ga Epoch &bull; Hadean Degassing • Hydrosphere Condensation</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="3" role="button" tabindex="0" aria-label="Inspect 04. PREBIOTIC SYNTHESIS scientific evidence">
+            <img src="assets/evidence/04-prebiotic-synthesis.jpg" alt="04. PREBIOTIC SYNTHESIS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>NOAA Ocean Exploration</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">04</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">04. PREBIOTIC SYNTHESIS</div>
+                <div class="marquee-card-sub">3.8 Ga Epoch &bull; Deep Sea Alkaline Vents • Chemoautotrophy</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="4" role="button" tabindex="0" aria-label="Inspect 05. STROMATOLITES & MITOSIS scientific evidence">
+            <img src="assets/evidence/05-cellular-stromatolite.jpg" alt="05. STROMATOLITES & MITOSIS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Shark Bay Reserve, Australia</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">05</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">05. STROMATOLITES & MITOSIS</div>
+                <div class="marquee-card-sub">3.5 Ga Epoch &bull; Great Oxidation Event • Biogenic Oxygen</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="5" role="button" tabindex="0" aria-label="Inspect 06. CAMBRIAN FAUNA scientific evidence">
+            <img src="assets/evidence/06-cambrian-fauna.jpg" alt="06. CAMBRIAN FAUNA" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Burgess Shale / ROM</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">06</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">06. CAMBRIAN FAUNA</div>
+                <div class="marquee-card-sub">541–485 Ma Epoch &bull; Bilateral Body Plans • Mineralized Exoskeletons</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="6" role="button" tabindex="0" aria-label="Inspect 07. VERTEBRATE PHYLOGENY scientific evidence">
+            <img src="assets/evidence/07-vertebrate-phylogeny.jpg" alt="07. VERTEBRATE PHYLOGENY" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Academy of Natural Sciences</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">07</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">07. VERTEBRATE PHYLOGENY</div>
+                <div class="marquee-card-sub">375 Ma Epoch &bull; Fish-to-Tetrapod Transition • Fin-to-Limb Homology</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="7" role="button" tabindex="0" aria-label="Inspect 08. TECTONIC OROGENY scientific evidence">
+            <img src="assets/evidence/08-tectonic-orogeny.jpg" alt="08. TECTONIC OROGENY" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>NASA Earth Observatory</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">08</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">08. TECTONIC OROGENY</div>
+                <div class="marquee-card-sub">55 Ma–Present &bull; Continental Convergence • Himalayan Uplift</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="8" role="button" tabindex="0" aria-label="Inspect 09. MONSOON CIRCULATION scientific evidence">
+            <img src="assets/evidence/09-monsoon-circulation.jpg" alt="09. MONSOON CIRCULATION" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>IMD / ISRO & NASA</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">09</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">09. MONSOON CIRCULATION</div>
+                <div class="marquee-card-sub">Holocene Dynamics &bull; ITCZ Migration • Somali Jet & Walker Circulation</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="9" role="button" tabindex="0" aria-label="Inspect 10. HOMINID BIPEDALISM scientific evidence">
+            <img src="assets/evidence/10-hominid-bipedalism.jpg" alt="10. HOMINID BIPEDALISM" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>National Museum of Ethiopia</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">10</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">10. HOMINID BIPEDALISM</div>
+                <div class="marquee-card-sub">3.2 Ma Epoch &bull; Habitual Bipedalism • Pelvic & Femoral Adaptations</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="10" role="button" tabindex="0" aria-label="Inspect 11. URBAN HARAPPAN POLIS scientific evidence">
+            <img src="assets/evidence/11-harappan-polis.jpg" alt="11. URBAN HARAPPAN POLIS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Archaeological Survey of India</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">11</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">11. URBAN HARAPPAN POLIS</div>
+                <div class="marquee-card-sub">2600–1900 BCE &bull; Grid Urbanism • Hydraulic Engineering & Standardization</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Row 2: Translates LEFT on scroll -->
         <div class="marquee-row" id="marquee-row-2">
-          <!-- 10 items tripled -->
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif" alt="Vedic Culture" loading="lazy"><span class="marquee-card-label">12. MAHAJANAPADAS &amp; POLITY</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif" alt="Inscriptions" loading="lazy"><span class="marquee-card-label">13. ASHOKAN EDICTS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif" alt="Feudalism" loading="lazy"><span class="marquee-card-label">14. AGRARIAN REVENUE</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif" alt="Colonial Drain" loading="lazy"><span class="marquee-card-label">15. COLONIAL DEINDUSTRIALIZATION</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif" alt="Freedom Struggle" loading="lazy"><span class="marquee-card-label">16. CONSTITUTIONAL DRAFTING</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" alt="Planning Commission" loading="lazy"><span class="marquee-card-label">17. FIVE YEAR PLANS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif" alt="Green Revolution" loading="lazy"><span class="marquee-card-label">18. AGRO-ECOLOGY &amp; CROPPING</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif" alt="Macroeconomics" loading="lazy"><span class="marquee-card-label">19. 1991 LPG REFORMS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif" alt="Tribal Affairs" loading="lazy"><span class="marquee-card-label">20. SCHEDULE 5 &amp; 6 RIGHTS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif" alt="Frontier Space & AI" loading="lazy"><span class="marquee-card-label">21. ISRO &amp; FRONTIER AI</span></div>
-          <!-- Repeat block 2 -->
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif" alt="Vedic Culture" loading="lazy"><span class="marquee-card-label">12. MAHAJANAPADAS &amp; POLITY</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif" alt="Inscriptions" loading="lazy"><span class="marquee-card-label">13. ASHOKAN EDICTS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif" alt="Feudalism" loading="lazy"><span class="marquee-card-label">14. AGRARIAN REVENUE</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif" alt="Colonial Drain" loading="lazy"><span class="marquee-card-label">15. COLONIAL DEINDUSTRIALIZATION</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif" alt="Freedom Struggle" loading="lazy"><span class="marquee-card-label">16. CONSTITUTIONAL DRAFTING</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif" alt="Planning Commission" loading="lazy"><span class="marquee-card-label">17. FIVE YEAR PLANS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif" alt="Green Revolution" loading="lazy"><span class="marquee-card-label">18. AGRO-ECOLOGY &amp; CROPPING</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif" alt="Macroeconomics" loading="lazy"><span class="marquee-card-label">19. 1991 LPG REFORMS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif" alt="Tribal Affairs" loading="lazy"><span class="marquee-card-label">20. SCHEDULE 5 &amp; 6 RIGHTS</span></div>
-          <div class="marquee-card"><img src="https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif" alt="Frontier Space & AI" loading="lazy"><span class="marquee-card-label">21. ISRO &amp; FRONTIER AI</span></div>
+          <div class="marquee-card" data-evidence-index="11" role="button" tabindex="0" aria-label="Inspect 12. MAHAJANAPADAS & POLITY scientific evidence">
+            <img src="assets/evidence/12-mahajanapadas-coins.jpg" alt="12. MAHAJANAPADAS & POLITY" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>INHCRF Coin Museum</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">12</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">12. MAHAJANAPADAS & POLITY</div>
+                <div class="marquee-card-sub">600–300 BCE &bull; Second Urbanization • Monetized Taxation & Statehood</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="12" role="button" tabindex="0" aria-label="Inspect 13. ASHOKAN EDICTS scientific evidence">
+            <img src="assets/evidence/13-ashokan-edicts.jpg" alt="13. ASHOKAN EDICTS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Archaeological Survey of India</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">13</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">13. ASHOKAN EDICTS</div>
+                <div class="marquee-card-sub">268–232 BCE &bull; Dhamma Policy • Welfare Statecraft & Epigraphy</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="13" role="button" tabindex="0" aria-label="Inspect 14. AGRARIAN REVENUE scientific evidence">
+            <img src="assets/evidence/14-agrarian-revenue.jpg" alt="14. AGRARIAN REVENUE" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Brihadisvara Temple, Thanjavur</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">14</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">14. AGRARIAN REVENUE</div>
+                <div class="marquee-card-sub">1010 CE &bull; Kudavolai Ballot • Tank Irrigation & Village Autonomy</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="14" role="button" tabindex="0" aria-label="Inspect 15. COLONIAL DEINDUSTRIALIZATION scientific evidence">
+            <img src="assets/evidence/15-colonial-drain.jpg" alt="15. COLONIAL DEINDUSTRIALIZATION" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>National Archives of India</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">15</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">15. COLONIAL DEINDUSTRIALIZATION</div>
+                <div class="marquee-card-sub">1867–1901 CE &bull; Poverty & Un-British Rule • Home Charges & Deindustrialization</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="15" role="button" tabindex="0" aria-label="Inspect 16. CONSTITUTIONAL DRAFTING scientific evidence">
+            <img src="assets/evidence/16-constitution-drafting.jpg" alt="16. CONSTITUTIONAL DRAFTING" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Parliament House Library, New Delhi</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">16</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">16. CONSTITUTIONAL DRAFTING</div>
+                <div class="marquee-card-sub">1949–1950 CE &bull; Basic Structure • Transformative Constitutionalism</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="16" role="button" tabindex="0" aria-label="Inspect 17. FIVE YEAR PLANS scientific evidence">
+            <img src="assets/evidence/17-five-year-plans.jpg" alt="17. FIVE YEAR PLANS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>BBMB & Planning Commission</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">17</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">17. FIVE YEAR PLANS</div>
+                <div class="marquee-card-sub">1951–1964 CE &bull; Mahalanobis Model • Temples of Modern India</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="17" role="button" tabindex="0" aria-label="Inspect 18. AGRO-ECOLOGY & CROPPING scientific evidence">
+            <img src="assets/evidence/18-green-revolution.jpg" alt="18. AGRO-ECOLOGY & CROPPING" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>ICAR & Punjab Agricultural Univ.</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">18</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">18. AGRO-ECOLOGY & CROPPING</div>
+                <div class="marquee-card-sub">1965–1980 CE &bull; HYV Seeds • Food Security & Groundwater Dynamics</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="18" role="button" tabindex="0" aria-label="Inspect 19. 1991 LPG REFORMS scientific evidence">
+            <img src="assets/evidence/19-lpg-reforms.jpg" alt="19. 1991 LPG REFORMS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Reserve Bank of India, Mumbai</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">19</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">19. 1991 LPG REFORMS</div>
+                <div class="marquee-card-sub">1991 CE &bull; Balance of Payments Crisis • Industrial Delicensing & Rupee Float</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="19" role="button" tabindex="0" aria-label="Inspect 20. SCHEDULE 5 & 6 TRIBAL RIGHTS scientific evidence">
+            <img src="assets/evidence/20-tribal-rights.jpg" alt="20. SCHEDULE 5 & 6 TRIBAL RIGHTS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Anthropological Survey of India</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">20</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">20. SCHEDULE 5 & 6 TRIBAL RIGHTS</div>
+                <div class="marquee-card-sub">Contemporary Ethnography &bull; PESA 1996 • Forest Rights Act & Autonomous Councils</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="20" role="button" tabindex="0" aria-label="Inspect 21. ISRO & FRONTIER AI scientific evidence">
+            <img src="assets/evidence/21-isro-frontier-ai.jpg" alt="21. ISRO & FRONTIER AI" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>ISRO & Moon South Pole Cameras</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">21</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">21. ISRO & FRONTIER AI</div>
+                <div class="marquee-card-sub">2023–Present &bull; Chandrayaan-3 • Lunar Regolith & Autonomous Navigation</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="11" role="button" tabindex="0" aria-label="Inspect 12. MAHAJANAPADAS & POLITY scientific evidence">
+            <img src="assets/evidence/12-mahajanapadas-coins.jpg" alt="12. MAHAJANAPADAS & POLITY" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>INHCRF Coin Museum</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">12</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">12. MAHAJANAPADAS & POLITY</div>
+                <div class="marquee-card-sub">600–300 BCE &bull; Second Urbanization • Monetized Taxation & Statehood</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="12" role="button" tabindex="0" aria-label="Inspect 13. ASHOKAN EDICTS scientific evidence">
+            <img src="assets/evidence/13-ashokan-edicts.jpg" alt="13. ASHOKAN EDICTS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Archaeological Survey of India</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">13</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">13. ASHOKAN EDICTS</div>
+                <div class="marquee-card-sub">268–232 BCE &bull; Dhamma Policy • Welfare Statecraft & Epigraphy</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="13" role="button" tabindex="0" aria-label="Inspect 14. AGRARIAN REVENUE scientific evidence">
+            <img src="assets/evidence/14-agrarian-revenue.jpg" alt="14. AGRARIAN REVENUE" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Brihadisvara Temple, Thanjavur</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">14</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">14. AGRARIAN REVENUE</div>
+                <div class="marquee-card-sub">1010 CE &bull; Kudavolai Ballot • Tank Irrigation & Village Autonomy</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="14" role="button" tabindex="0" aria-label="Inspect 15. COLONIAL DEINDUSTRIALIZATION scientific evidence">
+            <img src="assets/evidence/15-colonial-drain.jpg" alt="15. COLONIAL DEINDUSTRIALIZATION" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>National Archives of India</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">15</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">15. COLONIAL DEINDUSTRIALIZATION</div>
+                <div class="marquee-card-sub">1867–1901 CE &bull; Poverty & Un-British Rule • Home Charges & Deindustrialization</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="15" role="button" tabindex="0" aria-label="Inspect 16. CONSTITUTIONAL DRAFTING scientific evidence">
+            <img src="assets/evidence/16-constitution-drafting.jpg" alt="16. CONSTITUTIONAL DRAFTING" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Parliament House Library, New Delhi</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">16</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">16. CONSTITUTIONAL DRAFTING</div>
+                <div class="marquee-card-sub">1949–1950 CE &bull; Basic Structure • Transformative Constitutionalism</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="16" role="button" tabindex="0" aria-label="Inspect 17. FIVE YEAR PLANS scientific evidence">
+            <img src="assets/evidence/17-five-year-plans.jpg" alt="17. FIVE YEAR PLANS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>BBMB & Planning Commission</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">17</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">17. FIVE YEAR PLANS</div>
+                <div class="marquee-card-sub">1951–1964 CE &bull; Mahalanobis Model • Temples of Modern India</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="17" role="button" tabindex="0" aria-label="Inspect 18. AGRO-ECOLOGY & CROPPING scientific evidence">
+            <img src="assets/evidence/18-green-revolution.jpg" alt="18. AGRO-ECOLOGY & CROPPING" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>ICAR & Punjab Agricultural Univ.</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">18</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">18. AGRO-ECOLOGY & CROPPING</div>
+                <div class="marquee-card-sub">1965–1980 CE &bull; HYV Seeds • Food Security & Groundwater Dynamics</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="18" role="button" tabindex="0" aria-label="Inspect 19. 1991 LPG REFORMS scientific evidence">
+            <img src="assets/evidence/19-lpg-reforms.jpg" alt="19. 1991 LPG REFORMS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Reserve Bank of India, Mumbai</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">19</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">19. 1991 LPG REFORMS</div>
+                <div class="marquee-card-sub">1991 CE &bull; Balance of Payments Crisis • Industrial Delicensing & Rupee Float</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="19" role="button" tabindex="0" aria-label="Inspect 20. SCHEDULE 5 & 6 TRIBAL RIGHTS scientific evidence">
+            <img src="assets/evidence/20-tribal-rights.jpg" alt="20. SCHEDULE 5 & 6 TRIBAL RIGHTS" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>Anthropological Survey of India</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">20</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">20. SCHEDULE 5 & 6 TRIBAL RIGHTS</div>
+                <div class="marquee-card-sub">Contemporary Ethnography &bull; PESA 1996 • Forest Rights Act & Autonomous Councils</div>
+              </div>
+            </div>
+          </div>
+          <div class="marquee-card" data-evidence-index="20" role="button" tabindex="0" aria-label="Inspect 21. ISRO & FRONTIER AI scientific evidence">
+            <img src="assets/evidence/21-isro-frontier-ai.jpg" alt="21. ISRO & FRONTIER AI" loading="lazy" onerror="this.onerror=null; this.src='assets/wallpapers/celestial-symphony.jpg';">
+            <div class="marquee-card-overlay"></div>
+            <span class="marquee-card-cta">INSPECT EVIDENCE ↗</span>
+            <span class="marquee-card-archive"><span class="pulse-dot"></span>ISRO & Moon South Pole Cameras</span>
+            <div class="marquee-card-meta">
+              <span class="marquee-card-num">21</span>
+              <div class="marquee-card-info">
+                <div class="marquee-card-title">21. ISRO & FRONTIER AI</div>
+                <div class="marquee-card-sub">2023–Present &bull; Chandrayaan-3 • Lunar Regolith & Autonomous Navigation</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1704,6 +2461,45 @@
     </footer>
 
   </div>
+
+  
+    <!-- EVIDENCE INSPECTOR MODAL -->
+    <div class="evidence-modal-backdrop" id="evidence-modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="evidence-modal-box">
+        <button class="evidence-modal-close" id="modal-close-btn" aria-label="Close dialog">&times;</button>
+        <div class="evidence-modal-grid">
+          <div class="evidence-modal-visual">
+            <img id="modal-img" src="assets/evidence/01-big-bang.jpg" alt="Evidence View">
+            <div class="evidence-modal-tag" id="modal-tag">NASA / WMAP ARCHIVE</div>
+          </div>
+          <div class="evidence-modal-content">
+            <div class="evidence-modal-eyebrow" id="modal-eyebrow">GS-1 PAPER • PHYSICAL GEOGRAPHY</div>
+            <h3 class="evidence-modal-title" id="modal-title">01. BIG BANG &amp; COSMIC DAWN</h3>
+            <div class="evidence-modal-badge-row">
+              <span class="meta-pill highlight" id="modal-epoch">13.8 Ga Epoch</span>
+              <span class="meta-pill" id="modal-discipline">Astrophysics</span>
+              <span class="meta-pill" id="modal-syllabus">UPSC GS-1 Topic 1</span>
+            </div>
+            <div class="evidence-modal-desc" id="modal-desc">
+              Empirical proof of the Hot Big Bang and Cosmic Inflation: full-sky temperature fluctuations.
+            </div>
+            <div class="evidence-modal-provenance">
+              <div class="prov-label">SCIENTIFIC PROVENANCE &amp; ARTIFACT:</div>
+              <div class="prov-val" id="modal-provenance">WMAP 9-Year Cosmic Microwave Background (CMB) All-Sky Anisotropy Map</div>
+            </div>
+            <div class="evidence-modal-actions">
+              <button type="button" class="btn-primary" id="modal-syllabus-btn">
+                Explore in Syllabus Architecture &darr;
+              </button>
+              <div class="modal-nav-btns">
+                <button type="button" class="btn-ghost" id="modal-prev-btn" aria-label="Previous evidence">&larr; Prev</button>
+                <button type="button" class="btn-ghost" id="modal-next-btn" aria-label="Next evidence">Next &rarr;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <!-- SCRIPTS -->
   <script type="module">
@@ -2072,6 +2868,411 @@
         marqueeRow1.style.transform = `translateX(${offset - 300}px)`;
         marqueeRow2.style.transform = `translateX(-${offset - 300}px)`;
       }
+
+    // 7.1 Scientific Evidence Explorer Data & Interactive Engine
+    const evidenceData = [
+  {
+    "index": 1,
+    "id": "big-bang",
+    "title": "01. BIG BANG & COSMIC DAWN",
+    "epoch": "13.8 Ga Epoch",
+    "discipline": "Astrophysics",
+    "paper": "GS-1 \u2022 PHYSICAL GEOGRAPHY",
+    "atlas_index": 0,
+    "image": "assets/evidence/01-big-bang.jpg",
+    "archive": "NASA / WMAP & ESA",
+    "artifact": "WMAP 9-Year Cosmic Microwave Background (CMB) All-Sky Anisotropy Map",
+    "sub": "Cosmic Microwave Background \u2022 Relic Radiation",
+    "desc": "Empirical proof of the Hot Big Bang and Cosmic Inflation: full-sky temperature fluctuations (\u0394T/T ~ 10\u207b\u2075) of relic radiation emitted ~380,000 years after genesis during the recombination epoch. Essential for UPSC GS-1 physical geography on universe origin theories, dark energy, and cosmic expansion."
+  },
+  {
+    "index": 2,
+    "id": "planetary-accretion",
+    "title": "02. PLANETARY ACCRETION",
+    "epoch": "4.56 Ga Epoch",
+    "discipline": "Solar Astrophysics",
+    "paper": "GS-1 \u2022 SOLAR SYSTEM GENESIS",
+    "atlas_index": 0,
+    "image": "assets/evidence/02-planetary-accretion.jpg",
+    "archive": "ALMA / ESO / NAOJ",
+    "artifact": "Atacama Large Millimeter/submillimeter Array continuum radio image of HL Tauri",
+    "sub": "Circumstellar Disk \u2022 Protoplanet Sweeping",
+    "desc": "The most detailed empirical observation of planet formation in human history: protoplanetary accretion rings around young star HL Tauri. Directly demonstrates the Kant-Laplace Nebular Hypothesis and planetesimal accretion required in UPSC GS-1 geomorphology."
+  },
+  {
+    "index": 3,
+    "id": "primordial-atmosphere",
+    "title": "03. PRIMORDIAL ATMOSPHERE",
+    "epoch": "4.0\u20133.8 Ga Epoch",
+    "discipline": "Climatology & Geochemistry",
+    "paper": "GS-1 \u2022 ATMOSPHERE EVOLUTION",
+    "atlas_index": 0,
+    "image": "assets/evidence/03-primordial-atmosphere.jpg",
+    "archive": "NASA Apollo 17",
+    "artifact": "Apollo 17 Full-Disk Earth & Atmospheric Spectral Limb Observations",
+    "sub": "Hadean Degassing \u2022 Hydrosphere Condensation",
+    "desc": "Traces Earth's transition from primordial hydrogen-helium loss to volcanic degassing (CO\u2082, H\u2082O, NH\u2083, CH\u2084) and subsequent condensation into the oceans. Foundational for UPSC GS-1 physical geography on atmospheric evolution, greenhouse equilibrium, and early hydrosphere."
+  },
+  {
+    "index": 4,
+    "id": "prebiotic-synthesis",
+    "title": "04. PREBIOTIC SYNTHESIS",
+    "epoch": "3.8 Ga Epoch",
+    "discipline": "Evolutionary Biology",
+    "paper": "GS-3 / ZOOLOGY \u2022 ORIGIN OF LIFE",
+    "atlas_index": 2,
+    "image": "assets/evidence/04-prebiotic-synthesis.jpg",
+    "archive": "NOAA Ocean Exploration",
+    "artifact": "Submarine Hydrothermal Chimneys & Mineral Catalysis Zones",
+    "sub": "Deep Sea Alkaline Vents \u2022 Chemoautotrophy",
+    "desc": "Physical evidence of deep-sea hydrothermal mineral columns providing proton gradients and iron-sulfur catalytic surfaces for abiogenesis. Core to B.Sc. Zoology, GS-3 Biotechnology, and the biochemistry of early energy metabolism before cellular membrane evolution."
+  },
+  {
+    "index": 5,
+    "id": "cellular-stromatolites",
+    "title": "05. STROMATOLITES & MITOSIS",
+    "epoch": "3.5 Ga Epoch",
+    "discipline": "Paleobiology & Geobiology",
+    "paper": "GS-3 \u2022 BIOSPHERE & ENVIRONMENT",
+    "atlas_index": 2,
+    "image": "assets/evidence/05-cellular-stromatolite.jpg",
+    "archive": "Shark Bay Reserve, Australia",
+    "artifact": "Living Marine Microbialite Stromatolite Formations (Cyanobacteria)",
+    "sub": "Great Oxidation Event \u2022 Biogenic Oxygen",
+    "desc": "The oldest macroscopic fossil and living bio-sedimentary evidence on Earth: microbial mats of photosynthetic cyanobacteria that sequestered CO\u2082 and released free molecular oxygen, triggering the Great Oxidation Event and iron-banded formations studied in GS-3 Ecology."
+  },
+  {
+    "index": 6,
+    "id": "cambrian-fauna",
+    "title": "06. CAMBRIAN FAUNA",
+    "epoch": "541\u2013485 Ma Epoch",
+    "discipline": "Invertebrate Paleontology",
+    "paper": "GS-1 \u2022 GEOLOGICAL TIME SCALE",
+    "atlas_index": 0,
+    "image": "assets/evidence/06-cambrian-fauna.jpg",
+    "archive": "Burgess Shale / ROM",
+    "artifact": "Burgess Shale Calcareous Trilobite & Arthropod Fossil Specimens",
+    "sub": "Bilateral Body Plans \u2022 Mineralized Exoskeletons",
+    "desc": "Fossil evidence capturing the Cambrian Radiation: the sudden evolutionary emergence of almost all modern bilateral animal phyla, predation, compound eyes, and calcium carbonate exoskeletons. Essential for understanding geological time periods and fossil dating."
+  },
+  {
+    "index": 7,
+    "id": "vertebrate-phylogeny",
+    "title": "07. VERTEBRATE PHYLOGENY",
+    "epoch": "375 Ma Epoch",
+    "discipline": "Comparative Anatomy & Zoology",
+    "paper": "ANTHRO PAPER 1 / ZOOLOGY",
+    "atlas_index": 3,
+    "image": "assets/evidence/07-vertebrate-phylogeny.jpg",
+    "archive": "Academy of Natural Sciences",
+    "artifact": "Tiktaalik roseae Sarcopterygian-Tetrapod Transitional Fossil",
+    "sub": "Fish-to-Tetrapod Transition \u2022 Fin-to-Limb Homology",
+    "desc": "The landmark transitional vertebrate specimen bridging sarcopterygian lobe-finned fish and early tetrapods. Features functional wrist joints, pectoral girdles, primitive neck articulation, and spiracles\u2014crucial for UPSC Anthropology Paper-1 primate phylogeny."
+  },
+  {
+    "index": 8,
+    "id": "tectonic-orogeny",
+    "title": "08. TECTONIC OROGENY",
+    "epoch": "55 Ma\u2013Present",
+    "discipline": "Geomorphology & Geodynamics",
+    "paper": "GS-1 / M.SC. GEOGRAPHY",
+    "atlas_index": 0,
+    "image": "assets/evidence/08-tectonic-orogeny.jpg",
+    "archive": "NASA Earth Observatory",
+    "artifact": "SRTM Radar Topographic Model of Indo-Eurasian Suture & Tibetan Plateau",
+    "sub": "Continental Convergence \u2022 Himalayan Uplift",
+    "desc": "Satellite radar evidence of continental collision: the northward drift and underthrusting of the Indian tectonic plate beneath Eurasia, producing crustal shortening, the Main Boundary Thrust (MBT), and ongoing seismotectonic deformation essential to M.Sc. Geography and GS-1."
+  },
+  {
+    "index": 9,
+    "id": "monsoon-circulation",
+    "title": "09. MONSOON CIRCULATION",
+    "epoch": "Holocene Dynamics",
+    "discipline": "Tropical Climatology",
+    "paper": "GS-1 / M.SC. GEOGRAPHY",
+    "atlas_index": 0,
+    "image": "assets/evidence/09-monsoon-circulation.jpg",
+    "archive": "IMD / ISRO & NASA",
+    "artifact": "Multi-Spectral Weather Satellite Imagery of Bay of Bengal Monsoon Trough",
+    "sub": "ITCZ Migration \u2022 Somali Jet & Walker Circulation",
+    "desc": "Empirical meteorological imaging of the South-West Monsoon: differential thermal heating of the Tibetan Plateau, shifting equatorial trough, Somali low-level jet, and Madden-Julian Oscillation (MJO) teleconnections. Core pillar of Indian Physical Geography."
+  },
+  {
+    "index": 10,
+    "id": "hominid-bipedalism",
+    "title": "10. HOMINID BIPEDALISM",
+    "epoch": "3.2 Ma Epoch",
+    "discipline": "Physical Anthropology",
+    "paper": "ANTHRO PAPER 1 \u2022 HUMAN ORIGINS",
+    "atlas_index": 3,
+    "image": "assets/evidence/10-hominid-bipedalism.jpg",
+    "archive": "National Museum of Ethiopia",
+    "artifact": "Lucy (AL 288-1) Australopithecus afarensis 40% Complete Fossil Skeleton",
+    "sub": "Habitual Bipedalism \u2022 Pelvic & Femoral Adaptations",
+    "desc": "The holy grail of hominid evolutionary anthropology: demonstrative proof of habitual bipedalism before cranial encephalization. Pelvic broad iliac blades, bicondylar femur angle, and spinal lordosis form mandatory syllabus content for UPSC Anthropology Optional Paper-1."
+  },
+  {
+    "index": 11,
+    "id": "harappan-polis",
+    "title": "11. URBAN HARAPPAN POLIS",
+    "epoch": "2600\u20131900 BCE",
+    "discipline": "Ancient History & Archaeology",
+    "paper": "GS-1 \u2022 ANCIENT CIVILIZATIONS",
+    "atlas_index": 0,
+    "image": "assets/evidence/11-harappan-polis.jpg",
+    "archive": "Archaeological Survey of India",
+    "artifact": "Steatite Bust of the Priest-King & Mohenjo-daro HR Area Citadel Excavations",
+    "sub": "Grid Urbanism \u2022 Hydraulic Engineering & Standardization",
+    "desc": "Primary archaeological artifact of the mature Indus Valley Civilization: sophisticated civic planning, underground burnt-brick covered drainage, Great Bath hydraulics, standardized weights (binary/decimal), and international maritime trade through Lothal dockyards."
+  },
+  {
+    "index": 12,
+    "id": "mahajanapadas-coins",
+    "title": "12. MAHAJANAPADAS & POLITY",
+    "epoch": "600\u2013300 BCE",
+    "discipline": "Numismatics & Political History",
+    "paper": "GS-1 \u2022 SECOND URBANIZATION",
+    "atlas_index": 0,
+    "image": "assets/evidence/12-mahajanapadas-coins.jpg",
+    "archive": "INHCRF Coin Museum",
+    "artifact": "Punch-Marked Silver Karshapana Coin of the Kuru-Panchala / Magadha Janapadas",
+    "sub": "Second Urbanization \u2022 Monetized Taxation & Statehood",
+    "desc": "Numismatic evidence of India's second urbanization across the Gangetic plains: transition from tribal janas to territorial monarchies and republics (ganasanghas), emergence of standing armies, guilds (shrenis), and state-minted punch-marked currency."
+  },
+  {
+    "index": 13,
+    "id": "ashokan-edicts",
+    "title": "13. ASHOKAN EDICTS",
+    "epoch": "268\u2013232 BCE",
+    "discipline": "Epigraphy & Mauryan History",
+    "paper": "GS-1 \u2022 ART & ARCHITECTURE",
+    "atlas_index": 0,
+    "image": "assets/evidence/13-ashokan-edicts.jpg",
+    "archive": "Archaeological Survey of India",
+    "artifact": "Ashokan Monolithic Rock Inscription in Ancient Brahmi Script (Junagadh/Delhi)",
+    "sub": "Dhamma Policy \u2022 Welfare Statecraft & Epigraphy",
+    "desc": "The earliest deciphered epigraphic records in the subcontinent: James Prinsep's 1837 breakthrough decipherment of Ashokan Brahmi, revealing Emperor Ashoka's welfare paternalism, moral governance (Dhamma), religious toleration, and diplomatic medical missions."
+  },
+  {
+    "index": 14,
+    "id": "agrarian-revenue",
+    "title": "14. AGRARIAN REVENUE",
+    "epoch": "1010 CE",
+    "discipline": "Medieval History & Inscriptions",
+    "paper": "GS-1 \u2022 MEDIEVAL AGRARIAN SYSTEM",
+    "atlas_index": 0,
+    "image": "assets/evidence/14-agrarian-revenue.jpg",
+    "archive": "Brihadisvara Temple, Thanjavur",
+    "artifact": "Chola Dynasty Lithic Inscriptions on Temple Plinth Detailing Land Revenue",
+    "sub": "Kudavolai Ballot \u2022 Tank Irrigation & Village Autonomy",
+    "desc": "Epigraphic charter documenting Chola agrarian administrative genius: village assemblies (Sabha and Ur), democratic committee selection via the Kudavolai pot-lottery system, systematic cadastral land surveys, and dedicated irrigation maintenance levies (Eri-ayam)."
+  },
+  {
+    "index": 15,
+    "id": "colonial-drain",
+    "title": "15. COLONIAL DEINDUSTRIALIZATION",
+    "epoch": "1867\u20131901 CE",
+    "discipline": "Modern Indian Economic History",
+    "paper": "GS-1 \u2022 MODERN FREEDOM MOVEMENT",
+    "atlas_index": 0,
+    "image": "assets/evidence/15-colonial-drain.jpg",
+    "archive": "National Archives of India",
+    "artifact": "Dadabhai Naoroji Portrait & Statistical Papers on Drain of Wealth to Britain",
+    "sub": "Poverty & Un-British Rule \u2022 Home Charges & Deindustrialization",
+    "desc": "Documentary record of the early nationalist economic critique: Dadabhai Naoroji, R.C. Dutt, and M.G. Ranade proving through trade statistics how unrequited colonial transfers (Home Charges, council bills) bled Indian capital and caused recurrent famines."
+  },
+  {
+    "index": 16,
+    "id": "constitution-drafting",
+    "title": "16. CONSTITUTIONAL DRAFTING",
+    "epoch": "1949\u20131950 CE",
+    "discipline": "Constitutional Law & Polity",
+    "paper": "GS-2 \u2022 INDIAN CONSTITUTION",
+    "atlas_index": 1,
+    "image": "assets/evidence/16-constitution-drafting.jpg",
+    "archive": "Parliament House Library, New Delhi",
+    "artifact": "Original Illuminated Calligraphic Manuscript of the Preamble of India",
+    "sub": "Basic Structure \u2022 Transformative Constitutionalism",
+    "desc": "The supreme foundational charter of the Republic of India: calligraphed in flowing italic by Prem Behari Narain Raizada with Shantiniketan illumination by Beohar Rammanohar Sinha. Codifies sovereign democracy, fundamental rights, and constitutional morality."
+  },
+  {
+    "index": 17,
+    "id": "five-year-plans",
+    "title": "17. FIVE YEAR PLANS",
+    "epoch": "1951\u20131964 CE",
+    "discipline": "Development Economics & History",
+    "paper": "GS-3 / GS-1 POST-INDEPENDENCE",
+    "atlas_index": 2,
+    "image": "assets/evidence/17-five-year-plans.jpg",
+    "archive": "BBMB & Planning Commission",
+    "artifact": "Bhakra Nangal Dam Concrete Gravity Dam Inauguration Archive",
+    "sub": "Mahalanobis Model \u2022 Temples of Modern India",
+    "desc": "Photographic and engineering archive of Nehru's 'Temples of Resurgent India': massive state-led capital goods investment, river-valley multi-purpose dams, and public sector industrialization forming the foundation of India's post-independence self-reliance."
+  },
+  {
+    "index": 18,
+    "id": "green-revolution",
+    "title": "18. AGRO-ECOLOGY & CROPPING",
+    "epoch": "1965\u20131980 CE",
+    "discipline": "Agricultural Economics & Geography",
+    "paper": "GS-3 \u2022 INDIAN AGRICULTURE",
+    "atlas_index": 2,
+    "image": "assets/evidence/18-green-revolution.jpg",
+    "archive": "ICAR & Punjab Agricultural Univ.",
+    "artifact": "High-Yielding Dwarf Wheat Crop Agronomy Trial Plots in Punjab",
+    "sub": "HYV Seeds \u2022 Food Security & Groundwater Dynamics",
+    "desc": "Visual record of the Green Revolution: introduction of semi-dwarf Norin-10 wheat genetics by Swaminathan and Borlaug, transforming famine-prone India into a cereal-exporting power, while presenting contemporary challenges in soil salinization and water tables."
+  },
+  {
+    "index": 19,
+    "id": "lpg-reforms",
+    "title": "19. 1991 LPG REFORMS",
+    "epoch": "1991 CE",
+    "discipline": "Macroeconomics & Public Policy",
+    "paper": "GS-3 \u2022 ECONOMIC LIBERALIZATION",
+    "atlas_index": 2,
+    "image": "assets/evidence/19-lpg-reforms.jpg",
+    "archive": "Reserve Bank of India, Mumbai",
+    "artifact": "Reserve Bank of India Central Office & July 1991 Crisis Policy Documents",
+    "sub": "Balance of Payments Crisis \u2022 Industrial Delicensing & Rupee Float",
+    "desc": "Archival center of India's structural adjustment: navigating the severe Balance of Payments crisis of 1991 through gold pledging, devaluation, dismantling of the industrial licensing raj, peak tariff cuts, and integration into the globalized trading economy."
+  },
+  {
+    "index": 20,
+    "id": "tribal-rights",
+    "title": "20. SCHEDULE 5 & 6 TRIBAL RIGHTS",
+    "epoch": "Contemporary Ethnography",
+    "discipline": "Social & Tribal Anthropology",
+    "paper": "ANTHRO PAPER 2 \u2022 INDIAN TRIBAL ISSUES",
+    "atlas_index": 3,
+    "image": "assets/evidence/20-tribal-rights.jpg",
+    "archive": "Anthropological Survey of India",
+    "artifact": "Warli Indigenous Ritual Painting & Gram Sabha Forest Rights Council",
+    "sub": "PESA 1996 \u2022 Forest Rights Act & Autonomous Councils",
+    "desc": "Living anthropological evidence of indigenous Indian communities: balancing cultural identity preservation with democratic decentralization under the Fifth and Sixth Schedules, PESA 1996, and the Forest Rights Act 2006. Core to UPSC Anthropology Optional Paper-2."
+  },
+  {
+    "index": 21,
+    "id": "isro-frontier-ai",
+    "title": "21. ISRO & FRONTIER AI",
+    "epoch": "2023\u2013Present",
+    "discipline": "Space Exploration & Frontier AI",
+    "paper": "GS-3 \u2022 SCIENCE & TECHNOLOGY",
+    "atlas_index": 2,
+    "image": "assets/evidence/21-isro-frontier-ai.jpg",
+    "archive": "ISRO & Moon South Pole Cameras",
+    "artifact": "Pragyan Rover NavCam Image Rolling onto Lunar South Pole from Vikram Lander",
+    "sub": "Chandrayaan-3 \u2022 Lunar Regolith & Autonomous Navigation",
+    "desc": "Historic visual proof of India becoming the first nation to soft-land near the lunar south pole (Shiv Shakti Point). Symbolizes the frontier of cryogenic propulsion, autonomous obstacle-avoidance computer vision, and national technological sovereignty in GS-3."
+  }
+];
+
+    let currentEvidenceIdx = 0;
+    const modalBackdrop = document.getElementById('evidence-modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalTag = document.getElementById('modal-tag');
+    const modalEyebrow = document.getElementById('modal-eyebrow');
+    const modalTitle = document.getElementById('modal-title');
+    const modalEpoch = document.getElementById('modal-epoch');
+    const modalDiscipline = document.getElementById('modal-discipline');
+    const modalSyllabus = document.getElementById('modal-syllabus');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalProvenance = document.getElementById('modal-provenance');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalPrevBtn = document.getElementById('modal-prev-btn');
+    const modalNextBtn = document.getElementById('modal-next-btn');
+    const modalSyllabusBtn = document.getElementById('modal-syllabus-btn');
+
+    function openEvidenceModal(index) {
+      if (index < 0 || index >= evidenceData.length) return;
+      currentEvidenceIdx = index;
+      const data = evidenceData[index];
+      if (modalImg) {
+        modalImg.src = data.image;
+        modalImg.alt = data.title;
+      }
+      if (modalTag) modalTag.textContent = data.archive + ' ARCHIVE';
+      if (modalEyebrow) modalEyebrow.textContent = data.paper;
+      if (modalTitle) modalTitle.textContent = data.title;
+      if (modalEpoch) modalEpoch.textContent = data.epoch;
+      if (modalDiscipline) modalDiscipline.textContent = data.discipline;
+      if (modalSyllabus) modalSyllabus.textContent = data.sub;
+      if (modalDesc) modalDesc.textContent = data.desc;
+      if (modalProvenance) modalProvenance.textContent = data.artifact;
+      if (modalBackdrop) {
+        modalBackdrop.classList.add('open');
+        modalBackdrop.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeEvidenceModal() {
+      if (modalBackdrop) {
+        modalBackdrop.classList.remove('open');
+        modalBackdrop.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeEvidenceModal);
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener('click', (e) => {
+        if (e.target === modalBackdrop) closeEvidenceModal();
+      });
+    }
+    if (modalPrevBtn) {
+      modalPrevBtn.addEventListener('click', () => {
+        const nextIdx = (currentEvidenceIdx - 1 + evidenceData.length) % evidenceData.length;
+        openEvidenceModal(nextIdx);
+      });
+    }
+    if (modalNextBtn) {
+      modalNextBtn.addEventListener('click', () => {
+        const nextIdx = (currentEvidenceIdx + 1) % evidenceData.length;
+        openEvidenceModal(nextIdx);
+      });
+    }
+    if (modalSyllabusBtn) {
+      modalSyllabusBtn.addEventListener('click', () => {
+        const targetAtlasIdx = evidenceData[currentEvidenceIdx].atlas_index;
+        closeEvidenceModal();
+        const atlasSec = document.getElementById('atlas');
+        if (atlasSec) {
+          atlasSec.scrollIntoView({ behavior: 'smooth' });
+          setTimeout(() => {
+            const cards = document.querySelectorAll('.sticky-card');
+            if (cards[targetAtlasIdx]) {
+              cards[targetAtlasIdx].classList.remove('highlight-pulse');
+              void cards[targetAtlasIdx].offsetWidth;
+              cards[targetAtlasIdx].classList.add('highlight-pulse');
+            }
+          }, 600);
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!modalBackdrop || !modalBackdrop.classList.contains('open')) return;
+      if (e.key === 'Escape') closeEvidenceModal();
+      if (e.key === 'ArrowLeft') modalPrevBtn && modalPrevBtn.click();
+      if (e.key === 'ArrowRight') modalNextBtn && modalNextBtn.click();
+    });
+
+    // Bind click & keyboard handlers to all marquee cards
+    document.querySelectorAll('.marquee-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const idx = parseInt(card.dataset.evidenceIndex, 10);
+        if (!isNaN(idx)) openEvidenceModal(idx);
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const idx = parseInt(card.dataset.evidenceIndex, 10);
+          if (!isNaN(idx)) openEvidenceModal(idx);
+        }
+      });
+    });
+
 
       // 3D Perspective tilt
       if (perspectiveSec && tiltCard) {
