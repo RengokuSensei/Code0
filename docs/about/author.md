@@ -6,8 +6,8 @@ description: Background, philosophy, and curiosity matrix of Aditya, creator of 
 # About the Author
 
 <div class="aa-author-hero" style="display: flex; gap: 2rem; align-items: center; margin: 2rem 0; padding: 2rem; border-radius: 18px; background: rgba(14, 20, 42, 0.65); border: 1px solid rgba(140, 170, 240, 0.2); backdrop-filter: blur(16px); flex-wrap: wrap;">
-  <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; border: 3px solid #5df0a8; box-shadow: 0 0 25px rgba(93, 240, 168, 0.35); flex-shrink: 0;">
-    <img src="../assets/images/aditya.jpg" alt="Aditya" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;">
+  <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; border: 3px solid #5df0a8; box-shadow: 0 0 25px rgba(93, 240, 168, 0.4); flex-shrink: 0; background: #070913; position: relative;">
+    <img src="../../assets/images/aditya.jpg" alt="Aditya — Advanced Analysis" onerror="this.onerror=null; this.src='../assets/images/aditya.jpg';" style="width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;">
   </div>
   <div>
     <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #02d2e3; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem;">ARCHITECT &bull; RESEARCHER</div>
