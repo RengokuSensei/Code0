@@ -595,105 +595,6 @@
       font-size: 0.7rem;
     }
 
-    /* BASE SCRUBBER TIMELINE (VENGEANCEUI & GALAXY INSPIRED) */
-    .hero-scrub-bar-wrap {
-      margin-top: 36px;
-      padding: 16px 22px;
-      background: rgba(9, 12, 26, 0.82);
-      border: 1px solid var(--line-strong);
-      border-radius: var(--radius-lg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      position: relative;
-      z-index: 3;
-    }
-    .hero-scrub-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.74rem;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .hero-scrub-phase {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--accent-mint);
-      letter-spacing: 0.04em;
-      font-weight: 600;
-    }
-    .hero-scrub-phase .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent-cyan);
-      box-shadow: 0 0 8px var(--accent-cyan);
-    }
-    .hero-scrub-telemetry {
-      color: var(--ink-muted);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .scrub-hint-label {
-      color: var(--ink-dim);
-      font-size: 0.68rem;
-      letter-spacing: 0.05em;
-    }
-    .hero-scrub-track {
-      width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 99px;
-      position: relative;
-      cursor: ew-resize;
-      user-select: none;
-    }
-    .hero-scrub-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-mint));
-      border-radius: 99px;
-      position: relative;
-      transition: width 0.03s linear;
-    }
-    .hero-scrub-thumb {
-      position: absolute;
-      right: -6px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #fff;
-      border: 2px solid var(--accent-mint);
-      box-shadow: 0 0 10px var(--accent-mint);
-      pointer-events: none;
-    }
-    .hero-scrub-nodes {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.68rem;
-      color: var(--ink-dim);
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .hero-scrub-node {
-      cursor: pointer;
-      transition: color 0.2s ease;
-      padding: 2px 4px;
-      border-radius: 4px;
-    }
-    .hero-scrub-node:hover, .hero-scrub-node.active {
-      color: var(--accent-cyan);
-      background: rgba(2, 210, 227, 0.08);
-    }
 
         /* SECTION 2: COSMIC CONTINUUM DUAL-ROW SCROLL MARQUEE */
     .marquee-section {
@@ -1397,7 +1298,6 @@
       .hero-3d-stage { height: 340px; }
       .hero-actions { flex-direction: column; width: 100%; }
       .btn { width: 100%; justify-content: center; }
-      .hero-scrub-nodes { display: none; }
     }
   </style>
 </head>
@@ -1446,7 +1346,7 @@
     </nav>    <!-- 1. HERO SECTION -->
     <section class="section hero-section" id="hero">
       <!-- Living Ambient Background Continuum Video & Overlay -->
-      <video id="hero-scrub-video" class="hero-bg-video" playsinline muted preload="auto" src="assets/videos/advanced-analysis-scrub.mp4" loop></video>
+      <video id="hero-scrub-video" class="hero-bg-video" autoplay loop muted playsinline preload="auto" src="assets/videos/advanced-analysis-scrub.mp4"></video>
       <div class="hero-bg-overlay"></div>
       <div class="hero-scanlines"></div>
 
@@ -1543,34 +1443,6 @@
             </div>
           </div>
 
-        </div>
-
-        <!-- Hero Base: Futuristic Continuum Ambient Scrubber HUD -->
-        <div class="hero-scrub-bar-wrap" id="hero-scrub-container">
-          <div class="hero-scrub-top">
-            <div class="hero-scrub-phase" id="hud-status">
-              <span class="pulse-dot"></span>
-              <span id="hud-phase-text">CONTINUUM: t = 13.8 Ga • SINGULARITY &amp; BLACK HOLE</span>
-            </div>
-            <div class="hero-scrub-telemetry">
-              <span id="hud-time-val">0.00s / 6.00s</span>
-              <span class="scrub-hint-label">&bull; MOVE CURSOR ACROSS HERO TO TRAVEL TIME</span>
-            </div>
-          </div>
-
-          <div class="hero-scrub-track" id="hero-scrub-track">
-            <div class="hero-scrub-fill" id="scrub-fill">
-              <div class="hero-scrub-thumb"></div>
-            </div>
-          </div>
-
-          <div class="hero-scrub-nodes">
-            <span class="hero-scrub-node active" onclick="seekToProgress(0.0)">01. Singularity</span>
-            <span class="hero-scrub-node" onclick="seekToProgress(0.25)">02. Space-Time Fabric</span>
-            <span class="hero-scrub-node" onclick="seekToProgress(0.50)">03. Flora &amp; Biosphere</span>
-            <span class="hero-scrub-node" onclick="seekToProgress(0.75)">04. Fauna &amp; Anthropology</span>
-            <span class="hero-scrub-node" onclick="seekToProgress(1.0)">05. Advanced Analysis</span>
-          </div>
         </div>
 
       </div>
@@ -2597,127 +2469,10 @@
     }
     renderPhysics();
 
-    // 3. Living Background Video Scrubber Engine (Ambient Hero Scrub & Timeline Telemetry)
-    const scrubVideo = document.getElementById('hero-scrub-video');
-    const heroSection = document.getElementById('hero');
-    const scrubTrack = document.getElementById('hero-scrub-track');
-    const scrubFill = document.getElementById('scrub-fill');
-    const hudTime = document.getElementById('hud-time-val');
-    const hudPhaseText = document.getElementById('hud-phase-text');
-    const scrubNodes = document.querySelectorAll('.hero-scrub-node');
-
-    let isSeeking = false;
-    let targetTime = 0;
-
-    const timelinePhases = [
-      { maxP: 0.18, label: "SINGULARITY • COSMIC DAWN (t = 13.8 Ga)" },
-      { maxP: 0.42, label: "SPACE-TIME FABRIC • BLACK HOLE GRAVITATION" },
-      { maxP: 0.68, label: "BIOSPHERE • BOTANICAL FLORA & PHOTOSYNTHESIS" },
-      { maxP: 0.88, label: "FAUNA • ZOOLOGY, TETRAPODS & ANTHROPOLOGY" },
-      { maxP: 1.00, label: "ADVANCED ANALYSIS • LIVING UPSC CSE CODEX" }
-    ];
-
-    if (scrubVideo) {
-      scrubVideo.addEventListener('loadedmetadata', () => {
-        if (hudTime) hudTime.textContent = `0.00s / ${scrubVideo.duration.toFixed(2)}s`;
-      });
-      // Start muted playback initially so it breathes softly
-      scrubVideo.play().catch(() => {});
-    }
-
-    function requestScrubTime(t) {
-      if (!scrubVideo || !scrubVideo.duration) return;
-      targetTime = Math.max(0, Math.min(scrubVideo.duration, t));
-      const progress = targetTime / scrubVideo.duration;
-      const pct = progress * 100;
-      
-      if (scrubFill) scrubFill.style.width = `${pct}%`;
-      if (hudTime) hudTime.textContent = `${targetTime.toFixed(2)}s / ${scrubVideo.duration.toFixed(2)}s`;
-
-      // Active phase calculation
-      let matchedPhase = timelinePhases[timelinePhases.length - 1].label;
-      let matchedIndex = timelinePhases.length - 1;
-      for (let i = 0; i < timelinePhases.length; i++) {
-        if (progress <= timelinePhases[i].maxP) {
-          matchedPhase = timelinePhases[i].label;
-          matchedIndex = i;
-          break;
-        }
-      }
-      if (hudPhaseText) {
-        hudPhaseText.textContent = `CONTINUUM: ${matchedPhase}`;
-      }
-
-      // Highlight active node
-      if (scrubNodes.length) {
-        scrubNodes.forEach((node, idx) => {
-          if (idx === matchedIndex) {
-            node.classList.add('active');
-          } else {
-            node.classList.remove('active');
-          }
-        });
-      }
-
-      if (!isSeeking && Math.abs(scrubVideo.currentTime - targetTime) > 0.02) {
-        isSeeking = true;
-        scrubVideo.currentTime = targetTime;
-      }
-    }
-
-    if (scrubVideo) {
-      scrubVideo.addEventListener('seeked', () => {
-        if (Math.abs(scrubVideo.currentTime - targetTime) > 0.02) {
-          scrubVideo.currentTime = targetTime;
-        } else {
-          isSeeking = false;
-        }
-      });
-    }
-
-    window.seekToProgress = function(p) {
-      if (scrubVideo && scrubVideo.duration) {
-        requestScrubTime(p * scrubVideo.duration);
-      }
-    };
-
-    // Hero-wide cursor scrub: scrubbing across the hero seamlessly moves the continuum background
-    if (heroSection) {
-      heroSection.addEventListener('pointermove', (e) => {
-        // Only scrub if not interacting with 3D canvas or buttons
-        if (e.target.closest('#aditya-3d-canvas') || e.target.closest('.hero-actions') || e.target.closest('.hero-socials')) {
-          return;
-        }
-        const rect = heroSection.getBoundingClientRect();
-        const progress = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-        if (scrubVideo && scrubVideo.duration) {
-          requestScrubTime(progress * scrubVideo.duration);
-        }
-      });
-    }
-
-    // Direct scrubbing on timeline track
-    if (scrubTrack) {
-      let isDraggingTrack = false;
-      const handleTrackSeek = (e) => {
-        const rect = scrubTrack.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const progress = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-        if (scrubVideo && scrubVideo.duration) {
-          requestScrubTime(progress * scrubVideo.duration);
-        }
-      };
-
-      scrubTrack.addEventListener('pointerdown', (e) => {
-        isDraggingTrack = true;
-        handleTrackSeek(e);
-      });
-      window.addEventListener('pointermove', (e) => {
-        if (isDraggingTrack) handleTrackSeek(e);
-      });
-      window.addEventListener('pointerup', () => {
-        isDraggingTrack = false;
-      });
+    // 3. Living Ambient Background Video Playback Engine
+    const bgVideo = document.getElementById('hero-scrub-video');
+    if (bgVideo) {
+      bgVideo.play().catch(() => {});
     }
 
     // 4. Frameless Three.js 3D Viewer for aditya.glb
