@@ -547,6 +547,28 @@
       object-fit: cover;
       display: block;
     }
+    /* Cyberpunk HUD Brackets (VengeanceUI & Galaxy) */
+    .hud-corner {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+    .hud-corner-tl { top: 12px; left: 12px; border-top: 2px solid var(--accent-cyan); border-left: 2px solid var(--accent-cyan); }
+    .hud-corner-tr { top: 12px; right: 12px; border-top: 2px solid var(--accent-cyan); border-right: 2px solid var(--accent-cyan); }
+    .hud-corner-bl { bottom: 12px; left: 12px; border-bottom: 2px solid var(--accent-cyan); border-left: 2px solid var(--accent-cyan); }
+    .hud-corner-br { bottom: 12px; right: 12px; border-bottom: 2px solid var(--accent-cyan); border-right: 2px solid var(--accent-cyan); }
+    .video-scanline-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%), linear-gradient(90deg, rgba(0, 242, 254, 0.02), rgba(0, 0, 0, 0), rgba(93, 240, 168, 0.02));
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+      opacity: 0.6;
+      z-index: 5;
+    }
     .video-hud-overlay {
       position: absolute;
       top: 14px;
@@ -560,12 +582,24 @@
       font-size: 0.72rem;
     }
     .hud-badge {
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 6px;
-      background: rgba(7, 9, 19, 0.75);
-      border: 1px solid rgba(140, 170, 240, 0.25);
-      backdrop-filter: blur(8px);
+      background: rgba(5, 8, 20, 0.88);
+      border: 1px solid var(--line-strong);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       color: var(--accent-mint);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.04em;
+    }
+    .hud-badge .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 8px var(--accent-cyan);
     }
     .hud-time {
       padding: 4px 10px;
@@ -1543,21 +1577,30 @@
               <!-- 1. Interactive Video Scrubbing Stage (SynapseX Non-Dropping Seek Solver) -->
               <div class="stage-view active" id="view-video">
                 <div class="video-stage-inner" id="video-scrub-container">
-                  <video id="hero-scrub-video" playsinline muted preload="auto" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_083515_290e5a10-0b95-41af-a5e2-32b6389baa4d.mp4"></video>
+                  <video id="hero-scrub-video" playsinline muted preload="auto" src="assets/videos/advanced-analysis-scrub.mp4"></video>
                   
+                  <div class="video-scanline-overlay"></div>
+                  <!-- Cyberpunk HUD Corner Brackets (VengeanceUI) -->
+                  <div class="hud-corner hud-corner-tl"></div>
+                  <div class="hud-corner hud-corner-tr"></div>
+                  <div class="hud-corner hud-corner-bl"></div>
+                  <div class="hud-corner hud-corner-br"></div>
+
                   <div class="video-hud-overlay">
-                    <span class="hud-badge" id="hud-status">CONTINUUM: t = 13.8 Ga</span>
-                    <span class="hud-time" id="hud-time-val">0.00s / 0.00s</span>
+                    <span class="hud-badge" id="hud-status"><span class="pulse-dot"></span>CONTINUUM: t = 13.8 Ga</span>
+                    <span class="hud-time" id="hud-time-val">0.00s / 6.00s</span>
                   </div>
 
                   <div class="scrub-instruction">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8L22 12L18 16"/><path d="M6 8L2 12L6 16"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
-                    <span>Move cursor across video to scrub continuum timeline</span>
+                    <span>Drag or scrub cursor across continuum (Singularity &bull; Flora &bull; Fauna &bull; Codex)</span>
                   </div>
 
                   <div class="scrub-track-bar">
                     <div class="scrub-fill-bar" id="scrub-fill"></div>
                   </div>
+                </div>
+              </div>
                 </div>
               </div>
 
@@ -2617,7 +2660,7 @@
     }
     renderPhysics();
 
-    // 3. Interactive Video Scrubber Engine (SynapseX Non-Dropping Seek Solver)
+    // 3. Interactive Video Scrubber Engine (SynapseX Non-Dropping Seek Solver + Multi-Epoch Telemetry)
     const scrubVideo = document.getElementById('hero-scrub-video');
     const scrubBox = document.getElementById('video-scrub-container');
     const scrubFill = document.getElementById('scrub-fill');
@@ -2626,22 +2669,40 @@
 
     let isSeeking = false;
     let targetTime = 0;
-    const seekSensitivity = 0.8;
 
-    scrubVideo.addEventListener('loadedmetadata', () => {
-      hudTime.textContent = `0.00s / ${scrubVideo.duration.toFixed(2)}s`;
-    });
+    const timelinePhases = [
+      { maxP: 0.22, label: "🌌 SINGULARITY • SPACE-TIME & BLACK HOLE" },
+      { maxP: 0.48, label: "✨ ACCRETION • STELLAR PROTO-DISKS" },
+      { maxP: 0.72, label: "🌿 BIOSPHERE • FLORA & STROMATOLITES" },
+      { maxP: 0.88, label: "🦎 FAUNA • ZOOLOGY & ANTHROPOLOGY" },
+      { maxP: 1.00, label: "⚡ SYNTHESIS • LIVING UPSC CODEX" }
+    ];
+
+    if (scrubVideo) {
+      scrubVideo.addEventListener('loadedmetadata', () => {
+        if (hudTime) hudTime.textContent = `0.00s / ${scrubVideo.duration.toFixed(2)}s`;
+      });
+    }
 
     function requestScrubTime(t) {
-      if (!scrubVideo.duration) return;
+      if (!scrubVideo || !scrubVideo.duration) return;
       targetTime = Math.max(0, Math.min(scrubVideo.duration, t));
-      const pct = (targetTime / scrubVideo.duration) * 100;
-      scrubFill.style.width = `${pct}%`;
-      hudTime.textContent = `${targetTime.toFixed(2)}s / ${scrubVideo.duration.toFixed(2)}s`;
+      const progress = targetTime / scrubVideo.duration;
+      const pct = progress * 100;
+      if (scrubFill) scrubFill.style.width = `${pct}%`;
+      if (hudTime) hudTime.textContent = `${targetTime.toFixed(2)}s / ${scrubVideo.duration.toFixed(2)}s`;
 
-      // Timeline era calculation
-      const era = 13.8 * (1 - (targetTime / scrubVideo.duration));
-      hudStatus.textContent = era > 0.05 ? `CONTINUUM: t = ${era.toFixed(1)} Ga` : `CONTINUUM: PRESENT ERA`;
+      // Timeline phase calculation
+      let matchedPhase = timelinePhases[timelinePhases.length - 1].label;
+      for (const phase of timelinePhases) {
+        if (progress <= phase.maxP) {
+          matchedPhase = phase.label;
+          break;
+        }
+      }
+      if (hudStatus) {
+        hudStatus.innerHTML = `<span class="pulse-dot"></span>${matchedPhase}`;
+      }
 
       if (!isSeeking && Math.abs(scrubVideo.currentTime - targetTime) > 0.02) {
         isSeeking = true;
@@ -2649,21 +2710,30 @@
       }
     }
 
-    scrubVideo.addEventListener('seeked', () => {
-      if (Math.abs(scrubVideo.currentTime - targetTime) > 0.02) {
-        scrubVideo.currentTime = targetTime;
-      } else {
-        isSeeking = false;
-      }
-    });
+    if (scrubVideo) {
+      scrubVideo.addEventListener('seeked', () => {
+        if (Math.abs(scrubVideo.currentTime - targetTime) > 0.02) {
+          scrubVideo.currentTime = targetTime;
+        } else {
+          isSeeking = false;
+        }
+      });
+    }
 
-    scrubBox.addEventListener('pointermove', (e) => {
+    function handleScrubMove(e) {
+      if (!scrubBox || !scrubVideo) return;
       const rect = scrubBox.getBoundingClientRect();
-      const progress = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const progress = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
       if (scrubVideo.duration) {
         requestScrubTime(progress * scrubVideo.duration);
       }
-    });
+    }
+
+    if (scrubBox) {
+      scrubBox.addEventListener('pointermove', handleScrubMove);
+      scrubBox.addEventListener('touchmove', handleScrubMove, { passive: true });
+    }
 
     // 4. Three.js 3D Viewer for aditya.glb
     const canvas3D = document.getElementById('aditya-3d-canvas');
