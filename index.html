@@ -447,293 +447,252 @@
       background: rgba(225, 48, 108, 0.12);
     }
 
-    /* HERO SHOWCASE CARD (VIDEO SCRUBBER + 3D + PHOTO TABS) */
-    .showcase-card {
-      position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--line-strong);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      backdrop-filter: blur(24px);
-      box-shadow: var(--shadow-glass);
-      overflow: hidden;
-      z-index: 2;
-    }
-    .showcase-card::before {
-      content: "";
+    /* LIVING HERO BACKGROUND VIDEO & AMBIENT SCI-FI OVERLAYS */
+    .hero-bg-video {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(93, 240, 168, 0.6), transparent);
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.38;
+      filter: saturate(1.2) contrast(1.15) brightness(0.9);
+      transition: opacity 0.5s ease;
     }
-    .showcase-header {
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 65% 45%, rgba(7, 9, 19, 0.45) 0%, rgba(7, 9, 19, 0.88) 65%, #070913 100%),
+        linear-gradient(180deg, rgba(7, 9, 19, 0.6) 0%, rgba(7, 9, 19, 0.95) 100%);
+      pointer-events: none;
+    }
+    .hero-scanlines {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+      background-size: 100% 4px;
+      pointer-events: none;
+      opacity: 0.5;
+      z-index: 1;
+    }
+    .hero-container-rel {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    /* RIGHT COLUMN: FRAMELESS 3D STAGE & ADITYA AVATAR */
+    .hero-3d-stage {
+      position: relative;
+      width: 100%;
+      height: 480px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-      gap: 10px;
+      justify-content: center;
+      user-select: none;
     }
-    .showcase-tabs {
+    #aditya-3d-canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+      cursor: grab;
+      outline: none;
+    }
+    #aditya-3d-canvas:active {
+      cursor: grabbing;
+    }
+    .hero-photo-layer {
+      position: absolute;
+      inset: 20px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: none;
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      background: #070913;
+    }
+    .hero-photo-layer.active {
+      display: block;
+    }
+    .hero-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .hero-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(7, 9, 19, 0.95) 100%);
       display: flex;
-      gap: 5px;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 4px;
-      border-radius: 99px;
-      border: 1px solid var(--line);
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
     }
-    .tab-btn {
-      padding: 6px 13px;
+    .hero-stage-hud {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(7, 9, 19, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--line-strong);
+      padding: 6px 16px;
       border-radius: 99px;
-      font-size: 0.76rem;
       font-family: "JetBrains Mono", monospace;
-      font-weight: 600;
-      background: transparent;
+      font-size: 0.74rem;
       color: var(--ink-muted);
-      border: none;
+      white-space: nowrap;
+      pointer-events: auto;
+      z-index: 5;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .stage-toggle-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--ink-muted);
       cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      font-weight: 600;
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
-    .tab-btn.active {
-      background: var(--accent-mint);
-      color: #032018;
-      box-shadow: 0 2px 10px rgba(93, 240, 168, 0.4);
+    .stage-toggle-btn:hover {
+      color: #fff;
     }
-    .showcase-status {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.72rem;
-      color: var(--accent-cyan);
-    }
-
-    /* Viewport Stage Box */
-    .stage-box {
-      width: 100%;
-      height: 440px;
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: radial-gradient(circle at center, #121832 0%, #070913 100%);
-      border: 1px solid var(--line);
-    }
-    .stage-view {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s ease;
-    }
-    .stage-view.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* 1. Video Scrubber Stage */
-    .video-stage-inner {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      cursor: ew-resize;
-      user-select: none;
-    }
-    #hero-scrub-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    /* Cyberpunk HUD Brackets (VengeanceUI & Galaxy) */
-    .hud-corner {
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      pointer-events: none;
-      z-index: 10;
-      transition: all 0.3s ease;
-    }
-    .hud-corner-tl { top: 12px; left: 12px; border-top: 2px solid var(--accent-cyan); border-left: 2px solid var(--accent-cyan); }
-    .hud-corner-tr { top: 12px; right: 12px; border-top: 2px solid var(--accent-cyan); border-right: 2px solid var(--accent-cyan); }
-    .hud-corner-bl { bottom: 12px; left: 12px; border-bottom: 2px solid var(--accent-cyan); border-left: 2px solid var(--accent-cyan); }
-    .hud-corner-br { bottom: 12px; right: 12px; border-bottom: 2px solid var(--accent-cyan); border-right: 2px solid var(--accent-cyan); }
-    .video-scanline-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%), linear-gradient(90deg, rgba(0, 242, 254, 0.02), rgba(0, 0, 0, 0), rgba(93, 240, 168, 0.02));
-      background-size: 100% 3px, 6px 100%;
-      pointer-events: none;
-      opacity: 0.6;
-      z-index: 5;
-    }
-    .video-hud-overlay {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      right: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      pointer-events: none;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.72rem;
-    }
-    .hud-badge {
-      padding: 5px 12px;
-      border-radius: 6px;
-      background: rgba(5, 8, 20, 0.88);
-      border: 1px solid var(--line-strong);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+    .stage-toggle-btn.active {
+      background: rgba(93, 240, 168, 0.15);
       color: var(--accent-mint);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      letter-spacing: 0.04em;
+      border-color: rgba(93, 240, 168, 0.4);
     }
-    .hud-badge .pulse-dot {
+    .avatar-dot {
       width: 6px;
       height: 6px;
+      border-radius: 50%;
+      background: var(--accent-mint);
+      box-shadow: 0 0 8px var(--accent-mint);
+      display: inline-block;
+    }
+    .hud-sep {
+      color: var(--line-strong);
+      opacity: 0.6;
+    }
+    .hud-hint {
+      color: var(--ink-dim);
+      font-size: 0.7rem;
+    }
+
+    /* BASE SCRUBBER TIMELINE (VENGEANCEUI & GALAXY INSPIRED) */
+    .hero-scrub-bar-wrap {
+      margin-top: 36px;
+      padding: 16px 22px;
+      background: rgba(9, 12, 26, 0.82);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      position: relative;
+      z-index: 3;
+    }
+    .hero-scrub-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .hero-scrub-phase {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-mint);
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+    .hero-scrub-phase .pulse-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: var(--accent-cyan);
       box-shadow: 0 0 8px var(--accent-cyan);
     }
-    .hud-time {
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: rgba(7, 9, 19, 0.75);
-      border: 1px solid rgba(140, 170, 240, 0.25);
-      backdrop-filter: blur(8px);
-      color: #fff;
+    .hero-scrub-telemetry {
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .scrub-track-bar {
-      position: absolute;
-      bottom: 14px;
-      left: 16px;
-      right: 16px;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.15);
+    .scrub-hint-label {
+      color: var(--ink-dim);
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+    }
+    .hero-scrub-track {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 99px;
-      overflow: hidden;
-      pointer-events: none;
+      position: relative;
+      cursor: ew-resize;
+      user-select: none;
     }
-    .scrub-fill-bar {
+    .hero-scrub-fill {
       height: 100%;
       width: 0%;
       background: linear-gradient(90deg, var(--accent-cyan), var(--accent-mint));
       border-radius: 99px;
-      transition: width 0.05s linear;
-    }
-    .scrub-instruction {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.72rem;
-      color: var(--ink-muted);
-      background: rgba(7, 9, 19, 0.85);
-      backdrop-filter: blur(8px);
-      padding: 5px 14px;
-      border-radius: 99px;
-      border: 1px solid var(--line);
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    /* 2. 3D Model Stage */
-    #aditya-3d-canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-    .model-instructions {
-      position: absolute;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.72rem;
-      color: var(--ink-muted);
-      background: rgba(7, 9, 19, 0.75);
-      backdrop-filter: blur(8px);
-      padding: 5px 14px;
-      border-radius: 99px;
-      border: 1px solid var(--line);
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    /* 3. Magnetic Portrait Stage */
-    .portrait-wrap {
-      width: 100%;
-      height: 100%;
       position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      transition: width 0.03s linear;
     }
-    .portrait-magnet-box {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      will-change: transform;
-      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .portrait-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      filter: contrast(1.05) brightness(0.98);
-      display: block;
-    }
-    .portrait-overlay {
+    .hero-scrub-thumb {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(7, 9, 19, 0.95) 100%);
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--accent-mint);
+      box-shadow: 0 0 10px var(--accent-mint);
       pointer-events: none;
     }
-    .portrait-meta {
-      position: absolute;
-      bottom: 18px;
-      left: 20px;
-      right: 20px;
-      pointer-events: none;
-    }
-    .portrait-name {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #fff;
-    }
-    .portrait-title {
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.78rem;
-      color: var(--accent-mint);
-    }
-
-    /* Showcase Footer Details */
-    .showcase-footer {
+    .hero-scrub-nodes {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
+      margin-top: 10px;
       font-family: "JetBrains Mono", monospace;
-      font-size: 0.74rem;
+      font-size: 0.68rem;
       color: var(--ink-dim);
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .hero-scrub-node {
+      cursor: pointer;
+      transition: color 0.2s ease;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .hero-scrub-node:hover, .hero-scrub-node.active {
+      color: var(--accent-cyan);
+      background: rgba(2, 210, 227, 0.08);
     }
 
         /* SECTION 2: COSMIC CONTINUUM DUAL-ROW SCROLL MARQUEE */
@@ -1425,6 +1384,7 @@
     /* RESPONSIVE BREAKPOINTS */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; }
+      .hero-3d-stage { height: 400px; margin-top: 10px; }
       .convergence-nodes { grid-template-columns: 1fr 1fr; }
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
@@ -1434,9 +1394,10 @@
       .convergence-nodes { grid-template-columns: 1fr; }
       .tools-grid { grid-template-columns: 1fr; }
       .hero-title { font-size: 2.2rem; }
-      .stage-box { height: 360px; }
+      .hero-3d-stage { height: 340px; }
       .hero-actions { flex-direction: column; width: 100%; }
       .btn { width: 100%; justify-content: center; }
+      .hero-scrub-nodes { display: none; }
     }
   </style>
 </head>
@@ -1482,11 +1443,14 @@
         </svg>
         <span>JOIN TELEGRAM</span>
       </a>
-    </nav>
-
-    <!-- 1. HERO SECTION -->
+    </nav>    <!-- 1. HERO SECTION -->
     <section class="section hero-section" id="hero">
-      <div class="container">
+      <!-- Living Ambient Background Continuum Video & Overlay -->
+      <video id="hero-scrub-video" class="hero-bg-video" playsinline muted preload="auto" src="assets/videos/advanced-analysis-scrub.mp4" loop></video>
+      <div class="hero-bg-overlay"></div>
+      <div class="hero-scanlines"></div>
+
+      <div class="container hero-container-rel">
         <div class="hero-grid">
           
           <!-- Left Column -->
@@ -1546,96 +1510,69 @@
                 <span>Telegram</span>
               </a>
               <a href="https://www.instagram.com/advanced_analysis?stkn=YjU2Y3Roczh4ZXkw" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram">
-                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 <span>Instagram</span>
               </a>
             </div>
           </div>
 
-          <!-- Right Column: Interactive 3-Way Showcase -->
-          <div class="showcase-card">
-            <div class="showcase-header">
-              <div class="showcase-tabs">
-                <button class="tab-btn active" id="tab-video" onclick="switchStage('video')">
-                  <span>🎬 Video Scrub</span>
-                </button>
-                <button class="tab-btn" id="tab-3d" onclick="switchStage('3d')">
-                  <span>🧊 3D Avatar</span>
-                </button>
-                <button class="tab-btn" id="tab-photo" onclick="switchStage('photo')">
-                  <span>📸 Magnetic Bio</span>
-                </button>
-              </div>
-              <div class="showcase-status">
-                <span id="stage-status">&bull; Scrub Continuum Live</span>
+          <!-- Right Column: Clean Frameless 3D Stage (aditya.glb) with Dual Switch -->
+          <div class="hero-3d-stage" id="hero-3d-stage">
+            <canvas id="aditya-3d-canvas"></canvas>
+            
+            <!-- Photo layer (optional toggle) -->
+            <div class="hero-photo-layer" id="hero-photo-layer">
+              <img src="assets/images/aditya.jpg" alt="Aditya" class="hero-photo-img">
+              <div class="hero-photo-overlay">
+                <div class="portrait-name">Aditya</div>
+                <div class="portrait-title">Zoology &bull; M.Sc. Geography &bull; Anthropology Optional &bull; Data Analyst</div>
               </div>
             </div>
 
-            <!-- Viewport Stage Box -->
-            <div class="stage-box" id="main-stage-box">
-              
-              <!-- 1. Interactive Video Scrubbing Stage (SynapseX Non-Dropping Seek Solver) -->
-              <div class="stage-view active" id="view-video">
-                <div class="video-stage-inner" id="video-scrub-container">
-                  <video id="hero-scrub-video" playsinline muted preload="auto" src="assets/videos/advanced-analysis-scrub.mp4"></video>
-                  
-                  <div class="video-scanline-overlay"></div>
-                  <!-- Cyberpunk HUD Corner Brackets (VengeanceUI) -->
-                  <div class="hud-corner hud-corner-tl"></div>
-                  <div class="hud-corner hud-corner-tr"></div>
-                  <div class="hud-corner hud-corner-bl"></div>
-                  <div class="hud-corner hud-corner-br"></div>
-
-                  <div class="video-hud-overlay">
-                    <span class="hud-badge" id="hud-status"><span class="pulse-dot"></span>CONTINUUM: t = 13.8 Ga</span>
-                    <span class="hud-time" id="hud-time-val">0.00s / 6.00s</span>
-                  </div>
-
-                  <div class="scrub-instruction">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8L22 12L18 16"/><path d="M6 8L2 12L6 16"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
-                    <span>Drag or scrub cursor across continuum (Singularity &bull; Flora &bull; Fauna &bull; Codex)</span>
-                  </div>
-
-                  <div class="scrub-track-bar">
-                    <div class="scrub-fill-bar" id="scrub-fill"></div>
-                  </div>
-                </div>
-              </div>
-                </div>
-              </div>
-
-              <!-- 2. 3D Model Stage -->
-              <div class="stage-view" id="view-3d">
-                <canvas id="aditya-3d-canvas"></canvas>
-                <div class="model-instructions">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-                  <span>Drag to rotate 3D mesh &bull; Orbit enabled</span>
-                </div>
-              </div>
-
-              <!-- 3. Magnetic Portrait Stage (Jack Magnet Effect) -->
-              <div class="stage-view" id="view-photo">
-                <div class="portrait-wrap" id="magnet-trigger-area">
-                  <div class="portrait-magnet-box" id="portrait-magnet">
-                    <img src="assets/images/aditya.jpg" alt="Aditya — Advanced Analysis" class="portrait-img">
-                    <div class="portrait-overlay"></div>
-                    <div class="portrait-meta">
-                      <div class="portrait-name">Aditya</div>
-                      <div class="portrait-title">Zoology &bull; M.Sc. Geography &bull; Anthropology Optional &bull; Data Analyst</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="showcase-footer">
-              <span id="footer-meta-left">INTERACTIVE TIMELINE: SEEKED SYNC</span>
-              <span id="footer-meta-right">SENSITIVITY: 0.8 &bull; PURE ENGINE</span>
+            <!-- Sleek Frameless HUD & Mode Switch -->
+            <div class="hero-stage-hud">
+              <button class="stage-toggle-btn active" id="btn-show-3d" onclick="setAvatarMode('3d')">
+                <span class="avatar-dot"></span> 🧊 3D Avatar
+              </button>
+              <span class="hud-sep">|</span>
+              <button class="stage-toggle-btn" id="btn-show-photo" onclick="setAvatarMode('photo')">
+                📸 Real Bio
+              </button>
+              <span class="hud-sep">|</span>
+              <span class="hud-hint">Drag to Orbit</span>
             </div>
           </div>
 
         </div>
+
+        <!-- Hero Base: Futuristic Continuum Ambient Scrubber HUD -->
+        <div class="hero-scrub-bar-wrap" id="hero-scrub-container">
+          <div class="hero-scrub-top">
+            <div class="hero-scrub-phase" id="hud-status">
+              <span class="pulse-dot"></span>
+              <span id="hud-phase-text">CONTINUUM: t = 13.8 Ga • SINGULARITY &amp; BLACK HOLE</span>
+            </div>
+            <div class="hero-scrub-telemetry">
+              <span id="hud-time-val">0.00s / 6.00s</span>
+              <span class="scrub-hint-label">&bull; MOVE CURSOR ACROSS HERO TO TRAVEL TIME</span>
+            </div>
+          </div>
+
+          <div class="hero-scrub-track" id="hero-scrub-track">
+            <div class="hero-scrub-fill" id="scrub-fill">
+              <div class="hero-scrub-thumb"></div>
+            </div>
+          </div>
+
+          <div class="hero-scrub-nodes">
+            <span class="hero-scrub-node active" onclick="seekToProgress(0.0)">01. Singularity</span>
+            <span class="hero-scrub-node" onclick="seekToProgress(0.25)">02. Space-Time Fabric</span>
+            <span class="hero-scrub-node" onclick="seekToProgress(0.50)">03. Flora &amp; Biosphere</span>
+            <span class="hero-scrub-node" onclick="seekToProgress(0.75)">04. Fauna &amp; Anthropology</span>
+            <span class="hero-scrub-node" onclick="seekToProgress(1.0)">05. Advanced Analysis</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -2660,28 +2597,32 @@
     }
     renderPhysics();
 
-    // 3. Interactive Video Scrubber Engine (SynapseX Non-Dropping Seek Solver + Multi-Epoch Telemetry)
+    // 3. Living Background Video Scrubber Engine (Ambient Hero Scrub & Timeline Telemetry)
     const scrubVideo = document.getElementById('hero-scrub-video');
-    const scrubBox = document.getElementById('video-scrub-container');
+    const heroSection = document.getElementById('hero');
+    const scrubTrack = document.getElementById('hero-scrub-track');
     const scrubFill = document.getElementById('scrub-fill');
     const hudTime = document.getElementById('hud-time-val');
-    const hudStatus = document.getElementById('hud-status');
+    const hudPhaseText = document.getElementById('hud-phase-text');
+    const scrubNodes = document.querySelectorAll('.hero-scrub-node');
 
     let isSeeking = false;
     let targetTime = 0;
 
     const timelinePhases = [
-      { maxP: 0.22, label: "🌌 SINGULARITY • SPACE-TIME & BLACK HOLE" },
-      { maxP: 0.48, label: "✨ ACCRETION • STELLAR PROTO-DISKS" },
-      { maxP: 0.72, label: "🌿 BIOSPHERE • FLORA & STROMATOLITES" },
-      { maxP: 0.88, label: "🦎 FAUNA • ZOOLOGY & ANTHROPOLOGY" },
-      { maxP: 1.00, label: "⚡ SYNTHESIS • LIVING UPSC CODEX" }
+      { maxP: 0.18, label: "SINGULARITY • COSMIC DAWN (t = 13.8 Ga)" },
+      { maxP: 0.42, label: "SPACE-TIME FABRIC • BLACK HOLE GRAVITATION" },
+      { maxP: 0.68, label: "BIOSPHERE • BOTANICAL FLORA & PHOTOSYNTHESIS" },
+      { maxP: 0.88, label: "FAUNA • ZOOLOGY, TETRAPODS & ANTHROPOLOGY" },
+      { maxP: 1.00, label: "ADVANCED ANALYSIS • LIVING UPSC CSE CODEX" }
     ];
 
     if (scrubVideo) {
       scrubVideo.addEventListener('loadedmetadata', () => {
         if (hudTime) hudTime.textContent = `0.00s / ${scrubVideo.duration.toFixed(2)}s`;
       });
+      // Start muted playback initially so it breathes softly
+      scrubVideo.play().catch(() => {});
     }
 
     function requestScrubTime(t) {
@@ -2689,19 +2630,33 @@
       targetTime = Math.max(0, Math.min(scrubVideo.duration, t));
       const progress = targetTime / scrubVideo.duration;
       const pct = progress * 100;
+      
       if (scrubFill) scrubFill.style.width = `${pct}%`;
       if (hudTime) hudTime.textContent = `${targetTime.toFixed(2)}s / ${scrubVideo.duration.toFixed(2)}s`;
 
-      // Timeline phase calculation
+      // Active phase calculation
       let matchedPhase = timelinePhases[timelinePhases.length - 1].label;
-      for (const phase of timelinePhases) {
-        if (progress <= phase.maxP) {
-          matchedPhase = phase.label;
+      let matchedIndex = timelinePhases.length - 1;
+      for (let i = 0; i < timelinePhases.length; i++) {
+        if (progress <= timelinePhases[i].maxP) {
+          matchedPhase = timelinePhases[i].label;
+          matchedIndex = i;
           break;
         }
       }
-      if (hudStatus) {
-        hudStatus.innerHTML = `<span class="pulse-dot"></span>${matchedPhase}`;
+      if (hudPhaseText) {
+        hudPhaseText.textContent = `CONTINUUM: ${matchedPhase}`;
+      }
+
+      // Highlight active node
+      if (scrubNodes.length) {
+        scrubNodes.forEach((node, idx) => {
+          if (idx === matchedIndex) {
+            node.classList.add('active');
+          } else {
+            node.classList.remove('active');
+          }
+        });
       }
 
       if (!isSeeking && Math.abs(scrubVideo.currentTime - targetTime) > 0.02) {
@@ -2720,28 +2675,60 @@
       });
     }
 
-    function handleScrubMove(e) {
-      if (!scrubBox || !scrubVideo) return;
-      const rect = scrubBox.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const progress = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-      if (scrubVideo.duration) {
-        requestScrubTime(progress * scrubVideo.duration);
+    window.seekToProgress = function(p) {
+      if (scrubVideo && scrubVideo.duration) {
+        requestScrubTime(p * scrubVideo.duration);
       }
+    };
+
+    // Hero-wide cursor scrub: scrubbing across the hero seamlessly moves the continuum background
+    if (heroSection) {
+      heroSection.addEventListener('pointermove', (e) => {
+        // Only scrub if not interacting with 3D canvas or buttons
+        if (e.target.closest('#aditya-3d-canvas') || e.target.closest('.hero-actions') || e.target.closest('.hero-socials')) {
+          return;
+        }
+        const rect = heroSection.getBoundingClientRect();
+        const progress = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        if (scrubVideo && scrubVideo.duration) {
+          requestScrubTime(progress * scrubVideo.duration);
+        }
+      });
     }
 
-    if (scrubBox) {
-      scrubBox.addEventListener('pointermove', handleScrubMove);
-      scrubBox.addEventListener('touchmove', handleScrubMove, { passive: true });
+    // Direct scrubbing on timeline track
+    if (scrubTrack) {
+      let isDraggingTrack = false;
+      const handleTrackSeek = (e) => {
+        const rect = scrubTrack.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const progress = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        if (scrubVideo && scrubVideo.duration) {
+          requestScrubTime(progress * scrubVideo.duration);
+        }
+      };
+
+      scrubTrack.addEventListener('pointerdown', (e) => {
+        isDraggingTrack = true;
+        handleTrackSeek(e);
+      });
+      window.addEventListener('pointermove', (e) => {
+        if (isDraggingTrack) handleTrackSeek(e);
+      });
+      window.addEventListener('pointerup', () => {
+        isDraggingTrack = false;
+      });
     }
 
-    // 4. Three.js 3D Viewer for aditya.glb
+    // 4. Frameless Three.js 3D Viewer for aditya.glb
     const canvas3D = document.getElementById('aditya-3d-canvas');
-    const stageBox = document.getElementById('main-stage-box');
+    const stage3D = document.getElementById('hero-3d-stage');
     
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(40, stageBox.clientWidth / stageBox.clientHeight, 0.1, 100);
-    camera.position.set(0, 0.2, 3.4);
+    const stageW = stage3D ? stage3D.clientWidth : 500;
+    const stageH = stage3D ? stage3D.clientHeight : 480;
+    const camera = new THREE.PerspectiveCamera(38, stageW / stageH, 0.1, 100);
+    camera.position.set(0, 0.1, 3.2);
 
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas3D,
@@ -2750,35 +2737,39 @@
       powerPreference: 'high-performance'
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(stageBox.clientWidth, stageBox.clientHeight);
+    renderer.setSize(stageW, stageH);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.25;
+    renderer.toneMappingExposure = 1.35;
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.06;
+    controls.dampingFactor = 0.05;
     controls.enablePan = false;
-    controls.minDistance = 1.8;
-    controls.maxDistance = 5.5;
+    controls.enableZoom = false; // Prevents trapping normal page scroll
+    controls.minDistance = 1.6;
+    controls.maxDistance = 4.8;
+    controls.minPolarAngle = Math.PI * 0.2;
+    controls.maxPolarAngle = Math.PI * 0.75;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 1.2;
+    controls.autoRotateSpeed = 0.9;
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight(0x02d2e3, 3.4);
+    const keyLight = new THREE.DirectionalLight(0x02d2e3, 3.6);
     keyLight.position.set(4, 5, 4);
     scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight(0x8c68ff, 3.8);
+    const rimLight = new THREE.DirectionalLight(0x8c68ff, 4.0);
     rimLight.position.set(-4, 3, -3);
     scene.add(rimLight);
 
-    const mintLight = new THREE.DirectionalLight(0x5df0a8, 2.2);
+    const mintLight = new THREE.DirectionalLight(0x5df0a8, 2.4);
     mintLight.position.set(0, -4, 3);
     scene.add(mintLight);
 
     let avatarMesh = null;
+    let baseCenterY = 0;
     const loader = new GLTFLoader();
     const modelPath = new URL('assets/models/aditya.glb', window.location.href).href;
 
@@ -2787,13 +2778,13 @@
       (gltf) => {
         const root = gltf.scene;
         const customMaterial = new THREE.MeshPhysicalMaterial({
-          color: new THREE.Color('#6ea3ff'),
-          roughness: 0.32,
-          metalness: 0.18,
-          clearcoat: 0.85,
-          clearcoatRoughness: 0.2,
-          reflectivity: 0.9,
-          transmission: 0.05
+          color: new THREE.Color('#78abff'),
+          roughness: 0.28,
+          metalness: 0.15,
+          clearcoat: 0.9,
+          clearcoatRoughness: 0.18,
+          reflectivity: 0.95,
+          transmission: 0.04
         });
 
         root.traverse((child) => {
@@ -2810,12 +2801,13 @@
         const center = box.getCenter(new THREE.Vector3());
 
         const maxDim = Math.max(size.x, size.y, size.z);
-        const targetScale = 1.9 / maxDim;
+        const targetScale = 2.15 / maxDim;
         root.scale.setScalar(targetScale);
 
         root.position.x = -center.x * targetScale;
         root.position.y = -center.y * targetScale;
         root.position.z = -center.z * targetScale;
+        baseCenterY = root.position.y;
 
         scene.add(root);
         avatarMesh = root;
@@ -2823,7 +2815,7 @@
       undefined,
       (error) => {
         console.warn('Fallback mesh used:', error);
-        const fallbackGeo = new THREE.IcosahedronGeometry(0.9, 3);
+        const fallbackGeo = new THREE.IcosahedronGeometry(0.95, 3);
         fallbackGeo.computeVertexNormals();
         const fallbackMat = new THREE.MeshPhysicalMaterial({
           color: 0x5df0a8,
@@ -2842,77 +2834,51 @@
       mouseX3D = (e.clientX / window.innerWidth) * 2 - 1;
     });
 
+    let clock = new THREE.Clock();
     function animate3D() {
       requestAnimationFrame(animate3D);
+      const elapsed = clock.getElapsedTime();
       controls.update();
+
       if (avatarMesh) {
-        avatarMesh.rotation.y += (mouseX3D * 0.15 - avatarMesh.rotation.y) * 0.04;
+        // Gentle breathing float & mouse sway
+        avatarMesh.position.y = baseCenterY + Math.sin(elapsed * 1.6) * 0.035;
+        avatarMesh.rotation.y += (mouseX3D * 0.12 - avatarMesh.rotation.y) * 0.04;
       }
       renderer.render(scene, camera);
     }
     animate3D();
 
     function onResize3D() {
-      if (!stageBox) return;
-      const w = stageBox.clientWidth;
-      const h = stageBox.clientHeight;
+      if (!stage3D || !canvas3D) return;
+      const w = stage3D.clientWidth;
+      const h = stage3D.clientHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     }
     window.addEventListener('resize', onResize3D);
 
-    // 5. Magnetic Hover Effect on Portrait (Jack Magnet Component)
-    const magnetTrigger = document.getElementById('magnet-trigger-area');
-    const magnetBox = document.getElementById('portrait-magnet');
-    if (magnetTrigger && magnetBox) {
-      magnetTrigger.addEventListener('mousemove', (e) => {
-        const rect = magnetTrigger.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = (e.clientX - cx) / 3.2;
-        const dy = (e.clientY - cy) / 3.2;
-        magnetBox.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
-      });
-      magnetTrigger.addEventListener('mouseleave', () => {
-        magnetBox.style.transform = `translate3d(0px, 0px, 0)`;
-      });
-    }
+    // 5. Avatar Mode Switching (3D Avatar vs Real Bio Portrait)
+    window.setAvatarMode = function(mode) {
+      const btn3d = document.getElementById('btn-show-3d');
+      const btnPhoto = document.getElementById('btn-show-photo');
+      const photoLayer = document.getElementById('hero-photo-layer');
+      const canvasEl = document.getElementById('aditya-3d-canvas');
 
-    // 6. Tab Switching Logic
-    window.switchStage = function(mode) {
-      const tabVideo = document.getElementById('tab-video');
-      const tab3d = document.getElementById('tab-3d');
-      const tabPhoto = document.getElementById('tab-photo');
-      const viewVideo = document.getElementById('view-video');
-      const view3d = document.getElementById('view-3d');
-      const viewPhoto = document.getElementById('view-photo');
-      const status = document.getElementById('stage-status');
-      const metaLeft = document.getElementById('footer-meta-left');
-      const metaRight = document.getElementById('footer-meta-right');
-
-      [tabVideo, tab3d, tabPhoto].forEach(t => t.classList.remove('active'));
-      [viewVideo, view3d, viewPhoto].forEach(v => v.classList.remove('active'));
-
-      if (mode === 'video') {
-        tabVideo.classList.add('active');
-        viewVideo.classList.add('active');
-        status.textContent = '• Scrub Continuum Live';
-        metaLeft.textContent = 'INTERACTIVE TIMELINE: SEEKED SYNC';
-        metaRight.textContent = 'SENSITIVITY: 0.8 • PURE ENGINE';
-      } else if (mode === '3d') {
-        tab3d.classList.add('active');
-        view3d.classList.add('active');
-        status.textContent = '• 3D Engine Active';
-        metaLeft.textContent = 'MODEL: aditya.glb (470KB)';
-        metaRight.textContent = 'DEV: THREE.JS R160';
-        onResize3D();
+      if (mode === 'photo') {
+        if (btnPhoto) btnPhoto.classList.add('active');
+        if (btn3d) btn3d.classList.remove('active');
+        if (photoLayer) photoLayer.classList.add('active');
+        if (canvasEl) canvasEl.style.display = 'none';
       } else {
-        tabPhoto.classList.add('active');
-        viewPhoto.classList.add('active');
-        status.textContent = '• Magnetic Bio Mode';
-        metaLeft.textContent = 'CURSOR MAGNET: STRENGTH 3.2';
-        metaRight.textContent = 'OFFICIAL PORTRAIT ACTIVE';
+        if (btn3d) btn3d.classList.add('active');
+        if (btnPhoto) btnPhoto.classList.remove('active');
+        if (photoLayer) photoLayer.classList.remove('active');
+        if (canvasEl) {
+          canvasEl.style.display = 'block';
+          onResize3D();
+        }
       }
     };
 
