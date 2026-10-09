@@ -889,3 +889,151 @@ html {
   cursor: default;
 }
 
+/* --------------------------------------------------------------------------
+   20. Hover Image Preview Card Component (Inspired by hover-preview.tsx)
+   -------------------------------------------------------------------------- */
+.hover-link, .hover-preview, [data-preview-image] {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: var(--accent-mint, #5df0a8);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.hover-link::after, .hover-preview::after, [data-preview-image]::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff6b6b, #feca57, #02d2e3);
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hover-link:hover::after, .hover-preview:hover::after, [data-preview-image]:hover::after {
+  width: 100%;
+}
+
+.aa-hover-preview-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(12px) scale(0.94);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, opacity;
+  width: 280px;
+}
+
+.aa-hover-preview-card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.aa-preview-card-inner {
+  background: rgba(18, 22, 36, 0.92);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 40px rgba(2, 210, 227, 0.15);
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.aa-preview-card-img-wrap {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #070913;
+}
+
+.aa-preview-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.aa-preview-card-title {
+  padding: 10px 6px 4px;
+  font-size: 0.85rem;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'Space Grotesk', 'Syne', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.aa-preview-card-subtitle {
+  padding: 0 6px 6px;
+  font-size: 0.72rem;
+  color: var(--ink-dim, #8c9bb0);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   D3 HALFTONE DOTTED WIREFRAME GLOBE (.aa-dotted-globe)
+   ========================================================================== */
+.aa-dotted-globe {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 380px;
+  max-width: 720px;
+  margin: 1.5rem auto;
+  background: radial-gradient(circle at center, rgba(12, 17, 34, 0.95) 0%, rgba(5, 7, 14, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(2, 210, 227, 0.08);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.aa-dotted-globe-canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  touch-action: none;
+}
+
+.aa-globe-hint-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(7, 9, 19, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.aa-hint-sep {
+  opacity: 0.4;
+  font-size: 0.65rem;
+}
+
+
