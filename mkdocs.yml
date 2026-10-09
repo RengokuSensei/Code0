@@ -69,7 +69,10 @@ extra_css:
   - stylesheets/getlayers.css
 
 extra_javascript:
+  - javascripts/vendor/gsap.min.js
+  - javascripts/vendor/ScrollTrigger.min.js
   - javascripts/extra.js
+  - javascripts/interactive-fx.js
 
 # Social Links in Footer
 extra:
