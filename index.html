@@ -9,13 +9,11 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
       "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.mjs"
     }
   }
@@ -484,115 +482,203 @@
       width: 100%;
     }
 
-    /* RIGHT COLUMN: FRAMELESS 3D STAGE & ADITYA AVATAR */
-    .hero-3d-stage {
+    /* RIGHT COLUMN: INTERACTIVE BOTANICAL TYPE GARDEN STAGE */
+    .hero-garden-wrapper {
       position: relative;
       width: 100%;
-      height: 480px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-    }
-    #aditya-3d-canvas {
-      width: 100% !important;
-      height: 100% !important;
-      display: block;
-      cursor: grab;
-      outline: none;
-    }
-    #aditya-3d-canvas:active {
-      cursor: grabbing;
-    }
-    .hero-photo-layer {
-      position: absolute;
-      inset: 20px;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      display: none;
-      border: 1px solid var(--line-strong);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-      background: #070913;
-    }
-    .hero-photo-layer.active {
-      display: block;
-    }
-    .hero-photo-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-    .hero-photo-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 40%, rgba(7, 9, 19, 0.95) 100%);
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 24px;
+      user-select: none;
     }
-    .hero-stage-hud {
+    .hero-garden-card {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      background: rgba(7, 9, 19, 0.85);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hero-garden-card:focus-within, .hero-garden-card:hover {
+      border-color: rgba(93, 240, 168, 0.4);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(93, 240, 168, 0.1);
+    }
+    .hero-garden-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: rgba(12, 16, 32, 0.7);
+      border-bottom: 1px solid var(--line);
+      font-family: 'DM Mono', monospace;
+      z-index: 10;
+    }
+    .hud-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hud-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #5df0a8;
+      box-shadow: 0 0 10px #5df0a8;
+      animation: tg-pulse 2s ease-in-out infinite;
+    }
+    @keyframes tg-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .hud-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+    .hud-subtitle {
+      font-size: 0.68rem;
+      color: var(--ink-dim);
+      display: inline-block;
+    }
+    @media (max-width: 600px) {
+      .hud-subtitle { display: none; }
+    }
+    .hud-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .hero-palette-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-pal-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+    .hero-pal-dot:hover {
+      transform: scale(1.25);
+      border-color: #fff;
+    }
+    .hero-pal-dot.active {
+      transform: scale(1.2);
+      border-color: #fff;
+      box-shadow: 0 0 8px currentColor;
+    }
+    .hero-garden-expand-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent-mint);
+      background: rgba(93, 240, 168, 0.1);
+      border: 1px solid rgba(93, 240, 168, 0.3);
+      border-radius: 99px;
+      padding: 3px 10px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .hero-garden-expand-btn:hover {
+      background: rgba(93, 240, 168, 0.25);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .hero-garden-canvas-box {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      min-height: 270px;
+      cursor: text;
+      overflow: hidden;
+      background: #070913;
+    }
+    #hero-garden-canvas {
       position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hero-garden-footer {
+      padding: 12px 16px;
+      background: rgba(12, 16, 32, 0.75);
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 10;
+    }
+    .hero-garden-input-group {
       display: flex;
       align-items: center;
       gap: 10px;
       background: rgba(7, 9, 19, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--line-strong);
-      padding: 6px 16px;
-      border-radius: 99px;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.74rem;
-      color: var(--ink-muted);
-      white-space: nowrap;
-      pointer-events: auto;
-      z-index: 5;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+      padding: 6px 12px;
+      transition: border-color 0.2s ease;
     }
-    .stage-toggle-btn {
+    .hero-garden-input-group:focus-within {
+      border-color: var(--accent-mint);
+      box-shadow: 0 0 12px rgba(93, 240, 168, 0.2);
+    }
+    .garden-feather-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--accent-mint);
+      flex-shrink: 0;
+    }
+    #hero-garden-text-input {
+      flex: 1;
       background: transparent;
-      border: 1px solid transparent;
-      color: var(--ink-muted);
-      cursor: pointer;
-      padding: 4px 10px;
-      border-radius: 99px;
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.74rem;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
     }
-    .stage-toggle-btn:hover {
+    #hero-garden-text-input::placeholder {
+      color: var(--ink-dim);
+    }
+    .garden-tool-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--ink-muted);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .garden-tool-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
       color: #fff;
     }
-    .stage-toggle-btn.active {
-      background: rgba(93, 240, 168, 0.15);
-      color: var(--accent-mint);
-      border-color: rgba(93, 240, 168, 0.4);
-    }
-    .avatar-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent-mint);
-      box-shadow: 0 0 8px var(--accent-mint);
-      display: inline-block;
-    }
-    .hud-sep {
-      color: var(--line-strong);
-      opacity: 0.6;
-    }
-    .hud-hint {
+    .hero-garden-hint-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
       color: var(--ink-dim);
-      font-size: 0.7rem;
     }
 
 
@@ -1285,7 +1371,7 @@
     /* RESPONSIVE BREAKPOINTS */
     @media (max-width: 1024px) {
       .hero-grid { grid-template-columns: 1fr; }
-      .hero-3d-stage { height: 400px; margin-top: 10px; }
+      .hero-garden-card { height: 440px; margin-top: 10px; }
       .convergence-nodes { grid-template-columns: 1fr 1fr; }
       .tools-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
@@ -1295,7 +1381,8 @@
       .convergence-nodes { grid-template-columns: 1fr; }
       .tools-grid { grid-template-columns: 1fr; }
       .hero-title { font-size: 2.2rem; }
-      .hero-3d-stage { height: 340px; }
+      .hero-garden-card { height: 380px; }
+      .hero-garden-hint-bar span:nth-child(n+3) { display: none; }
       .hero-actions { flex-direction: column; width: 100%; }
       .btn { width: 100%; justify-content: center; }
     }
@@ -1334,6 +1421,7 @@
         <li><a href="#convergence" class="nav-link scramble-hover">Academic Matrix</a></li>
         <li><a href="#interests" class="nav-link scramble-hover">Curiosity Tools</a></li>
         <li><a href="#atlas" class="nav-link scramble-hover">UPSC Atlas</a></li>
+        <li><a href="type-garden.html" class="nav-link scramble-hover" style="color: var(--accent-mint);">Type Garden 🌸</a></li>
         <li><a href="about/author/" class="nav-link scramble-hover">Full Bio</a></li>
       </ul>
 
@@ -1416,33 +1504,53 @@
             </div>
           </div>
 
-          <!-- Right Column: Clean Frameless 3D Stage (aditya.glb) with Dual Switch -->
-          <div class="hero-3d-stage" id="hero-3d-stage">
-            <canvas id="aditya-3d-canvas"></canvas>
-            
-            <!-- Photo layer (optional toggle) -->
-            <div class="hero-photo-layer" id="hero-photo-layer">
-              <img src="assets/images/aditya.jpg" alt="Aditya" class="hero-photo-img">
-              <div class="hero-photo-overlay">
-                <div class="portrait-name">Aditya</div>
-                <div class="portrait-title">Zoology &bull; M.Sc. Geography &bull; Anthropology Optional &bull; Data Analyst</div>
+          <!-- Right Column: Procedural Botanical Type Garden Generator -->
+          <div class="hero-garden-wrapper" id="hero-garden-wrapper">
+            <div class="hero-garden-card">
+              <!-- Top Garden Header / HUD -->
+              <div class="hero-garden-hud">
+                <div class="hud-title-wrap">
+                  <span class="hud-badge-dot"></span>
+                  <span class="hud-title">TYPE GARDEN</span>
+                  <span class="hud-subtitle">Procedural Botanical Engine</span>
+                </div>
+                <div class="hud-actions">
+                  <div class="hero-palette-dots" id="hero-palette-dots" title="Switch Floral Palette">
+                    <!-- Palettes rendered dynamically -->
+                  </div>
+                  <a href="type-garden.html" class="hero-garden-expand-btn" title="Open Full Type Garden Studio (Poster & Export)">
+                    Studio ↗
+                  </a>
+                </div>
+              </div>
+
+              <!-- Interactive Canvas Stage -->
+              <div class="hero-garden-canvas-box" id="hero-garden-box">
+                <canvas id="hero-garden-canvas"></canvas>
+              </div>
+
+              <!-- Bottom Interactive Type Bar & Quick Controls -->
+              <div class="hero-garden-footer">
+                <div class="hero-garden-input-group">
+                  <svg class="garden-feather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                    <path d="M2 2l7.586 7.586"/>
+                    <circle cx="11" cy="11" r="2"/>
+                  </svg>
+                  <input type="text" id="hero-garden-text-input" placeholder="Type here to bloom roses..." value="Aditya" spellcheck="false" autocomplete="off" />
+                  <button type="button" id="hero-garden-clear-btn" class="garden-tool-btn" title="Clear (Enter)">Clear</button>
+                  <button type="button" id="hero-garden-random-btn" class="garden-tool-btn" title="Random Botanical Word">Bloom</button>
+                </div>
+                <div class="hero-garden-hint-bar">
+                  <span>✦ Type = grow roses & vines</span>
+                  <span>✦ Space = fresh word</span>
+                  <span>✦ Backspace = wither</span>
+                  <span>✦ Move cursor = pull stems</span>
+                </div>
               </div>
             </div>
-
-            <!-- Sleek Frameless HUD & Mode Switch -->
-            <div class="hero-stage-hud">
-              <button class="stage-toggle-btn active" id="btn-show-3d" onclick="setAvatarMode('3d')">
-                <span class="avatar-dot"></span> 🧊 3D Avatar
-              </button>
-              <span class="hud-sep">|</span>
-              <button class="stage-toggle-btn" id="btn-show-photo" onclick="setAvatarMode('photo')">
-                📸 Real Bio
-              </button>
-              <span class="hud-sep">|</span>
-              <span class="hud-hint">Drag to Orbit</span>
-            </div>
           </div>
-
         </div>
 
       </div>
@@ -2354,10 +2462,8 @@
     </div>
 
   <!-- SCRIPTS -->
+  <script src="javascripts/hero-type-garden.js"></script>
   <script type="module">
-    import * as THREE from 'three';
-    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
     import Lenis from 'lenis';
 
     // 1. Lenis Smooth Scrolling
@@ -2474,168 +2580,6 @@
     if (bgVideo) {
       bgVideo.play().catch(() => {});
     }
-
-    // 4. Frameless Three.js 3D Viewer for aditya.glb
-    const canvas3D = document.getElementById('aditya-3d-canvas');
-    const stage3D = document.getElementById('hero-3d-stage');
-    
-    const scene = new THREE.Scene();
-    const stageW = stage3D ? stage3D.clientWidth : 500;
-    const stageH = stage3D ? stage3D.clientHeight : 480;
-    const camera = new THREE.PerspectiveCamera(38, stageW / stageH, 0.1, 100);
-    camera.position.set(0, 0.1, 3.2);
-
-    const renderer = new THREE.WebGLRenderer({
-      canvas: canvas3D,
-      antialias: true,
-      alpha: true,
-      powerPreference: 'high-performance'
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(stageW, stageH);
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.35;
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
-    controls.enablePan = false;
-    controls.enableZoom = false; // Prevents trapping normal page scroll
-    controls.minDistance = 1.6;
-    controls.maxDistance = 4.8;
-    controls.minPolarAngle = Math.PI * 0.2;
-    controls.maxPolarAngle = Math.PI * 0.75;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.9;
-
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
-    scene.add(ambientLight);
-
-    const keyLight = new THREE.DirectionalLight(0x02d2e3, 3.6);
-    keyLight.position.set(4, 5, 4);
-    scene.add(keyLight);
-
-    const rimLight = new THREE.DirectionalLight(0x8c68ff, 4.0);
-    rimLight.position.set(-4, 3, -3);
-    scene.add(rimLight);
-
-    const mintLight = new THREE.DirectionalLight(0x5df0a8, 2.4);
-    mintLight.position.set(0, -4, 3);
-    scene.add(mintLight);
-
-    let avatarMesh = null;
-    let baseCenterY = 0;
-    const loader = new GLTFLoader();
-    const modelPath = new URL('assets/models/aditya.glb', window.location.href).href;
-
-    loader.load(
-      modelPath,
-      (gltf) => {
-        const root = gltf.scene;
-        const customMaterial = new THREE.MeshPhysicalMaterial({
-          color: new THREE.Color('#78abff'),
-          roughness: 0.28,
-          metalness: 0.15,
-          clearcoat: 0.9,
-          clearcoatRoughness: 0.18,
-          reflectivity: 0.95,
-          transmission: 0.04
-        });
-
-        root.traverse((child) => {
-          if (child.isMesh) {
-            child.geometry.computeVertexNormals();
-            child.material = customMaterial;
-            child.castShadow = true;
-            child.receiveShadow = true;
-          }
-        });
-
-        const box = new THREE.Box3().setFromObject(root);
-        const size = box.getSize(new THREE.Vector3());
-        const center = box.getCenter(new THREE.Vector3());
-
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const targetScale = 2.15 / maxDim;
-        root.scale.setScalar(targetScale);
-
-        root.position.x = -center.x * targetScale;
-        root.position.y = -center.y * targetScale;
-        root.position.z = -center.z * targetScale;
-        baseCenterY = root.position.y;
-
-        scene.add(root);
-        avatarMesh = root;
-      },
-      undefined,
-      (error) => {
-        console.warn('Fallback mesh used:', error);
-        const fallbackGeo = new THREE.IcosahedronGeometry(0.95, 3);
-        fallbackGeo.computeVertexNormals();
-        const fallbackMat = new THREE.MeshPhysicalMaterial({
-          color: 0x5df0a8,
-          roughness: 0.25,
-          metalness: 0.1,
-          clearcoat: 1.0
-        });
-        const fallbackMesh = new THREE.Mesh(fallbackGeo, fallbackMat);
-        scene.add(fallbackMesh);
-        avatarMesh = fallbackMesh;
-      }
-    );
-
-    let mouseX3D = 0;
-    window.addEventListener('pointermove', (e) => {
-      mouseX3D = (e.clientX / window.innerWidth) * 2 - 1;
-    });
-
-    let clock = new THREE.Clock();
-    function animate3D() {
-      requestAnimationFrame(animate3D);
-      const elapsed = clock.getElapsedTime();
-      controls.update();
-
-      if (avatarMesh) {
-        // Gentle breathing float & mouse sway
-        avatarMesh.position.y = baseCenterY + Math.sin(elapsed * 1.6) * 0.035;
-        avatarMesh.rotation.y += (mouseX3D * 0.12 - avatarMesh.rotation.y) * 0.04;
-      }
-      renderer.render(scene, camera);
-    }
-    animate3D();
-
-    function onResize3D() {
-      if (!stage3D || !canvas3D) return;
-      const w = stage3D.clientWidth;
-      const h = stage3D.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    }
-    window.addEventListener('resize', onResize3D);
-
-    // 5. Avatar Mode Switching (3D Avatar vs Real Bio Portrait)
-    window.setAvatarMode = function(mode) {
-      const btn3d = document.getElementById('btn-show-3d');
-      const btnPhoto = document.getElementById('btn-show-photo');
-      const photoLayer = document.getElementById('hero-photo-layer');
-      const canvasEl = document.getElementById('aditya-3d-canvas');
-
-      if (mode === 'photo') {
-        if (btnPhoto) btnPhoto.classList.add('active');
-        if (btn3d) btn3d.classList.remove('active');
-        if (photoLayer) photoLayer.classList.add('active');
-        if (canvasEl) canvasEl.style.display = 'none';
-      } else {
-        if (btn3d) btn3d.classList.add('active');
-        if (btnPhoto) btnPhoto.classList.remove('active');
-        if (photoLayer) photoLayer.classList.remove('active');
-        if (canvasEl) {
-          canvasEl.style.display = 'block';
-          onResize3D();
-        }
-      }
-    };
 
     // 7. Scroll-Linked Marquee Animation (Motionsites 21-Asset Engine)
     const marqueeSec = document.getElementById('marquee');
