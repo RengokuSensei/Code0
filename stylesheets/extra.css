@@ -857,3 +857,35 @@ html {
   }
 }
 
+/* --------------------------------------------------------------------------
+   19. Shiny Text Shimmer & Micro-FX (Inspired by react-bits)
+   -------------------------------------------------------------------------- */
+.shiny-text {
+  background: linear-gradient(
+    110deg,
+    currentColor 0%,
+    currentColor 35%,
+    #5df0a8 48%,
+    #ffffff 52%,
+    currentColor 65%,
+    currentColor 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shiny-sweep 4.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes shiny-sweep {
+  0%, 15% { background-position: 250% 0; }
+  85%, 100% { background-position: -250% 0; }
+}
+
+.decrypt-text, [data-decrypt] {
+  letter-spacing: 0.04em;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  cursor: default;
+}
+
