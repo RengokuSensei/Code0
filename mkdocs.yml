@@ -71,8 +71,12 @@ extra_css:
 extra_javascript:
   - javascripts/vendor/gsap.min.js
   - javascripts/vendor/ScrollTrigger.min.js
+  - javascripts/vendor/d3.min.js
   - javascripts/extra.js
   - javascripts/interactive-fx.js
+  - javascripts/hover-preview.js
+  - javascripts/dotted-globe.js
+
 
 # Social Links in Footer
 extra:
@@ -134,3 +138,5 @@ markdown_extensions:
 nav:
   - Home: index.md
   - About Aditya: about/author.md
+  - Project Codex & Notes: project-notes.md
+
