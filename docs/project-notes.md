@@ -118,6 +118,8 @@ allow continuous monitoring of lithospheric crustal deformation, desertification
 
 | Source / Tool | Description & Role | Integration Status |
 | :--- | :--- | :--- |
+| **`acamposuribe/p5.brush`** | Natural media drawing in WebGL (watercolor bleeds, charcoal, ink, hatching, organic flow fields). | **Cloned & Analyzed** in `research/p5.brush`. Standalone zero-dependency WebGL2 build (`dist/brush.js`, 76KB) available for generative anatomical & geological diagrams. |
+| **`CopilotKit/OpenIntelligentUI`** | Generative, adaptive UI & interactive tools for AI agents. | **Cloned & Analyzed** in `research/OpenIntelligentUI`. Architectural playbooks for SVG diagrams and sandboxed interactive simulations extracted. |
 | **`DavidHDev/react-bits`** | 80+ UI components, canvas animations, and text effects | Analyzed. Ported `ClickSpark`, `Magnet`, `DecryptedText`, and `ShinyText` to zero-dependency vanilla JS. |
 | **`darkroomengineering/lenis`** | High-performance smooth scrolling | Active sitewide via CDN. Synchronized with GSAP. |
 | **`GSAP`** | GreenSock animation standard & ScrollTrigger | Vendored locally in `docs/javascripts/vendor/`. Active sitewide. |
@@ -129,7 +131,51 @@ allow continuous monitoring of lithospheric crustal deformation, desertification
 
 ---
 
-## 6. Upcoming Multi-Page Development Roadmap
+## 6. Deep Research: Component Analysis & Academic Mapping
+
+### A. Radial Orbital Timeline (`radial-orbital-timeline.tsx`)
+- **Visual Mechanism**:
+  - Central pulsating glowing core with multi-layer ping animations.
+  - Orbital radius ($R = 200\text{ px}$) around which $N$ nodes rotate with trig-derived coordinates ($x = R \cos\theta, y = R \sin\theta$).
+  - 3D perspective simulation via calculated $z$-index ($100 + 50\cos\theta$) and opacity ($0.4 + 0.6 \times \frac{1 + \sin\theta}{2}$).
+  - Idle auto-rotation with pause-on-click; clicking an orbital node rotates the ring so the node smoothly docks at $270^\circ$ (bottom center).
+  - Expandable node inspection card featuring status badges, energy percentage bar with gradient sweep, and cross-node link graph.
+- **Academic Deployment**:
+  1. **UPSC Anthropology &bull; Paleoanthropological Chronology**:
+     - Central Core: *Last Common Ancestor (LCA)*.
+     - Orbital Nodes: *Sahelanthropus tchadensis* (7 Ma) &rarr; *Ardipithecus ramidus* (4.4 Ma) &rarr; *Australopithecus afarensis* (3.2 Ma) &rarr; *Homo habilis* (2.4 Ma) &rarr; *Homo erectus* (1.9 Ma) &rarr; *Homo neanderthalensis* (400 ka) &rarr; *Homo sapiens* (300 ka).
+     - Node Energy Bar: Cranial capacity progression (400 cc &rarr; 1450 cc).
+     - Connected Nodes: Phyletic lineages, tool industries (Oldowan, Acheulean), and inter-species gene flow.
+  2. **M.Sc. Geography &bull; Deep-Time Geological Epochs**:
+     - Precambrian &rarr; Paleozoic &rarr; Mesozoic &rarr; Cenozoic &rarr; Quaternary &rarr; Anthropocene with plate tectonic supercontinent cycles (Rodinia &rarr; Pangaea &rarr; Gondwanaland).
+
+---
+
+### B. Ink Orbit Features Bento (`ink-orbit-features.tsx`)
+- **Visual Mechanism**:
+  - Blueprint aesthetic with subtle cross-hatch background (`repeating-linear-gradient(135deg, ...)`).
+  - Four spring-animated corner brackets (`.ib-c`, `.ib-c-tl`, `.ib-c-tr`, `.ib-c-bl`, `.ib-c-br`) on each card.
+  - Pure SVG vector diagrams with zero external dependencies:
+    - **Flow Card**: Team avatar cluster &rarr; cubic bezier routes with gliding `<animateMotion>` packets &rarr; central hardware chip &rarr; dynamic auto-incrementing printing report stack (`REPORT #128`, `#129`, etc.).
+    - **Integrations Card**: Orthogonal stepped bus wiring syncing across 4 tools with auto-cycling highlights.
+    - **Insights Card**: Real-time scrubbable cubic bezier area chart with animated draw-in stroke (`pathLength={1}`), vertical forecast boundary, and interactive crosshair hover tooltip.
+- **Academic Deployment**:
+  - **The "Advanced Analysis" Engine Bento**:
+    - **Flow Card**: Fieldwork data collection (Fossil discoveries, satellite GIS telemetry, tribal ethnographic interviews) flowing into the central Advanced Analysis synthesis processor.
+    - **Integrations Card**: Real-time cross-disciplinary sync across the four academic pillars: (1) Evolutionary Zoology, (2) Geomorphology & Climatology, (3) Tribal Jurisprudence & Anthropology, (4) Empirical Data Science.
+    - **Insights Card**: Longitudinal climate models, speciation rates, or tribal demographic trends with historical data and future forecast projections.
+
+---
+
+### C. Natural Media Generative Art (`p5.brush.js`)
+- **Capabilities**: Watercolor bleeding, charcoal smudges, pencil grain, cross-hatching, and vector flow fields that bend strokes dynamically.
+- **Academic Value**:
+  - High-resolution anatomical sketches (comparative vertebrate anatomy, hominin cranial superimposition).
+  - Hand-drawn style geological cross-sections (anticlines, synclines, subduction zones, fault scarps) merging artistic elegance with scientific accuracy.
+
+---
+
+## 7. Upcoming Multi-Page Development Roadmap
 
 As noted: *"we have to build a lot of pages — we just started."*
 
@@ -137,11 +183,14 @@ As noted: *"we have to build a lot of pages — we just started."*
    - Full dedicated interactive atlas powered by the D3 Halftone Dotted Globe.
    - Plate tectonics, volcanic arcs, atmospheric circulation, geomorphic cycles, and Indian physical geography.
 2. **Anthropology & Human Origins Codex**:
-   - Deep-time hominid fossil timeline (Australopithecus, Homo erectus, Neanderthal, Denisovan, Homo sapiens).
+   - Deep-time hominid fossil timeline powered by the **Radial Orbital Timeline**.
    - Socio-cultural anthropology modules (tribal rights, Fifth/Sixth Schedules, PESA 1996, kinship and social structures).
    - Integrated with Hover Image Previews for fossil skulls, stone tools, and tribal material culture.
-3. **Curiosity Tools & Interactive Labs**:
+3. **The Advanced Analysis Methodology Page**:
+   - Technical bento section powered by the **Ink Orbit Features** architecture.
+4. **Curiosity Tools & Interactive Labs**:
    - Dedicated pages for physical simulations, data analytics models, and systems thinking.
-4. **Research Reading Room & Essays**:
+5. **Research Reading Room & Essays**:
    - Long-form essays with rich typography, marginalia, and cursor-following Hover Image Previews.
+
 
