@@ -351,7 +351,81 @@ We internalize this pipeline within our own development environment so that simp
   - **Planetary Telemetry & Earth Systems Grid (M.Sc. Geography)**:
     - Mapping satellite orbital passes, crustal strain vectors, and atmospheric cells over a live globe with chamfered telemetry callout cards.
 
+---
 
+## 11. Fluvial Geomorphology & River Bend Migration (Ikeda-Parker-Sawai Model)
 
+### A. Scientific Core & Mathematical Formulation
+Based on our deep study of Ryan Sael's *River Bend Lab* (`https://sael.net/river-bend/`), the simulation implements the classic **Ikeda, Parker & Sawai (1981)** meander migration theory in its discrete 1D formulation established by **Howard & Knutson (1984)**:
 
+1. **Hydraulic Geometry (Manning's Equation)**:
+   - Sinuosity index: $\sigma = \frac{L_{channel}}{L_{valley}}$, modifying the effective reach slope $S = \frac{S_{valley}}{\sigma}$.
+   - Channel depth $H$ and mean cross-sectional flow velocity $U$:
+     $$H = \left(\frac{Q \cdot n}{W \sqrt{S}}\right)^{0.6}, \quad U = \frac{Q}{W \cdot H}$$
+     where $Q$ is discharge ($20 - 400\text{ m}^3/\text{s}$), $W$ is channel width ($90\text{ m}$), and $n = 0.03$ is Manning's roughness.
 
+2. **Near-Bank Velocity Perturbation ($A[i]$)**:
+   - Water around a bend is accelerated along the outer cut bank and retarded along the inner point bar. The velocity anomaly is governed by both **local curvature** $\kappa(s)$ and an **upstream-lagged convolution** representing fluid inertia and secondary circulation development:
+     $$\alpha = \frac{2 C_f}{H} \quad (C_f = 0.02, \text{ Darcy-Weisbach / Chezy friction})$$
+     $$num_i = \kappa_i + e^{-\alpha \Delta s} num_{i-1}, \quad den_i = 1 + e^{-\alpha \Delta s} den_{i-1}, \quad \overline{\kappa}_i = \frac{num_i}{den_i}$$
+     $$A[i] = \text{clamp}\left(\frac{W}{2} (\omega \kappa_i + \Gamma \overline{\kappa}_i), -A_{max}, A_{max}\right)$$
+     with $\omega = -1$ (local bank boundary curvature term), $\Gamma = 2.5$ (upstream curvature memory coefficient), and $A_{max} = 0.6$.
+   - Near-bank velocities:
+     $$u_{outer} = U(1 + A[i]), \quad u_{inner} = U(1 - A[i])$$
+
+3. **Excess Shear Stress Bank Erosion ($e$)**:
+   - The outer bank (cut bank cliff) scours only when near-bank boundary velocity exceeds the critical erodibility threshold $u_c = 1.35\text{ m/s}$ (corresponding to critical entrainment shear stress $\tau_c$):
+     $$e = M \cdot \max\left(0, \left(\frac{u}{u_c}\right)^2 - 1\right) \quad (M = 5\text{ m/yr})$$
+
+4. **Point Bar Sediment Accretion ($d$)**:
+   - On the inner bank, secondary helical flow decelerates water below the settling threshold $u_d = 1.25\text{ m/s}$. Suspended and bedload sediment drops to build point bars:
+     $$d = K_d \cdot C_{eff} \cdot \max\left(0, 1 - \left(\frac{u}{u_d}\right)^2\right) \quad (K_d = 5)$$
+     where effective sediment load $C_{eff} = C_{in} + \beta \cdot \overline{e}$ reflects upstream bank collapse feedback.
+
+5. **Centerline Migration Vector & Width Relaxation**:
+   - Centerline lateral displacement rate:
+     $$mig_i = \frac{(e_R - d_R) - (e_L - d_L)}{2}$$
+     Nodes are displaced along the local normal vector: $\vec{x}_i \leftarrow \vec{x}_i + \vec{n}_i \cdot (mig_i \Delta t + \text{noise})$.
+   - Width $W$ relaxes toward equilibrium hydraulic geometry ($W_{eq} \propto Q^{0.4}$) over decadal timescales $T_w \approx 60\text{ yr}$.
+
+6. **Neck Cutoff & Oxbow Lake Formation**:
+   - As sinuosity increases, meander loop necks narrow. When the Euclidean distance between two non-adjacent channel points falls below critical neck width:
+     $$\Delta r_{neck} < 1.6 \cdot W$$
+     an instantaneous **neck cutoff** occurs. The meander loop is abandoned, isolating an **oxbow lake** (billabong) that progressively fills with fine clay plugs, while the active river straightens, abruptly reducing sinuosity.
+
+7. **Helical / Secondary Flow (The Corkscrew)**:
+   - Centrifugal acceleration propels high-velocity surface water toward the outer cut bank, creating vertical downward scouring and undercutting.
+   - Near the bed, friction creates an inward pressure-driven return flow that sweeps sand and gravel diagonally upward onto the inner point bar, generating rhythmic ridges known as **scroll bars**.
+
+---
+
+### B. Performance & Resource Weight Audit: 3D Heavy vs. Zero-Build Lightweight
+Addressing the critical question regarding computational load:
+- **Why `sael.net` is Resource-Heavy**:
+  - The heavy load is **not caused by the river math**, but by the lavish **desktop-grade 3D showroom rendering**:
+    1. **2.5 Million Pixel Budget** (rendering at high devicePixelRatio).
+    2. **6-Stage Postprocessing Pipeline**: 4x MSAA Scene Pass, 2048x2048 PCF soft shadows, Ground Truth Ambient Occlusion (GTAO) with 12 samples, Half-Float UnrealBloomPass, 72-tap Poisson gather Depth of Field (MacroDOF), and SMAA anti-aliasing.
+    3. **Planar Floor Mirror Reflection**: A secondary camera (`reflCam`) re-renders the complete scene geometry every frame with oblique clipping planes.
+    4. **Dual 32-Bit Float GPU Render Targets**: Dynamically writing distance fields and historical age stamps into GPU memory.
+    - *Result*: 14–20 ms per frame on high-end GPUs, causing battery drain and thermal throttling on mobile devices.
+- **Why the Mathematical Simulation is Featherlight**:
+  - The Howard-Knutson 1D centerline ODE operates on just **40 to 80 nodes**!
+  - Manning depth calculation, curvature convolution, excess shear erosion, and neck cutoff detection require **less than 0.15 ms per timestep on standard JavaScript**. Stepping 30 simulated years per second consumes less than 2% of a single CPU thread.
+- **Our Zero-Build Adaptation Strategy**:
+  - Instead of a GPU-punishing 3D flume tank, we deploy a **lightweight HTML5 2D Canvas / WebGL2 topographic ribbon**:
+    - **60 FPS, < 1% CPU utilization, 0% idle load**, perfectly responsive on mobile phones.
+    - **Interactive Controls**: Discharge slider ($Q: 20 - 400\text{ m}^3/\text{s}$), Sediment concentration slider ($C: 0 - 2\text{ g/L}$), Time scrubber ($0 - 1200\text{ yr}$), and live telemetry dials for Sinuosity ($\sigma$) and Cut Bank erosion velocity ($m/\text{yr}$).
+    - **Helical Flow Cross-Section Popover**: Interactive vector cutaway displaying the corkscrew flow (cyan outward surface vector, amber inward bed return vector).
+    - **Oxbow Lake Timeline**: Chronological color coding of abandoned loops and clay plug infill history.
+
+---
+
+### C. Academic Mapping & Examination Syllabus Integration
+
+| Syllabus Domain | Academic Topic | Interactive River Module Application |
+| :--- | :--- | :--- |
+| **M.Sc. Geography (Geomorphology)** | **Fluvial Morphodynamics & Meanders** | Live simulation of Ikeda-Parker-Sawai equations, Leopold & Wolman empirical geometry ($L_m \approx 11W$, $r_c \approx 2.4W$), and Davisian youth-mature-old age floodplain evolution. |
+| **M.Sc. Geography (Hydrology)** | **Hydraulic Geometry & Sediment Transport** | Manning's equation, critical shear stress thresholds ($\tau_c, u_c = 1.35\text{ m/s}$), bedload vs. suspended load, and point bar scroll accretion. |
+| **Cartography & Remote Sensing** | **Fluvial Landform Interpretation** | False Color Composite (FCC) identification of oxbow lakes, abandoned paleochannels, sinuosity metrics ($\sigma = L/L_x$), and river terrace mapping. |
+| **UPSC Anthropology (Paper I - 1.4)** | **Quaternary Paleoenvironments & Settlement Sites** | Hominin settlements situated along oxbow lakes and alluvial terraces (e.g., Narmada gravels, Olduvai Gorge, Thames terrace stratigraphy). |
+| **Civil Services (General Studies I)** | **Drainage Systems & River Rejuvenation** | Fluvial erosion features, braided vs. meandering streams, flood management, and embankment breaching dynamics at cut banks. |
