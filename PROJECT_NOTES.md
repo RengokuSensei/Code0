@@ -227,5 +227,60 @@ We internalize this pipeline within our own development environment so that simp
 - **Component 2 (Hero Interaction)**: The interactive visual centerpiece (e.g., *D3 Orthographic Halftone Globe*, *Radial Orbital Timeline*, *Ink Orbit Bento*).
 - **Component 3 (Empirical Evidence)**: Tangible case studies, anatomical measurements (cc volume), stratigraphic horizons, or constitutional legal articles.
 
+---
+
+## 9. Advanced Component Blueprints: Contribution Skyline & Glass Folder Cards
+
+### A. Contribution Skyline (`contribution-skyline.tsx`)
+- **Core Concept**: A year of activity represented as a GitHub-style activity heat map that seamlessly folds up into an isometric 3D skyline, and folds back down again.
+- **Single-Scene Camera Matrix**:
+  - Rather than swapping between two separate components, one continuous camera transitions between top-down ($e = 0$, yaw $0$, elevation $90^\circ$) and isometric corner view ($e = 1$, yaw $\pi/4$, elevation $34^\circ$).
+  - Screen projection math:
+    $$\text{project}(\text{cam}, x, y, z) = [x\cos(\text{yaw}) - y\sin(\text{yaw}), (x\sin(\text{yaw}) + y\cos(\text{yaw}))\sin(\text{elev}) - z\cos(\text{elev})]$$
+- **Wave Morph Mechanics**:
+  - Bars rise in a phased wave from the oldest week to the newest week ($WAVE = 0.42$):
+    $$\text{riseAt}(t, \text{week}, \text{weeks}, \text{day}) = \text{easeOutCubic}\left(\frac{t - d}{1 - 0.42}\right)$$
+    where $d = \frac{\text{week}}{\text{weeks} - 1} \times 0.36 + \frac{\text{day}}{6} \times 0.06$.
+- **Painter's Depth Sorting & Rendering**:
+  - Avoids heavy WebGL overhead by using 2D Canvas with a mathematical depth sort: $\text{depth} = (x + 0.5)\sin(\text{yaw}) + (y + 0.5)\cos(\text{yaw})$.
+  - Renders top, left ($+y$), and right ($+x$) faces with simulated diffuse shading.
+- **Interactions**:
+  - Trackball drag orbiting in 3D (clamped yaw $[8^\circ, 82^\circ]$, elevation $[18^\circ, 62^\circ]$, double-click resets).
+  - Floating tooltip dynamically rides the projected 3D peak of the hovered/active cell.
+  - Arrow key navigation across weeks and weekdays.
+  - Legend swatch isolation: hovering a level swatch dims unrelated days.
+- **Academic Deployment**:
+  1. **UPSC Preparation & Research Velocity**: Visualizing annual answer writing consistency, mock test frequency, and study hours.
+  2. **Paleoclimatic Time-Series & Monsoon Insolation (Geography)**: Annual solar radiation flux, daily monsoon precipitation variability, or Milankovitch orbital cycles.
+  3. **Fieldwork & Specimen Acquisition Log**: Daily fossil excavation logs or tribal ethnographic survey counts.
+
+---
+
+### B. Glass Folder Cards (`glass-folder-cards.tsx`)
+- **Core Concept**: A physical, tactile folder drawn as an object with authentic frosted glass physics and procedural liquid artwork.
+- **Three-Layer Physical Sandwich**:
+  1. **Back Panel**: Structural back plate carrying procedural liquid artwork or custom imagery, with subtle light sheen and rim highlight.
+  2. **File Sheets**: Real document sheets housed inside the pocket with individual depth offsets and slot fan rotations.
+  3. **Frosted Front Glass**: Frosted panel with `-webkit-backdrop-filter: blur(22px) saturate(1.5)` hinged at its bottom edge (`transform-origin: 50% 100%`).
+- **Kinematic States**:
+  - **Rest**: Flat and closed; files barely peek over the rim.
+  - **Hover/Focus**: Front glass leans forward on bottom hinge ($--\text{gf-hinge}: -11^\circ$), files lift slightly ($--\text{gf-lift}: -34\text{px}$).
+  - **Open (Click / Enter)**: Glass falls open ($--\text{gf-hinge}: -24^\circ$), files rise high ($--\text{gf-lift}: -96\text{px}$) and fan outward ($--\text{gf-spread}: 40\text{px}, --\text{gf-fan}: 5^\circ$), becoming individual interactive links.
+  - **Add (`+`)**: Drops a new document with an elastic bounce animation (`gf-drop`, `gf-bump`).
+  - **More (`···`)**: Frosted contextual popover menu.
+- **Procedural Liquid Artwork Engine**:
+  - Generates domain-warped fractal Brownian motion (fBM) noise fields with seedable PRNG (mulberry32).
+  - Surface slope normal vector $\mathbf{n} = (-\partial_x F, -\partial_y F, 1)$ computes diffuse illumination and tight Phong specular highlights:
+    $$\text{spec} = (\mathbf{n} \cdot \mathbf{l})^{24} \times \text{gloss} \times 255$$
+  - Five Presets: `aurora` (streak), `ember` (marble with dark veins), `dusk` (plum & rust marble), `glacier` (pale cold streak), `verdant` (moss & brass marble).
+  - **Cooperative Frame Queue**: Uses a time-budgeted painter queue that spends $\le 7\text{ ms}$ per frame (`performance.now() + 7`), ensuring zero UI lag or dropped frames even with multiple folders on screen.
+- **Academic Deployment & Archive System**:
+  - **The Academic Dossier Hub**:
+    - **Folder 1: UPSC Anthropology** (`ember` smoked glass): Houses *Hominin Cranial Database.pdf*, *Tribal Schedules & PESA.doc*, *Kinship Diagrams.png*.
+    - **Folder 2: M.Sc. Geography** (`glacier` / `aurora` milk glass): Houses *Plate Tectonics Field Atlas*, *Geomorphological Cycles*, *Satellite Remote Sensing GIS Data*.
+    - **Folder 3: Evolutionary Zoology** (`verdant` moss glass): Houses *Vertebrate Osteology*, *Population Genetics*, *Ecological Niche Modeling*.
+  - When opened, files fan out and allow direct one-click exploration of notes, essays, or interactive tools!
+
+
 
 
