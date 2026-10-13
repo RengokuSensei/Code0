@@ -776,6 +776,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#9-advanced-component-blueprints-contribution-skyline-glass-folder-cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Advanced Component Blueprints: Contribution Skyline &amp; Glass Folder Cards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Advanced Component Blueprints: Contribution Skyline &amp; Glass Folder Cards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-contribution-skyline-contribution-skylinetsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Contribution Skyline (contribution-skyline.tsx)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-glass-folder-cards-glass-folder-cardstsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Glass Folder Cards (glass-folder-cards.tsx)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1110,6 +1149,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#9-advanced-component-blueprints-contribution-skyline-glass-folder-cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Advanced Component Blueprints: Contribution Skyline &amp; Glass Folder Cards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Advanced Component Blueprints: Contribution Skyline &amp; Glass Folder Cards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-contribution-skyline-contribution-skylinetsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Contribution Skyline (contribution-skyline.tsx)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-glass-folder-cards-glass-folder-cardstsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Glass Folder Cards (glass-folder-cards.tsx)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1410,6 +1488,61 @@ allow continuous monitoring of lithospheric crustal deformation, desertification
 - <strong>Component 1 (Topic)</strong>: The scientific domain (e.g., <em>Continental Drift</em>, <em>Hominin Bipedalism</em>, <em>Fifth &amp; Sixth Schedules</em>).
 - <strong>Component 2 (Hero Interaction)</strong>: The interactive visual centerpiece (e.g., <em>D3 Orthographic Halftone Globe</em>, <em>Radial Orbital Timeline</em>, <em>Ink Orbit Bento</em>).
 - <strong>Component 3 (Empirical Evidence)</strong>: Tangible case studies, anatomical measurements (cc volume), stratigraphic horizons, or constitutional legal articles.</p>
+<hr />
+<h2 id="9-advanced-component-blueprints-contribution-skyline-glass-folder-cards">9. Advanced Component Blueprints: Contribution Skyline &amp; Glass Folder Cards<a class="headerlink" href="#9-advanced-component-blueprints-contribution-skyline-glass-folder-cards" title="Permanent link">&para;</a></h2>
+<h3 id="a-contribution-skyline-contribution-skylinetsx">A. Contribution Skyline (<code>contribution-skyline.tsx</code>)<a class="headerlink" href="#a-contribution-skyline-contribution-skylinetsx" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Core Concept</strong>: A year of activity represented as a GitHub-style activity heat map that seamlessly folds up into an isometric 3D skyline, and folds back down again.</li>
+<li><strong>Single-Scene Camera Matrix</strong>:</li>
+<li>Rather than swapping between two separate components, one continuous camera transitions between top-down (<span class="arithmatex">\(e = 0\)</span>, yaw <span class="arithmatex">\(0\)</span>, elevation <span class="arithmatex">\(90^\circ\)</span>) and isometric corner view (<span class="arithmatex">\(e = 1\)</span>, yaw <span class="arithmatex">\(\pi/4\)</span>, elevation <span class="arithmatex">\(34^\circ\)</span>).</li>
+<li>Screen projection math:
+    $<span class="arithmatex">\(\text{project}(\text{cam}, x, y, z) = [x\cos(\text{yaw}) - y\sin(\text{yaw}), (x\sin(\text{yaw}) + y\cos(\text{yaw}))\sin(\text{elev}) - z\cos(\text{elev})]\)</span>$</li>
+<li><strong>Wave Morph Mechanics</strong>:</li>
+<li>Bars rise in a phased wave from the oldest week to the newest week (<span class="arithmatex">\(WAVE = 0.42\)</span>):
+    $<span class="arithmatex">\(\text{riseAt}(t, \text{week}, \text{weeks}, \text{day}) = \text{easeOutCubic}\left(\frac{t - d}{1 - 0.42}\right)\)</span>$
+    where <span class="arithmatex">\(d = \frac{\text{week}}{\text{weeks} - 1} \times 0.36 + \frac{\text{day}}{6} \times 0.06\)</span>.</li>
+<li><strong>Painter's Depth Sorting &amp; Rendering</strong>:</li>
+<li>Avoids heavy WebGL overhead by using 2D Canvas with a mathematical depth sort: <span class="arithmatex">\(\text{depth} = (x + 0.5)\sin(\text{yaw}) + (y + 0.5)\cos(\text{yaw})\)</span>.</li>
+<li>Renders top, left (<span class="arithmatex">\(+y\)</span>), and right (<span class="arithmatex">\(+x\)</span>) faces with simulated diffuse shading.</li>
+<li><strong>Interactions</strong>:</li>
+<li>Trackball drag orbiting in 3D (clamped yaw <span class="arithmatex">\([8^\circ, 82^\circ]\)</span>, elevation <span class="arithmatex">\([18^\circ, 62^\circ]\)</span>, double-click resets).</li>
+<li>Floating tooltip dynamically rides the projected 3D peak of the hovered/active cell.</li>
+<li>Arrow key navigation across weeks and weekdays.</li>
+<li>Legend swatch isolation: hovering a level swatch dims unrelated days.</li>
+<li><strong>Academic Deployment</strong>:</li>
+<li><strong>UPSC Preparation &amp; Research Velocity</strong>: Visualizing annual answer writing consistency, mock test frequency, and study hours.</li>
+<li><strong>Paleoclimatic Time-Series &amp; Monsoon Insolation (Geography)</strong>: Annual solar radiation flux, daily monsoon precipitation variability, or Milankovitch orbital cycles.</li>
+<li><strong>Fieldwork &amp; Specimen Acquisition Log</strong>: Daily fossil excavation logs or tribal ethnographic survey counts.</li>
+</ul>
+<hr />
+<h3 id="b-glass-folder-cards-glass-folder-cardstsx">B. Glass Folder Cards (<code>glass-folder-cards.tsx</code>)<a class="headerlink" href="#b-glass-folder-cards-glass-folder-cardstsx" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Core Concept</strong>: A physical, tactile folder drawn as an object with authentic frosted glass physics and procedural liquid artwork.</li>
+<li><strong>Three-Layer Physical Sandwich</strong>:</li>
+<li><strong>Back Panel</strong>: Structural back plate carrying procedural liquid artwork or custom imagery, with subtle light sheen and rim highlight.</li>
+<li><strong>File Sheets</strong>: Real document sheets housed inside the pocket with individual depth offsets and slot fan rotations.</li>
+<li><strong>Frosted Front Glass</strong>: Frosted panel with <code>-webkit-backdrop-filter: blur(22px) saturate(1.5)</code> hinged at its bottom edge (<code>transform-origin: 50% 100%</code>).</li>
+<li><strong>Kinematic States</strong>:</li>
+<li><strong>Rest</strong>: Flat and closed; files barely peek over the rim.</li>
+<li><strong>Hover/Focus</strong>: Front glass leans forward on bottom hinge (<span class="arithmatex">\(--\text{gf-hinge}: -11^\circ\)</span>), files lift slightly (<span class="arithmatex">\(--\text{gf-lift}: -34\text{px}\)</span>).</li>
+<li><strong>Open (Click / Enter)</strong>: Glass falls open (<span class="arithmatex">\(--\text{gf-hinge}: -24^\circ\)</span>), files rise high (<span class="arithmatex">\(--\text{gf-lift}: -96\text{px}\)</span>) and fan outward (<span class="arithmatex">\(--\text{gf-spread}: 40\text{px}, --\text{gf-fan}: 5^\circ\)</span>), becoming individual interactive links.</li>
+<li><strong>Add (<code>+</code>)</strong>: Drops a new document with an elastic bounce animation (<code>gf-drop</code>, <code>gf-bump</code>).</li>
+<li><strong>More (<code>···</code>)</strong>: Frosted contextual popover menu.</li>
+<li><strong>Procedural Liquid Artwork Engine</strong>:</li>
+<li>Generates domain-warped fractal Brownian motion (fBM) noise fields with seedable PRNG (mulberry32).</li>
+<li>Surface slope normal vector <span class="arithmatex">\(\mathbf{n} = (-\partial_x F, -\partial_y F, 1)\)</span> computes diffuse illumination and tight Phong specular highlights:
+    $<span class="arithmatex">\(\text{spec} = (\mathbf{n} \cdot \mathbf{l})^{24} \times \text{gloss} \times 255\)</span>$</li>
+<li>Five Presets: <code>aurora</code> (streak), <code>ember</code> (marble with dark veins), <code>dusk</code> (plum &amp; rust marble), <code>glacier</code> (pale cold streak), <code>verdant</code> (moss &amp; brass marble).</li>
+<li><strong>Cooperative Frame Queue</strong>: Uses a time-budgeted painter queue that spends <span class="arithmatex">\(\le 7\text{ ms}\)</span> per frame (<code>performance.now() + 7</code>), ensuring zero UI lag or dropped frames even with multiple folders on screen.</li>
+<li><strong>Academic Deployment &amp; Archive System</strong>:</li>
+<li><strong>The Academic Dossier Hub</strong>:<ul>
+<li><strong>Folder 1: UPSC Anthropology</strong> (<code>ember</code> smoked glass): Houses <em>Hominin Cranial Database.pdf</em>, <em>Tribal Schedules &amp; PESA.doc</em>, <em>Kinship Diagrams.png</em>.</li>
+<li><strong>Folder 2: M.Sc. Geography</strong> (<code>glacier</code> / <code>aurora</code> milk glass): Houses <em>Plate Tectonics Field Atlas</em>, <em>Geomorphological Cycles</em>, <em>Satellite Remote Sensing GIS Data</em>.</li>
+<li><strong>Folder 3: Evolutionary Zoology</strong> (<code>verdant</code> moss glass): Houses <em>Vertebrate Osteology</em>, <em>Population Genetics</em>, <em>Ecological Niche Modeling</em>.</li>
+</ul>
+</li>
+<li>When opened, files fan out and allow direct one-click exploration of notes, essays, or interactive tools!</li>
+</ul>
 
 
 
