@@ -429,3 +429,44 @@ Addressing the critical question regarding computational load:
 | **Cartography & Remote Sensing** | **Fluvial Landform Interpretation** | False Color Composite (FCC) identification of oxbow lakes, abandoned paleochannels, sinuosity metrics ($\sigma = L/L_x$), and river terrace mapping. |
 | **UPSC Anthropology (Paper I - 1.4)** | **Quaternary Paleoenvironments & Settlement Sites** | Hominin settlements situated along oxbow lakes and alluvial terraces (e.g., Narmada gravels, Olduvai Gorge, Thames terrace stratigraphy). |
 | **Civil Services (General Studies I)** | **Drainage Systems & River Rejuvenation** | Fluvial erosion features, braided vs. meandering streams, flood management, and embankment breaching dynamics at cut banks. |
+
+---
+
+## 12. Generative Blueprints, 3D Solvers & Video Scrubbing Architecture
+
+### A. The 7-Stage Incremental Builder ("Jelly Study" Protocol)
+- **Problem**: Monolithic 3D prompt requests fail because LLMs mix physics, geometry generation, UI state, and raycasting all at once, creating unstable code.
+- **Architectural Solution**: The 7-stage constraint chain:
+  1. *Visual Foundation*: Stage, camera orbit, static geometry, typography behind 3D (`pointer-events: none`).
+  2. *Soft-Body Physics*: Localized point picking, volumetric deformation solver, elastic settlement, GPU acceleration fallback.
+  3. *Multi-Asset Scaling*: Dynamic object instantiation, collision bounds, contextual radial menus.
+  4. *Planar Geometric Slicing*: Dynamic clipping planes with closed manifold cap triangulation (preventing hollow mesh holes).
+  5. *Topological Stacking*: Rigid skewer constraint running through soft-body centers, maintaining outer elasticity without exploding.
+  6. *Input Bifurcation*: Touch event disambiguation (1-finger drag = deform, empty canvas = camera orbit, pinch = zoom, tap = menu).
+  7. *Performance & Leak Prevention*: Zero per-frame memory allocation, disposal of removed meshes/buffers, GPU budget cap.
+
+### B. Anti-Jitter Video Scrubbing (`CursorScrubVideo` & Scroll Engine)
+- **Key Breakthrough**: Continuous video playhead scrubbing driven by mouse coordinates or scroll position without browser playback lag.
+- **Critical Technical Guards**:
+  - *All-Keyframe Encoding*: Must encode video with All-Intra (`-g 1 -keyint_min 1 -x264-params "scenecut=0"` via FFmpeg). Standard inter-frame compression creates 200–500ms seek latency.
+  - *Seek Storm Prevention*: Only assign `video.currentTime = next` if `!isSeeking` and `Math.abs(video.currentTime - next) > 0.008s`.
+  - *Silent Buffer Trick*: Call `video.play().then(() => video.pause())` on mount to force GPU hardware frame decoders to initialize immediately.
+  - *Lerp Damping*: RAF loop with `next = current + (target - current) * smoothing` (smoothing 0.15–0.25).
+
+### C. "Living Atlas" Specimen Explorer Layout
+- **Composition**: Left 3D viewport (`.glb` models with unconstrained z-index overflow) + Right taxonomy and traits table, bounded by an overarching baseline alignment grid.
+- **Choreography**: Symmetrical slide-out (right, 280ms) and slide-in (left, 280ms) for 3D creature models synced with text cross-fade.
+- **Academic Application**: Specimen inspection for Zoology (invertebrate anatomy) and Anthropology (fossil crania, e.g., Taung Child, Turkana Boy, Petralona skull).
+
+### D. Touchless Vision & Gesture Control (MediaPipe Hand Tracking)
+- **Concept**: Draggable webcam HUD window running in-browser ML hand-tracking (open hand = play/rotate, closed fist = pause/lock).
+- **Academic Application**: Kiosk / interactive museum display mode for examining fragile archaeological specimens and geomorphological block models without mouse or keyboard inputs.
+
+### E. Industrial Telemetry & Scroll-to-Orbit Camera Handoff
+- **Concept**: Multi-section scroll sequence where the camera tracks strict cinematic angles along a technical model, culminating in an unconstrained interactive OrbitControls handoff.
+- **Academic Application**: Stratigraphic crustal drilling models and satellite remote sensing telemetry (M.Sc. Cartography).
+
+### F. Identity Anchoring & Physics Constraints in Generative Visuals
+- **Techniques**:
+  - *Faceted Vector Likeness*: Strict feature preservation without smoothing, high-frequency facial polygons, low-frequency torso planes.
+  - *Subtle Micro-Motion Video*: Locked camera, unchanging head position, micro-movement confined exclusively to secondary elements (eyeblinks, wind-blown foliage, rising hand) to eliminate morphing artifacts.
