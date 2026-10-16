@@ -470,3 +470,45 @@ Addressing the critical question regarding computational load:
 - **Techniques**:
   - *Faceted Vector Likeness*: Strict feature preservation without smoothing, high-frequency facial polygons, low-frequency torso planes.
   - *Subtle Micro-Motion Video*: Locked camera, unchanging head position, micro-movement confined exclusively to secondary elements (eyeblinks, wind-blown foliage, rising hand) to eliminate morphing artifacts.
+
+---
+
+## 13. Anatomical Decomposition & 3D Spatial Dissection (Astra AI Human Body Atlas)
+
+### A. Core Architecture & Open Data Foundations
+Reverse-engineered from Astra AI's *Human Body 3D Lab* (`https://app.astra-ai.co/en-IN/lab/human-body-3d`):
+- **Primary Data Sources**:
+  - **BodyParts3D**: Comprehensive polygon models by The Database Center for Life Science (DBCLS, Japan, CC BY 4.0).
+  - **ashemag/human-atlas**: Open-source MIT Three.js web-atlas engine.
+  - **HuBMAP / Visible Human Project**: High-resolution female reference organs by the NIH Human Reference Atlas (HRA, CC BY 4.0).
+  - **MakeHuman**: Anatomical gender dimorphism reference meshes (CC0).
+- **Taxonomic Nomenclature**:
+  - Dual-indexed via **FIPAT Terminologia Anatomica 2 (TA2)** and **Foundational Model of Anatomy (FMA)** identifiers (e.g., `FMA:7155` Heart), ensuring clinical-grade accuracy.
+
+### B. The 4 Spatial Dissection Mechanics
+1. **Layer Peeling & Alpha Blending ("Peel Back" / "Restore")**:
+   - Progressive visibility sliders moving through anatomical depths:
+     $$\text{Dermal / Integumentary} \longrightarrow \text{Superficial Muscles} \longrightarrow \text{Deep Fascia} \longrightarrow \text{Visceral Organs} \longrightarrow \text{Endoskeleton}$$
+   - Independent per-system opacity controls for multi-system overlapping analysis.
+2. **Exploded Assembly Animation ("Spread Apart" / "Reassemble")**:
+   - Translates organ groups outwards from their regional centroid along normal expansion vectors:
+     $$\vec{p}_{exploded} = \vec{p}_{rest} + \vec{v}_{expand} \cdot t \quad (t \in [0, 1])$$
+   - Allows inspection of deeply nested organs (e.g., pulling the ribcage forward to expose the mediastinum, pericardium, and heart chambers).
+3. **Focal Isolation & Ghosting ("Isolate" / "Surrounding")**:
+   - Isolates a selected organ at $1.0$ opacity while switching surrounding anatomy to an interactive translucent Fresnel/x-ray shader ($\approx 0.1$ opacity).
+4. **Smart Proximity Billboard Pins**:
+   - Vector markers that fade in based on camera frustum distance, anchoring Latin/English names to exact bone processes and organ sulci.
+
+### C. 14 Anatomical Systems & 5 Regional Partitions
+- **14 Systems**: Skeletal, Muscular, Cardiac, Arterial, Venous, Nervous, Respiratory, Digestive, Urinary, Lymphatic, Endocrine, Reproductive, Connective, Sensory.
+- **5 Clinical Regions**: Head & Neck, Chest (Thorax), Abdomen & Pelvis, Arms & Hands, Legs & Feet.
+- **Guided Explorations & Tours**: Step-by-step camera path animations (e.g., tracing bolus transit through the GI tract or oxygenated blood flow through cardiac chambers).
+
+### D. Academic Mapping to Aditya's Examination Syllabus
+- **Zoology (Paper I & II - Animal Physiology & Functional Anatomy)**:
+  - Dissection-level study of mammalian systems (coronary circulation, digestive loops, nephron filtration, endocrine axis).
+- **UPSC Anthropology (Paper I - Section 1.4 & 1.5 - Human Physical Evolution)**:
+  - **Skeletal Adaptations to Bipedalism**: Direct 3D inspection of the *foramen magnum* anterior migration, spinal *lumbar lordosis* (S-curve), broad basin-shaped *ilium*, *bicondylar femoral carrying angle* (valgus angle), and transversal/longitudinal *foot arches*.
+  - Comparative osteology between modern *Homo sapiens* and fossil hominins (*Australopithecus*, *Homo erectus*, *Neanderthals*).
+- **Earth Systems Analog (M.Sc. Geography)**:
+  - Applying this identical "exploding/peeling" 3D architecture to planetary lithospheric strata (Crust, Upper Mantle, Asthenosphere, Core) and fold nappes.
