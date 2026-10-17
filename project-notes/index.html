@@ -1070,6 +1070,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#14-code-drawn-vector-animation-visual-keyframe-pipelines-html-anime-html-animator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Code-Drawn Vector Animation &amp; Visual Keyframe Pipelines (html-anime &amp; html-animator)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Code-Drawn Vector Animation &amp; Visual Keyframe Pipelines (html-anime &amp; html-animator)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-html-anime-architecture-prompt-to-code-animation-without-video-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. html-anime Architecture (Prompt-to-Code Animation Without Video Models)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-html-animator-architecture-keyframe-studio-pure-css-exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. html-animator Architecture (Keyframe Studio &amp; Pure CSS Exporter)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-academic-mapping-integration-into-adityas-platform-code0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Academic Mapping &amp; Integration into Aditya's Platform (Code0)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-zero-build-implementation-protocol-in-code0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Zero-Build Implementation Protocol in Code0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1687,6 +1748,67 @@
     <span class="md-ellipsis">
       
         D. Academic Mapping to Aditya's Examination Syllabus
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-code-drawn-vector-animation-visual-keyframe-pipelines-html-anime-html-animator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Code-Drawn Vector Animation &amp; Visual Keyframe Pipelines (html-anime &amp; html-animator)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. Code-Drawn Vector Animation &amp; Visual Keyframe Pipelines (html-anime &amp; html-animator)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-html-anime-architecture-prompt-to-code-animation-without-video-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. html-anime Architecture (Prompt-to-Code Animation Without Video Models)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-html-animator-architecture-keyframe-studio-pure-css-exporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. html-animator Architecture (Keyframe Studio &amp; Pure CSS Exporter)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-academic-mapping-integration-into-adityas-platform-code0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Academic Mapping &amp; Integration into Aditya's Platform (Code0)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-zero-build-implementation-protocol-in-code0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Zero-Build Implementation Protocol in Code0
       
     </span>
   </a>
@@ -2340,6 +2462,127 @@ allow continuous monitoring of lithospheric crustal deformation, desertification
 <li><strong>Earth Systems Analog (M.Sc. Geography)</strong>:</li>
 <li>Applying this identical "exploding/peeling" 3D architecture to planetary lithospheric strata (Crust, Upper Mantle, Asthenosphere, Core) and fold nappes.</li>
 </ul>
+<hr />
+<h2 id="14-code-drawn-vector-animation-visual-keyframe-pipelines-html-anime-html-animator">14. Code-Drawn Vector Animation &amp; Visual Keyframe Pipelines (<code>html-anime</code> &amp; <code>html-animator</code>)<a class="headerlink" href="#14-code-drawn-vector-animation-visual-keyframe-pipelines-html-anime-html-animator" title="Permanent link">&para;</a></h2>
+<h3 id="a-html-anime-architecture-prompt-to-code-animation-without-video-models">A. <code>html-anime</code> Architecture (Prompt-to-Code Animation Without Video Models)<a class="headerlink" href="#a-html-anime-architecture-prompt-to-code-animation-without-video-models" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Origin &amp; Core Philosophy</strong>:</li>
+<li>Reverse-engineered from <code>blixvip/html-anime</code> (<code>https://github.com/blixvip/html-anime.git</code>).</li>
+<li>Completely eliminates heavy <code>.mp4</code> video downloads, GPU-taxing generative video models, and AI hallucination artifacts.</li>
+<li>Draws cinematic animation entirely in <strong>pure HTML5, vector SVG, and GSAP 3 timelines</strong>, adhering to the <strong>HyperFrames</strong> specification.</li>
+<li><strong>The HyperFrames Standard</strong>:</li>
+<li>Strict composition metadata: <code>data-composition-id</code>, <code>data-start</code>, <code>data-duration</code>, <code>data-track-index</code>.</li>
+<li>Exposes timeline instances to the global browser scope: <code>window.__timelines[slug] = tl;</code>, enabling external frame scrubbing and video capture tools.</li>
+<li><strong>The 5-Skill Agent Discipline</strong>:</li>
+<li><strong><code>html-anime-direct</code> (The Shot Sheet Contract)</strong>:<ul>
+<li>Fixed, deterministic runtimes: <strong>8s</strong> (3 shots: Establish <span class="arithmatex">\(\to\)</span> Sakuga <span class="arithmatex">\(\to\)</span> Button), <strong>12s</strong> (4 shots), or <strong>20s</strong> (6 shots).</li>
+<li><strong>The 1-Sakuga Constraint</strong>: Exactly <strong>ONE expensive action shot</strong> per scene. All other shots are static holds, atmospheric pans, or subtle character pauses. This guarantees deterministic completion and eliminates code sprawl.</li>
+<li><strong>Closed Color Script</strong>: Every scene is constrained to strictly <strong>10 hex codes</strong> (e.g., <code>sky</code>, <code>ink</code>, <code>moon</code>, <code>accent</code>, <code>practical</code>, <code>iris</code>, <code>skin</code>, <code>hair</code>, <code>sclera</code>, <code>line</code>). No arbitrary off-palette colors.</li>
+</ul>
+</li>
+<li><strong><code>html-anime-cel</code> (Flat Cel Painting)</strong>:<ul>
+<li>Strict z-index depth order from background to foreground:
+   $<span class="arithmatex">\(\text{Sky} \longrightarrow \text{Far Silhouette} \longrightarrow \text{Ground / Wide Figures} \longrightarrow \text{Atmosphere / Weather} \longrightarrow \text{Close Hero} \longrightarrow \text{Type}\)</span>$</li>
+<li>Hard-edged shadows (e.g., <code>ink</code> at 20% opacity over local color) &mdash; no fuzzy gradients or airbrush blur.</li>
+<li>Deterministic particles and rain coordinates (never unseeded <code>Math.random()</code>).</li>
+</ul>
+</li>
+<li><strong><code>html-anime-timing</code> (Traditional Anime Cadence)</strong>:<ul>
+<li>Animates on <strong>"twos"</strong> (12 drawings/s in a 24 FPS container) and holds.</li>
+<li>Stepped opacity toggling (<code>tl.set</code>) between discrete SVG poses instead of continuous rubbery tweening, replicating authentic hand-drawn cel animation.</li>
+<li>Directional speed lines, smear frames, and tapered blade/motion arcs.</li>
+</ul>
+</li>
+<li><strong><code>html-anime-camera</code> (Cinematic Lens &amp; Cutting)</strong>:<ul>
+<li>Symmetrical framing, wide-shot atmospheric silhouettes vs. close-up vector detail.</li>
+<li><strong>The Color-Dip Cut</strong>: An opaque full-screen accent color flash (<code>#dip</code> overlay, duration <span class="arithmatex">\(\approx 0.3\text{s}\)</span>) to transition between shots without jump cuts.</li>
+</ul>
+</li>
+<li><strong><code>html-anime-render</code></strong>:<ul>
+<li>Zero-dependency, pure web execution runnable directly in any browser without build tooling.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="b-html-animator-architecture-keyframe-studio-pure-css-exporter">B. <code>html-animator</code> Architecture (Keyframe Studio &amp; Pure CSS Exporter)<a class="headerlink" href="#b-html-animator-architecture-keyframe-studio-pure-css-exporter" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Origin &amp; Core Philosophy</strong>:</li>
+<li>Reverse-engineered from <code>html-animator/web-app</code> (<code>https://github.com/html-animator/web-app.git</code>).</li>
+<li>Web-based GUI timeline and keyframe editor built on Anime.js concepts.</li>
+<li>Separates scene authoring (Figma / Illustrator / Inkscape / Text editor with semantic <code>&lt;g id="..."&gt;</code> tags) from keyframe choreography.</li>
+<li><strong>Dual Export Capabilities</strong>:</li>
+<li><strong>Pure CSS <code>@keyframes</code> Exporter (<code>src/export/Css.js</code>)</strong>:<ul>
+<li>Exports animation directly to pure CSS stylesheets with <strong>0 KB JavaScript runtime overhead</strong>.</li>
+<li>Provides advanced mathematical easing curves, including CSS <code>cubic-bezier</code> and multi-stop CSS <code>linear()</code> approximations for complex bounce physics (<code>easeOutBounce</code>) and elastic damping.</li>
+<li>Automatic path tracing via <code>strokeDashoffset</code> animation.</li>
+</ul>
+</li>
+<li><strong>Anime.js / GSAP Script Exporter (<code>src/export/AnimeJs.js</code>)</strong>:<ul>
+<li>Generates structured JavaScript timelines targeting SVG transforms (<code>translateX</code>, <code>translateY</code>, <code>rotate</code>, <code>scale</code>, <code>path</code> motion-following).</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="c-academic-mapping-integration-into-adityas-platform-code0">C. Academic Mapping &amp; Integration into Aditya's Platform (<code>Code0</code>)<a class="headerlink" href="#c-academic-mapping-integration-into-adityas-platform-code0" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Syllabus Domain</th>
+<th style="text-align: left;">Academic Topic</th>
+<th style="text-align: left;">Code-Drawn Animation Module Application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>B.Sc. Zoology</strong></td>
+<td style="text-align: left;"><strong>Neurophysiology &amp; Synaptic Transmission</strong></td>
+<td style="text-align: left;">An 8-second 3-shot code-drawn SVG anime sequence: Action potential wave down myelinated axon <span class="arithmatex">\(\to\)</span> <em>Sakuga shot</em>: Synaptic vesicle fusion &amp; neurotransmitter release into synaptic cleft <span class="arithmatex">\(\to\)</span> Receptor binding.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>B.Sc. Zoology</strong></td>
+<td style="text-align: left;"><strong>Cardiac Mechanics &amp; Coronary Cycle</strong></td>
+<td style="text-align: left;">Pure CSS keyframe loop generated via <code>html-animator</code>: Synchronized ventricular systole/diastole with directional vector flow arrows.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UPSC Anthropology (Paper I - 1.4)</strong></td>
+<td style="text-align: left;"><strong>Paleolithic Lithic Technology</strong></td>
+<td style="text-align: left;">An 8-second sequence: Raw quartzite pebble selection <span class="arithmatex">\(\to\)</span> <em>Sakuga shot</em>: Hard hammer percussive strike detaching flakes to produce an Oldowan chopper / Acheulean biface <span class="arithmatex">\(\to\)</span> Edge examination.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UPSC Anthropology (Paper I - 1.5)</strong></td>
+<td style="text-align: left;"><strong>Hominin Locomotion &amp; Gait Cycle</strong></td>
+<td style="text-align: left;">12-frame traditional stepped animation comparing the knuckle-walking quadrupedal gait of chimpanzees with the bipedal inverted pendulum stride of <em>Homo sapiens</em>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>M.Sc. Geography (Geomorphology)</strong></td>
+<td style="text-align: left;"><strong>Fluvial Meander Neck Cutoffs</strong></td>
+<td style="text-align: left;">3-shot flood event: High discharge swell <span class="arithmatex">\(\to\)</span> <em>Sakuga shot</em>: Outer cut bank breach, rapid chute cutoff channel scouring, and loop abandonment <span class="arithmatex">\(\to\)</span> Clay plug sedimentation isolating an oxbow lake.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>M.Sc. Geography (Climatology)</strong></td>
+<td style="text-align: left;"><strong>Monsoon Teleconnections &amp; Walker Circulation</strong></td>
+<td style="text-align: left;">Low-weight SVG vectors illustrating the seasonal reversal of low-level Somali Jet winds and Tibetan Plateau anticyclone pumping.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="d-zero-build-implementation-protocol-in-code0">D. Zero-Build Implementation Protocol in <code>Code0</code><a class="headerlink" href="#d-zero-build-implementation-protocol-in-code0" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Interactive Scroll Scrubbing</strong>:</li>
+<li>Bind any <code>html-anime</code> GSAP timeline to our sitewide <code>ScrollTrigger</code> and <code>Lenis</code> engine:
+     <div class="language-javascript highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">tl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gsap</span><span class="p">.</span><span class="nx">timeline</span><span class="p">({</span><span class="w"> </span><span class="nx">paused</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">});</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nx">ScrollTrigger</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nx">trigger</span><span class="o">:</span><span class="w"> </span><span class="s2">"#explorable-scene"</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="s2">"top center"</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nx">end</span><span class="o">:</span><span class="w"> </span><span class="s2">"bottom center"</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nx">scrub</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nx">animation</span><span class="o">:</span><span class="w"> </span><span class="nx">tl</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">});</span>
+</span></code></pre></div></li>
+<li>Visitors smoothly scrub through the educational animation simply by scrolling through the essay.</li>
+<li><strong>Zero Runtime Micro-Graphics</strong>:</li>
+<li>Use <code>html-animator</code>'s pure CSS export technique for diagrams that need infinite ambient loops (e.g., oscillating seismic P/S waves, rotating Coriolis deflection vectors) without adding CPU or battery load.</li>
+</ol>
 
 
 
