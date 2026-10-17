@@ -512,3 +512,83 @@ Reverse-engineered from Astra AI's *Human Body 3D Lab* (`https://app.astra-ai.co
   - Comparative osteology between modern *Homo sapiens* and fossil hominins (*Australopithecus*, *Homo erectus*, *Neanderthals*).
 - **Earth Systems Analog (M.Sc. Geography)**:
   - Applying this identical "exploding/peeling" 3D architecture to planetary lithospheric strata (Crust, Upper Mantle, Asthenosphere, Core) and fold nappes.
+
+---
+
+## 14. Code-Drawn Vector Animation & Visual Keyframe Pipelines (`html-anime` & `html-animator`)
+
+### A. `html-anime` Architecture (Prompt-to-Code Animation Without Video Models)
+- **Origin & Core Philosophy**:
+  - Reverse-engineered from `blixvip/html-anime` (`https://github.com/blixvip/html-anime.git`).
+  - Completely eliminates heavy `.mp4` video downloads, GPU-taxing generative video models, and AI hallucination artifacts.
+  - Draws cinematic animation entirely in **pure HTML5, vector SVG, and GSAP 3 timelines**, adhering to the **HyperFrames** specification.
+- **The HyperFrames Standard**:
+  - Strict composition metadata: `data-composition-id`, `data-start`, `data-duration`, `data-track-index`.
+  - Exposes timeline instances to the global browser scope: `window.__timelines[slug] = tl;`, enabling external frame scrubbing and video capture tools.
+- **The 5-Skill Agent Discipline**:
+  1. **`html-anime-direct` (The Shot Sheet Contract)**:
+     - Fixed, deterministic runtimes: **8s** (3 shots: Establish $\to$ Sakuga $\to$ Button), **12s** (4 shots), or **20s** (6 shots).
+     - **The 1-Sakuga Constraint**: Exactly **ONE expensive action shot** per scene. All other shots are static holds, atmospheric pans, or subtle character pauses. This guarantees deterministic completion and eliminates code sprawl.
+     - **Closed Color Script**: Every scene is constrained to strictly **10 hex codes** (e.g., `sky`, `ink`, `moon`, `accent`, `practical`, `iris`, `skin`, `hair`, `sclera`, `line`). No arbitrary off-palette colors.
+  2. **`html-anime-cel` (Flat Cel Painting)**:
+     - Strict z-index depth order from background to foreground:
+       $$\text{Sky} \longrightarrow \text{Far Silhouette} \longrightarrow \text{Ground / Wide Figures} \longrightarrow \text{Atmosphere / Weather} \longrightarrow \text{Close Hero} \longrightarrow \text{Type}$$
+     - Hard-edged shadows (e.g., `ink` at 20% opacity over local color) &mdash; no fuzzy gradients or airbrush blur.
+     - Deterministic particles and rain coordinates (never unseeded `Math.random()`).
+  3. **`html-anime-timing` (Traditional Anime Cadence)**:
+     - Animates on **"twos"** (12 drawings/s in a 24 FPS container) and holds.
+     - Stepped opacity toggling (`tl.set`) between discrete SVG poses instead of continuous rubbery tweening, replicating authentic hand-drawn cel animation.
+     - Directional speed lines, smear frames, and tapered blade/motion arcs.
+  4. **`html-anime-camera` (Cinematic Lens & Cutting)**:
+     - Symmetrical framing, wide-shot atmospheric silhouettes vs. close-up vector detail.
+     - **The Color-Dip Cut**: An opaque full-screen accent color flash (`#dip` overlay, duration $\approx 0.3\text{s}$) to transition between shots without jump cuts.
+  5. **`html-anime-render`**:
+     - Zero-dependency, pure web execution runnable directly in any browser without build tooling.
+
+---
+
+### B. `html-animator` Architecture (Keyframe Studio & Pure CSS Exporter)
+- **Origin & Core Philosophy**:
+  - Reverse-engineered from `html-animator/web-app` (`https://github.com/html-animator/web-app.git`).
+  - Web-based GUI timeline and keyframe editor built on Anime.js concepts.
+  - Separates scene authoring (Figma / Illustrator / Inkscape / Text editor with semantic `<g id="...">` tags) from keyframe choreography.
+- **Dual Export Capabilities**:
+  1. **Pure CSS `@keyframes` Exporter (`src/export/Css.js`)**:
+     - Exports animation directly to pure CSS stylesheets with **0 KB JavaScript runtime overhead**.
+     - Provides advanced mathematical easing curves, including CSS `cubic-bezier` and multi-stop CSS `linear()` approximations for complex bounce physics (`easeOutBounce`) and elastic damping.
+     - Automatic path tracing via `strokeDashoffset` animation.
+  2. **Anime.js / GSAP Script Exporter (`src/export/AnimeJs.js`)**:
+     - Generates structured JavaScript timelines targeting SVG transforms (`translateX`, `translateY`, `rotate`, `scale`, `path` motion-following).
+
+---
+
+### C. Academic Mapping & Integration into Aditya's Platform (`Code0`)
+
+| Syllabus Domain | Academic Topic | Code-Drawn Animation Module Application |
+| :--- | :--- | :--- |
+| **B.Sc. Zoology** | **Neurophysiology & Synaptic Transmission** | An 8-second 3-shot code-drawn SVG anime sequence: Action potential wave down myelinated axon $\to$ *Sakuga shot*: Synaptic vesicle fusion & neurotransmitter release into synaptic cleft $\to$ Receptor binding. |
+| **B.Sc. Zoology** | **Cardiac Mechanics & Coronary Cycle** | Pure CSS keyframe loop generated via `html-animator`: Synchronized ventricular systole/diastole with directional vector flow arrows. |
+| **UPSC Anthropology (Paper I - 1.4)** | **Paleolithic Lithic Technology** | An 8-second sequence: Raw quartzite pebble selection $\to$ *Sakuga shot*: Hard hammer percussive strike detaching flakes to produce an Oldowan chopper / Acheulean biface $\to$ Edge examination. |
+| **UPSC Anthropology (Paper I - 1.5)** | **Hominin Locomotion & Gait Cycle** | 12-frame traditional stepped animation comparing the knuckle-walking quadrupedal gait of chimpanzees with the bipedal inverted pendulum stride of *Homo sapiens*. |
+| **M.Sc. Geography (Geomorphology)** | **Fluvial Meander Neck Cutoffs** | 3-shot flood event: High discharge swell $\to$ *Sakuga shot*: Outer cut bank breach, rapid chute cutoff channel scouring, and loop abandonment $\to$ Clay plug sedimentation isolating an oxbow lake. |
+| **M.Sc. Geography (Climatology)** | **Monsoon Teleconnections & Walker Circulation** | Low-weight SVG vectors illustrating the seasonal reversal of low-level Somali Jet winds and Tibetan Plateau anticyclone pumping. |
+
+---
+
+### D. Zero-Build Implementation Protocol in `Code0`
+1. **Interactive Scroll Scrubbing**:
+   - Bind any `html-anime` GSAP timeline to our sitewide `ScrollTrigger` and `Lenis` engine:
+     ```javascript
+     const tl = gsap.timeline({ paused: true });
+     ScrollTrigger.create({
+       trigger: "#explorable-scene",
+       start: "top center",
+       end: "bottom center",
+       scrub: 0.5,
+       animation: tl
+     });
+     ```
+   - Visitors smoothly scrub through the educational animation simply by scrolling through the essay.
+2. **Zero Runtime Micro-Graphics**:
+   - Use `html-animator`'s pure CSS export technique for diagrams that need infinite ambient loops (e.g., oscillating seismic P/S waves, rotating Coriolis deflection vectors) without adding CPU or battery load.
+
