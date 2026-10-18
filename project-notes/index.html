@@ -1131,6 +1131,78 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#15-canvas-native-motion-templates-spatial-transitions-animosapp-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Canvas-Native Motion Templates &amp; Spatial Transitions (animos.app Architecture)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Canvas-Native Motion Templates &amp; Spatial Transitions (animos.app Architecture)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-reverse-engineered-architecture-performance-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Reverse-Engineered Architecture &amp; Performance Principles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-mathematical-time-space-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Mathematical Time-Space Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-catalog-of-69-spatial-motion-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Catalog of 69+ Spatial Motion Templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-academic-mapping-to-adityas-examination-syllabus-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Academic Mapping to Aditya's Examination Syllabus Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-zero-build-implementation-protocol-in-code0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E. Zero-Build Implementation Protocol in Code0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1809,6 +1881,78 @@
     <span class="md-ellipsis">
       
         D. Zero-Build Implementation Protocol in Code0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-canvas-native-motion-templates-spatial-transitions-animosapp-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Canvas-Native Motion Templates &amp; Spatial Transitions (animos.app Architecture)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15. Canvas-Native Motion Templates &amp; Spatial Transitions (animos.app Architecture)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-reverse-engineered-architecture-performance-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Reverse-Engineered Architecture &amp; Performance Principles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-mathematical-time-space-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Mathematical Time-Space Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-catalog-of-69-spatial-motion-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Catalog of 69+ Spatial Motion Templates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-academic-mapping-to-adityas-examination-syllabus-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Academic Mapping to Aditya's Examination Syllabus Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e-zero-build-implementation-protocol-in-code0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E. Zero-Build Implementation Protocol in Code0
       
     </span>
   </a>
@@ -2582,6 +2726,173 @@ allow continuous monitoring of lithospheric crustal deformation, desertification
 <li>Visitors smoothly scrub through the educational animation simply by scrolling through the essay.</li>
 <li><strong>Zero Runtime Micro-Graphics</strong>:</li>
 <li>Use <code>html-animator</code>'s pure CSS export technique for diagrams that need infinite ambient loops (e.g., oscillating seismic P/S waves, rotating Coriolis deflection vectors) without adding CPU or battery load.</li>
+</ol>
+<hr />
+<h2 id="15-canvas-native-motion-templates-spatial-transitions-animosapp-architecture">15. Canvas-Native Motion Templates &amp; Spatial Transitions (<code>animos.app</code> Architecture)<a class="headerlink" href="#15-canvas-native-motion-templates-spatial-transitions-animosapp-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="a-reverse-engineered-architecture-performance-principles">A. Reverse-Engineered Architecture &amp; Performance Principles<a class="headerlink" href="#a-reverse-engineered-architecture-performance-principles" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Origin &amp; Core Philosophy</strong>:</li>
+<li>Reverse-engineered from <code>animos.app/editor</code> (<code>https://animos.app/</code>).</li>
+<li>Achieves rich, 3D-perspective card layouts, spherical rotations, and multi-axis spatial cascades without loading Three.js, Babylon, or GPU-heavy WebGL vertex shaders.</li>
+<li><strong>Zero-Engine 2D Canvas Matrix Pipeline</strong>:<ul>
+<li>Operates entirely on standard HTML5 <code>CanvasRenderingContext2D</code>.</li>
+<li>Every 3D-looking card transformation (depth scaling, camera tilt, perspective distortion, orbital rotation) is computed with pure trigonometry and applied via 2D affine matrix calls:
+  <div class="language-javascript highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">ctx</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nx">ctx</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">cx</span><span class="p">,</span><span class="w"> </span><span class="nx">cy</span><span class="p">);</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nx">ctx</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">scaleX</span><span class="p">,</span><span class="w"> </span><span class="nx">scaleY</span><span class="p">);</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nx">ctx</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">angleRad</span><span class="p">);</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nx">ctx</span><span class="p">.</span><span class="nx">transform</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">);</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1">// Renders card with rounded corners, drop shadows, and image aspect-ratio fitting</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nx">ctx</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+</span></code></pre></div></li>
+</ul>
+</li>
+<li><strong>Performance Profile</strong>:<ul>
+<li>Locked <strong>60 FPS</strong> rendering across mobile and desktop devices.</li>
+<li>Minimal CPU usage (<span class="arithmatex">\(&lt; 1\%\)</span>), 0% idle GPU battery drain, and zero external npm/build dependencies.</li>
+</ul>
+</li>
+</ul>
+<h3 id="b-mathematical-time-space-framework">B. Mathematical Time-Space Framework<a class="headerlink" href="#b-mathematical-time-space-framework" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>The Global Discrete Card Indexer (<code>Rt(s, m)</code>)</strong>:</li>
+<li>Given normalized continuous progress <span class="arithmatex">\(s \in [0, 1]\)</span> and <span class="arithmatex">\(m\)</span> cards/specimens:
+     $<span class="arithmatex">\(s' = \text{clamp}(s, 0, 1) \cdot m\)</span>$
+     $<span class="arithmatex">\(\text{index} = \lfloor s' \rfloor, \quad \text{local} = s' - \text{index}\)</span>$</li>
+<li><code>index</code>: Designates the currently active focal item in the sequence (<span class="arithmatex">\(0, 1, \dots, m-1\)</span>).</li>
+<li>
+<p><code>local</code>: Fractional sub-step progress (<span class="arithmatex">\(0.0 \to 1.0\)</span>) driving the active card transition and secondary background reactions.</p>
+</li>
+<li>
+<p><strong>Closed-Form Physics &amp; Built-in Easing Suite</strong>:</p>
+</li>
+<li><strong>Natural Bézier Solver</strong>: Custom Newton-Raphson solver evaluating cubic-bezier curves with bisection fallback:
+     $<span class="arithmatex">\(\text{natural} = \text{cubic-bezier}(0.4, 0, 0.2, 1)\)</span>$</li>
+<li><strong>Snappy Exponential Ease-Out</strong>:
+     $<span class="arithmatex">\(f(t) = 1 - 2^{-10t}\)</span>$</li>
+<li><strong>Polynomial Overshoot (Zero Spring Library Overhead)</strong>:
+     $<span class="arithmatex">\(f(t) = 1 + 3.2(t - 1)^3 + 2.2(t - 1)^2\)</span>$</li>
+<li><strong>Damped Harmonic Elastic Bounce</strong>:
+     $<span class="arithmatex">\(f(t) = 2^{-10t} \cdot \sin\left(\left(10t - 0.75\right) \cdot \frac{2\pi}{3}\right) + 1\)</span>$</li>
+<li><strong>Smooth Cubic Hermite</strong>:
+     $<span class="arithmatex">\(f(t) = \begin{cases} 4t^3 &amp; \text{if } t &lt; 0.5 \\ 1 - \frac{(-2t + 2)^3}{2} &amp; \text{if } t \ge 0.5 \end{cases}\)</span>$</li>
+</ol>
+<hr />
+<h3 id="c-catalog-of-69-spatial-motion-templates">C. Catalog of 69+ Spatial Motion Templates<a class="headerlink" href="#c-catalog-of-69-spatial-motion-templates" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Motion Category</th>
+<th style="text-align: left;">Key Template Identifiers</th>
+<th style="text-align: left;">Visual Mechanics &amp; Spatial Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Stack &amp; Deck Dynamics</strong></td>
+<td style="text-align: left;"><code>deck-peel</code>, <code>stack-slide</code>, <code>cascade-deck</code>, <code>depth-stack-scroll</code>, <code>cascade-drop</code>, <code>card-totem</code>, <code>parallax-totem</code>, <code>fan-shuffle</code>, <code>card-toss</code></td>
+<td style="text-align: left;">Front card drops away or slides forward with spring landing; background cards step up through depth scale reduction (<span class="arithmatex">\(d = 0.95\)</span>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Carousels &amp; Flow Belts</strong></td>
+<td style="text-align: left;"><code>carousel-flow</code>, <code>diagonal-carousel</code>, <code>cover-flow</code>, <code>cover-flow-vertical</code>, <code>cover-ring</code>, <code>cover-ring-vertical</code>, <code>film-strip</code>, <code>bloom-belt</code>, <code>wheel-carousel</code>, <code>wheel-spin</code></td>
+<td style="text-align: left;">Horizontal or vertical conveyor belts; centered card expands with focal zoom while peripheral cards compress and rotate along tangent angles.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Spheres, Orbits &amp; Spatial Globes</strong></td>
+<td style="text-align: left;"><code>sphere-globe</code> (Card Globe), <code>orbit-globe</code>, <code>orbit-carousel</code>, <code>photo-orbit</code>, <code>focus-orbit</code>, <code>orbit-showcase</code>, <code>orbit-bloom</code>, <code>sphere-wall</code>, <code>sphere-cascade</code>, <code>vortex-spin</code>, <code>lens-orbit</code></td>
+<td style="text-align: left;">Cards mapped onto virtual 3D spherical hulls or planetary rings; depth sorting dynamically modulates alpha, scale, and drop shadows based on latitude and longitude.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Isometric &amp; 3D Spatial Drift</strong></td>
+<td style="text-align: left;"><code>iso-cascade</code>, <code>iso-focus</code>, <code>iso-orbit</code>, <code>card-tunnel</code>, <code>grid-dive</code>, <code>stairway</code>, <code>showcase-stream</code>, <code>spiral-stream</code></td>
+<td style="text-align: left;">True isometric <span class="arithmatex">\(30^\circ\)</span> projections with stepped elevation changes along the virtual Z-axis; tunnel zooms rushing past camera viewplanes.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Reveals, Wipes &amp; Marquees</strong></td>
+<td style="text-align: left;"><code>grid-reveal</code>, <code>split-reveal</code>, <code>diagonal-wipe</code>, <code>stripe-reveal</code>, <code>mosaic-wipe</code>, <code>flip-grid</code>, <code>pop-grid</code>, <code>pop-parade</code>, <code>ticker-loop</code>, <code>ticker-tilt</code>, <code>mosaic-marquee</code></td>
+<td style="text-align: left;">Matrix-based geometric unmasking, perspective-tilted continuous tickers, and staggered feed scrolls.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="d-academic-mapping-to-adityas-examination-syllabus-matrix">D. Academic Mapping to Aditya's Examination Syllabus Matrix<a class="headerlink" href="#d-academic-mapping-to-adityas-examination-syllabus-matrix" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Syllabus Domain</th>
+<th style="text-align: left;">Academic Topic</th>
+<th style="text-align: left;">Canvas Motion Template Application</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>B.Sc. Zoology</strong></td>
+<td style="text-align: left;"><strong>Histology &amp; Microanatomy Stratification</strong></td>
+<td style="text-align: left;"><strong><code>deck-peel</code></strong>: Progressive anatomical peeling through the histological strata of the mammalian digestive tract: Serosa <span class="arithmatex">\(\to\)</span> Muscularis externa <span class="arithmatex">\(\to\)</span> Submucosa <span class="arithmatex">\(\to\)</span> Mucosa with gastric crypts.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>B.Sc. Zoology</strong></td>
+<td style="text-align: left;"><strong>Comparative Vertebrate Anatomy</strong></td>
+<td style="text-align: left;"><strong><code>orbit-carousel</code></strong>: Multi-focal rotation through phylogenetic cardiac adaptations: 2-chambered (Elasmobranch / Teleost) <span class="arithmatex">\(\to\)</span> 3-chambered (Amphibia) <span class="arithmatex">\(\to\)</span> Incompletely 4-chambered (Reptilia) <span class="arithmatex">\(\to\)</span> Complete 4-chambered double circulation (Aves / Mammalia).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UPSC Anthropology (Paper I - 1.4)</strong></td>
+<td style="text-align: left;"><strong>Hominin Cranial Capacity &amp; Facial Retraction</strong></td>
+<td style="text-align: left;"><strong><code>cover-flow</code></strong>: Chronological perspective carousel of fossil hominin crania coupled with real-time cranial capacity dials (<span class="arithmatex">\(450\text{ cm}^3 \to 1450\text{ cm}^3\)</span>): <em>Australopithecus africanus</em> <span class="arithmatex">\(\to\)</span> <em>Homo habilis</em> <span class="arithmatex">\(\to\)</span> <em>Homo erectus</em> <span class="arithmatex">\(\to\)</span> <em>Neanderthal</em> <span class="arithmatex">\(\to\)</span> Cro-Magnon.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>UPSC Anthropology (Paper II - 1.1)</strong></td>
+<td style="text-align: left;"><strong>Indian Prehistoric Lithic Typology</strong></td>
+<td style="text-align: left;"><strong><code>iso-cascade</code></strong>: Isometric stepped terrace displaying the stratigraphic sequence of Indian stone industries: Soanian pebble choppers <span class="arithmatex">\(\to\)</span> Acheulean handaxes (Attirampakkam) <span class="arithmatex">\(\to\)</span> Middle Paleolithic Levallois flakes <span class="arithmatex">\(\to\)</span> Upper Paleolithic blades <span class="arithmatex">\(\to\)</span> Mesolithic geometric microliths.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>M.Sc. Geography (Remote Sensing)</strong></td>
+<td style="text-align: left;"><strong>Multi-Spectral Satellite Band Analysis</strong></td>
+<td style="text-align: left;"><strong><code>column-drift</code></strong>: Staggered vertical drift of Landsat-9 OLI spectral bands (B1 Coastal Aerosol, B2 Blue, B3 Green, B4 Red, B5 NIR, B6/B7 SWIR) with live False Color Composite (FCC) synthesis on hover.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>M.Sc. Geography (Geomorphology)</strong></td>
+<td style="text-align: left;"><strong>Davisian Cycle of Landscape Evolution</strong></td>
+<td style="text-align: left;"><strong><code>stack-slide</code></strong>: Sequential erosion stages illustrating peneplain formation: Youth (V-shaped canyons, waterfalls) <span class="arithmatex">\(\to\)</span> Maturity (meandering floodplains, oxbows) <span class="arithmatex">\(\to\)</span> Old Age (monadnocks, peneplains).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Planetary Physics (Earth Interior)</strong></td>
+<td style="text-align: left;"><strong>Seismic Wave Propagation &amp; Shadow Zones</strong></td>
+<td style="text-align: left;"><strong><code>orbit-globe</code></strong>: Orthographic cross-section tracing P-wave and S-wave refraction paths across the Gutenberg discontinuity and Lehman boundary, showing the <span class="arithmatex">\(105^\circ - 142^\circ\)</span> shadow zones.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="e-zero-build-implementation-protocol-in-code0">E. Zero-Build Implementation Protocol in <code>Code0</code><a class="headerlink" href="#e-zero-build-implementation-protocol-in-code0" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Dual Execution Modes</strong>:</li>
+<li><strong>Mode 1: Ambient Continuous Loop</strong> (for hero banners &amp; showcase teasers):
+     $<span class="arithmatex">\(s = \left(\frac{\text{currentTime}}{\text{duration}}\right) \bmod 1\)</span>$</li>
+<li><strong>Mode 2: Scroll-Driven Scrubbing</strong> (for deep-dive academic articles):
+     Tied directly to the document scroll position via Lenis and GSAP <code>ScrollTrigger</code>:
+     <div class="language-javascript highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kd">const</span><span class="w"> </span><span class="nx">showcase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">CanvasMotionShowcase</span><span class="p">({</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nx">canvas</span><span class="o">:</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'#hominin-showcase'</span><span class="p">),</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nx">template</span><span class="o">:</span><span class="w"> </span><span class="s1">'cover-flow'</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nx">items</span><span class="o">:</span><span class="w"> </span><span class="nx">homininSpecimens</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">});</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nx">ScrollTrigger</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nx">trigger</span><span class="o">:</span><span class="w"> </span><span class="s1">'#hominin-section'</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="s1">'top top'</span><span class="p">,</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="nx">end</span><span class="o">:</span><span class="w"> </span><span class="s1">'bottom bottom'</span><span class="p">,</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nx">scrub</span><span class="o">:</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nx">onUpdate</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">showcase</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">progress</span><span class="p">)</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">});</span>
+</span></code></pre></div></li>
+<li><strong>Design Cohesion with Obsidian Dark System</strong>:</li>
+<li>The original Animos palette is mapped to our site tokens:<ul>
+<li>Background: Deep Obsidian Space (<code>#070913</code>, <code>#0C1022</code>)</li>
+<li>Card Borders: Subtle translucent hairline (<code>rgba(140, 170, 240, 0.18)</code>)</li>
+<li>Active Accents: Vibrant Cyber Cyan (<code>#02d2e3</code>) and Spring Mint (<code>#5df0a8</code>)</li>
+<li>Dynamic Shadows: Multi-stage ambient occlusion blur (<code>rgba(0, 0, 0, 0.65)</code>).</li>
+</ul>
+</li>
 </ol>
 
 
