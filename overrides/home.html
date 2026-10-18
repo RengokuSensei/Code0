@@ -1242,466 +1242,320 @@
       .btn { width: 100%; justify-content: center; }
     }
     /* ==========================================================================
-       COMMAND DECK & COMMUNITY TRANSMISSION HUB
+       INTERACTIVE SCIENTIFIC SIMULATION LAB & CONVERGENCE WORKSPACE
+       ========================================================================== */
+    .convergence-sandbox {
+      background: rgba(10, 14, 30, 0.7);
+      border: 1px solid rgba(140, 170, 240, 0.22);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .sandbox-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .convergence-nodes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .c-node {
+      background: rgba(14, 20, 42, 0.75);
+      border: 1px solid rgba(140, 170, 240, 0.18);
+      border-radius: 18px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .c-node:hover {
+      transform: translateY(-4px);
+      border-color: rgba(2, 210, 227, 0.45);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(2, 210, 227, 0.15);
+    }
+
+    .c-node.active {
+      background: linear-gradient(135deg, rgba(20, 30, 65, 0.9) 0%, rgba(14, 20, 42, 0.95) 100%);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(2, 210, 227, 0.3);
+    }
+
+    .c-node-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .c-node h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .c-node-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .c-node p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* THE LIVING SIMULATION LAB STAGE */
+    .convergence-lab-workspace {
+      background: #04060d;
+      border: 1px solid rgba(140, 170, 240, 0.24);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    .lab-hud-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 16px 24px;
+      background: rgba(14, 20, 42, 0.85);
+      border-bottom: 1px solid rgba(140, 170, 240, 0.18);
+    }
+
+    .lab-hud-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-mint);
+      letter-spacing: 0.06em;
+    }
+
+    .lab-mode-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .lab-mode-tab {
+      background: rgba(7, 9, 19, 0.7);
+      border: 1px solid rgba(140, 170, 240, 0.2);
+      color: #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lab-mode-tab:hover {
+      background: rgba(2, 210, 227, 0.15);
+      border-color: rgba(2, 210, 227, 0.5);
+      color: #fff;
+    }
+
+    .lab-mode-tab.active {
+      background: rgba(2, 210, 227, 0.22);
+      border-color: var(--accent-cyan);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(2, 210, 227, 0.3);
+    }
+
+    .lab-viewport-wrap {
+      position: relative;
+      width: 100%;
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lab-stage-canvas {
+      width: 100%;
+      height: 440px;
+      display: block;
+      background: radial-gradient(circle at center, rgba(14, 20, 42, 0.5) 0%, #04060d 100%);
+      cursor: crosshair;
+    }
+
+    .lab-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 16px 24px;
+      background: rgba(10, 14, 30, 0.9);
+      border-top: 1px solid rgba(140, 170, 240, 0.16);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+    }
+
+    .lab-param-slider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #94a3b8;
+    }
+
+    .lab-param-slider input[type="range"] {
+      accent-color: var(--accent-cyan);
+      cursor: pointer;
+    }
+
+    .lab-btn-small {
+      background: rgba(2, 210, 227, 0.15);
+      border: 1px solid rgba(2, 210, 227, 0.4);
+      color: var(--accent-cyan);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .lab-btn-small:hover {
+      background: var(--accent-cyan);
+      color: #070913;
+      box-shadow: 0 0 12px rgba(2, 210, 227, 0.4);
+    }
+
+    /* ==========================================================================
+       COMMUNITY SECTION & FLOATING CYBER-GLASS SOCIAL DOCK
        ========================================================================== */
     .community-section {
       position: relative;
-      padding: 120px 0 100px 0;
-      background: radial-gradient(circle at 50% 10%, rgba(2, 210, 227, 0.08) 0%, transparent 60%),
-                  radial-gradient(circle at 80% 80%, rgba(140, 104, 255, 0.06) 0%, transparent 60%),
+      padding: 100px 0 90px 0;
+      background: radial-gradient(circle at 50% 20%, rgba(2, 210, 227, 0.08) 0%, transparent 60%),
                   #070913;
       border-top: 1px solid rgba(140, 170, 240, 0.16);
       border-bottom: 1px solid rgba(140, 170, 240, 0.16);
       overflow: hidden;
-    }
-
-    .community-section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: 
-        linear-gradient(to right, rgba(140, 170, 240, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(140, 170, 240, 0.04) 1px, transparent 1px);
-      background-size: 50px 50px;
-      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
-      pointer-events: none;
+      text-align: center;
     }
 
     .community-header {
-      text-align: center;
-      max-width: 860px;
-      margin: 0 auto 50px auto;
+      max-width: 760px;
+      margin: 0 auto 40px auto;
       position: relative;
       z-index: 2;
     }
 
-    .community-waveform-box {
-      width: 100%;
-      max-width: 440px;
-      height: 48px;
-      margin: 16px auto 20px auto;
-      border-radius: 999px;
-      background: rgba(14, 20, 42, 0.6);
-      border: 1px solid rgba(140, 170, 240, 0.2);
+    .social-dock-wrap {
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 0 16px;
+      margin-top: 36px;
       position: relative;
-      overflow: hidden;
+      z-index: 3;
     }
 
-    #comm-waveform {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .community-telemetry-bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 24px;
-    }
-
-    .telemetry-pill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(14, 20, 42, 0.75);
-      border: 1px solid rgba(140, 170, 240, 0.2);
-      color: #95a3c2;
+    .social-dock {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .telemetry-pill.live {
-      color: #5df0a8;
-      border-color: rgba(93, 240, 168, 0.4);
-      background: rgba(93, 240, 168, 0.12);
-    }
-
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #5df0a8;
-      box-shadow: 0 0 10px #5df0a8;
-      animation: pulseBeacon 1.6s ease-in-out infinite alternate;
-    }
-
-    @keyframes pulseBeacon {
-      0% { transform: scale(0.8); opacity: 0.5; }
-      100% { transform: scale(1.3); opacity: 1; }
-    }
-
-    /* BENTO GRID OF 4 CHANNELS */
-    .community-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
       gap: 24px;
-      margin-bottom: 48px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .community-card {
-      position: relative;
-      background: rgba(14, 20, 42, 0.72);
-      border: 1px solid rgba(140, 170, 240, 0.2);
-      border-radius: 24px;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-      overflow: hidden;
-    }
-
-    .community-card::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, var(--card-ambient, rgba(2, 210, 227, 0.08)) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .community-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 30px var(--card-glow, rgba(2, 210, 227, 0.25));
-    }
-
-    .community-card:hover::before {
-      opacity: 1;
-    }
-
-    .community-card > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .comm-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 22px;
-    }
-
-    .comm-icon-box {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: rgba(7, 9, 19, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.06);
-      transition: transform 0.25s ease;
-    }
-
-    .community-card:hover .comm-icon-box {
-      transform: scale(1.08) rotate(-2deg);
-    }
-
-    /* YouTube Card */
-    .yt-card {
-      --card-ambient: rgba(255, 20, 0, 0.15);
-      --card-glow: rgba(255, 20, 0, 0.28);
-    }
-    .yt-card:hover { border-color: rgba(255, 20, 0, 0.6); }
-    .yt-icon { color: #ff1400; border-color: rgba(255, 20, 0, 0.4); box-shadow: 0 0 20px rgba(255, 20, 0, 0.25); }
-    .yt-badge { color: #ff5252; background: rgba(255, 20, 0, 0.12); border: 1px solid rgba(255, 20, 0, 0.35); }
-
-    /* Telegram Card */
-    .tg-card {
-      --card-ambient: rgba(2, 210, 227, 0.18);
-      --card-glow: rgba(2, 210, 227, 0.3);
-    }
-    .tg-card:hover { border-color: rgba(2, 210, 227, 0.6); }
-    .tg-icon { color: #02d2e3; border-color: rgba(2, 210, 227, 0.4); box-shadow: 0 0 20px rgba(2, 210, 227, 0.25); }
-    .tg-badge { color: #02d2e3; background: rgba(2, 210, 227, 0.12); border: 1px solid rgba(2, 210, 227, 0.35); }
-
-    /* Instagram Card */
-    .ig-card {
-      --card-ambient: rgba(225, 48, 108, 0.18);
-      --card-glow: rgba(225, 48, 108, 0.3);
-    }
-    .ig-card:hover { border-color: rgba(225, 48, 108, 0.6); }
-    .ig-icon { color: #ff6b8b; border-color: rgba(225, 48, 108, 0.4); box-shadow: 0 0 20px rgba(225, 48, 108, 0.25); }
-    .ig-badge { color: #ff85a1; background: rgba(225, 48, 108, 0.12); border: 1px solid rgba(225, 48, 108, 0.35); }
-
-    /* GitHub Card */
-    .gh-card {
-      --card-ambient: rgba(93, 240, 168, 0.16);
-      --card-glow: rgba(93, 240, 168, 0.28);
-    }
-    .gh-card:hover { border-color: rgba(93, 240, 168, 0.6); }
-    .gh-icon { color: #5df0a8; border-color: rgba(93, 240, 168, 0.4); box-shadow: 0 0 20px rgba(93, 240, 168, 0.25); }
-    .gh-badge { color: #5df0a8; background: rgba(93, 240, 168, 0.12); border: 1px solid rgba(93, 240, 168, 0.35); }
-
-    .comm-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: 5px 12px;
+      padding: 16px 36px;
       border-radius: 999px;
-      text-transform: uppercase;
-    }
-
-    .comm-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.55rem;
-      font-weight: 800;
-      margin: 0 0 4px 0;
-      color: #fff;
-    }
-
-    .comm-handle {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--accent-cyan);
-      margin-bottom: 14px;
-      font-weight: 600;
-    }
-
-    .comm-desc {
-      font-size: 0.94rem;
-      line-height: 1.65;
-      color: #95a3c2;
-      margin-bottom: 18px;
-    }
-
-    .comm-meta-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
-      color: #718096;
-      margin-bottom: 24px;
-    }
-
-    .comm-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 13px 20px;
-      border-radius: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.86rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-    }
-
-    .yt-btn {
-      background: linear-gradient(135deg, #ff1400 0%, #b80d00 100%);
-      color: #fff;
-      border: 1px solid rgba(255, 60, 40, 0.5);
-      box-shadow: 0 8px 20px rgba(255, 20, 0, 0.3);
-    }
-    .yt-btn:hover {
-      background: #ff2a17;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(255, 20, 0, 0.5);
-      color: #fff;
-    }
-
-    .tg-btn {
-      background: linear-gradient(135deg, #02d2e3 0%, #009cb0 100%);
-      color: #070913;
-      border: 1px solid rgba(2, 210, 227, 0.6);
-      box-shadow: 0 8px 20px rgba(2, 210, 227, 0.3);
-    }
-    .tg-btn:hover {
-      background: #25e5f5;
-      color: #070913;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(2, 210, 227, 0.5);
-    }
-
-    .ig-btn {
-      background: linear-gradient(135deg, #e1306c 0%, #c13584 100%);
-      color: #fff;
-      border: 1px solid rgba(225, 48, 108, 0.5);
-      box-shadow: 0 8px 20px rgba(225, 48, 108, 0.3);
-    }
-    .ig-btn:hover {
-      background: #fd1d1d;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(225, 48, 108, 0.5);
-      color: #fff;
-    }
-
-    .gh-btn {
-      background: rgba(93, 240, 168, 0.12);
-      color: #5df0a8;
-      border: 1px solid rgba(93, 240, 168, 0.4);
-      box-shadow: 0 8px 20px rgba(93, 240, 168, 0.15);
-    }
-    .gh-btn:hover {
-      background: #5df0a8;
-      color: #070913;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(93, 240, 168, 0.4);
-    }
-
-    /* COLLABORATION / DISPATCH TERMINAL */
-    .community-dispatch-terminal {
-      background: linear-gradient(135deg, rgba(14, 20, 42, 0.9) 0%, rgba(7, 9, 19, 0.96) 100%);
+      background: rgba(14, 20, 42, 0.78);
       border: 1px solid rgba(140, 170, 240, 0.28);
-      border-radius: 24px;
-      padding: 36px;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      position: relative;
-      z-index: 2;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    .dispatch-header {
+    .social-dock-item {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 14px;
-      padding-bottom: 20px;
-      margin-bottom: 22px;
-      border-bottom: 1px solid rgba(140, 170, 240, 0.18);
+      gap: 8px;
+      text-decoration: none;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .dispatch-title-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--accent-mint);
+    .social-dock-item:hover {
+      transform: translateY(-8px) scale(1.15);
+    }
+
+    .dock-icon-box {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #070913;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .dock-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-    }
-
-    .dispatch-icon {
-      font-size: 1.1rem;
-      color: var(--accent-cyan);
-    }
-
-    .dispatch-status {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.74rem;
-      color: var(--accent-cyan);
-      padding: 5px 12px;
-      border-radius: 999px;
-      background: rgba(2, 210, 227, 0.12);
-      border: 1px solid rgba(2, 210, 227, 0.35);
-    }
-
-    /* Console Screen inside Terminal */
-    .dispatch-console-screen {
-      background: #04060d;
-      border: 1px solid rgba(140, 170, 240, 0.2);
-      border-radius: 16px;
-      padding: 20px 24px;
-      margin-bottom: 24px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
+      font-size: 0.72rem;
       color: #94a3b8;
-    }
-
-    .console-prompt-line {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #5df0a8;
       font-weight: 600;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
+      transition: color 0.2s ease;
     }
 
-    .console-input-display {
+    /* Brand-Specific Glows */
+    .yt-dock .dock-icon-box { color: #ff1400; border-color: rgba(255, 20, 0, 0.4); }
+    .yt-dock:hover .dock-icon-box {
+      background: #ff1400;
       color: #fff;
-      font-weight: 500;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 4px 10px;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      display: inline-block;
-      min-width: 220px;
+      border-color: #ff3344;
+      box-shadow: 0 0 28px rgba(255, 20, 0, 0.6);
     }
+    .yt-dock:hover .dock-label { color: #ff5252; }
 
-    .cursor-blink {
-      display: inline-block;
-      width: 8px;
-      height: 16px;
-      background: var(--accent-cyan);
-      vertical-align: middle;
-      animation: blinkCursor 0.9s infinite;
+    .tg-dock .dock-icon-box { color: #02d2e3; border-color: rgba(2, 210, 227, 0.4); }
+    .tg-dock:hover .dock-icon-box {
+      background: #02d2e3;
+      color: #070913;
+      border-color: #25e5f5;
+      box-shadow: 0 0 28px rgba(2, 210, 227, 0.6);
     }
+    .tg-dock:hover .dock-label { color: #02d2e3; }
 
-    @keyframes blinkCursor {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    .console-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .console-topic-chip {
-      background: rgba(14, 20, 42, 0.9);
-      border: 1px solid rgba(140, 170, 240, 0.25);
-      color: #cbd5e1;
-      padding: 5px 12px;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .console-topic-chip:hover {
-      background: rgba(2, 210, 227, 0.2);
-      border-color: rgba(2, 210, 227, 0.6);
+    .ig-dock .dock-icon-box { color: #ff6b8b; border-color: rgba(225, 48, 108, 0.4); }
+    .ig-dock:hover .dock-icon-box {
+      background: linear-gradient(135deg, #e1306c 0%, #fd1d1d 100%);
       color: #fff;
-      transform: translateY(-1px);
+      border-color: #ff85a1;
+      box-shadow: 0 0 28px rgba(225, 48, 108, 0.6);
     }
+    .ig-dock:hover .dock-label { color: #ff85a1; }
 
-    .console-topic-chip.active {
-      background: rgba(93, 240, 168, 0.2);
-      border-color: rgba(93, 240, 168, 0.7);
-      color: #5df0a8;
+    .gh-dock .dock-icon-box { color: #5df0a8; border-color: rgba(93, 240, 168, 0.4); }
+    .gh-dock:hover .dock-icon-box {
+      background: #5df0a8;
+      color: #070913;
+      border-color: #5df0a8;
+      box-shadow: 0 0 28px rgba(93, 240, 168, 0.6);
     }
-
-    .dispatch-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-    }
+    .gh-dock:hover .dock-label { color: #5df0a8; }
 
     /* CINEMATIC FOOTER */
     .cinematic-footer {
@@ -2505,18 +2359,46 @@
             </div>
           </div>
 
-          <!-- Dynamic Output Box -->
-          <div class="c-details-box" id="convergence-details">
-            <div class="c-details-text">
-              <div class="c-details-badge" id="c-badge">SYNERGY: ANTHROPOLOGY (UPSC OPTIONAL) &rarr; HUMAN EVOLUTION &amp; TRIBAL GOVERNANCE</div>
-              <div class="c-details-desc" id="c-desc">
-                Anthropology forms the deep human bridge. Combining biological genetics (from Zoology) with territorial land-settlement patterns (from Geography), it unlocks unprecedented mastery over Paper-1 (Paleoanthropology &amp; Social Institutions) and Paper-2 (Indian Tribal Dynamics, Caste Evolution &amp; Constitutional Safeguards).
+          <!-- LIVING INTERACTIVE SCIENCE LABORATORY & 3D SIMULATION STAGE -->
+          <div class="convergence-lab-workspace" id="convergence-lab">
+            <div class="lab-hud-header">
+              <div class="lab-hud-title">
+                <span style="color: var(--accent-cyan); font-size: 1.1rem;">⚡</span>
+                <span id="lab-active-title">SIMULATION: 3D PLANETARY ORTHOGRAPHIC GLOBE</span>
+              </div>
+              <div class="lab-mode-tabs">
+                <button type="button" class="lab-mode-tab active" id="tab-globe" onclick="switchLabMode('globe')">🌍 3D Planetary Globe</button>
+                <button type="button" class="lab-mode-tab" id="tab-river" onclick="switchLabMode('river')">🌊 River Meander ODE</button>
+                <button type="button" class="lab-mode-tab" id="tab-anthro" onclick="switchLabMode('anthro')">🦴 Hominin Cranial &amp; Bipedalism</button>
+                <button type="button" class="lab-mode-tab" id="tab-data" onclick="switchLabMode('data')">📊 Demographic Dividend</button>
               </div>
             </div>
-            <div>
-              <a href="#atlas" class="btn btn-outline" style="padding: 9px 18px; font-size: 0.85rem;">
-                <span>View Syllabus Mapping &darr;</span>
-              </a>
+
+            <div class="lab-viewport-wrap">
+              <!-- Mode 1: 3D Dotted Globe Container -->
+              <div id="lab-globe-container" class="aa-dotted-globe" style="width: 100%; height: 440px; display: block;" data-globe-width="960" data-globe-height="440" data-globe-speed="0.55"></div>
+
+              <!-- Modes 2, 3, 4: Dynamic Canvas Simulation Stage -->
+              <canvas id="sim-stage-canvas" class="lab-stage-canvas" width="960" height="440" style="display: none;"></canvas>
+
+              <!-- Synergistic Insight Ribbon -->
+              <div id="lab-synergy-banner" style="background: rgba(14, 20, 42, 0.95); border-top: 1px solid rgba(140, 170, 240, 0.2); padding: 12px 24px; font-family: 'DM Mono', monospace; font-size: 0.82rem; color: #cbd5e1; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+                <div id="lab-synergy-text">
+                  <span style="color: var(--accent-mint); font-weight: 700;">SYNERGY:</span> Drag globe to rotate coordinates. Zoom in to inspect continental plates, geomorphological fracture zones, and global monsoon belts.
+                </div>
+                <div style="font-size: 0.74rem; color: #64748b; white-space: nowrap;">[ REALTIME COMPUTE ]</div>
+              </div>
+            </div>
+
+            <div class="lab-controls-bar">
+              <div id="lab-controls-dynamic" style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+                <!-- Dynamic controls injected by JS -->
+              </div>
+              <div>
+                <a href="#atlas" class="lab-btn-small" style="text-decoration: none; padding: 7px 16px;">
+                  <span>Syllabus Mapping &darr;</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -2696,166 +2578,63 @@
           <div class="community-telemetry-bar">
             <span class="telemetry-pill live"><span class="pulse-dot"></span> BROADCAST ACTIVE</span>
             <span class="telemetry-pill">DISCIPLINES: ZOOLOGY // GEOGRAPHY // ANTHROPOLOGY // DATA</span>
-            <span class="telemetry-pill">LOCATION: RAJASTHAN, INDIA // OPEN ACCESSIBLE WEB</span>
+            <span class="telemetry-pill">LOCATION: HIMACHAL PRADESH, INDIA // OPEN ACCESSIBLE WEB</span>
           </div>
         </div>
 
-        <!-- 4-Card Command Bento Grid -->
-        <div class="community-grid">
-          
-          <!-- Card 1: YouTube -->
-          <div class="community-card yt-card">
-            <div class="comm-card-header">
-              <div class="comm-icon-box yt-icon">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+        <!-- Sleek Minimalist Floating Cyber-Glass Social Dock -->
+        <div class="social-dock-wrap">
+          <div class="social-dock">
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@ADVANCED_ANALYSIS" target="_blank" rel="noopener noreferrer" class="social-dock-item yt-dock" title="YouTube Studio (@ADVANCED_ANALYSIS)">
+              <div class="dock-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
               </div>
-              <span class="comm-badge yt-badge">4K SIMULATIONS</span>
-            </div>
-            <div>
-              <h3 class="comm-title">YouTube Studio</h3>
-              <div class="comm-handle">@ADVANCED_ANALYSIS</div>
-              <p class="comm-desc">
-                Long-form scientific documentaries, physical geomorphology animations, and deep-time UPSC syllabus walkthroughs rendered from Big Bang to Governance.
-              </p>
-              <div class="comm-meta-list">
-                <span>&bull; Explorable Code Visuals</span>
-                <span>&bull; UPSC GS-1 &amp; Optional Masterclasses</span>
-              </div>
-            </div>
-            <a href="https://www.youtube.com/@ADVANCED_ANALYSIS" target="_blank" rel="noopener noreferrer" class="comm-btn yt-btn magnet-btn">
-              <span>Enter YouTube Studio</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <span class="dock-label">YouTube</span>
             </a>
-          </div>
 
-          <!-- Card 2: Telegram -->
-          <div class="community-card tg-card">
-            <div class="comm-card-header">
-              <div class="comm-icon-box tg-icon">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+            <!-- Telegram -->
+            <a href="https://t.me/oOlIOo_b0t" target="_blank" rel="noopener noreferrer" class="social-dock-item tg-dock" title="Telegram Citadel (@oOlIOo_b0t)">
+              <div class="dock-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.16l-1.92 9.06c-.14.65-.53.81-1.08.5l-2.98-2.2-1.44 1.38c-.16.16-.29.29-.6.29l.21-3.04 5.54-5.01c.24-.21-.05-.33-.38-.12l-6.85 4.31-2.95-.92c-.64-.2-.66-.64.14-.95l11.53-4.45c.53-.19 1 .13.81.95z"/>
                 </svg>
               </div>
-              <span class="comm-badge tg-badge">LIVE CITADEL</span>
-            </div>
-            <div>
-              <h3 class="comm-title">Telegram Citadel</h3>
-              <div class="comm-handle">@oOlIOo_b0t</div>
-              <p class="comm-desc">
-                Daily analytical research debriefs, curated UPSC Mains answer frameworks, high-resolution scientific diagrams, and direct peer discussion with Aditya.
-              </p>
-              <div class="comm-meta-list">
-                <span>&bull; Direct Simulation Request Hotline</span>
-                <span>&bull; Research Notes &amp; PDF Schematics</span>
-              </div>
-            </div>
-            <a href="https://t.me/oOlIOo_b0t" target="_blank" rel="noopener noreferrer" class="comm-btn tg-btn magnet-btn">
-              <span>Join Telegram Citadel</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <span class="dock-label">Telegram</span>
             </a>
-          </div>
 
-          <!-- Card 3: Instagram -->
-          <div class="community-card ig-card">
-            <div class="comm-card-header">
-              <div class="comm-icon-box ig-icon">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/advanced_analysis?stkn=YjU2Y3Roczh4ZXkw" target="_blank" rel="noopener noreferrer" class="social-dock-item ig-dock" title="Instagram Lab (@advanced_analysis)">
+              <div class="dock-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
               </div>
-              <span class="comm-badge ig-badge">VISUAL LAB</span>
-            </div>
-            <div>
-              <h3 class="comm-title">Instagram Lab</h3>
-              <div class="comm-handle">@advanced_analysis</div>
-              <p class="comm-desc">
-                Fast kinetic typography, micro-anatomical 3D cels, field photography, and concise reels bringing planetary physical processes to your mobile feed.
-              </p>
-              <div class="comm-meta-list">
-                <span>&bull; Micro-Anatomy &amp; Geomorphology Reels</span>
-                <span>&bull; Visual Research Stories</span>
-              </div>
-            </div>
-            <a href="https://www.instagram.com/advanced_analysis?stkn=YjU2Y3Roczh4ZXkw" target="_blank" rel="noopener noreferrer" class="comm-btn ig-btn magnet-btn">
-              <span>Follow Visual Lab</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <span class="dock-label">Instagram</span>
             </a>
-          </div>
 
-          <!-- Card 4: GitHub -->
-          <div class="community-card gh-card">
-            <div class="comm-card-header">
-              <div class="comm-icon-box gh-icon">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+            <!-- GitHub -->
+            <a href="https://github.com/RengokuSensei/Code0" target="_blank" rel="noopener noreferrer" class="social-dock-item gh-dock" title="GitHub Repository (RengokuSensei/Code0)">
+              <div class="dock-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                 </svg>
               </div>
-              <span class="comm-badge gh-badge">OPEN FOUNDRY</span>
-            </div>
-            <div>
-              <h3 class="comm-title">GitHub Foundry</h3>
-              <div class="comm-handle">RengokuSensei/Code0</div>
-              <p class="comm-desc">
-                Inspect the source code of our static zero-build MkDocs engine, procedural floral blooming Type Garden algorithms, D3 dotted globe, and Project Notes.
-              </p>
-              <div class="comm-meta-list">
-                <span>&bull; Public Open Source Repository</span>
-                <span>&bull; Star, Fork &amp; Contribute</span>
-              </div>
-            </div>
-            <a href="https://github.com/RengokuSensei/Code0" target="_blank" rel="noopener noreferrer" class="comm-btn gh-btn magnet-btn">
-              <span>Star on GitHub</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <span class="dock-label">GitHub</span>
             </a>
           </div>
-
         </div>
 
-        <!-- Interactive Collaboration & Simulation Request Terminal -->
-        <div class="community-dispatch-terminal">
-          <div class="dispatch-header">
-            <div class="dispatch-title-wrap">
-              <span class="dispatch-icon">✦</span>
-              <span class="dispatch-title">RESEARCH COLLABORATION &amp; SIMULATION REQUEST HOTLINE</span>
-            </div>
-            <div class="dispatch-status">DISPATCH PROTOCOL: ACTIVE</div>
-          </div>
-          <div class="dispatch-body">
-            <p style="margin-bottom: 16px;">
-              Have a specific scientific model, civil services strategy question, or physical simulation you want engineered next? Select a topic blueprint or test our live hotline:
-            </p>
-
-            <div class="dispatch-console-screen">
-              <div class="console-prompt-line">
-                <span>visitor@code0:~$</span>
-                <span>./dispatch-sim.sh --topic=</span>
-                <span class="console-input-display" id="sim-query-display">&quot;Hominin Bipedal Mechanics&quot;</span>
-                <span class="cursor-blink"></span>
-              </div>
-              <div style="font-size: 0.74rem; color: #64748b; margin-bottom: 8px;">CLICK TO PRE-FILL SIMULATION TARGET:</div>
-              <div class="console-chip-row">
-                <button type="button" class="console-topic-chip active" onclick="setSimTopic('Hominin Bipedal Mechanics (Pelvic Adaptations)')">🦴 Hominin Bipedalism</button>
-                <button type="button" class="console-topic-chip" onclick="setSimTopic('Ikeda-Parker Meander Neck Cutoff ODE')">🌊 River Meander ODE</button>
-                <button type="button" class="console-topic-chip" onclick="setSimTopic('Mendelian Genetics & Polygenic Traits')">🧬 Mendelian Genetics</button>
-                <button type="button" class="console-topic-chip" onclick="setSimTopic('Himalayan Collision & Main Boundary Thrust')">⛰️ Himalayan Orogeny</button>
-                <button type="button" class="console-topic-chip" onclick="setSimTopic('Ashokan Brahmi Epigraphic Decipherment')">📜 Ashokan Epigraphy</button>
-                <button type="button" class="console-topic-chip" onclick="setSimTopic('5th & 6th Schedule Tribal Governance PESA 1996')">⚖️ Tribal PESA 1996</button>
-              </div>
-            </div>
-
-            <div class="dispatch-actions">
-              <a id="telegram-dispatch-btn" href="https://t.me/oOlIOo_b0t?text=Hi%20Aditya,%20I%20would%20like%20to%20request%20a%20simulation%20on:%20Hominin%20Bipedal%20Mechanics" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnet-btn" style="padding: 14px 28px;">
-                <span>Dispatch Topic via Telegram &rarr;</span>
-              </a>
-              <a href="about/author/" class="btn btn-outline magnet-btn" style="padding: 14px 24px;">
-                <span>Read Aditya's Full Dossier &rarr;</span>
-              </a>
-              <a href="project-notes/" class="btn btn-outline magnet-btn" style="padding: 14px 24px;">
-                <span>Inspect Master Codex &rarr;</span>
-              </a>
-            </div>
+        <div style="margin-top: 40px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+          <a href="about/author/" class="btn btn-outline" style="padding: 11px 22px; font-size: 0.85rem;">
+            <span>Read Aditya's Full Dossier &rarr;</span>
+          </a>
+          <a href="project-notes/" class="btn btn-outline" style="padding: 11px 22px; font-size: 0.85rem;">
+            <span>Inspect Master Codex &rarr;</span>
+          </a>
+        </div>
           </div>
         </div>
 
@@ -2923,6 +2702,8 @@
   <!-- SCRIPTS -->
   <script src="javascripts/vendor/gsap.min.js"></script>
   <script src="javascripts/vendor/ScrollTrigger.min.js"></script>
+  <script src="javascripts/vendor/d3.min.js"></script>
+  <script src="javascripts/dotted-globe.js"></script>
   <script src="javascripts/interactive-fx.js"></script>
   <script src="javascripts/hero-type-garden.js"></script>
   <script type="module">
@@ -3047,30 +2828,76 @@
       bgVideo.play().catch(() => {});
     }
 
-    // 2. GSAP ScrollTrigger Pipeline — Cosmic Marquee & Perspective Tilt
+    // 2. Cosmic Continuum Infinite Marquee — Continuous 60fps Auto-Motion + Dynamic Mouse Hover Steering
     const marqueeSec = document.getElementById('marquee');
     const marqueeRow1 = document.getElementById('marquee-row-1');
     const marqueeRow2 = document.getElementById('marquee-row-2');
 
     if (marqueeSec && marqueeRow1 && marqueeRow2) {
-      gsap.to(marqueeRow1, {
-        x: '-22%',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: marqueeSec,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 0.6
-        }
+      // Duplicate children to ensure seamless continuous wrap
+      marqueeRow1.innerHTML += marqueeRow1.innerHTML;
+      marqueeRow2.innerHTML += marqueeRow2.innerHTML;
+
+      let pos1 = 0;
+      let pos2 = 0;
+      const baseSpeed = 0.85;
+      let mouseSteer = 0;
+      let targetSteer = 0;
+      let scrollImpulse = 0;
+
+      marqueeSec.addEventListener('pointerleave', () => {
+        targetSteer = 0;
       });
-      gsap.to(marqueeRow2, {
-        x: '22%',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: marqueeSec,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 0.6
+
+      marqueeSec.addEventListener('pointermove', (e) => {
+        const normX = (e.clientX / window.innerWidth) - 0.5; // -0.5 to +0.5
+        targetSteer = normX * 5.4; // Dynamically steer and accelerate marquee with cursor position
+      });
+
+      let lastSY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const sy = window.scrollY;
+        scrollImpulse = (sy - lastSY) * 0.35;
+        lastSY = sy;
+      }, { passive: true });
+
+      function animateMarqueeLoop() {
+        mouseSteer += (targetSteer - mouseSteer) * 0.08;
+        scrollImpulse *= 0.90;
+
+        const delta1 = -(baseSpeed + mouseSteer + scrollImpulse);
+        const delta2 = (baseSpeed * 0.88 - mouseSteer - scrollImpulse);
+
+        pos1 += delta1;
+        pos2 += delta2;
+
+        const half1 = marqueeRow1.scrollWidth / 2;
+        const half2 = marqueeRow2.scrollWidth / 2;
+
+        if (half1 > 0) {
+          if (pos1 <= -half1) pos1 += half1;
+          if (pos1 > 0) pos1 -= half1;
+          marqueeRow1.style.transform = `translate3d(${pos1}px, 0, 0)`;
+        }
+
+        if (half2 > 0) {
+          if (pos2 >= 0) pos2 -= half2;
+          if (pos2 < -half2) pos2 += half2;
+          marqueeRow2.style.transform = `translate3d(${pos2}px, 0, 0)`;
+        }
+
+        requestAnimationFrame(animateMarqueeLoop);
+      }
+      requestAnimationFrame(animateMarqueeLoop);
+
+      // Event delegation for opening evidence modal from any marquee card (original or duplicated)
+      marqueeSec.addEventListener('click', (e) => {
+        const card = e.target.closest('.marquee-card');
+        if (card) {
+          const idx = parseInt(card.dataset.evidenceIndex, 10);
+          if (!isNaN(idx) && typeof window.openEvidenceModal === 'function') {
+            window.openEvidenceModal(idx);
+          }
         }
       });
     }
@@ -3531,37 +3358,542 @@
       });
     });
 
-    // 10. Convergence Node Interactive Logic
-    const nodeData = {
-      anthro: {
-        badge: "SYNERGY: ANTHROPOLOGY (UPSC OPTIONAL) → HUMAN ORIGINS & TRIBAL POLICY",
-        desc: "Anthropology is the master human synthesis. Blending paleoanthropology (fossil hominid skulls, bipedal mechanics) with socio-cultural ethnography (Indian tribal customs, 5th/6th Schedule governance, kinship, and linguistic diversity), it turns Paper-1 and Paper-2 into a rich, living scientific narrative."
-      },
-      geog: {
-        badge: "SYNERGY: M.SC. GEOGRAPHY (OPEN UNIV.) → PLANETARY DYNAMICS & SPATIAL SYSTEMS",
-        desc: "Geography provides the physical stage for all history. From plate tectonics, geomorphic landforms, and Walker atmospheric circulation to Indian agro-climatic zones and resource geopolitics, it equips the codex with precise physical maps and environmental models."
-      },
-      zoo: {
-        badge: "SYNERGY: B.SC. ZOOLOGY → EVOLUTIONARY BIOLOGY & ECOLOGY",
-        desc: "Zoology grounds the intellect in organic reality: genetic mutation rates, cellular respiration, taxonomy, and ecological trophic cascades. It provides an intuitive biological bedrock that directly enriches Anthropology, Environmental GS-3, and Paleontology."
-      },
-      data: {
-        badge: "SYNERGY: DATA ANALYTICS → EMPIRICAL RIGOR & INTERACTIVE SIMULATION",
-        desc: "Data Analytics transforms qualitative theories into interactive quantitative models: calculating demographic dividends, economic inflation cycles, and climate anomaly regressions so students can test cause-and-effect with live parameters."
-      }
+    // =========================================================================
+    // 10. CONVERGENCE SCIENCE LABORATORY & 3D SIMULATION ENGINE
+    // =========================================================================
+    let currentLabMode = 'globe';
+    let globeInstance = null;
+    let labAnimFrame = null;
+
+    // A. RIVER MEANDER SOLVER (Ikeda-Parker ODE)
+    const riverState = {
+      nodes: [],
+      particles: [],
+      numNodes: 95,
+      erosionRate: 1.5,
+      flowRate: 1.2,
+      surge: 1.0,
+      cutoffs: []
     };
 
+    function initRiver() {
+      riverState.nodes = [];
+      riverState.particles = [];
+      riverState.cutoffs = [];
+      const W = 960, H = 440;
+      for (let i = 0; i < riverState.numNodes; i++) {
+        const t = i / (riverState.numNodes - 1);
+        const x = 30 + t * (W - 60);
+        const y = H / 2 + Math.sin(t * Math.PI * 4.2) * 65 + Math.sin(t * Math.PI * 8.4) * 25;
+        riverState.nodes.push({ x, y, origY: y, vy: 0, s: t });
+      }
+      for (let k = 0; k < 60; k++) {
+        riverState.particles.push({
+          nodeIdx: Math.random() * (riverState.numNodes - 2),
+          offset: (Math.random() - 0.5) * 16,
+          speed: Math.random() * 0.4 + 0.8
+        });
+      }
+    }
+
+    function setupRiverControls(wrap) {
+      if (!wrap) return;
+      wrap.innerHTML = `
+        <div class="lab-param-slider">
+          <span>Erosion Rate:</span>
+          <input type="range" id="river-erode" min="0.5" max="3.5" step="0.1" value="${riverState.erosionRate}" style="width: 90px;">
+        </div>
+        <div class="lab-param-slider">
+          <span>Flow Discharge:</span>
+          <input type="range" id="river-flow" min="0.6" max="3.0" step="0.1" value="${riverState.flowRate}" style="width: 90px;">
+        </div>
+        <button class="lab-btn-small" id="btn-surge">⚡ Flood Surge</button>
+        <button class="lab-btn-small" id="btn-reset-river">↺ Reset Thalweg</button>
+        <span id="river-metrics" style="color: var(--accent-cyan); font-size: 0.74rem; font-weight: 600;">Sinuosity: 1.62 | Cutoffs: 0</span>
+      `;
+
+      const erodeSlider = document.getElementById('river-erode');
+      const flowSlider = document.getElementById('river-flow');
+      const surgeBtn = document.getElementById('btn-surge');
+      const resetBtn = document.getElementById('btn-reset-river');
+
+      if (erodeSlider) erodeSlider.addEventListener('input', e => riverState.erosionRate = parseFloat(e.target.value));
+      if (flowSlider) flowSlider.addEventListener('input', e => riverState.flowRate = parseFloat(e.target.value));
+      if (surgeBtn) {
+        surgeBtn.addEventListener('click', () => {
+          riverState.surge = 3.5;
+          setTimeout(() => riverState.surge = 1.0, 1800);
+        });
+      }
+      if (resetBtn) resetBtn.addEventListener('click', () => initRiver());
+    }
+
+    function startRiverLoop(canvas) {
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const H = canvas.height;
+
+      function renderRiver() {
+        if (currentLabMode !== 'river') return;
+        ctx.fillStyle = '#04060d';
+        ctx.fillRect(0, 0, W, H);
+
+        // Topographic Contour Grid
+        ctx.strokeStyle = 'rgba(140, 170, 240, 0.05)';
+        ctx.lineWidth = 1;
+        for (let y = 0; y < H; y += 40) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(W, y);
+          ctx.stroke();
+        }
+
+        // Solve Ikeda-Parker Curvature ODE
+        const nodes = riverState.nodes;
+        let totalLen = 0;
+        for (let i = 1; i < nodes.length - 1; i++) {
+          const prev = nodes[i - 1];
+          const curr = nodes[i];
+          const next = nodes[i + 1];
+
+          // 2nd derivative (curvature)
+          const curv = (next.y - 2 * curr.y + prev.y) * 0.003;
+          const latSpeed = curv * riverState.erosionRate * riverState.flowRate * riverState.surge;
+          curr.y += latSpeed * 0.45;
+
+          // Soft boundary damping
+          if (curr.y < 50) curr.y += (50 - curr.y) * 0.1;
+          if (curr.y > H - 50) curr.y -= (curr.y - (H - 50)) * 0.1;
+
+          const dx = curr.x - prev.x;
+          const dy = curr.y - prev.y;
+          totalLen += Math.sqrt(dx * dx + dy * dy);
+        }
+
+        // Spontaneous Neck Cutoff Detection
+        for (let i = 3; i < nodes.length - 15; i++) {
+          for (let j = i + 14; j < nodes.length - 3; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 26) {
+              // Neck breakthrough: isolate loop as oxbow lake
+              const oxbowSlice = nodes.slice(i, j).map(pt => ({ x: pt.x, y: pt.y }));
+              riverState.cutoffs.push(oxbowSlice);
+              if (riverState.cutoffs.length > 5) riverState.cutoffs.shift();
+
+              // Straighten active channel across neck
+              const midY = (nodes[i].y + nodes[j].y) / 2;
+              nodes[i].y = midY;
+              nodes[j].y = midY;
+              break;
+            }
+          }
+        }
+
+        // Render Abandoned Oxbow Lakes
+        riverState.cutoffs.forEach(ox => {
+          if (ox.length < 2) return;
+          ctx.strokeStyle = 'rgba(93, 240, 168, 0.4)';
+          ctx.lineWidth = 14;
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.beginPath();
+          ctx.moveTo(ox[0].x, ox[0].y);
+          for (let p = 1; p < ox.length; p++) ctx.lineTo(ox[p].x, ox[p].y);
+          ctx.stroke();
+
+          ctx.strokeStyle = 'rgba(2, 210, 227, 0.2)';
+          ctx.lineWidth = 6;
+          ctx.stroke();
+
+          // Label
+          ctx.fillStyle = '#5df0a8';
+          ctx.font = '10px "JetBrains Mono", monospace';
+          ctx.fillText('OXBOW LAKE (CUTOFF)', ox[Math.floor(ox.length / 2)].x - 40, ox[Math.floor(ox.length / 2)].y - 14);
+        });
+
+        // Render Outer Cut-Banks (Erosion) and Inner Point Bars (Deposition)
+        for (let i = 2; i < nodes.length - 2; i++) {
+          const curv = (nodes[i + 1].y - 2 * nodes[i].y + nodes[i - 1].y);
+          if (Math.abs(curv) > 2.0) {
+            // Cut bank in rose glow
+            ctx.fillStyle = 'rgba(255, 107, 139, 0.4)';
+            ctx.beginPath();
+            ctx.arc(nodes[i].x, nodes[i].y + (curv > 0 ? 16 : -16), 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Point bar in amber
+            ctx.fillStyle = 'rgba(255, 184, 77, 0.35)';
+            ctx.beginPath();
+            ctx.arc(nodes[i].x, nodes[i].y - (curv > 0 ? 14 : -14), 4, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        // Render Active River Channel (Deep Core + Glow)
+        ctx.strokeStyle = 'rgba(2, 210, 227, 0.25)';
+        ctx.lineWidth = 26;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.beginPath();
+        ctx.moveTo(nodes[0].x, nodes[0].y);
+        for (let i = 1; i < nodes.length; i++) ctx.lineTo(nodes[i].x, nodes[i].y);
+        ctx.stroke();
+
+        ctx.strokeStyle = '#02d2e3';
+        ctx.lineWidth = 10;
+        ctx.stroke();
+
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Render Flow Particles
+        ctx.fillStyle = '#ffffff';
+        riverState.particles.forEach(p => {
+          p.nodeIdx += p.speed * riverState.flowRate * 0.4;
+          if (p.nodeIdx >= nodes.length - 2) p.nodeIdx = 1;
+          const baseNode = nodes[Math.floor(p.nodeIdx)];
+          const nextNode = nodes[Math.floor(p.nodeIdx) + 1];
+          const frac = p.nodeIdx - Math.floor(p.nodeIdx);
+          const px = baseNode.x + (nextNode.x - baseNode.x) * frac;
+          const py = baseNode.y + (nextNode.y - baseNode.y) * frac + p.offset;
+          ctx.beginPath();
+          ctx.arc(px, py, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Sinuosity Metrics
+        const valleyLen = W - 60;
+        const sinuosity = (totalLen / valleyLen).toFixed(2);
+        const metricsEl = document.getElementById('river-metrics');
+        if (metricsEl) {
+          metricsEl.textContent = `Sinuosity P: ${sinuosity} | Cutoffs Formed: ${riverState.cutoffs.length} | Status: ${riverState.surge > 1.0 ? 'FLOOD SURGE ACTIVE' : 'STEADY MEANDER'}`;
+        }
+
+        labAnimFrame = requestAnimationFrame(renderRiver);
+      }
+      renderRiver();
+    }
+
+    // B. HOMININ CRANIAL & BIPEDAL MORPH SOLVER
+    const homininTaxa = [
+      { name: "Australopithecus afarensis", epoch: "3.2 Ma (Pliocene)", cc: 430, valgus: 9.0, prog: 108, brow: 18, color: "#ff8c42" },
+      { name: "Homo habilis", epoch: "2.3 Ma (Pleistocene)", cc: 610, valgus: 10.0, prog: 100, brow: 15, color: "#ffb84d" },
+      { name: "Homo erectus", epoch: "1.8 Ma (Pleistocene)", cc: 900, valgus: 11.2, prog: 92, brow: 22, color: "#02d2e3" },
+      { name: "Homo neanderthalensis", epoch: "150 ka (Late Pleistocene)", cc: 1450, valgus: 10.4, prog: 88, brow: 24, color: "#8c68ff" },
+      { name: "Homo sapiens", epoch: "300 ka–Present (Holocene)", cc: 1350, valgus: 10.0, prog: 82, brow: 8, color: "#5df0a8" }
+    ];
+    let anthroEpochVal = 2.0;
+    let anthroPlaying = false;
+
+    function setupAnthroControls(wrap) {
+      if (!wrap) return;
+      wrap.innerHTML = `
+        <div class="lab-param-slider">
+          <span>Evolutionary Epoch:</span>
+          <input type="range" id="anthro-slider" min="0" max="4" step="0.02" value="${anthroEpochVal}" style="width: 140px;">
+        </div>
+        <button class="lab-btn-small" id="btn-anthro-play">${anthroPlaying ? '⏸ Pause' : '▶ Auto-Morph'}</button>
+        <span id="anthro-metrics" style="color: var(--accent-mint); font-size: 0.74rem; font-weight: 600;">Taxon: Homo erectus | 900 cc | Valgus: 11.2°</span>
+      `;
+
+      const slider = document.getElementById('anthro-slider');
+      const playBtn = document.getElementById('btn-anthro-play');
+
+      if (slider) slider.addEventListener('input', e => anthroEpochVal = parseFloat(e.target.value));
+      if (playBtn) {
+        playBtn.addEventListener('click', () => {
+          anthroPlaying = !anthroPlaying;
+          playBtn.textContent = anthroPlaying ? '⏸ Pause' : '▶ Auto-Morph';
+        });
+      }
+    }
+
+    function startAnthroLoop(canvas) {
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const H = canvas.height;
+
+      function renderAnthro() {
+        if (currentLabMode !== 'anthro') return;
+        ctx.fillStyle = '#04060d';
+        ctx.fillRect(0, 0, W, H);
+
+        if (anthroPlaying) {
+          anthroEpochVal += 0.008;
+          if (anthroEpochVal > 4.0) anthroEpochVal = 0;
+          const slider = document.getElementById('anthro-slider');
+          if (slider) slider.value = anthroEpochVal.toFixed(2);
+        }
+
+        // Interpolate between taxa
+        const idx = Math.min(Math.floor(anthroEpochVal), 3);
+        const frac = anthroEpochVal - idx;
+        const t1 = homininTaxa[idx];
+        const t2 = homininTaxa[idx + 1];
+
+        const cc = t1.cc + (t2.cc - t1.cc) * frac;
+        const valgus = t1.valgus + (t2.valgus - t1.valgus) * frac;
+        const prog = t1.prog + (t2.prog - t1.prog) * frac;
+        const brow = t1.brow + (t2.brow - t1.brow) * frac;
+        const activeTaxon = frac < 0.5 ? t1 : t2;
+
+        // LEFT STAGE: Sagittal Cranial Vault Morph
+        const skullCx = W * 0.32;
+        const skullCy = H * 0.52;
+        const brainRadius = Math.sqrt(cc) * 3.3;
+
+        // Glowing Cranial Mesh
+        ctx.save();
+        ctx.fillStyle = 'rgba(2, 210, 227, 0.08)';
+        ctx.strokeStyle = activeTaxon.color;
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        // Morph skull profile (Vault, Torus, Prognathic Maxilla, Chin)
+        const progShift = (prog - 80) * 1.4;
+        ctx.ellipse(skullCx - 10, skullCy - 15, brainRadius, brainRadius * 0.88, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Facial profile & brow ridge
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(skullCx + brainRadius * 0.7, skullCy - brainRadius * 0.5); // forehead
+        ctx.lineTo(skullCx + brainRadius * 0.8 + brow * 0.8, skullCy - 10); // supraorbital brow ridge
+        ctx.lineTo(skullCx + brainRadius * 0.7, skullCy + 5); // nasion
+        ctx.lineTo(skullCx + brainRadius * 0.8 + progShift, skullCy + 45); // alveolar prognathism
+        ctx.lineTo(skullCx + brainRadius * 0.55 + (progShift > 15 ? 0 : 12), skullCy + 80); // mental protuberance (chin)
+        ctx.lineTo(skullCx - 30, skullCy + 80); // mandible base
+        ctx.stroke();
+
+        // Foramen Magnum Angulation Vector
+        const fmAngle = (90 - prog * 0.25) * (Math.PI / 180);
+        const fmX = skullCx - 20;
+        const fmY = skullCy + brainRadius * 0.75;
+        ctx.strokeStyle = 'rgba(93, 240, 168, 0.8)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(fmX, fmY);
+        ctx.lineTo(fmX + Math.cos(fmAngle) * 45, fmY + Math.sin(fmAngle) * 45);
+        ctx.stroke();
+
+        ctx.fillStyle = '#5df0a8';
+        ctx.font = '10px "JetBrains Mono", monospace';
+        ctx.fillText('FORAMEN MAGNUM VECTOR (BIPEDAL BALANCE)', fmX - 70, fmY + 60);
+        ctx.fillText(`CRANIAL CAPACITY: ${Math.round(cc)} cc`, skullCx - 60, skullCy - brainRadius - 16);
+        ctx.restore();
+
+        // RIGHT STAGE: Femoral Carrying Valgus Angle Diagram
+        const pelvisX = W * 0.74;
+        const pelvisY = H * 0.22;
+        ctx.save();
+        ctx.strokeStyle = 'rgba(140, 170, 240, 0.4)';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+
+        // Plumb line of gravity
+        ctx.beginPath();
+        ctx.moveTo(pelvisX, pelvisY);
+        ctx.lineTo(pelvisX, pelvisY + 260);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Femoral shaft tilted at Valgus Angle
+        const radValgus = valgus * (Math.PI / 180);
+        const kneeX = pelvisX + Math.sin(radValgus) * 190;
+        const kneeY = pelvisY + Math.cos(radValgus) * 190;
+
+        ctx.strokeStyle = '#ffb84d';
+        ctx.lineWidth = 5;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(pelvisX, pelvisY + 20);
+        ctx.lineTo(kneeX, kneeY);
+        ctx.stroke();
+
+        // Tibia vertical to ground
+        ctx.strokeStyle = '#5df0a8';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(kneeX, kneeY);
+        ctx.lineTo(kneeX, kneeY + 75);
+        ctx.stroke();
+
+        // Valgus Arc
+        ctx.strokeStyle = 'rgba(2, 210, 227, 0.8)';
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.arc(pelvisX, pelvisY + 20, 60, Math.PI / 2, Math.PI / 2 + radValgus);
+        ctx.stroke();
+
+        ctx.fillStyle = '#02d2e3';
+        ctx.font = '11px "JetBrains Mono", monospace';
+        ctx.fillText(`BICONDYLAR VALGUS: ${valgus.toFixed(1)}°`, pelvisX + 16, pelvisY + 95);
+        ctx.fillText('MEDIAL CONDYLE AXIS', kneeX - 50, kneeY + 95);
+        ctx.restore();
+
+        // HUD Readouts
+        const metricsEl = document.getElementById('anthro-metrics');
+        if (metricsEl) {
+          metricsEl.textContent = `Taxon: ${activeTaxon.name} (${activeTaxon.epoch}) | Cranial: ${Math.round(cc)} cc | Valgus: ${valgus.toFixed(1)}° | Facial Prognathism: ${prog.toFixed(1)}°`;
+        }
+
+        labAnimFrame = requestAnimationFrame(renderAnthro);
+      }
+      renderAnthro();
+    }
+
+    // C. DEMOGRAPHIC DIVIDEND AGE-COHORT PYRAMID SOLVER
+    let dataTFR = 2.0;
+    let dataLife = 70;
+
+    function setupDataControls(wrap) {
+      if (!wrap) return;
+      wrap.innerHTML = `
+        <div class="lab-param-slider">
+          <span>Fertility Rate (TFR):</span>
+          <input type="range" id="tfr-slider" min="1.1" max="4.8" step="0.1" value="${dataTFR}" style="width: 80px;">
+          <span id="tfr-val" style="color: #fff;">${dataTFR.toFixed(1)}</span>
+        </div>
+        <div class="lab-param-slider">
+          <span>Longevity:</span>
+          <input type="range" id="life-slider" min="55" max="85" step="1" value="${dataLife}" style="width: 80px;">
+          <span id="life-val" style="color: #fff;">${dataLife}y</span>
+        </div>
+        <span id="data-metrics" style="color: var(--accent-amber); font-size: 0.74rem; font-weight: 600;">Dependency: 43.8% (DIVIDEND ACTIVE)</span>
+      `;
+
+      const tfrSlider = document.getElementById('tfr-slider');
+      const lifeSlider = document.getElementById('life-slider');
+      const tfrVal = document.getElementById('tfr-val');
+      const lifeVal = document.getElementById('life-val');
+
+      if (tfrSlider) {
+        tfrSlider.addEventListener('input', e => {
+          dataTFR = parseFloat(e.target.value);
+          if (tfrVal) tfrVal.textContent = dataTFR.toFixed(1);
+        });
+      }
+      if (lifeSlider) {
+        lifeSlider.addEventListener('input', e => {
+          dataLife = parseInt(e.target.value, 10);
+          if (lifeVal) lifeVal.textContent = `${dataLife}y`;
+        });
+      }
+    }
+
+    function startDataLoop(canvas) {
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const H = canvas.height;
+
+      function renderData() {
+        if (currentLabMode !== 'data') return;
+        ctx.fillStyle = '#04060d';
+        ctx.fillRect(0, 0, W, H);
+
+        const cx = W / 2;
+        const numBrackets = 16; // 0-4 to 75+
+        const barH = 16;
+        const startY = H - 55;
+
+        let youthPop = 0;
+        let workPop = 0;
+        let oldPop = 0;
+
+        // Render bilateral age pyramid
+        for (let b = 0; b < numBrackets; b++) {
+          const age = b * 5;
+          const y = startY - b * (barH + 4);
+
+          // Demographic model profile based on TFR and Longevity
+          let cohortWeight;
+          if (b < 3) { // 0-14 Youth
+            cohortWeight = dataTFR * 35;
+            youthPop += cohortWeight * 2;
+          } else if (b < 13) { // 15-64 Working demographic bulge
+            const peak = Math.sin((b - 3) / 10 * Math.PI);
+            cohortWeight = 85 + peak * 55 * (dataTFR < 2.5 ? 1.3 : 0.8);
+            workPop += cohortWeight * 2;
+          } else { // 65+ Elderly
+            const decay = Math.max(0, 1 - (b - 13) * (0.45 - (dataLife - 60) * 0.012));
+            cohortWeight = 45 * decay;
+            oldPop += cohortWeight * 2;
+          }
+
+          const barW = Math.min(cohortWeight * 1.5, cx - 70);
+          const isWorking = (b >= 3 && b < 13);
+
+          // Male bar (Left)
+          ctx.fillStyle = isWorking ? 'rgba(2, 210, 227, 0.85)' : 'rgba(140, 170, 240, 0.35)';
+          ctx.fillRect(cx - 10 - barW, y, barW, barH);
+
+          // Female bar (Right)
+          ctx.fillStyle = isWorking ? 'rgba(255, 107, 139, 0.85)' : 'rgba(255, 184, 77, 0.35)';
+          ctx.fillRect(cx + 10, y, barW, barH);
+
+          // Age label in center column
+          ctx.fillStyle = '#64748b';
+          ctx.font = '10px "JetBrains Mono", monospace';
+          ctx.textAlign = 'center';
+          ctx.fillText(`${age}-${age + 4}`, cx, y + 12);
+        }
+
+        // Bracket highlight for Demographic Dividend Cohort (15-64)
+        const yTopWork = startY - 12 * (barH + 4);
+        const yBottomWork = startY - 3 * (barH + 4) + barH;
+        ctx.strokeStyle = '#ffb84d';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        ctx.strokeRect(30, yTopWork, W - 60, yBottomWork - yTopWork);
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = '#ffb84d';
+        ctx.font = '11px "JetBrains Mono", monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText('◄ WORKING-AGE COHORT (15–64) — DEMOGRAPHIC DIVIDEND WINDOW ►', 45, yTopWork + 16);
+
+        // Calculate Dependency Ratio
+        const totalDep = ((youthPop + oldPop) / workPop) * 100;
+        const isDividendActive = totalDep < 50.0;
+
+        const metricsEl = document.getElementById('data-metrics');
+        if (metricsEl) {
+          metricsEl.textContent = `Dependency Ratio: ${totalDep.toFixed(1)}% | Status: ${isDividendActive ? 'GOLDEN DIVIDEND HARVEST ACTIVE (DR < 50%)' : 'HIGH DEPENDENCY BURDEN'}`;
+          metricsEl.style.color = isDividendActive ? '#5df0a8' : '#ff6b8b';
+        }
+
+        labAnimFrame = requestAnimationFrame(renderData);
+      }
+      renderData();
+    }
+
+    // Global Node Selector that simultaneously synchronizes with the Simulation Lab
     window.selectConvergence = function(key) {
       document.querySelectorAll('.c-node').forEach(el => el.classList.remove('active'));
       const target = document.getElementById(`node-${key}`);
       if (target) target.classList.add('active');
 
-      const d = nodeData[key];
-      if (d) {
-        document.getElementById('c-badge').textContent = d.badge;
-        document.getElementById('c-desc').textContent = d.desc;
+      if (key === 'anthro') window.switchLabMode('anthro');
+      else if (key === 'geog') window.switchLabMode('globe');
+      else if (key === 'zoo') window.switchLabMode('river');
+      else if (key === 'data') window.switchLabMode('data');
+
+      const labEl = document.getElementById('convergence-lab');
+      if (labEl) {
+        labEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     };
+
+    // Auto-initialize Default Mode (Globe) on Mount
+    setTimeout(() => {
+      if (typeof window.switchLabMode === 'function') {
+        window.switchLabMode('globe');
+      }
+    }, 150);
 
     // 11. Cryptographic ScrambleText Hover Effect (SynapseX Spec)
     const scrambleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";

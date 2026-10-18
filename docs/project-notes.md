@@ -688,6 +688,7 @@ Reverse-engineered from Astra AI's *Human Body 3D Lab* (`https://app.astra-ai.co
 
 ---
 
+<span id="d-zero-build-implementation-protocol-in-code0"></span>
 ### E. Zero-Build Implementation Protocol in `Code0`
 1. **Dual Execution Modes**:
    - **Mode 1: Ambient Continuous Loop** (for hero banners & showcase teasers):
