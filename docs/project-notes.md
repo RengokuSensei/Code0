@@ -592,3 +592,104 @@ Reverse-engineered from Astra AI's *Human Body 3D Lab* (`https://app.astra-ai.co
 2. **Zero Runtime Micro-Graphics**:
    - Use `html-animator`'s pure CSS export technique for diagrams that need infinite ambient loops (e.g., oscillating seismic P/S waves, rotating Coriolis deflection vectors) without adding CPU or battery load.
 
+---
+
+## 15. Canvas-Native Motion Templates & Spatial Transitions (`animos.app` Architecture)
+
+### A. Reverse-Engineered Architecture & Performance Principles
+- **Origin & Core Philosophy**:
+  - Reverse-engineered from `animos.app/editor` (`https://animos.app/`).
+  - Achieves rich, 3D-perspective card layouts, spherical rotations, and multi-axis spatial cascades without loading Three.js, Babylon, or GPU-heavy WebGL vertex shaders.
+  - **Zero-Engine 2D Canvas Matrix Pipeline**:
+    - Operates entirely on standard HTML5 `CanvasRenderingContext2D`.
+    - Every 3D-looking card transformation (depth scaling, camera tilt, perspective distortion, orbital rotation) is computed with pure trigonometry and applied via 2D affine matrix calls:
+      ```javascript
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.scale(scaleX, scaleY);
+      ctx.rotate(angleRad);
+      ctx.transform(a, b, c, d, e, f);
+      // Renders card with rounded corners, drop shadows, and image aspect-ratio fitting
+      ctx.restore();
+      ```
+  - **Performance Profile**:
+    - Locked **60 FPS** rendering across mobile and desktop devices.
+    - Minimal CPU usage ($< 1\%$), 0% idle GPU battery drain, and zero external npm/build dependencies.
+
+### B. Mathematical Time-Space Framework
+1. **The Global Discrete Card Indexer (`Rt(s, m)`)**:
+   - Given normalized continuous progress $s \in [0, 1]$ and $m$ cards/specimens:
+     $$s' = \text{clamp}(s, 0, 1) \cdot m$$
+     $$\text{index} = \lfloor s' \rfloor, \quad \text{local} = s' - \text{index}$$
+   - `index`: Designates the currently active focal item in the sequence ($0, 1, \dots, m-1$).
+   - `local`: Fractional sub-step progress ($0.0 \to 1.0$) driving the active card transition and secondary background reactions.
+
+2. **Closed-Form Physics & Built-in Easing Suite**:
+   - **Natural Bézier Solver**: Custom Newton-Raphson solver evaluating cubic-bezier curves with bisection fallback:
+     $$\text{natural} = \text{cubic-bezier}(0.4, 0, 0.2, 1)$$
+   - **Snappy Exponential Ease-Out**:
+     $$f(t) = 1 - 2^{-10t}$$
+   - **Polynomial Overshoot (Zero Spring Library Overhead)**:
+     $$f(t) = 1 + 3.2(t - 1)^3 + 2.2(t - 1)^2$$
+   - **Damped Harmonic Elastic Bounce**:
+     $$f(t) = 2^{-10t} \cdot \sin\left(\left(10t - 0.75\right) \cdot \frac{2\pi}{3}\right) + 1$$
+   - **Smooth Cubic Hermite**:
+     $$f(t) = \begin{cases} 4t^3 & \text{if } t < 0.5 \\ 1 - \frac{(-2t + 2)^3}{2} & \text{if } t \ge 0.5 \end{cases}$$
+
+---
+
+### C. Catalog of 69+ Spatial Motion Templates
+
+| Motion Category | Key Template Identifiers | Visual Mechanics & Spatial Behavior |
+| :--- | :--- | :--- |
+| **Stack & Deck Dynamics** | `deck-peel`, `stack-slide`, `cascade-deck`, `depth-stack-scroll`, `cascade-drop`, `card-totem`, `parallax-totem`, `fan-shuffle`, `card-toss` | Front card drops away or slides forward with spring landing; background cards step up through depth scale reduction ($d = 0.95$). |
+| **Carousels & Flow Belts** | `carousel-flow`, `diagonal-carousel`, `cover-flow`, `cover-flow-vertical`, `cover-ring`, `cover-ring-vertical`, `film-strip`, `bloom-belt`, `wheel-carousel`, `wheel-spin` | Horizontal or vertical conveyor belts; centered card expands with focal zoom while peripheral cards compress and rotate along tangent angles. |
+| **Spheres, Orbits & Spatial Globes** | `sphere-globe` (Card Globe), `orbit-globe`, `orbit-carousel`, `photo-orbit`, `focus-orbit`, `orbit-showcase`, `orbit-bloom`, `sphere-wall`, `sphere-cascade`, `vortex-spin`, `lens-orbit` | Cards mapped onto virtual 3D spherical hulls or planetary rings; depth sorting dynamically modulates alpha, scale, and drop shadows based on latitude and longitude. |
+| **Isometric & 3D Spatial Drift** | `iso-cascade`, `iso-focus`, `iso-orbit`, `card-tunnel`, `grid-dive`, `stairway`, `showcase-stream`, `spiral-stream` | True isometric $30^\circ$ projections with stepped elevation changes along the virtual Z-axis; tunnel zooms rushing past camera viewplanes. |
+| **Reveals, Wipes & Marquees** | `grid-reveal`, `split-reveal`, `diagonal-wipe`, `stripe-reveal`, `mosaic-wipe`, `flip-grid`, `pop-grid`, `pop-parade`, `ticker-loop`, `ticker-tilt`, `mosaic-marquee` | Matrix-based geometric unmasking, perspective-tilted continuous tickers, and staggered feed scrolls. |
+
+---
+
+### D. Academic Mapping to Aditya's Examination Syllabus Matrix
+
+| Syllabus Domain | Academic Topic | Canvas Motion Template Application |
+| :--- | :--- | :--- |
+| **B.Sc. Zoology** | **Histology & Microanatomy Stratification** | **`deck-peel`**: Progressive anatomical peeling through the histological strata of the mammalian digestive tract: Serosa $\to$ Muscularis externa $\to$ Submucosa $\to$ Mucosa with gastric crypts. |
+| **B.Sc. Zoology** | **Comparative Vertebrate Anatomy** | **`orbit-carousel`**: Multi-focal rotation through phylogenetic cardiac adaptations: 2-chambered (Elasmobranch / Teleost) $\to$ 3-chambered (Amphibia) $\to$ Incompletely 4-chambered (Reptilia) $\to$ Complete 4-chambered double circulation (Aves / Mammalia). |
+| **UPSC Anthropology (Paper I - 1.4)** | **Hominin Cranial Capacity & Facial Retraction** | **`cover-flow`**: Chronological perspective carousel of fossil hominin crania coupled with real-time cranial capacity dials ($450\text{ cm}^3 \to 1450\text{ cm}^3$): *Australopithecus africanus* $\to$ *Homo habilis* $\to$ *Homo erectus* $\to$ *Neanderthal* $\to$ Cro-Magnon. |
+| **UPSC Anthropology (Paper II - 1.1)** | **Indian Prehistoric Lithic Typology** | **`iso-cascade`**: Isometric stepped terrace displaying the stratigraphic sequence of Indian stone industries: Soanian pebble choppers $\to$ Acheulean handaxes (Attirampakkam) $\to$ Middle Paleolithic Levallois flakes $\to$ Upper Paleolithic blades $\to$ Mesolithic geometric microliths. |
+| **M.Sc. Geography (Remote Sensing)** | **Multi-Spectral Satellite Band Analysis** | **`column-drift`**: Staggered vertical drift of Landsat-9 OLI spectral bands (B1 Coastal Aerosol, B2 Blue, B3 Green, B4 Red, B5 NIR, B6/B7 SWIR) with live False Color Composite (FCC) synthesis on hover. |
+| **M.Sc. Geography (Geomorphology)** | **Davisian Cycle of Landscape Evolution** | **`stack-slide`**: Sequential erosion stages illustrating peneplain formation: Youth (V-shaped canyons, waterfalls) $\to$ Maturity (meandering floodplains, oxbows) $\to$ Old Age (monadnocks, peneplains). |
+| **Planetary Physics (Earth Interior)** | **Seismic Wave Propagation & Shadow Zones** | **`orbit-globe`**: Orthographic cross-section tracing P-wave and S-wave refraction paths across the Gutenberg discontinuity and Lehman boundary, showing the $105^\circ - 142^\circ$ shadow zones. |
+
+---
+
+### E. Zero-Build Implementation Protocol in `Code0`
+1. **Dual Execution Modes**:
+   - **Mode 1: Ambient Continuous Loop** (for hero banners & showcase teasers):
+     $$s = \left(\frac{\text{currentTime}}{\text{duration}}\right) \bmod 1$$
+   - **Mode 2: Scroll-Driven Scrubbing** (for deep-dive academic articles):
+     Tied directly to the document scroll position via Lenis and GSAP `ScrollTrigger`:
+     ```javascript
+     const showcase = new CanvasMotionShowcase({
+       canvas: document.querySelector('#hominin-showcase'),
+       template: 'cover-flow',
+       items: homininSpecimens
+     });
+
+     ScrollTrigger.create({
+       trigger: '#hominin-section',
+       start: 'top top',
+       end: 'bottom bottom',
+       scrub: 0.6,
+       onUpdate: (self) => showcase.render(self.progress)
+     });
+     ```
+2. **Design Cohesion with Obsidian Dark System**:
+   - The original Animos palette is mapped to our site tokens:
+     - Background: Deep Obsidian Space (`#070913`, `#0C1022`)
+     - Card Borders: Subtle translucent hairline (`rgba(140, 170, 240, 0.18)`)
+     - Active Accents: Vibrant Cyber Cyan (`#02d2e3`) and Spring Mint (`#5df0a8`)
+     - Dynamic Shadows: Multi-stage ambient occlusion blur (`rgba(0, 0, 0, 0.65)`).
+
+
