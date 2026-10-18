@@ -8,8 +8,9 @@
   <meta name="description" content="Personal research terminal and living UPSC Civil Services explorable atlas by Aditya (B.Sc Zoology, M.Sc Geography, Anthropology Optional, Data Analytics). Real-time 3D, video scrubbed continuum, and interactive simulations.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheets/extra.css">
+  <link rel="stylesheet" href="stylesheets/getlayers.css">
 
   <script type="importmap">
   {
@@ -1240,6 +1241,476 @@
       .hero-actions { flex-direction: column; width: 100%; }
       .btn { width: 100%; justify-content: center; }
     }
+    /* ==========================================================================
+       COMMAND DECK & COMMUNITY TRANSMISSION HUB
+       ========================================================================== */
+    .community-section {
+      position: relative;
+      padding: 120px 0 100px 0;
+      background: radial-gradient(circle at 50% 10%, rgba(2, 210, 227, 0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 80% 80%, rgba(140, 104, 255, 0.06) 0%, transparent 60%),
+                  #070913;
+      border-top: 1px solid rgba(140, 170, 240, 0.16);
+      border-bottom: 1px solid rgba(140, 170, 240, 0.16);
+      overflow: hidden;
+    }
+
+    .community-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(140, 170, 240, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(140, 170, 240, 0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
+      pointer-events: none;
+    }
+
+    .community-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto 50px auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .community-waveform-box {
+      width: 100%;
+      max-width: 440px;
+      height: 48px;
+      margin: 16px auto 20px auto;
+      border-radius: 999px;
+      background: rgba(14, 20, 42, 0.6);
+      border: 1px solid rgba(140, 170, 240, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #comm-waveform {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .community-telemetry-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .telemetry-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(14, 20, 42, 0.75);
+      border: 1px solid rgba(140, 170, 240, 0.2);
+      color: #95a3c2;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .telemetry-pill.live {
+      color: #5df0a8;
+      border-color: rgba(93, 240, 168, 0.4);
+      background: rgba(93, 240, 168, 0.12);
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #5df0a8;
+      box-shadow: 0 0 10px #5df0a8;
+      animation: pulseBeacon 1.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseBeacon {
+      0% { transform: scale(0.8); opacity: 0.5; }
+      100% { transform: scale(1.3); opacity: 1; }
+    }
+
+    /* BENTO GRID OF 4 CHANNELS */
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .community-card {
+      position: relative;
+      background: rgba(14, 20, 42, 0.72);
+      border: 1px solid rgba(140, 170, 240, 0.2);
+      border-radius: 24px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+
+    .community-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, var(--card-ambient, rgba(2, 210, 227, 0.08)) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .community-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 30px var(--card-glow, rgba(2, 210, 227, 0.25));
+    }
+
+    .community-card:hover::before {
+      opacity: 1;
+    }
+
+    .community-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .comm-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .comm-icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(7, 9, 19, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.06);
+      transition: transform 0.25s ease;
+    }
+
+    .community-card:hover .comm-icon-box {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    /* YouTube Card */
+    .yt-card {
+      --card-ambient: rgba(255, 20, 0, 0.15);
+      --card-glow: rgba(255, 20, 0, 0.28);
+    }
+    .yt-card:hover { border-color: rgba(255, 20, 0, 0.6); }
+    .yt-icon { color: #ff1400; border-color: rgba(255, 20, 0, 0.4); box-shadow: 0 0 20px rgba(255, 20, 0, 0.25); }
+    .yt-badge { color: #ff5252; background: rgba(255, 20, 0, 0.12); border: 1px solid rgba(255, 20, 0, 0.35); }
+
+    /* Telegram Card */
+    .tg-card {
+      --card-ambient: rgba(2, 210, 227, 0.18);
+      --card-glow: rgba(2, 210, 227, 0.3);
+    }
+    .tg-card:hover { border-color: rgba(2, 210, 227, 0.6); }
+    .tg-icon { color: #02d2e3; border-color: rgba(2, 210, 227, 0.4); box-shadow: 0 0 20px rgba(2, 210, 227, 0.25); }
+    .tg-badge { color: #02d2e3; background: rgba(2, 210, 227, 0.12); border: 1px solid rgba(2, 210, 227, 0.35); }
+
+    /* Instagram Card */
+    .ig-card {
+      --card-ambient: rgba(225, 48, 108, 0.18);
+      --card-glow: rgba(225, 48, 108, 0.3);
+    }
+    .ig-card:hover { border-color: rgba(225, 48, 108, 0.6); }
+    .ig-icon { color: #ff6b8b; border-color: rgba(225, 48, 108, 0.4); box-shadow: 0 0 20px rgba(225, 48, 108, 0.25); }
+    .ig-badge { color: #ff85a1; background: rgba(225, 48, 108, 0.12); border: 1px solid rgba(225, 48, 108, 0.35); }
+
+    /* GitHub Card */
+    .gh-card {
+      --card-ambient: rgba(93, 240, 168, 0.16);
+      --card-glow: rgba(93, 240, 168, 0.28);
+    }
+    .gh-card:hover { border-color: rgba(93, 240, 168, 0.6); }
+    .gh-icon { color: #5df0a8; border-color: rgba(93, 240, 168, 0.4); box-shadow: 0 0 20px rgba(93, 240, 168, 0.25); }
+    .gh-badge { color: #5df0a8; background: rgba(93, 240, 168, 0.12); border: 1px solid rgba(93, 240, 168, 0.35); }
+
+    .comm-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    .comm-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      margin: 0 0 4px 0;
+      color: #fff;
+    }
+
+    .comm-handle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .comm-desc {
+      font-size: 0.94rem;
+      line-height: 1.65;
+      color: #95a3c2;
+      margin-bottom: 18px;
+    }
+
+    .comm-meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: #718096;
+      margin-bottom: 24px;
+    }
+
+    .comm-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 13px 20px;
+      border-radius: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .yt-btn {
+      background: linear-gradient(135deg, #ff1400 0%, #b80d00 100%);
+      color: #fff;
+      border: 1px solid rgba(255, 60, 40, 0.5);
+      box-shadow: 0 8px 20px rgba(255, 20, 0, 0.3);
+    }
+    .yt-btn:hover {
+      background: #ff2a17;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(255, 20, 0, 0.5);
+      color: #fff;
+    }
+
+    .tg-btn {
+      background: linear-gradient(135deg, #02d2e3 0%, #009cb0 100%);
+      color: #070913;
+      border: 1px solid rgba(2, 210, 227, 0.6);
+      box-shadow: 0 8px 20px rgba(2, 210, 227, 0.3);
+    }
+    .tg-btn:hover {
+      background: #25e5f5;
+      color: #070913;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(2, 210, 227, 0.5);
+    }
+
+    .ig-btn {
+      background: linear-gradient(135deg, #e1306c 0%, #c13584 100%);
+      color: #fff;
+      border: 1px solid rgba(225, 48, 108, 0.5);
+      box-shadow: 0 8px 20px rgba(225, 48, 108, 0.3);
+    }
+    .ig-btn:hover {
+      background: #fd1d1d;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(225, 48, 108, 0.5);
+      color: #fff;
+    }
+
+    .gh-btn {
+      background: rgba(93, 240, 168, 0.12);
+      color: #5df0a8;
+      border: 1px solid rgba(93, 240, 168, 0.4);
+      box-shadow: 0 8px 20px rgba(93, 240, 168, 0.15);
+    }
+    .gh-btn:hover {
+      background: #5df0a8;
+      color: #070913;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(93, 240, 168, 0.4);
+    }
+
+    /* COLLABORATION / DISPATCH TERMINAL */
+    .community-dispatch-terminal {
+      background: linear-gradient(135deg, rgba(14, 20, 42, 0.9) 0%, rgba(7, 9, 19, 0.96) 100%);
+      border: 1px solid rgba(140, 170, 240, 0.28);
+      border-radius: 24px;
+      padding: 36px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .dispatch-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-bottom: 20px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid rgba(140, 170, 240, 0.18);
+    }
+
+    .dispatch-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--accent-mint);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .dispatch-icon {
+      font-size: 1.1rem;
+      color: var(--accent-cyan);
+    }
+
+    .dispatch-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: var(--accent-cyan);
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(2, 210, 227, 0.12);
+      border: 1px solid rgba(2, 210, 227, 0.35);
+    }
+
+    /* Console Screen inside Terminal */
+    .dispatch-console-screen {
+      background: #04060d;
+      border: 1px solid rgba(140, 170, 240, 0.2);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+
+    .console-prompt-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #5df0a8;
+      font-weight: 600;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .console-input-display {
+      color: #fff;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: inline-block;
+      min-width: 220px;
+    }
+
+    .cursor-blink {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background: var(--accent-cyan);
+      vertical-align: middle;
+      animation: blinkCursor 0.9s infinite;
+    }
+
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .console-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .console-topic-chip {
+      background: rgba(14, 20, 42, 0.9);
+      border: 1px solid rgba(140, 170, 240, 0.25);
+      color: #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .console-topic-chip:hover {
+      background: rgba(2, 210, 227, 0.2);
+      border-color: rgba(2, 210, 227, 0.6);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .console-topic-chip.active {
+      background: rgba(93, 240, 168, 0.2);
+      border-color: rgba(93, 240, 168, 0.7);
+      color: #5df0a8;
+    }
+
+    .dispatch-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    /* CINEMATIC FOOTER */
+    .cinematic-footer {
+      background: #04060d;
+      border-top: 1px solid rgba(140, 170, 240, 0.16);
+      padding: 50px 0 40px 0;
+      position: relative;
+      z-index: 2;
+    }
   </style>
 </head>
 <body>
@@ -1340,6 +1811,21 @@
                 <span>Interactive Matrix</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
               </a>
+            </div>
+
+            <!-- Hero Telemetry Metric Ribbon -->
+            <div class="hero-metric-ribbon" style="display: flex; gap: 14px; margin: 24px 0 18px 0; padding-top: 20px; border-top: 1px solid rgba(140, 170, 240, 0.16); flex-wrap: wrap; align-items: center;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+                <span style="color: var(--accent-cyan); font-weight: 700;">4</span> ACADEMIC PILLARS
+              </div>
+              <div style="color: rgba(140, 170, 240, 0.3);">&bull;</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+                <span style="color: var(--accent-mint); font-weight: 700;">21</span> DEEP-TIME EPOCHS
+              </div>
+              <div style="color: rgba(140, 170, 240, 0.3);">&bull;</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+                <span style="color: var(--accent-amber); font-weight: 700;">15</span> CODEX MODULES
+              </div>
             </div>
 
             <!-- Social links row -->
@@ -2194,13 +2680,19 @@
     <section class="section community-section" id="connect-community">
       <div class="container">
         
-        <!-- Header -->
+        <!-- Header with Live Spectral Waveform -->
         <div class="community-header">
           <div class="section-eyebrow" data-decrypt>NETWORK TRANSMISSION // BROADCAST CITADEL</div>
           <h2 class="section-title scramble-hover">Connect with the Living Continuum.</h2>
           <p class="section-lead">
             Bridging empirical sciences, civil services strategy, and creative computing. Join our research collective across YouTube, Telegram, Instagram, and GitHub to discuss first principles, request bespoke 3D simulations, and access our open-source codex.
           </p>
+
+          <!-- Spectral Transmission Signal Waveform -->
+          <div class="community-waveform-box" title="Realtime Signal Modulation Spectrum">
+            <canvas id="comm-waveform" width="440" height="48"></canvas>
+          </div>
+
           <div class="community-telemetry-bar">
             <span class="telemetry-pill live"><span class="pulse-dot"></span> BROADCAST ACTIVE</span>
             <span class="telemetry-pill">DISCIPLINES: ZOOLOGY // GEOGRAPHY // ANTHROPOLOGY // DATA</span>
@@ -2208,7 +2700,7 @@
           </div>
         </div>
 
-        <!-- 4-Card Command Grid -->
+        <!-- 4-Card Command Bento Grid -->
         <div class="community-grid">
           
           <!-- Card 1: YouTube -->
@@ -2331,17 +2823,36 @@
             <div class="dispatch-status">DISPATCH PROTOCOL: ACTIVE</div>
           </div>
           <div class="dispatch-body">
-            <p>
-              Have a specific scientific model, civil services strategy question, or physical simulation you want engineered next? (e.g. <em>Mendelian genetic polymorphism</em>, <em>Meander neck cutoff ODEs</em>, <em>Hominin bicondylar carrying angle</em>, or <em>Himalayan collision nappes</em>).
+            <p style="margin-bottom: 16px;">
+              Have a specific scientific model, civil services strategy question, or physical simulation you want engineered next? Select a topic blueprint or test our live hotline:
             </p>
+
+            <div class="dispatch-console-screen">
+              <div class="console-prompt-line">
+                <span>visitor@code0:~$</span>
+                <span>./dispatch-sim.sh --topic=</span>
+                <span class="console-input-display" id="sim-query-display">&quot;Hominin Bipedal Mechanics&quot;</span>
+                <span class="cursor-blink"></span>
+              </div>
+              <div style="font-size: 0.74rem; color: #64748b; margin-bottom: 8px;">CLICK TO PRE-FILL SIMULATION TARGET:</div>
+              <div class="console-chip-row">
+                <button type="button" class="console-topic-chip active" onclick="setSimTopic('Hominin Bipedal Mechanics (Pelvic Adaptations)')">🦴 Hominin Bipedalism</button>
+                <button type="button" class="console-topic-chip" onclick="setSimTopic('Ikeda-Parker Meander Neck Cutoff ODE')">🌊 River Meander ODE</button>
+                <button type="button" class="console-topic-chip" onclick="setSimTopic('Mendelian Genetics & Polygenic Traits')">🧬 Mendelian Genetics</button>
+                <button type="button" class="console-topic-chip" onclick="setSimTopic('Himalayan Collision & Main Boundary Thrust')">⛰️ Himalayan Orogeny</button>
+                <button type="button" class="console-topic-chip" onclick="setSimTopic('Ashokan Brahmi Epigraphic Decipherment')">📜 Ashokan Epigraphy</button>
+                <button type="button" class="console-topic-chip" onclick="setSimTopic('5th & 6th Schedule Tribal Governance PESA 1996')">⚖️ Tribal PESA 1996</button>
+              </div>
+            </div>
+
             <div class="dispatch-actions">
-              <a href="https://t.me/oOlIOo_b0t" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnet-btn" style="padding: 12px 24px;">
-                <span>Dispatch Topic Request via Telegram &rarr;</span>
+              <a id="telegram-dispatch-btn" href="https://t.me/oOlIOo_b0t?text=Hi%20Aditya,%20I%20would%20like%20to%20request%20a%20simulation%20on:%20Hominin%20Bipedal%20Mechanics" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnet-btn" style="padding: 14px 28px;">
+                <span>Dispatch Topic via Telegram &rarr;</span>
               </a>
-              <a href="about/author/" class="btn btn-outline magnet-btn" style="padding: 12px 24px;">
+              <a href="about/author/" class="btn btn-outline magnet-btn" style="padding: 14px 24px;">
                 <span>Read Aditya's Full Dossier &rarr;</span>
               </a>
-              <a href="project-notes/" class="btn btn-outline magnet-btn" style="padding: 12px 24px;">
+              <a href="project-notes/" class="btn btn-outline magnet-btn" style="padding: 14px 24px;">
                 <span>Inspect Master Codex &rarr;</span>
               </a>
             </div>
@@ -3079,6 +3590,91 @@
       elem.addEventListener('mouseleave', () => {
         clearInterval(scrambleTimer);
         elem.textContent = originalText;
+      });
+    });
+
+    // 12. Community Interactive Simulation Hotline Dispatch
+    window.setSimTopic = function(topic) {
+      document.querySelectorAll('.console-topic-chip').forEach(c => c.classList.remove('active'));
+      if (window.event && window.event.target) {
+        window.event.target.classList.add('active');
+      }
+      const display = document.getElementById('sim-query-display');
+      const tgBtn = document.getElementById('telegram-dispatch-btn');
+      if (display) {
+        display.textContent = `"${topic}"`;
+      }
+      if (tgBtn) {
+        tgBtn.href = `https://t.me/oOlIOo_b0t?text=${encodeURIComponent('Hi Aditya, I would like to request an explorable simulation on: ' + topic)}`;
+      }
+    };
+
+    // 13. Spectral Transmission Waveform Visualizer
+    const waveCanvas = document.getElementById('comm-waveform');
+    if (waveCanvas) {
+      const ctx = waveCanvas.getContext('2d');
+      let wavePhase = 0;
+      function renderWaveform() {
+        if (!waveCanvas.width || !waveCanvas.height) return;
+        ctx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+        const w = waveCanvas.width;
+        const h = waveCanvas.height;
+        const cy = h / 2;
+
+        // Wave 1: Cyan primary carrier
+        ctx.beginPath();
+        ctx.strokeStyle = '#02d2e3';
+        ctx.lineWidth = 2;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#02d2e3';
+        for (let x = 0; x < w; x++) {
+          const y = cy + Math.sin(x * 0.04 + wavePhase) * (h * 0.32) * Math.sin(x * 0.015);
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // Wave 2: Mint secondary modulation
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(93, 240, 168, 0.7)';
+        ctx.lineWidth = 1.5;
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = '#5df0a8';
+        for (let x = 0; x < w; x++) {
+          const y = cy + Math.sin(x * 0.025 - wavePhase * 1.3) * (h * 0.25) * Math.cos(x * 0.012);
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // Wave 3: Violet sub-carrier
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(140, 104, 255, 0.5)';
+        ctx.lineWidth = 1;
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = '#8c68ff';
+        for (let x = 0; x < w; x++) {
+          const y = cy + Math.cos(x * 0.05 + wavePhase * 0.8) * (h * 0.18);
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        ctx.shadowBlur = 0;
+        wavePhase += 0.04;
+        requestAnimationFrame(renderWaveform);
+      }
+      renderWaveform();
+    }
+
+    // 14. Bento Card Dynamic Mouse Spotlight
+    document.querySelectorAll('.community-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
       });
     });
   </script>
