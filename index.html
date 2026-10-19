@@ -1619,10 +1619,12 @@
       transition: all 0.15s ease;
     }
 
-    .lab-btn-small:hover {
+    .lab-btn-small:hover,
+    .lab-btn-small.active {
       background: var(--accent-cyan);
       color: #070913;
       box-shadow: 0 0 12px rgba(2, 210, 227, 0.4);
+      font-weight: 700;
     }
 
     /* ==========================================================================
@@ -2574,6 +2576,7 @@
               </div>
               <div class="lab-mode-tabs">
                 <button type="button" class="lab-mode-tab active" id="tab-globe" onclick="switchLabMode('globe')">🌍 3D Planetary Globe</button>
+                <button type="button" class="lab-mode-tab" id="tab-thermo" onclick="switchLabMode('thermo')">🌡️ Isobar &amp; Thermal FLIR</button>
                 <button type="button" class="lab-mode-tab" id="tab-river" onclick="switchLabMode('river')">🌊 River Meander ODE</button>
                 <button type="button" class="lab-mode-tab" id="tab-anthro" onclick="switchLabMode('anthro')">🦴 Hominin Cranial &amp; Bipedalism</button>
                 <button type="button" class="lab-mode-tab" id="tab-data" onclick="switchLabMode('data')">📊 Demographic Dividend</button>
@@ -4340,6 +4343,526 @@
       renderData();
     }
 
+    // ==========================================================================
+    // D. THERMODYNAMIC ISOBAR & THERMAL FLIR FIELD SIMULATOR (LADYBUG ARCHITECTURE)
+    // ==========================================================================
+    let thermoScenario = 'monsoon'; // 'monsoon', 'winter', 'cyclone'
+    let thermoFilter = 'flir'; // 'flir', 'isobar', 'halftone', 'streamlines'
+    let thermoParticles = [];
+    let thermoAnomaly = null; // { x, y, deltaP, deltaT }
+    let thermoMouse = { x: -1, y: -1, isHover: false, isDown: false };
+    let thermoListenersBound = false;
+
+    function initThermoParticles(W, H) {
+      thermoParticles = [];
+      const numP = 160;
+      for (let i = 0; i < numP; i++) {
+        thermoParticles.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          age: Math.random() * 80,
+          maxAge: 70 + Math.random() * 60,
+          history: []
+        });
+      }
+    }
+
+    function setupThermoControls(wrap) {
+      if (!wrap) return;
+      wrap.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #94a3b8; text-transform: uppercase;">SYNOPTIC SCENARIO:</span>
+          <button type="button" class="lab-btn-small ${thermoScenario === 'monsoon' ? 'active' : ''}" id="scen-monsoon" onclick="setThermoScenario('monsoon')">☀️ SW Monsoon (July)</button>
+          <button type="button" class="lab-btn-small ${thermoScenario === 'winter' ? 'active' : ''}" id="scen-winter" onclick="setThermoScenario('winter')">❄️ Western Disturbance (Jan)</button>
+          <button type="button" class="lab-btn-small ${thermoScenario === 'cyclone' ? 'active' : ''}" id="scen-cyclone" onclick="setThermoScenario('cyclone')">🌀 Tropical Cyclone</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-left: 12px; padding-left: 12px; border-left: 1px solid rgba(140, 170, 240, 0.2);">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #94a3b8; text-transform: uppercase;">LADYBUG FILTER:</span>
+          <button type="button" class="lab-btn-small ${thermoFilter === 'flir' ? 'active' : ''}" id="filt-flir" onclick="setThermoFilter('flir')">🌡️ Thermal FLIR</button>
+          <button type="button" class="lab-btn-small ${thermoFilter === 'isobar' ? 'active' : ''}" id="filt-isobar" onclick="setThermoFilter('isobar')">〰️ Isobar Contours</button>
+          <button type="button" class="lab-btn-small ${thermoFilter === 'halftone' ? 'active' : ''}" id="filt-halftone" onclick="setThermoFilter('halftone')">▦ Bayer Density Dither</button>
+          <button type="button" class="lab-btn-small ${thermoFilter === 'streamlines' ? 'active' : ''}" id="filt-streamlines" onclick="setThermoFilter('streamlines')">💨 Wind Streamlines</button>
+        </div>
+        <div style="margin-left: auto; display: flex; align-items: center; gap: 8px;">
+          <button type="button" class="lab-btn-small" onclick="focusThermoHimachal()">📍 Focus Himachal (31.1°N, 77.1°E)</button>
+          <button type="button" class="lab-btn-small" onclick="clearThermoAnomaly()">↺ Clear Anomaly</button>
+        </div>
+        <div id="thermo-hud-readout" style="width: 100%; margin-top: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent-mint); display: flex; align-items: center; justify-content: space-between;">
+          <span id="thermo-telemetry">Hover or drag on canvas to probe thermodynamic state &amp; inject heat/pressure anomalies...</span>
+          <span id="thermo-hp-badge" style="color: var(--accent-amber); font-weight: 700;">HIMACHAL: P=1004 hPa | T=18.4°C</span>
+        </div>
+      `;
+    }
+
+    window.setThermoScenario = function(scen) {
+      thermoScenario = scen;
+      const wrap = document.getElementById('lab-controls-dynamic');
+      if (wrap) setupThermoControls(wrap);
+    };
+
+    window.setThermoFilter = function(filt) {
+      thermoFilter = filt;
+      const wrap = document.getElementById('lab-controls-dynamic');
+      if (wrap) setupThermoControls(wrap);
+    };
+
+    window.focusThermoHimachal = function() {
+      const canvas = document.getElementById('sim-stage-canvas');
+      if (!canvas) return;
+      const W = canvas.width;
+      const H = canvas.height;
+      thermoAnomaly = {
+        x: W * 0.44,
+        y: H * 0.28,
+        deltaP: -14,
+        deltaT: +6
+      };
+      const badge = document.getElementById('thermo-hp-badge');
+      if (badge) badge.style.textShadow = '0 0 10px #ffb84d';
+    };
+
+    window.clearThermoAnomaly = function() {
+      thermoAnomaly = null;
+    };
+
+    function startThermoLoop(canvas) {
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const H = canvas.height;
+
+      if (thermoParticles.length === 0) {
+        initThermoParticles(W, H);
+      }
+
+      if (!thermoListenersBound) {
+        thermoListenersBound = true;
+        canvas.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          thermoMouse.x = e.clientX - rect.left;
+          thermoMouse.y = e.clientY - rect.top;
+          thermoMouse.isHover = true;
+          if (thermoMouse.isDown) {
+            thermoAnomaly = {
+              x: thermoMouse.x,
+              y: thermoMouse.y,
+              deltaP: -18,
+              deltaT: +8
+            };
+          }
+        });
+        canvas.addEventListener('mouseleave', () => {
+          thermoMouse.isHover = false;
+          thermoMouse.isDown = false;
+        });
+        canvas.addEventListener('mousedown', (e) => {
+          thermoMouse.isDown = true;
+          const rect = canvas.getBoundingClientRect();
+          thermoMouse.x = e.clientX - rect.left;
+          thermoMouse.y = e.clientY - rect.top;
+          thermoAnomaly = {
+            x: thermoMouse.x,
+            y: thermoMouse.y,
+            deltaP: -18,
+            deltaT: +8
+          };
+        });
+        window.addEventListener('mouseup', () => {
+          thermoMouse.isDown = false;
+        });
+      }
+
+      function sampleThermo(px, py, t) {
+        const u = px / W;
+        const v = py / H;
+        let P = 1013.25;
+        let T = 25.0;
+        let Z = 0; // Altitude in km
+
+        // Topographic profile of Himalayan wall: arc from (0.32, 0.30) to (0.76, 0.24)
+        const himY = 0.30 - (u - 0.32) * 0.12;
+        const distToHim = Math.abs(v - himY);
+        if (u >= 0.30 && u <= 0.78 && distToHim < 0.09) {
+          Z = Math.max(0, (1 - distToHim / 0.09) * 5.4); // Elevation up to 5.4 km
+        }
+
+        if (thermoScenario === 'monsoon') {
+          // Tibetan Heat Low & Thar Low
+          const dThar = Math.hypot(u - 0.42, v - 0.26);
+          const dMas = Math.hypot(u - 0.46, v - 0.90);
+          P = 1012 - 20 * Math.exp(-(dThar*dThar)/0.035) + 14 * Math.exp(-(dMas*dMas)/0.07);
+          T = 27 + (1 - v) * 14 + 11 * Math.exp(-(dThar*dThar)/0.035);
+        } else if (thermoScenario === 'winter') {
+          // Siberian/Tibetan High & Western Disturbance depression in NW
+          const dTib = Math.hypot(u - 0.54, v - 0.20);
+          const wdU = 0.36 + Math.sin(t * 0.0006) * 0.08;
+          const dWD = Math.hypot(u - wdU, v - 0.28);
+          P = 1015 + 16 * Math.exp(-(dTib*dTib)/0.045) - 14 * Math.exp(-(dWD*dWD)/0.02);
+          T = 16 - (1 - v) * 24;
+        } else if (thermoScenario === 'cyclone') {
+          // Tropical Cyclone in Bay of Bengal
+          const cycU = 0.70 + Math.cos(t * 0.0008) * 0.03;
+          const cycV = 0.60 + Math.sin(t * 0.0008) * 0.03;
+          const dCyc = Math.hypot(u - cycU, v - cycV);
+          P = 1015 - 40 * Math.exp(-(dCyc*dCyc)/0.012);
+          T = 28 + (dCyc < 0.06 ? 4 : 0);
+        }
+
+        if (thermoAnomaly) {
+          const dAnom = Math.hypot(px - thermoAnomaly.x, py - thermoAnomaly.y) / W;
+          P += thermoAnomaly.deltaP * Math.exp(-(dAnom*dAnom)/0.015);
+          T += thermoAnomaly.deltaT * Math.exp(-(dAnom*dAnom)/0.015);
+        }
+
+        // Topographic lapse rate (6.5 °C/km) & Barometric hypsometric equation
+        T = T - Z * 6.5;
+        P = P * Math.exp(-Z / 8.4);
+
+        // Dry air density (rho) in kg/m^3 via Ideal Gas Law P = rho * Rd * T
+        const Tk = T + 273.15;
+        const rho = (P * 100) / (287.058 * Math.max(180, Tk));
+
+        return { P, T, Z, rho };
+      }
+
+      function sampleWind(px, py, t) {
+        const eps = 4;
+        const pr = sampleThermo(px + eps, py, t).P;
+        const pl = sampleThermo(px - eps, py, t).P;
+        const pd = sampleThermo(px, py + eps, t).P;
+        const pu = sampleThermo(px, py - eps, t).P;
+
+        const dPdx = (pr - pl) / (2 * eps);
+        const dPdy = (pd - pu) / (2 * eps);
+
+        // Coriolis geostrophic wind vector in Northern Hemisphere
+        const u_g = -dPdy * 130;
+        const v_g = dPdx * 130;
+        const spd = Math.hypot(u_g, v_g);
+        return { u: u_g, v: v_g, spd };
+      }
+
+      function getFlirColor(T) {
+        // Map T [-15°C to 42°C] to [0 to 1]
+        const norm = Math.max(0, Math.min(1, (T + 15) / 57));
+        if (norm < 0.25) {
+          const f = norm / 0.25;
+          return `rgb(${Math.round(7 + f * 5)}, ${Math.round(10 + f * 190)}, ${Math.round(36 + f * 190)})`;
+        } else if (norm < 0.50) {
+          const f = (norm - 0.25) / 0.25;
+          return `rgb(${Math.round(12 + f * 81)}, ${Math.round(200 + f * 40)}, ${Math.round(226 - f * 58)})`;
+        } else if (norm < 0.75) {
+          const f = (norm - 0.50) / 0.25;
+          return `rgb(${Math.round(93 + f * 162)}, ${Math.round(240 - f * 56)}, ${Math.round(168 - f * 91)})`;
+        } else {
+          const f = (norm - 0.75) / 0.25;
+          return `rgb(${Math.round(255 - f * 19)}, ${Math.round(184 - f * 112)}, ${Math.round(77 + f * 76)})`;
+        }
+      }
+
+      function drawGeographyOverlay() {
+        ctx.save();
+        ctx.strokeStyle = 'rgba(140, 170, 240, 0.45)';
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+
+        // Himalayan Tectonic Arc
+        ctx.setLineDash([5, 4]);
+        ctx.moveTo(W * 0.30, H * 0.30);
+        ctx.quadraticCurveTo(W * 0.52, H * 0.25, W * 0.76, H * 0.23);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Coastline of Indian Subcontinent
+        ctx.beginPath();
+        ctx.moveTo(W * 0.24, H * 0.38); // Indus delta
+        ctx.lineTo(W * 0.27, H * 0.46); // Rann of Kutch
+        ctx.lineTo(W * 0.25, H * 0.50); // Saurashtra
+        ctx.lineTo(W * 0.30, H * 0.52); // Gulf of Khambhat
+        ctx.lineTo(W * 0.33, H * 0.56); // Konkan coast
+        ctx.lineTo(W * 0.35, H * 0.68); // Malabar coast
+        ctx.lineTo(W * 0.38, H * 0.79); // Cape Comorin
+        ctx.lineTo(W * 0.43, H * 0.72); // Coromandel coast
+        ctx.lineTo(W * 0.50, H * 0.63); // Andhra coast
+        ctx.lineTo(W * 0.60, H * 0.54); // Odisha coast
+        ctx.lineTo(W * 0.66, H * 0.48); // Sundarbans delta
+        ctx.stroke();
+
+        // Sri Lanka
+        ctx.beginPath();
+        ctx.ellipse(W * 0.42, H * 0.84, 14, 20, 0.2, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Labels
+        ctx.fillStyle = 'rgba(140, 170, 240, 0.6)';
+        ctx.font = '10px "JetBrains Mono", monospace';
+        ctx.fillText('ARABIAN SEA', W * 0.16, H * 0.66);
+        ctx.fillText('BAY OF BENGAL', W * 0.70, H * 0.66);
+        ctx.fillText('EQUATORIAL INDIAN OCEAN', W * 0.36, H * 0.94);
+        ctx.fillText('TIBETAN PLATEAU [HEAT SINK]', W * 0.52, H * 0.16);
+        ctx.fillText('HIMALAYAN OROGRAPHIC CREST', W * 0.52, H * 0.27);
+        ctx.restore();
+      }
+
+      function renderThermo(time) {
+        if (currentLabMode !== 'thermo') return;
+
+        // Base clear
+        ctx.fillStyle = '#060814';
+        ctx.fillRect(0, 0, W, H);
+
+        // 1. FILTER: THERMAL FLIR
+        if (thermoFilter === 'flir') {
+          const step = 14;
+          for (let gy = 0; gy < H; gy += step) {
+            for (let gx = 0; gx < W; gx += step) {
+              const { T } = sampleThermo(gx + step / 2, gy + step / 2, time);
+              ctx.fillStyle = getFlirColor(T);
+              ctx.fillRect(gx, gy, step, step);
+            }
+          }
+          // Scanlines
+          ctx.fillStyle = 'rgba(6, 8, 20, 0.2)';
+          for (let y = 0; y < H; y += 4) {
+            ctx.fillRect(0, y, W, 1);
+          }
+        } 
+        // 2. FILTER: ISOBAR CONTOURS
+        else if (thermoFilter === 'isobar') {
+          const step = 12;
+          for (let gy = 0; gy < H; gy += step) {
+            for (let gx = 0; gx < W; gx += step) {
+              const { P } = sampleThermo(gx, gy, time);
+              const isoSine = Math.sin((P - 980) * Math.PI / 4);
+              if (Math.abs(isoSine) < 0.18) {
+                ctx.fillStyle = P < 1004 ? 'rgba(236, 72, 153, 0.85)' : 'rgba(2, 210, 227, 0.85)';
+                ctx.fillRect(gx, gy, step, step);
+              } else {
+                ctx.fillStyle = 'rgba(12, 18, 38, 0.5)';
+                ctx.fillRect(gx, gy, step, step);
+              }
+            }
+          }
+          // Isobar numerical annotations
+          ctx.fillStyle = '#ffb84d';
+          ctx.font = '10px "JetBrains Mono", monospace';
+          const pHP = sampleThermo(W * 0.44, H * 0.28, time).P;
+          ctx.fillText(`ISOBAR: ${pHP.toFixed(0)} hPa`, W * 0.44 + 18, H * 0.28 - 6);
+          const pThar = sampleThermo(W * 0.36, H * 0.36, time).P;
+          ctx.fillText(`ISOBAR: ${pThar.toFixed(0)} hPa`, W * 0.36 - 20, H * 0.36);
+          const pBob = sampleThermo(W * 0.70, H * 0.60, time).P;
+          ctx.fillText(`ISOBAR: ${pBob.toFixed(0)} hPa`, W * 0.70, H * 0.60);
+        }
+        // 3. FILTER: BAYER DENSITY DITHER
+        else if (thermoFilter === 'halftone') {
+          const dotStep = 15;
+          for (let gy = dotStep / 2; gy < H; gy += dotStep) {
+            for (let gx = dotStep / 2; gx < W; gx += dotStep) {
+              const { rho, T } = sampleThermo(gx, gy, time);
+              // Density normalized between 0.75 and 1.25 kg/m3
+              const rNorm = Math.max(0, Math.min(1, (rho - 0.75) / 0.50));
+              const dotR = 1.2 + rNorm * 4.6;
+
+              ctx.beginPath();
+              ctx.arc(gx, gy, dotR, 0, Math.PI * 2);
+              ctx.fillStyle = T < 15 ? 'rgba(2, 210, 227, 0.75)' : 'rgba(255, 184, 77, 0.75)';
+              ctx.fill();
+            }
+          }
+        }
+        // 4. FILTER: WIND STREAMLINES
+        else if (thermoFilter === 'streamlines') {
+          ctx.fillStyle = 'rgba(6, 8, 20, 0.4)';
+          ctx.fillRect(0, 0, W, H);
+        }
+
+        // Draw Coastlines and Mountain topography
+        drawGeographyOverlay();
+
+        // Animate and draw Streamlines
+        thermoParticles.forEach(p => {
+          const wind = sampleWind(p.x, p.y, time);
+          p.history.push({ x: p.x, y: p.y });
+          if (p.history.length > 7) p.history.shift();
+
+          p.x += wind.u * 0.22;
+          p.y += wind.v * 0.22;
+          p.age += 1;
+
+          if (p.x < 0 || p.x > W || p.y < 0 || p.y > H || p.age > p.maxAge) {
+            p.x = Math.random() * W;
+            p.y = Math.random() * H;
+            p.age = 0;
+            p.history = [];
+          }
+
+          if (p.history.length > 1) {
+            ctx.beginPath();
+            ctx.moveTo(p.history[0].x, p.history[0].y);
+            for (let i = 1; i < p.history.length; i++) {
+              ctx.lineTo(p.history[i].x, p.history[i].y);
+            }
+            const windSample = sampleThermo(p.x, p.y, time);
+            ctx.strokeStyle = windSample.T < 18 ? 'rgba(2, 210, 227, 0.65)' : (windSample.T > 30 ? 'rgba(236, 72, 153, 0.75)' : 'rgba(93, 240, 168, 0.65)');
+            ctx.lineWidth = 1.6;
+            ctx.stroke();
+
+            // Head dot
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = '#fff';
+            ctx.fill();
+          }
+        });
+
+        // High / Low Atmospheric Pressure Center Markers
+        if (thermoScenario === 'monsoon') {
+          // Low over NW / Tibet
+          const lx = W * 0.42, ly = H * 0.26;
+          ctx.beginPath();
+          ctx.arc(lx, ly, 18, 0, Math.PI * 2);
+          ctx.strokeStyle = '#ec4899';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.fillStyle = '#ec4899';
+          ctx.font = 'bold 12px "JetBrains Mono", monospace';
+          ctx.fillText('LOW [994 hPa]', lx - 38, ly - 22);
+
+          // High over Mascarene / South
+          const hx = W * 0.46, hy = H * 0.90;
+          ctx.beginPath();
+          ctx.arc(hx, hy, 18, 0, Math.PI * 2);
+          ctx.strokeStyle = '#02d2e3';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.fillStyle = '#02d2e3';
+          ctx.fillText('HIGH [1026 hPa]', hx - 42, hy - 22);
+        } else if (thermoScenario === 'winter') {
+          const hx = W * 0.54, hy = H * 0.20;
+          ctx.beginPath();
+          ctx.arc(hx, hy, 18, 0, Math.PI * 2);
+          ctx.strokeStyle = '#02d2e3';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.fillStyle = '#02d2e3';
+          ctx.font = 'bold 12px "JetBrains Mono", monospace';
+          ctx.fillText('SIBERIAN HIGH [1026 hPa]', hx - 65, hy - 22);
+
+          const wdU = 0.36 + Math.sin(time * 0.0006) * 0.08;
+          const lx = wdU * W, ly = H * 0.28;
+          ctx.beginPath();
+          ctx.arc(lx, ly, 16, 0, Math.PI * 2);
+          ctx.strokeStyle = '#ec4899';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.fillStyle = '#ec4899';
+          ctx.fillText('WD LOW [1002 hPa]', lx - 48, ly + 32);
+        } else if (thermoScenario === 'cyclone') {
+          const cycU = 0.70 + Math.cos(time * 0.0008) * 0.03;
+          const cycV = 0.60 + Math.sin(time * 0.0008) * 0.03;
+          const cx = cycU * W, cy = cycV * H;
+          ctx.beginPath();
+          ctx.arc(cx, cy, 22, 0, Math.PI * 2);
+          ctx.strokeStyle = '#f43f5e';
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+          ctx.fillStyle = '#f43f5e';
+          ctx.font = 'bold 12px "JetBrains Mono", monospace';
+          ctx.fillText('CYCLONE EYE [974 hPa]', cx - 64, cy - 28);
+        }
+
+        // Himachal Pradesh Pinpoint Beacon (31.1°N, 77.1°E)
+        const hpX = W * 0.44;
+        const hpY = H * 0.28;
+        const hpPulse = (Math.sin(time * 0.005) + 1) * 0.5;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(hpX, hpY, 6 + hpPulse * 8, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 184, 77, 0.7)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(hpX, hpY, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffb84d';
+        ctx.fill();
+
+        ctx.fillStyle = '#ffb84d';
+        ctx.font = 'bold 11px "JetBrains Mono", monospace';
+        ctx.fillText('📍 HIMACHAL PRADESH (31.1°N, 77.1°E)', hpX + 10, hpY - 10);
+        ctx.font = '9px "JetBrains Mono", monospace';
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillText('Dhauladhar / Pir Panjal Orographic Lift Wall', hpX + 10, hpY + 4);
+        ctx.restore();
+
+        // Sample HP telemetry values for badge
+        const hpSample = sampleThermo(hpX, hpY, time);
+        const hpBadge = document.getElementById('thermo-hp-badge');
+        if (hpBadge) {
+          hpBadge.textContent = `HIMACHAL: P=${hpSample.P.toFixed(1)} hPa | T=${hpSample.T.toFixed(1)}°C | ρ=${hpSample.rho.toFixed(2)} kg/m³ | Z=${hpSample.Z.toFixed(1)} km`;
+        }
+
+        // Interactive Cursor Crosshair & Sounding Probe
+        if (thermoMouse.isHover && thermoMouse.x >= 0 && thermoMouse.y >= 0) {
+          const mx = thermoMouse.x;
+          const my = thermoMouse.y;
+          const probe = sampleThermo(mx, my, time);
+          const windProbe = sampleWind(mx, my, time);
+
+          // Crosshairs
+          ctx.save();
+          ctx.strokeStyle = 'rgba(2, 210, 227, 0.6)';
+          ctx.lineWidth = 1;
+          ctx.setLineDash([3, 3]);
+          ctx.beginPath();
+          ctx.moveTo(mx, 0); ctx.lineTo(mx, H);
+          ctx.moveTo(0, my); ctx.lineTo(W, my);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          // Reticle
+          ctx.beginPath();
+          ctx.arc(mx, my, 8, 0, Math.PI * 2);
+          ctx.strokeStyle = '#02d2e3';
+          ctx.lineWidth = 1.8;
+          ctx.stroke();
+
+          // Floating Telemetry Box
+          const cardX = Math.min(mx + 14, W - 220);
+          const cardY = Math.max(my - 75, 15);
+          ctx.fillStyle = 'rgba(7, 9, 19, 0.92)';
+          ctx.strokeStyle = 'rgba(2, 210, 227, 0.45)';
+          ctx.lineWidth = 1;
+          ctx.fillRect(cardX, cardY, 210, 80);
+          ctx.strokeRect(cardX, cardY, 210, 80);
+
+          ctx.fillStyle = '#02d2e3';
+          ctx.font = 'bold 10px "JetBrains Mono", monospace';
+          const lat = (20 + (1 - my / H) * 20).toFixed(1);
+          const lon = (60 + (mx / W) * 40).toFixed(1);
+          ctx.fillText(`LOC: ${lat}°N, ${lon}°E`, cardX + 8, cardY + 16);
+
+          ctx.fillStyle = '#fff';
+          ctx.font = '10px "JetBrains Mono", monospace';
+          ctx.fillText(`Pressure: ${probe.P.toFixed(1)} hPa`, cardX + 8, cardY + 32);
+          ctx.fillText(`Temp: ${probe.T.toFixed(1)}°C | Alt: ${probe.Z.toFixed(1)} km`, cardX + 8, cardY + 46);
+          ctx.fillText(`Density: ${probe.rho.toFixed(2)} kg/m³`, cardX + 8, cardY + 60);
+          ctx.fillStyle = '#5df0a8';
+          ctx.fillText(`Wind: ${(windProbe.spd * 0.9).toFixed(1)} m/s (${(windProbe.spd * 1.8).toFixed(1)} kt)`, cardX + 8, cardY + 74);
+          ctx.restore();
+
+          const teleEl = document.getElementById('thermo-telemetry');
+          if (teleEl) {
+            teleEl.textContent = `TARGET [${lat}°N, ${lon}°E] | Pressure: ${probe.P.toFixed(1)} hPa | Temp: ${probe.T.toFixed(1)}°C | Wind: ${(windProbe.spd * 0.9).toFixed(1)} m/s | ${probe.Z > 1.5 ? 'OROGRAPHIC LIFT ELEVATION' : 'LOW-LEVEL MARITIME INFLOW'}`;
+          }
+        }
+
+        labAnimFrame = requestAnimationFrame(renderThermo);
+      }
+
+      labAnimFrame = requestAnimationFrame(renderThermo);
+    }
+
     // Switch Simulation Lab Mode Handler
     window.switchLabMode = function(mode) {
       currentLabMode = mode;
@@ -4402,7 +4925,12 @@
           canvas.height = 440;
         }
 
-        if (mode === 'river') {
+        if (mode === 'thermo') {
+          if (activeTitle) activeTitle.innerHTML = `<span style="color: var(--accent-cyan); font-size: 1.1rem;">⚡</span> SIMULATION: THERMODYNAMIC ISOBAR &amp; THERMAL FLIR FIELD (LADYBUG ARCHITECTURE)`;
+          if (synergyText) synergyText.innerHTML = `<span style="color: var(--accent-mint); font-weight: 700;">ATMOSPHERIC CLIMATOLOGY (UPSC GS-1 &amp; GEOGRAPHY):</span> Barometric pressure gradient force ($-\\frac{1}{\\rho}\\nabla P$), Coriolis deflection ($f = 2\\Omega\\sin\\phi$), and thermal FLIR/isobaric field dynamics over the Indian Subcontinent &amp; Himalayas.`;
+          setupThermoControls(controlsWrap);
+          startThermoLoop(canvas);
+        } else if (mode === 'river') {
           if (activeTitle) activeTitle.innerHTML = `<span style="color: var(--accent-cyan); font-size: 1.1rem;">⚡</span> SIMULATION: IKEDA-PARKER RIVER MEANDER ODE &amp; OXBOW CUTOFF`;
           if (synergyText) synergyText.innerHTML = `<span style="color: var(--accent-mint); font-weight: 700;">FLUID GEOMORPHOLOGY:</span> Outer cut-bank erosion vs. inner slip-off deposition. High curvature drives neck thinning and spontaneous oxbow lake cutoff.`;
           initRiver();
@@ -4438,7 +4966,7 @@
       if (target) target.classList.add('active');
 
       if (key === 'anthro') window.switchLabMode('anthro');
-      else if (key === 'geog') window.switchLabMode('globe');
+      else if (key === 'geog') window.switchLabMode('thermo');
       else if (key === 'zoo') window.switchLabMode('river');
       else if (key === 'data') window.switchLabMode('data');
 
