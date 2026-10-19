@@ -21,7 +21,7 @@
     <a href="#13-anatomical-decomposition-3d-spatial-dissection-astra-ai-human-body-atlas" class="codex-jump-pill">13. Astra 3D Anatomy</a>
     <a href="#14-code-drawn-vector-animation-visual-keyframe-pipelines-html-anime-html-animator" class="codex-jump-pill">14. Vector Anime Pipeline</a>
     <a href="#15-canvas-native-motion-templates-spatial-transitions-animosapp-architecture" class="codex-jump-pill">15. animos.app Transitions</a>
-    <a href="#16-chromatic-shader-pipelines-thermodynamic-field-visualization-theladybugapp-architecture" class="codex-jump-pill">16. Ladybug Thermo Shader</a>
+    <a href="#16-multi-purpose-creative-scientific-visual-computing-theladybugapp-architecture" class="codex-jump-pill">16. Ladybug Multi-Engine</a>
   </div>
 </div>
 
@@ -720,24 +720,169 @@ Reverse-engineered from Astra AI's *Human Body 3D Lab* (`https://app.astra-ai.co
 
 ---
 
-## 16. Chromatic Shader Pipelines & Thermodynamic Field Visualization (`theladybug.app` Architecture)
+## 16. Multi-Purpose Creative & Scientific Visual Computing (`theladybug.app` Architecture)
 
-### A. Reverse-Engineered Architecture & Photo-Effect Mechanics
+### A. Reverse-Engineered Architecture & The 7 Core Production Engines
 - **Origin & Core Philosophy**:
   - Reverse-engineered from `app.theladybug.app/home/` and `theladybug.app`.
-  - Ladybug is a zero-server, high-performance in-browser creative studio specializing in retro-futuristic, scientific, and technical image manipulations (`fx-thermal`, `Thermal Pink`, `fx-halftone`, `fx-riso`, `Riso Glow`, `Pixel Dither G0`, `Neon Text Dither`, `ASCII`).
-  - **Local Canvas & WebGL Shader Pipeline**:
-    - Operates completely client-side inside the browser sandbox using 2D image data transformations and hardware-accelerated fragment shader pipelines.
-    - Media never leaves the user's computer; processing runs at 60 FPS without server roundtrips.
-  - **Core Graphical Transformations**:
-    1. **Color-Lookup Table (LUT) & Thermal Remapping**: Converts monochrome luminance $L(x, y)$ or arbitrary scalar energy fields into multi-stop chromatic thermal gradients (e.g., deep cryogenic indigos $\to$ ocean cyans $\to$ isobaric amber-gold $\to$ incandescent magenta/pink).
-    2. **Isoline & Isobar Frequency Synthesis**: Computes contour boundaries via trigonometric modulo functions ($f(S) = \sin(\omega \cdot S)$ or $\text{fract}(S/\Delta)$), producing razor-sharp isolines across non-linear gradients.
-    3. **Bayer Matrix & Halftone Spatial Dithering**: Converts continuous intensity fields into structured dot-matrix or Bayer dither patterns ($4\times 4$ or $8\times 8$ kernels), creating technical, tactile representations of continuous scalar density.
-    4. **Vector Field Advection & Fluid Streamlines**: Calculates tangent velocity vectors across gradient surfaces, animating particles and streamlines along potential lines.
+  - Ladybug is a zero-server, high-performance in-browser creative effects studio designed for instant, local media processing without render farms, background servers, or upload latency.
+  - **Zero-Server Client-Side Sandboxing**:
+    - Every filter, texture generation, compositing operation, and video export runs 100% locally on the client's GPU/CPU using WebGL 2.0 fragment shaders, 2D HTML5 Canvas image manipulation, and WebCodecs / Web Worker pipelines.
+    - Media files never leave the user's hard drive, enabling locked 60 FPS viewport manipulation and zero cloud egress cost.
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                        LADYBUG STUDIO CLIENT-SIDE PIPELINE                             │
+│                                                                                        │
+│  [Source Media] ───► [Monocular Depth] ───► [Shader Pipeline] ───► [Optical Glow]     │
+│  (Image/Video/SVG)   (Z-Displacement)      (Thermal/Dither/ASCII)   (Bloom/Streaks)    │
+│          │                                          │                     │            │
+│          ▼                                          ▼                     ▼            │
+│   [Audio Analyzer] ──► [FFT Frequency Dial] ──► [Time Modulator] ──► [60 FPS Canvas]   │
+│   (Web Audio API)      (Kick / Bass / Mix)      (Float/Breathe)     (4K / Video Out)   │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### The 7 Core Architectural Engines:
+1. **`LOOKS` Engine (60 Effects, 300+ Pre-Configured Looks)**:
+   - Client-side fragment shader presets transforming standard visual inputs into retro-futuristic, scientific, and technical representations (`Thermal Pink`, `RISO 01`, `ASCII CG0`, `Golden Halftones`, `Pixel Dither G0`, `Data Hatching 01`, `VHS 01`, `RETRO MATRIX`).
+2. **`DEPTH` Engine (Monocular Depth Map Estimation & 2.5D Spatial Parallax)**:
+   - Automatically computes depth displacement maps $Z(x, y)$ from 2D luminance and neural depth estimations.
+   - Extrudes flat 2D layers into virtual 3D perspective cards with camera mouse-tracking tilt, plane rotations, and SVG extrusions without loading heavy 3D asset files.
+3. **`GLOW` Engine (Three-Dial Optical Post-Processing)**:
+   - **Bloom**: Multi-pass Gaussian blur thresholding creating radiant light scattering around high-luminance elements.
+   - **Streaks**: Anamorphic horizontal optical flare distortion mimicking high-end cinema lenses and laser spectrometers.
+   - **Trails**: Frame-accumulation temporal persistence creating fluid motion smear and phosphor decay.
+4. **`MOTION` Engine (Procedural Micro-Animations & Timeline Loops)**:
+   - Trigonometric procedural physics loops (`Float`, `Breathe`, `Drift`, `Sway`, `Pop-in`) that animate rotation, scale, and position without external animation library overhead.
+   - Kinetic typography engine with character-by-character cascade delays and undulating sine waves.
+5. **`SOUND` Engine (Audio-Reactive Frequency Spectrum Modulation)**:
+   - Uses Web Audio API `AnalyserNode` with Fast Fourier Transform (FFT) splitting incoming audio into 4 distinct frequency bands:
+     - **Sub-Bass / Kick** ($20 - 120\text{ Hz}$): Drives shockwaves, scale pulses, and violent displacement surges.
+     - **Bass** ($120 - 350\text{ Hz}$): Modulates chromatic aberration and thermal palette offsets.
+     - **Mid-Range / Vocals** ($350 - 2500\text{ Hz}$): Modulates contour line frequency and dither dot radii.
+     - **Full Mix**: Drives global luminance gain and temporal trails.
+6. **`TRACK` Engine (Feature Tracking & Optical Flow Layer Anchoring)**:
+   - Edge and contrast centroid tracking that pins synthetic visual elements, data telemetry tags, or callouts to moving focal points in image/video feeds.
+7. **`ONECLICK` Dial Architecture (Normalized CSS Variable Dials)**:
+   - Universal parameter exposure where every complex multi-pass shader operation is controlled by clean, normalized dials:
+     ```css
+     .dial-slider { --v: 0.72; } /* Normalized 0.0 to 1.0 */
+     ```
+   - Hardware-accelerated CSS custom properties dynamically binding UI knobs to WebGL uniform variables or Canvas drawing contexts.
 
 ---
 
-### B. Mathematical & Physical Formulation of Atmospheric Dynamics
+### B. The Production Catalog of 24 Live Ladybug Templates
+Reverse-engineered directly from Ladybug's production CDN catalog (`https://cdn.theladybug.app/templates/catalog.json`):
+
+| # | Template Name | Canvas Dimensions | Duration | Layers | Core Shader & Visual Mechanics |
+| :-: | :--- | :-: | :-: | :-: | :--- |
+| **01** | **`Thermal Pink`** | $1920 \times 1080$ | 3.43s | 1 | Multi-stop chromatic thermal LUT remapping luminance into incandescent pink, amber, and deep cyan heat ramps. |
+| **02** | **`Neo Motion`** | $1080 \times 1350$ | 29.50s | 1 | Smooth continuous looping kinetic typography with harmonic drift and micro-jitter. |
+| **03** | **`Blox Counter`** | $1080 \times 1080$ | 3.23s | 1 | Pixelated numerical data-readout HUD with retro digital counting metrics. |
+| **04** | **`Ditbox`** | $1080 \times 1080$ | 6.00s | 1 | Ordered Bayer matrix dithering combined with geometric bounding box constraints. |
+| **05** | **`Line Craze`** | $1080 \times 1350$ | 5.21s | 1 | Dynamic vector contour lines and isoline displacement slicing across high-contrast subject boundaries. |
+| **06** | **`Stardust Go`** | $1920 \times 1080$ | 5.94s | 1 | Procedural particle emission cloud with optical bloom trails and depth-sorted twinkling. |
+| **07** | **`Trace Motion`** | $1080 \times 1080$ | 6.07s | 1 | Optical flow velocity tracing extracting motion vectors and drawing glowing streak trails. |
+| **08** | **`ASCII CG0`** | $960 \times 960$ | 5.21s | 1 | Dynamic monospace ASCII character quantization (`@%#*+=-:. `) with radiant phosphor bloom. |
+| **09** | **`ASCII Ghost Temple`** | $2688 \times 1792$ | 6.60s | 1 | Ultra-high-resolution looping ASCII shader overlaying 3D perspective scenes with misty depth decay. |
+| **10** | **`VHS 01`** | $1080 \times 1350$ | 6.00s | 1 | Analog video tape distortion: horizontal tracking scanlines, chromatic aberration fringe, tape flutter, and timestamp HUD. |
+| **11** | **`Golden Halftones`** | $1080 \times 1920$ | 8.27s | 1 | Luminous circular dot-matrix halftone raster with warm golden-amber lighting and soft glow. |
+| **12** | **`Neon Text Dither`** | $1920 \times 1080$ | 5.71s | 1 | High-contrast neon typography mapped through a 1-bit Bayer dither matrix for razor-sharp edge contrast. |
+| **13** | **`RETRO MATRIX`** | $1600 \times 1200$ | 6.00s | 1 | Digital code rain / phosphor cathode matrix with vertical character cascades and luminance decay. |
+| **14** | **`Dither Text 01`** | $1080 \times 1080$ | 6.00s | 1 | Minimalist bit-depth quantization styling typography with tactile newsprint texture. |
+| **15** | **`Game Boy`** | $1080 \times 1080$ | 6.00s | 1 | Authentic 4-color LCD green phosphor palette quantization with square pixel grid emulation. |
+| **16** | **`Pixel Code`** | $1080 \times 1350$ | 5.21s | 1 | Cellular automaton grid combined with hexadecimal and algorithmic code readouts. |
+| **17** | **`Pixel Dither G0`** | $1080 \times 1350$ | 6.00s | 1 | Multi-frequency dithering blending large pixel cells with micro-stipple grain. |
+| **18** | **`Tag Pill`** | $1080 \times 1350$ | 7.00s | 1 | 3D peel-away tag and sticker animation with dynamic lighting and customizable telemetry dials. |
+| **19** | **`RISO 01`** | $1600 \times 1200$ | 5.21s | 1 | Risograph print simulation: 2-color ink separation, slight mechanical registration offset, and coarse paper grain. |
+| **20** | **`The Trace`** | $1600 \times 1200$ | 6.00s | 1 | Edge-detection Sobel filter extracting vector wireframe contours from video frames. |
+| **21** | **`Counter VHS`** | $1080 \times 1350$ | 5.21s | 1 | Telemetry tape counter overlay with analog tape noise and timecode synchronization. |
+| **22** | **`Counter 01`** | $1080 \times 1350$ | 5.21s | 1 | Clean modern numerical increment counter with smooth cubic easing. |
+| **23** | **`Dither Text B`** | $1920 \times 1080$ | 5.21s | 1 | Horizontal slit-scan dither text typography with directional grain. |
+| **24** | **`Data Hatching 01`** | $1080 \times 1350$ | 5.21s | 1 | Multi-directional vector cross-hatching illustrating scalar field density and topographic gradient slopes. |
+
+---
+
+### C. Multi-Disciplinary Academic Mapping to Aditya's Entire Platform
+
+Ladybug's visual processing engines provide exceptional multi-purpose capabilities across every academic domain in Aditya's UPSC, scientific, and technical curriculum:
+
+```
+                                  ┌─────────────────────────────┐
+                                  │ LADYBUG VISUAL COMPUTING    │
+                                  │ 7 Engines • 24 Templates    │
+                                  └──────────────┬──────────────┘
+               ┌───────────────────┬─────────────┴─────┬───────────────────┐
+               ▼                   ▼                   ▼                   ▼
+       [UPSC GEOGRAPHY]   [UPSC ANTHROPOLOGY]   [B.SC. ZOOLOGY]    [DATA & CYBER-CODEX]
+       • Thermal Climatology • Fossil Crania 2.5D  • Confocal Fluoro  • Poverty Choropleths
+       • Topo Depth Relief  • Lithic Typology    • Organelle Stipple • Ancient Epigraphy
+       • Satellite FCC Multi• Tribal Allele Drift • Bio-Acoustics    • Terminal HUD Logs
+```
+
+#### 1. UPSC Geography & Earth Dynamics (GS-1 & Optional Paper 1):
+* **Atmospheric Climatology & Synoptic Meteorology**:
+  * **Thermal FLIR (`Thermal Pink`)**: Maps sea-surface temperature (SST) anomalies during El Niño/La Niña (ENSO) in the Pacific, positive/negative Indian Ocean Dipole (IOD), and the thermal sensible heat flux over the **Tibetan Plateau** ($996\text{ hPa}$) that triggers the Indian Southwest Monsoon.
+  * **Isoline Contouring (`Line Craze`)**: Generates real-time barometric isobars ($hPa$), isotherms ($^\circ\text{C}$), and isohyets ($mm$), showing pressure troughs, ridges, and cyclonic gradients.
+* **Geomorphology & Structural Tectonics**:
+  * **Depth & Parallax (`DEPTH` Engine)**: Converts 2D satellite elevation models into interactive 2.5D topographic relief flyarounds:
+    * Himalayan Tectonic Scarps: Main Central Thrust (MCT), Main Boundary Thrust (MBT), and Himalayan Frontal Thrust (HFT).
+    * Fault Trough Rift Valleys: Narmada and Tapi grabens between the Vindhyan and Satpura horst blocks.
+    * Volcanic Terracing: Step-like basaltic lava mesas of the Deccan Traps.
+  * **Data Hatching (`Data Hatching 01`)**: Renders geological cross-sections showing synclines, anticlines, strike-and-dip strata angles, and Davisian peneplain evolution.
+* **Remote Sensing & Satellite Image Processing (M.Sc. Geography)**:
+  * **False Color Composite (FCC) Remapping**: Re-synthesizes Landsat-9 and Sentinel-2 multi-spectral bands:
+    $$\text{Red} \leftarrow \text{Band 5 (NIR)}, \quad \text{Green} \leftarrow \text{Band 4 (Red)}, \quad \text{Blue} \leftarrow \text{Band 3 (Green)}$$
+    Dense Himalayan deodar/pine forest canopies reflect intense near-infrared energy, glowing incandescent crimson-red, while sediment-laden rivers appear turquoise-blue.
+  * **Halftone & Bayer Dithering (`Golden Halftones`, `Ditbox`)**: Emulates satellite sensor spatial resolution, detector pixel pitch, and radiometric quantization (8-bit vs. 12-bit dynamic range).
+
+#### 2. UPSC Anthropology (Physical Anthropology & Prehistory - Optional Paper 1 & 2):
+* **Paleoanthropology & Cranial Morphometrics**:
+  * **Depth & 3D Flyaround (`DEPTH` Engine)**: Adds volumetric front-and-back spatial inspection to fossil crania (*Australopithecus afarensis* Lucy, *Homo habilis* KNM-ER 1813, *Homo erectus* Java/Peking Man, *Neanderthal* La Chapelle-aux-Saints, *Homo sapiens* Cro-Magnon).
+  * Enables interactive visual comparison of the supraorbital torus (brow ridge), sagittal crest, facial prognathism, and foramen magnum positioning.
+* **Prehistoric Archaeological Lithic Typology**:
+  * **Risograph & Data Hatching (`RISO 01`, `Data Hatching 01`)**: Recreates the tactile, hand-drawn stipple and cross-hatch conventions of professional archaeological artefact drawings:
+    * Lower Paleolithic Soanian pebble choppers and Acheulean bifacial handaxes (Attirampakkam, Madrasian culture).
+    * Middle Paleolithic Levallois prepared-core flake tools (Nevasan industry).
+    * Upper Paleolithic parallel-sided blades and Mesolithic geometric microliths (Bhimbetka rock shelters).
+* **Population Genetics & Tribal Demography (Paper II)**:
+  * **Halftone Dither Grids (`Pixel Dither G0`)**: Visualizes spatial distribution of genetic alleles (e.g. Sickle Cell trait $Hb^S$, G6PD deficiency, Rh-negative factors) across distinct tribal isolates of India:
+    * Particularly vulnerable tribal groups (PVTGs): Andamanese Negritos (Onge, Jarawa, Sentinelese).
+    * Central Indian Proto-Australoid tribes (Gonds, Santhals, Baigas).
+    * Mongoloid tribal groups of the Northeast (Nagas, Mizos, Khasis).
+
+#### 3. B.Sc. Zoology & Cellular Biology:
+* **Confocal Laser Scanning & Epifluorescence Microscopy**:
+  * **Thermal FLIR & Riso Glow**: Emulates multi-fluorophore immunofluorescence imaging:
+    * DAPI fluorophore ($461\text{ nm}$ Blue): Staining condensed nuclear DNA and mitotic metaphase chromosomes.
+    * GFP ($509\text{ nm}$ Green): Cytoskeletal actin microfilaments and tubulin microtubules.
+    * Rhodamine / Texas Red ($615\text{ nm}$ Red): Mitochondria and lysosomal compartments.
+* **Bio-Acoustics & Animal Communication (`SOUND` Engine)**:
+  * Real-time audio FFT spectral analysis of bio-acoustic recordings:
+    * Cetacean echolocation clicks and baleen whale frequency sweeps ($10 - 40\text{ Hz}$).
+    * Avian syrinx harmonic structures and amphibian mating calls.
+    * Phonocardiogram (PCG) visualization of vertebrate heart sounds ($S_1, S_2, S_3, S_4$).
+
+#### 4. Data Analytics & Quantitative Governance (UPSC GS-3 & Economics):
+* **Thermodynamic Socio-Economic Heatmaps**:
+  * **Thermal FLIR Remapping**: Replaces static Excel charts with interactive multi-gradient thermodynamic maps:
+    * District-level Multidimensional Poverty Index (NITI Aayog MPI).
+    * Aspirational Districts Program composite performance indicators.
+    * Dynamic groundwater stage of extraction (Central Ground Water Board, CGWB) across over-exploited vs. safe aquifer basins.
+* **Halftone Density Representation**:
+  * **Bayer Halftone Grids (`Golden Halftones`)**: Visualizes population density, rural-to-urban labor migration corridors, and renewable energy grid capacity across India's states.
+
+#### 5. Cyber-Codex & Creative UI/UX Presentation:
+* **Ancient Epigraphy & Decipherment Terminal (`ASCII CG0`, `RETRO MATRIX`)**:
+  * Renders undeciphered Harappan / Indus Valley script seal glyphs, Ashokan rock edict Brahmi inscriptions, and Kharosthi scrolls into interactive cyber-archaeological matrices that shimmer with optical bloom on cursor hover.
+* **Analog Research Telemetry HUD (`VHS 01`, `Counter VHS`)**:
+  * Gives deep-time historical and astronomical articles the aesthetic of a retro-futuristic scientific field observatory monitor with scanlines, date timecodes, and subtle analog jitter.
+
+---
+
+### D. Mathematical & Physical Formulation of Atmospheric Dynamics
 By abstracting Ladybug's visual filters into physical solvers, we transform image-stylization shaders into rigorous synoptic meteorological simulators:
 
 1. **Atmospheric State Variables & The Ideal Gas Law**:
@@ -769,19 +914,7 @@ By abstracting Ladybug's visual filters into physical solvers, we transform imag
 
 ---
 
-### C. Visual Effect Translation Matrix: Ladybug Filters $\to$ Scientific Processes
-
-| Ladybug Visual Effect | Algorithmic Mechanism | Scientific & Synoptic Phenomenon | UPSC Geography / Physics Mapping |
-| :--- | :--- | :--- | :--- |
-| **`fx-thermal` / `Thermal Pink`** | Multi-stop chromatic LUT remapping scalar range $[0, 1] \to [\text{Navy}, \text{Cyan}, \text{Amber}, \text{Magenta}, \text{White}]$. | **Surface Heat Lows vs Cryogenic Polar Sinks** | Visualization of the **Tibetan Plateau Heat Engine** (summer thermal low $996\text{ hPa}$) vs cold continental Siberian High ($1036\text{ hPa}$). |
-| **Isoline / Contouring** | $\sin\left(\frac{2\pi P}{\Delta P}\right) > 1 - \epsilon$ or modulo step functions. | **Barometric Isobars & Thermal Isotherms** | Drawing continuous isobaric contours at standard intervals ($4\text{ hPa}$: $1000, 1004, 1008, 1012, 1016\text{ hPa}$) showing pressure ridge lines and troughs. |
-| **`Pixel Dither G0` / `fx-halftone`** | Ordered $4\times 4$ Bayer matrix thresholding or circular dot radius modulation: $r = r_{\max}\sqrt{\rho/\rho_0}$. | **Air Density ($\rho$) & Atmospheric Moisture Content ($q$)** | Representing dense, cold, heavy air masses at sea level vs rarified thin air over high Himalayan altitudes ($3000\text{m} - 8000\text{m}$) and cloud condensation density. |
-| **Vector Streamline Ripple** | Advecting particle coordinates along isobar tangent vectors $\vec{\tau} = \frac{1}{|\nabla P|}(-\frac{\partial P}{\partial y}, \frac{\partial P}{\partial x})$. | **Geostrophic & Cyclonic Wind Streamlines** | Simulating the **Southwest Monsoon Cross-Equatorial Flow** (Findlater Jet) turning cyclonically into the monsoon trough over North India. |
-| **Dynamic Probe / Crosshair** | Real-time spatial query extracting $P(x_0, y_0), T(x_0, y_0)$ with instant thermodynamic readout. | **Radiosonde / Synoptic Weather Station Sounding** | Live pinpoint inspection of specific coordinate centers (e.g. **Shimla / Himachal Pradesh $31.1^\circ\text{N}, 77.1^\circ\text{E}$**). |
-
----
-
-### D. Synoptic Case Studies for the Indian Subcontinent & Himachal Pradesh
+### E. Synoptic Case Studies for the Indian Subcontinent & Himachal Pradesh
 
 1. **Synoptic Scenario 1: The South-West Monsoon Peak (July)**:
    - **Tibetan Thermal Engine**: Intense sensible heat flux over the Tibetan Plateau creates a massive upper-tropospheric anticyclone and a deep surface thermal low ($996\text{ hPa}$) over the Thar Desert and Northwest India.
@@ -798,15 +931,128 @@ By abstracting Ladybug's visual filters into physical solvers, we transform imag
 
 ---
 
-### E. Zero-Build Implementation Architecture in `overrides/home.html`
+### F. Five Zero-Build Implementation Recipes in `Code0`
+
+These clean, pure JavaScript algorithms implement Ladybug's core principles without external dependencies:
+
+#### Recipe 1: Fast 2.5D Monocular Depth Displacement (`DEPTH` Engine)
+Extracts luminance from any image/diagram to displace vertices on cursor hover:
+```javascript
+function applyDepthParallax(canvas, image, mouseX, mouseY) {
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const offX = (mouseX / W - 0.5) * 24; // Parallax tilt angle
+  const offY = (mouseY / H - 0.5) * 18;
+
+  ctx.clearRect(0, 0, W, H);
+  // Layer 1: Background shadow with depth offset
+  ctx.save();
+  ctx.translate(-offX * 0.5, -offY * 0.5);
+  ctx.filter = 'blur(12px) brightness(0.2)';
+  ctx.drawImage(image, 0, 0, W, H);
+  ctx.restore();
+
+  // Layer 2: Foreground specimen with 2.5D perspective displacement
+  ctx.save();
+  ctx.translate(offX, offY);
+  ctx.drawImage(image, 0, 0, W, H);
+  ctx.restore();
+}
+```
+
+#### Recipe 2: Audio-Reactive FFT Parameter Dial (`SOUND` Engine)
+Captures microphone or audio tracks and binds frequency energy to UI dials:
+```javascript
+class AudioDialController {
+  constructor() {
+    this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    this.analyser = this.audioCtx.createAnalyser();
+    this.analyser.fftSize = 512;
+    this.buffer = new Uint8Array(this.analyser.frequencyBinCount);
+  }
+  getBands() {
+    this.analyser.getByteFrequencyData(this.buffer);
+    // Sub-Bass (0-120Hz): bins 0 to 3
+    const kick = (this.buffer[0] + this.buffer[1] + this.buffer[2]) / (3 * 255);
+    // Mid-Range (350-2500Hz): bins 8 to 58
+    let midSum = 0;
+    for (let i = 8; i <= 58; i++) midSum += this.buffer[i];
+    const vocals = midSum / (51 * 255);
+    return { kick, vocals }; // Returns normalized 0.0 to 1.0 values
+  }
+}
+```
+
+#### Recipe 3: Ordered $4\times 4$ Bayer Matrix Dithering (`Pixel Dither G0`)
+Converts scalar density into tactile stipple textures:
+```javascript
+const BAYER_4X4 = [
+  [ 0,  8,  2, 10],
+  [12,  4, 14,  6],
+  [ 3, 11,  1,  9],
+  [15,  7, 13,  5]
+];
+function renderBayerDither(ctx, x, y, value0to1, color) {
+  const threshold = BAYER_4X4[y % 4][x % 4] / 16.0;
+  if (value0to1 > threshold) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, 1, 1);
+  }
+}
+```
+
+#### Recipe 4: Multi-Stop Chromatic Thermal LUT (`Thermal Pink`)
+Maps continuous temperature $[-15^\circ\text{C}, 42^\circ\text{C}]$ to FLIR heat colors:
+```javascript
+function getThermalColor(T) {
+  const norm = Math.max(0, Math.min(1, (T + 15) / 57));
+  if (norm < 0.25) { // Deep Cryo Indigo -> Electric Cyan
+    const f = norm / 0.25;
+    return `rgb(${Math.round(7 + f * 5)}, ${Math.round(10 + f * 190)}, ${Math.round(36 + f * 190)})`;
+  } else if (norm < 0.50) { // Electric Cyan -> Spring Mint
+    const f = (norm - 0.25) / 0.25;
+    return `rgb(${Math.round(12 + f * 81)}, ${Math.round(200 + f * 40)}, ${Math.round(226 - f * 58)})`;
+  } else if (norm < 0.75) { // Spring Mint -> Amber Gold
+    const f = (norm - 0.50) / 0.25;
+    return `rgb(${Math.round(93 + f * 162)}, ${Math.round(240 - f * 56)}, ${Math.round(168 - f * 91)})`;
+  } else { // Amber Gold -> Thermal Pink -> White Hot Core
+    const f = (norm - 0.75) / 0.25;
+    return `rgb(${Math.round(255 - f * 19)}, ${Math.round(184 - f * 112)}, ${Math.round(77 + f * 76)})`;
+  }
+}
+```
+
+#### Recipe 5: Continuous Trigonometric Isoline / Isobar Generator
+Draws razor-sharp contour lines without marching squares mesh generation:
+```javascript
+function renderIsobarLine(ctx, gx, gy, step, pressureVal, interval = 4) {
+  // Evaluates sine modulo at standard intervals (e.g. 4 hPa)
+  const isoSine = Math.sin((pressureVal - 980) * Math.PI / interval);
+  if (Math.abs(isoSine) < 0.18) {
+    ctx.fillStyle = pressureVal < 1004 ? 'rgba(236, 72, 153, 0.9)' : 'rgba(2, 210, 227, 0.9)';
+    ctx.fillRect(gx, gy, step, step);
+  }
+}
+```
+
+---
+
+### G. Live Zero-Build Integration in `overrides/home.html`
 1. **Interactive Thermodynamic Engine**:
-   - Implemented within the **Convergence Lab** as an additional specialized mode (`switchLabMode('thermo')`).
-   - Uses direct HTML5 Canvas pixel manipulation (`createImageData` / `putImageData`) or analytical procedural rasterization for 60 FPS performance without WebGL bundle overhead.
-2. **Interactive Controls Suite**:
-   - **Visual Filter Selector**: Thermal FLIR / False-Color IR $\leftrightarrow$ Isobaric Contour Map $\leftrightarrow$ Bayer Density Dither $\leftrightarrow$ Wind Vector Streamlines.
-   - **Synoptic Scenario Presets**: South-West Monsoon (Summer) $\leftrightarrow$ Western Disturbance / Winter High $\leftrightarrow$ Tropical Cyclone Vortex.
-   - **Interactive Cursor Perturbation**: Dragging the cursor over the map acts as a mobile thermal anomaly or barometric perturbation, dynamically recalculating the pressure gradient and stream flow in real time.
-   - **Himachal Pinpoint Telemetry**: Instant readout of barometric pressure ($P$), temperature ($T$), air density ($\rho$), and wind speed at Himachal Pradesh coordinates ($31.1^\circ\text{N}, 77.1^\circ\text{E}$).
+   - Integrated as the 5th mode in the **Convergence Lab** (`switchLabMode('thermo')`).
+   - Features real-time switching between 4 visual filters:
+     1. `🌡️ Thermal FLIR`: Full false-color infrared heat map.
+     2. `〰️ Isobar Contours`: Luminous $4\text{ hPa}$ contours with High **[H]** / Low **[L]** center markers.
+     3. `▦ Bayer Density Dither`: Halftone dot matrix tracking air density $\rho = P / (R_d T)$.
+     4. `💨 Wind Streamlines`: 160 animated geostrophic particles circulating dynamically across the subcontinent.
+2. **Three Synoptic Meteorological Presets**:
+   - `☀️ SW Monsoon (July)`: Tibetan thermal heat low ($994\text{ hPa}$) + Mascarene High ($1026\text{ hPa}$).
+   - `❄️ Western Disturbance (Jan)`: Siberian continental anticyclone ($1026\text{ hPa}$) + extratropical low depression ($1002\text{ hPa}$).
+   - `🌀 Tropical Cyclone`: Deep rotating vortex ($974\text{ hPa}$) in the Bay of Bengal with cyclostrophic streamlines.
+3. **Interactive Cursor Probing & Anomaly Injection**:
+   - Live crosshair sounding probe displaying coordinates ($\text{Lat/Lon}$), Pressure ($P$), Temperature ($T$), Air Density ($\rho$), and Geostrophic Wind Speed ($v_g$).
+   - Dragging across the map injects localized thermal/pressure anomalies.
+   - Dedicated telemetry beacon tracking **Himachal Pradesh ($31.1^\circ\text{N}, 77.1^\circ\text{E}$)** and the Dhauladhar / Pir Panjal orographic wall.
 
 
 
