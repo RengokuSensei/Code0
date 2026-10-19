@@ -3,7 +3,7 @@
 <div class="codex-hud-nav">
   <div class="codex-hud-header">
     <span>⚡ MASTER CODEX HUD &bull; QUICK ACCESS REGISTRY</span>
-    <span class="telemetry-pill" style="font-size: 0.65rem;">15 MODULES ACTIVE</span>
+    <span class="telemetry-pill" style="font-size: 0.65rem;">16 MODULES ACTIVE</span>
   </div>
   <div class="codex-hud-pills">
     <a href="#1-project-overview-intellectual-core" class="codex-jump-pill">01. Overview &amp; Core</a>
@@ -21,6 +21,7 @@
     <a href="#13-anatomical-decomposition-3d-spatial-dissection-astra-ai-human-body-atlas" class="codex-jump-pill">13. Astra 3D Anatomy</a>
     <a href="#14-code-drawn-vector-animation-visual-keyframe-pipelines-html-anime-html-animator" class="codex-jump-pill">14. Vector Anime Pipeline</a>
     <a href="#15-canvas-native-motion-templates-spatial-transitions-animosapp-architecture" class="codex-jump-pill">15. animos.app Transitions</a>
+    <a href="#16-chromatic-shader-pipelines-thermodynamic-field-visualization-theladybugapp-architecture" class="codex-jump-pill">16. Ladybug Thermo Shader</a>
   </div>
 </div>
 
@@ -716,5 +717,96 @@ Reverse-engineered from Astra AI's *Human Body 3D Lab* (`https://app.astra-ai.co
      - Card Borders: Subtle translucent hairline (`rgba(140, 170, 240, 0.18)`)
      - Active Accents: Vibrant Cyber Cyan (`#02d2e3`) and Spring Mint (`#5df0a8`)
      - Dynamic Shadows: Multi-stage ambient occlusion blur (`rgba(0, 0, 0, 0.65)`).
+
+---
+
+## 16. Chromatic Shader Pipelines & Thermodynamic Field Visualization (`theladybug.app` Architecture)
+
+### A. Reverse-Engineered Architecture & Photo-Effect Mechanics
+- **Origin & Core Philosophy**:
+  - Reverse-engineered from `app.theladybug.app/home/` and `theladybug.app`.
+  - Ladybug is a zero-server, high-performance in-browser creative studio specializing in retro-futuristic, scientific, and technical image manipulations (`fx-thermal`, `Thermal Pink`, `fx-halftone`, `fx-riso`, `Riso Glow`, `Pixel Dither G0`, `Neon Text Dither`, `ASCII`).
+  - **Local Canvas & WebGL Shader Pipeline**:
+    - Operates completely client-side inside the browser sandbox using 2D image data transformations and hardware-accelerated fragment shader pipelines.
+    - Media never leaves the user's computer; processing runs at 60 FPS without server roundtrips.
+  - **Core Graphical Transformations**:
+    1. **Color-Lookup Table (LUT) & Thermal Remapping**: Converts monochrome luminance $L(x, y)$ or arbitrary scalar energy fields into multi-stop chromatic thermal gradients (e.g., deep cryogenic indigos $\to$ ocean cyans $\to$ isobaric amber-gold $\to$ incandescent magenta/pink).
+    2. **Isoline & Isobar Frequency Synthesis**: Computes contour boundaries via trigonometric modulo functions ($f(S) = \sin(\omega \cdot S)$ or $\text{fract}(S/\Delta)$), producing razor-sharp isolines across non-linear gradients.
+    3. **Bayer Matrix & Halftone Spatial Dithering**: Converts continuous intensity fields into structured dot-matrix or Bayer dither patterns ($4\times 4$ or $8\times 8$ kernels), creating technical, tactile representations of continuous scalar density.
+    4. **Vector Field Advection & Fluid Streamlines**: Calculates tangent velocity vectors across gradient surfaces, animating particles and streamlines along potential lines.
+
+---
+
+### B. Mathematical & Physical Formulation of Atmospheric Dynamics
+By abstracting Ladybug's visual filters into physical solvers, we transform image-stylization shaders into rigorous synoptic meteorological simulators:
+
+1. **Atmospheric State Variables & The Ideal Gas Law**:
+   - The scalar barometric pressure field $P(x, y)$ and temperature field $T(x, y)$ govern local air density $\rho(x, y)$ through the dry air equation of state:
+     $$\rho(x, y) = \frac{P(x, y)}{R_d \cdot T(x, y)}$$
+     where $R_d = 287.058\text{ J}/(\text{kg}\cdot\text{K})$ is the specific gas constant for dry air.
+
+2. **Pressure Gradient Force (PGF)**:
+   - The fundamental driving force accelerating air parcels from high pressure cells toward low pressure sinks:
+     $$\vec{F}_{\text{pgf}} = -\frac{1}{\rho}\nabla P = -\frac{1}{\rho}\left(\frac{\partial P}{\partial x}\hat{i} + \frac{\partial P}{\partial y}\hat{j}\right)$$
+
+3. **Coriolis Acceleration & Geostrophic Balance**:
+   - On a rotating sphere with angular velocity $\Omega = 7.2921 \times 10^{-5}\text{ rad/s}$ at latitude $\phi$, the Coriolis parameter is $f = 2\Omega\sin\phi$.
+   - In geostrophic equilibrium (above the planetary boundary layer where surface friction is negligible), the horizontal PGF is exactly balanced by the Coriolis force:
+     $$\vec{F}_{\text{pgf}} + \vec{F}_c = 0 \implies -2\Omega\sin\phi \cdot (\hat{k} \times \vec{v}_g) = \frac{1}{\rho}\nabla P$$
+   - Decomposed into Cartesian velocity components:
+     $$u_g = -\frac{1}{f\rho}\frac{\partial P}{\partial y}, \quad v_g = \frac{1}{f\rho}\frac{\partial P}{\partial x}$$
+   - **Visual Implication**: Winds blow *parallel* to isobars rather than across them! Cyclonic circulation flows counter-clockwise around Lows in the Northern Hemisphere, while anticyclonic circulation flows clockwise around Highs.
+
+4. **Thermal Wind Relation (Baroclinic Shear)**:
+   - The vertical shear of the geostrophic wind is directly proportional to horizontal temperature gradients:
+     $$\frac{\partial \vec{v}_g}{\partial \ln p} = -\frac{R_d}{f}\left(\hat{k} \times \nabla_p T\right)$$
+   - Explains the formation of the Subtropical Westerly Jet Stream (STWJ) over the Indo-Gangetic Plains and Himalayas due to the steep meridional temperature gradient between the equator and Tibetan landmass.
+
+5. **Orographic Lift & Adiabatic Thermodynamic Profiles**:
+   - When moist air encounters topographic barriers (e.g. the Dhauladhar & Pir Panjal ranges of Himachal Pradesh), forced vertical displacement $w = \vec{v}\cdot\nabla Z_s$ triggers adiabatic expansion:
+     - **Dry Adiabatic Lapse Rate (DALR)**: $\Gamma_d = \frac{g}{c_p} \approx 9.8^\circ\text{C/km}$ (unsaturated ascent up to Lifting Condensation Level, LCL).
+     - **Saturated Adiabatic Lapse Rate (SALR)**: $\Gamma_s \approx 5.0 - 6.5^\circ\text{C/km}$ (condensation releases latent heat of vaporization $L_v \approx 2.5 \times 10^6\text{ J/kg}$).
+
+---
+
+### C. Visual Effect Translation Matrix: Ladybug Filters $\to$ Scientific Processes
+
+| Ladybug Visual Effect | Algorithmic Mechanism | Scientific & Synoptic Phenomenon | UPSC Geography / Physics Mapping |
+| :--- | :--- | :--- | :--- |
+| **`fx-thermal` / `Thermal Pink`** | Multi-stop chromatic LUT remapping scalar range $[0, 1] \to [\text{Navy}, \text{Cyan}, \text{Amber}, \text{Magenta}, \text{White}]$. | **Surface Heat Lows vs Cryogenic Polar Sinks** | Visualization of the **Tibetan Plateau Heat Engine** (summer thermal low $996\text{ hPa}$) vs cold continental Siberian High ($1036\text{ hPa}$). |
+| **Isoline / Contouring** | $\sin\left(\frac{2\pi P}{\Delta P}\right) > 1 - \epsilon$ or modulo step functions. | **Barometric Isobars & Thermal Isotherms** | Drawing continuous isobaric contours at standard intervals ($4\text{ hPa}$: $1000, 1004, 1008, 1012, 1016\text{ hPa}$) showing pressure ridge lines and troughs. |
+| **`Pixel Dither G0` / `fx-halftone`** | Ordered $4\times 4$ Bayer matrix thresholding or circular dot radius modulation: $r = r_{\max}\sqrt{\rho/\rho_0}$. | **Air Density ($\rho$) & Atmospheric Moisture Content ($q$)** | Representing dense, cold, heavy air masses at sea level vs rarified thin air over high Himalayan altitudes ($3000\text{m} - 8000\text{m}$) and cloud condensation density. |
+| **Vector Streamline Ripple** | Advecting particle coordinates along isobar tangent vectors $\vec{\tau} = \frac{1}{|\nabla P|}(-\frac{\partial P}{\partial y}, \frac{\partial P}{\partial x})$. | **Geostrophic & Cyclonic Wind Streamlines** | Simulating the **Southwest Monsoon Cross-Equatorial Flow** (Findlater Jet) turning cyclonically into the monsoon trough over North India. |
+| **Dynamic Probe / Crosshair** | Real-time spatial query extracting $P(x_0, y_0), T(x_0, y_0)$ with instant thermodynamic readout. | **Radiosonde / Synoptic Weather Station Sounding** | Live pinpoint inspection of specific coordinate centers (e.g. **Shimla / Himachal Pradesh $31.1^\circ\text{N}, 77.1^\circ\text{E}$**). |
+
+---
+
+### D. Synoptic Case Studies for the Indian Subcontinent & Himachal Pradesh
+
+1. **Synoptic Scenario 1: The South-West Monsoon Peak (July)**:
+   - **Tibetan Thermal Engine**: Intense sensible heat flux over the Tibetan Plateau creates a massive upper-tropospheric anticyclone and a deep surface thermal low ($996\text{ hPa}$) over the Thar Desert and Northwest India.
+   - **Mascarene High & Cross-Equatorial Jet**: High pressure ($1026\text{ hPa}$) east of Madagascar pushes maritime tropical air across the equator, deflected right by Coriolis force into the Arabian Sea branch and Bay of Bengal branch.
+   - **Orographic Rain Sinks in Himachal**: The Bay of Bengal branch funnels along the Himalayan foothills, encountering the steep topographic wall of Himachal Pradesh, triggering extreme adiabatic cooling, cloudbursts, and heavy monsoonal runoff.
+
+2. **Synoptic Scenario 2: Winter Continental Anticyclone & Western Disturbances (January)**:
+   - **North Indian Cold High**: High pressure ($1020\text{ hPa}$) stabilizes over Central Asia and North-Western India, producing clear skies and dry offshore winds.
+   - **Western Disturbances (WDs)**: Extratropical baroclinic depressions originating in the Mediterranean Sea embed into the Subtropical Westerly Jet Stream (STWJ). As they hit the Western Himalayas (Jammu & Kashmir, Himachal Pradesh, Uttarakhand), intense orographic lift causes winter snowfall, replenishing Himalayan glaciers and sustaining the Rabi wheat crop.
+
+3. **Synoptic Scenario 3: Tropical Cyclogenesis (Bay of Bengal / Arabian Sea)**:
+   - Deep barotropic low ($975 - 985\text{ hPa}$) over warm sea surface temperatures ($> 26.5^\circ\text{C}$).
+   - Isobars pack tightly into concentric rings; tangential wind speeds accelerate into hurricane-force cyclostrophic balance ($\frac{v^2}{R} = \frac{1}{\rho}\frac{\partial P}{\partial r}$).
+
+---
+
+### E. Zero-Build Implementation Architecture in `overrides/home.html`
+1. **Interactive Thermodynamic Engine**:
+   - Implemented within the **Convergence Lab** as an additional specialized mode (`switchLabMode('thermo')`).
+   - Uses direct HTML5 Canvas pixel manipulation (`createImageData` / `putImageData`) or analytical procedural rasterization for 60 FPS performance without WebGL bundle overhead.
+2. **Interactive Controls Suite**:
+   - **Visual Filter Selector**: Thermal FLIR / False-Color IR $\leftrightarrow$ Isobaric Contour Map $\leftrightarrow$ Bayer Density Dither $\leftrightarrow$ Wind Vector Streamlines.
+   - **Synoptic Scenario Presets**: South-West Monsoon (Summer) $\leftrightarrow$ Western Disturbance / Winter High $\leftrightarrow$ Tropical Cyclone Vortex.
+   - **Interactive Cursor Perturbation**: Dragging the cursor over the map acts as a mobile thermal anomaly or barometric perturbation, dynamically recalculating the pressure gradient and stream flow in real time.
+   - **Himachal Pinpoint Telemetry**: Instant readout of barometric pressure ($P$), temperature ($T$), air density ($\rho$), and wind speed at Himachal Pradesh coordinates ($31.1^\circ\text{N}, 77.1^\circ\text{E}$).
+
 
 
