@@ -3,7 +3,7 @@
 <div class="codex-hud-nav">
   <div class="codex-hud-header">
     <span>⚡ MASTER CODEX HUD &bull; QUICK ACCESS REGISTRY</span>
-    <span class="telemetry-pill" style="font-size: 0.65rem;">17 MODULES ACTIVE</span>
+    <span class="telemetry-pill" style="font-size: 0.65rem;">18 MODULES ACTIVE</span>
   </div>
   <div class="codex-hud-pills">
     <a href="#1-project-overview-intellectual-core" class="codex-jump-pill">01. Overview &amp; Core</a>
@@ -23,6 +23,7 @@
     <a href="#15-canvas-native-motion-templates-spatial-transitions-animosapp-architecture" class="codex-jump-pill">15. animos.app Transitions</a>
     <a href="#16-multi-purpose-creative-scientific-visual-computing-theladybugapp-architecture" class="codex-jump-pill">16. Ladybug Multi-Engine</a>
     <a href="#17-master-session-ledger-handoff-protocol-multi-page-transition-blueprint" class="codex-jump-pill">17. Session Ledger</a>
+    <a href="#18-author-dossier-re-engineering-himalayan-topographic-telemetry" class="codex-jump-pill">18. Author &amp; HP Telemetry</a>
   </div>
 </div>
 
@@ -1168,15 +1169,80 @@ When starting the next conversation, the immediate development sequence is:
 
 ---
 
-### E. Copy-Paste Resume Prompt for the Next Conversation
+### E. Multi-Page Roadmap Status
+- [x] **Phase 1: Full Redesign of `/about/author/` Page**: Fully completed in Section 18.
+- [ ] **Phase 2: Upgrade `/project-notes/` Standalone Experience**: Scrollspy ToC & embedded live mini-canvas previews.
+- [ ] **Phase 3: 2.5D Monocular Depth Cards**: Ladybug `DEPTH` engine for fossil & stratigraphy cards.
+- [ ] **Phase 4: Audio-Reactive Spectrum Analyzer**: Ladybug `SOUND` engine Web Audio FFT analyzer.
+- [ ] **Phase 5: Dedicated 3D Atlas / Living UPSC Navigator**: Full-page explorable 3D coordinate atlas.
 
-To resume in a new chat with 100% context alignment, simply copy and send the following prompt:
+---
 
-```markdown
-Resume pair-programming on Aditya's platform (Code0). We have thoroughly documented all findings in docs/project-notes.md (Sections 1 through 17). The homepage (overrides/home.html) is live with the floating capsule navbar, the Hero 3D WebGL Three.js hologram, and all 5 Convergence Lab modes (including the new Thermodynamic Isobar & Thermal FLIR simulator). 
+## 18. Author Dossier Cyber-Glass Re-Engineering & Himalayan Topographic Telemetry Engine
 
-Please review Section 17 in docs/project-notes.md and proceed with Phase 1 of our roadmap: reforming and redesigning the Author profile page at docs/about/author.md to match our cyber-glass obsidian aesthetic, highlighting Aditya's Himachal Pradesh roots, B.Sc Zoology, M.Sc Geography, UPSC Anthropology, and Data Analytics matrix.
-```
+### A. Executive Delivery Overview
+In accordance with Phase 1 of our multi-page transition roadmap, the Author Profile page at `docs/about/author.md` has been reformed and redesigned from the ground up to mirror the high-contrast cyber-glass obsidian aesthetic of `overrides/home.html`.
+
+The upgraded author dossier integrates:
+1. **Interactive Himalayan Hypsometric Transect Engine**: Real-time cross-section probe spanning Shivalik foothills ($350\text{m}$) through Dhauladhar, Pir Panjal, Shimla Ridge, and the Great Himalayan Crest ($6,816\text{m}$) into the Spiti cold desert.
+2. **Disciplinary Convergence Matrix & Interactive Coupling Hub**: Seamless 4-tab interactive matrix linking Zoology, Geography, Anthropology, and Data Analytics into direct UPSC civil services problem-solving.
+3. **Dedicated Geolocation & Tectonic Suture Terminal**: Grounded in Aditya's roots in Himachal Pradesh ($31.1048^\circ\text{N}, 77.1734^\circ\text{E}$), explaining orographic monsoon barrier physics, Main Boundary Thrust (MBT) and Main Central Thrust (MCT) plate kinematics, altitudinal ecotones, and Gaddi transhumant customary governance.
+4. **Minimalist Citadel & Social Console**: Full cyber-glass cards with hover glow and direct redirection to Telegram Citadel, YouTube Studio, Instagram Lab, and GitHub Foundry.
+
+---
+
+### B. Interactive Himalayan Elevation Transect & Sensor Architecture
+
+The interactive SVG transect at `docs/about/author.md` provides an empirical sounding probe that calculates physical atmospheric and ecotonal properties dynamically as the user hovers over the topographic profile:
+
+1. **Orographic Adiabatic Lapse Rate**:
+   \[
+   T(z) = T_0 - \Gamma \cdot z \quad \text{where } \Gamma = 0.0065^\circ\text{C/m}, \; T_0 = 24.5^\circ\text{C}
+   \]
+2. **Standard Hypsometric Barometric Pressure**:
+   \[
+   P(z) = P_0 \cdot \left(1 - \frac{L \cdot z}{T_0}\right)^{5.25588} \quad \text{where } P_0 = 1013.25\text{ hPa}
+   \]
+3. **12 Geomorphic & Ecological Calibration Stations**:
+   - `Punjab Plains Boundary` ($350\text{m}$): Indo-Gangetic Alluvium
+   - `Kangra Shivalik Foot-Hills` ($720\text{m}$): Subtropical Chir Pine (*Pinus roxburghii*), Main Frontal Thrust
+   - `Jawalamukhi Gas Suture` ($1,100\text{m}$): Main Boundary Thrust (MBT)
+   - `Dharamsala / Kangra Valley` ($1,457\text{m}$): Heavy Monsoon Zone ($3,000\text{ mm/yr}$)
+   - `McLeod Ganj / Triund Slope` ($2,825\text{m}$): Kharsu Oak & *Rhododendron arboreum*
+   - `Dhauladhar Ridge (Moon Peak)` ($4,350\text{m}$): Main Central Thrust (MCT) crystalline suture
+   - `Chamba / Ravi River Gorge` ($1,980\text{m}$): Fluvial Gorge Incision
+   - `Pir Panjal Pass (Rohtang)` ($3,978\text{m}$): Subalpine Birch (*Betula utilis*)
+   - `Shimla Ridge (Aditya Core)` ($2,205\text{m}$): Himalayan Moist Temperate, Deodar & Rhododendron, Jutogh Sheet
+   - `Kinnaur / Baspa Valley (Sangla)` ($3,150\text{m}$): Dry Temperate Conifer (*Pinus gerardiana* Chilgoza)
+   - `Greater Himalayan Crest (Reo Purgyil)` ($6,816\text{m}$): Nival Cryosphere & Permafrost
+   - `Spiti Cold Desert (Kaza / Tabo)` ($3,800\text{m}$): Trans-Himalayan Cold Arid Rain-Shadow Steppe
+
+---
+
+### C. Academic Convergence & UPSC Analytical Synthesis
+
+| Discipline | Degree / Role | Core Analytical Focus | UPSC Integration |
+| :--- | :--- | :--- | :--- |
+| **Anthropology** | UPSC Civil Services Optional | Physical Paleoanthropology, Hominin Cranial Morphometrics ($430 \to 1450\text{ cc}$), Obligate Bipedal Valgus Angle, Kinship Algebras, Tribal Customary Law. | Fifth & Sixth Schedules, PESA 1996, FRA 2006, PVTG Vulnerability Matrix, Tribal Welfare Administration. |
+| **Geography** | M.Sc. (Open University) | Fluvial Meander ODEs, Tectonic Orogeny (Indo-Eurasian Collision), Synoptic Climatology (Tibetan Thermal Low $994\text{ hPa}$, ENSO/IOD), Multispectral GIS. | GS-1 Physical & Human Geography, GS-3 Disaster Management, River Basin Management, Agrarian Corridors. |
+| **Zoology** | B.Sc. Graduate | Comparative Vertebrate Anatomy (Aortic Arch Evolution), Cellular Bioenergetics ($\Delta\mu_{\text{H}^+}$), Population Genetics ($p^2+2pq+q^2=1$). | GS-3 Ecology & Biodiversity hotspots, Wildlife Protection Act 1972, Biotechnology, Anthropological Genetics. |
+| **Data Analytics** | Quantitative Computing | Numerical Differential Equations (RK4), Geostrophic Vector Fields, Demographic Pyramid Solvers, Zero-Build WebGL Shaders. | Quantitative Economic Projections, Demographic Dividend Transition ($< 50\%$ dependency ratio), Living Simulations. |
+
+---
+
+### D. Zero-Build Build Performance & Verification Metrics
+- **Local MkDocs Material Build**: `uv run --with mkdocs-material mkdocs build` $\to$ **0.49 seconds**.
+- **Console Errors**: 0 errors, 0 warnings.
+- **Theme Support**: Full automated dark-mode (`slate`) and light-mode (`default`) contrast overrides for all cyber-glass cards.
+- **Cross-Platform Compatibility**: Tested responsive layouts across mobile ($< 600\text{px}$), tablet ($< 900\text{px}$), and desktop ($> 1200\text{px}$).
+
+---
+
+### E. Next Priority: Phase 2 Roadmap
+With Phase 1 complete, the next conversation can proceed immediately with **Phase 2: Upgrade `/project-notes/` Standalone Experience**:
+- Adding an interactive sticky scrollspy Table of Contents to the Project Codex.
+- Embedding interactive live mini-canvas simulation widgets (e.g. mini River Meander ODE, mini Bayer Density Dither, mini Three.js Polyhedron) directly inside the codex note sections.
+
 
 
 
