@@ -1283,13 +1283,49 @@ Following direct user instructions to transform the entire Author Dossier into a
 
 ---
 
-### G. Next Priority: Phase 2 Roadmap
-With the complete 3D overhaul of the Author page delivered, the next roadmap priority is **Phase 2: Upgrade `/project-notes/` Standalone Experience**:
-- Adding an interactive sticky scrollspy Table of Contents to the Project Codex.
-- Embedding interactive live mini-canvas simulation widgets (e.g. mini River Meander ODE, mini Bayer Density Dither, mini Three.js Polyhedron) directly inside the codex note sections.
+## 18. Author Page Studio Overhaul: Iris-Benchmark 3D Mascot Companion & Authentic Dossier
 
+### A. Architectural Motivation & Paradigm Shift
+In response to architectural review, the Author page (`docs/about/author.md`) underwent a complete purge of synthetic gimmicks (such as artificial holographic scanners, military radar beacons, and exaggerated topographic terrain spaces). The page has been reimagined as an authentic, high-fidelity personal laboratory and systems dossier centered exclusively on Aditya’s real-world identity, intellectual trajectory, and authentic interests.
 
+### B. Core Dossier Components
+1. **Aditya's Authentic Identity & Origin**:
+   - Mountain base: Himachal Pradesh, India (`31.1°N, 77.1°E`), serving as an environment of quiet focus, clean air, and high-altitude road running.
+   - Mission: Rejecting rote memorization to pioneer interactive 3D simulations and living exploratory codices (*Code0*).
 
+2. **The 4 Academic Pillars**:
+   - **B.Sc. Zoology**: Comparative vertebrate anatomy, cellular physiology, evolutionary morphodynamics, and metabolic homeostasis.
+   - **M.Sc. Geography**: Physical geomorphology, crustal deformation, orographic thermodynamics, and spatial quantitative GIS.
+   - **UPSC Civil Services Optional (Anthropology)**: Paleoanthropology, hominid cranial evolution, genetic haplogroups, and Indian tribal socio-cultural structures.
+   - **Data Analytics & Computational Modeling**: High-performance client-side WebGL, statistical inference, and zero-build interactive simulation algorithms.
 
+3. **The "All-or-Nothing" Learning Philosophy**:
+   - *"Knowledge cannot remain an assemblage of fragmented bullet points. If a biological, geological, or societal system exists in nature, it must be understood from first principles and brought to life through explorable, interactive simulations. We do not memorize what we can model."*
 
+4. **Tools of Curiosity (Pass-time Matrix)**:
+   - *01 / Systems Engineering*: Arch Linux, custom kernels, minimal tiling window managers, and bespoke dotfiles.
+   - *02 / On-Device Intelligence*: Custom Android ROM tuning, Termux environments, and local SLM automation agents.
+   - *03 / Endurance & Clarity*: Dawn mountain road running across Himachal roads; aerobic stamina priming deep cognitive focus.
+   - *04 / Scientific Atelier*: Hand-drawn graphite & ink studies of primate osteology, hominid cranial sutures, and tectonic fold cross-sections.
+   - *05 / Optical Physics*: Landscape and macro photography exploring Rayleigh atmospheric scattering and botanical venation.
+   - *06 / Cognitive Systems*: Evolutionary psychology, decision theory, behavioral heuristics, and foundational civil services texts.
 
+5. **Citadel Dispatch & Scannable QR Drawer**:
+   - Clean collapsible glass drawer embedding a verified vector SVG QR code for `@oOlIOo_b0t` (`https://t.me/oOlIOo_b0t`).
+   - Direct bridges to YouTube Studio (`@ADVANCED_ANALYSIS`), Instagram Lab (`@advanced_analysis`), and GitHub Foundry (`RengokuSensei/Code0`).
+
+---
+
+### C. Iris 3D Companion Mascot Engineering
+Inspired by state-of-the-art interactive companion benchmarks (Iris AI hero):
+- **WebGL Engine**: Built on Three.js r185 with ES module import architecture (`three`, `three/addons/loaders/GLTFLoader.js`, `three/addons/postprocessing/EffectComposer.js`, `UnrealBloomPass.js`).
+- **Asset Hierarchy & Fallback**:
+  - Remote CORS-enabled GLB assets: `HEAD_GLB` and `ARM_GLB`.
+  - Zero-fail procedural fallback: Dark graphite `SphereGeometry` with ear caps, antenna rods, glowing violet spheres, and `CapsuleGeometry` floating arms with Fresnel rim shaders (`createRimMaterial`).
+- **Kinematic & Interaction Pipeline**:
+  - Exponential decay pointer smoothing: `look += (target - look) * (1 - 0.0025^dt)`.
+  - Realistic pupil tracking: Procedural glowing iris and catchlight glint shift with cursor position within clamped bounds.
+  - Natural blinking cycle: Random intervals between 2.5s and 6s with cubic compression and expansion.
+  - Floating arm physics: Harmonic oscillation with phase offset `sin(t * 2.0 + phase)`.
+  - Idle look-around: Smooth sinusoidal surveying when pointer is inactive for $> 3.5\text{s}$.
+  - Performance optimization: `IntersectionObserver` automatically halts the render loop when scrolled off-screen, ensuring zero idle GPU consumption.
