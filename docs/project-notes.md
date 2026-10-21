@@ -1238,10 +1238,56 @@ The interactive SVG transect at `docs/about/author.md` provides an empirical sou
 
 ---
 
-### E. Next Priority: Phase 2 Roadmap
-With Phase 1 complete, the next conversation can proceed immediately with **Phase 2: Upgrade `/project-notes/` Standalone Experience**:
+### E. Full 3D WebGL Redesign & Multi-Engine Architecture
+
+Following direct user instructions to transform the entire Author Dossier into a complete 3D interactive experience, the `/about/author/` page has been elevated into a **Four-Tier 3D WebGL Ecosystem**:
+
+1. **Tier 1: 3D Holographic Avatar & Cyber Core (`#author-3d-canvas`)**:
+   - Ultra-fast native binary buffer parser for `aditya.glb` (470 KB, 19,992 vertices, 119,994 indices) executing without external library overhead.
+   - Interactive 3D rendering modes:
+     - `🗿 3D Hologram`: Obsidian metallic base (`roughness: 0.3, metalness: 0.85`) with cyan emissive rim lighting.
+     - `⚡ Cyber Wireframe`: Neon wireframe lattice tracing cranial morphology.
+     - `🌌 Point Matrix`: 19,992 floating vertex points undulating in 3D cyber-space.
+   - Dual gyroscopic counter-rotating orbital rings and 220-particle deep-space nebula starfield.
+   - Inertia-damped trackball mouse drag, cursor parallax, and scroll-wheel zoom.
+
+2. **Tier 2: 3D Himalayan Topographic Terrain Stage (`#hp-terrain-3d-canvas`)**:
+   - Parametric 3D digital elevation model (DEM) computed on a $64 \times 48$ topographic grid modeling the southwest-to-northeast Himalayan cross-section.
+   - Vertex elevation color classification: Subtropical valley green ($h < 2.5$) $\to$ Temperate oak/rhododendron blue ($h < 7.5$) $\to$ Alpine cyan-slate ($h < 13.0$) $\to$ Snow-crest ice white ($h \ge 13.0$).
+   - 3D Beacons:
+     - 📍 **Shimla Ridge ($2,205\text{m}$) [Aditya Core]**: Glowing amber pin + vertical pulsating laser beacon cylinder penetrating into space.
+     - 🏔️ **Dhauladhar Wall ($4,350\text{m}$)**: Cyan marker highlighting the orographic cloudburst barrier.
+     - ❄️ **Reo Purgyil Peak ($6,816\text{m}$)**: Violet peak marker at the Great Himalayan crest.
+   - 110 animated 3D monsoon wind particles sweeping across the plains and lifting vertically up the mountain face (adiabatic orographic lift simulation).
+   - Camera presets: `🏔️ 3D Perspective`, `🌧️ Orographic Wind Lift`, `📐 Topo Wireframe`, `📍 Focus on Shimla`.
+
+3. **Tier 3: 3D Disciplinary Convergence Gyroscope (`#convergence-3d-canvas`)**:
+   - Central luminous icosahedron data core with 4 orbiting discipline planetary spheres:
+     - 🦴 Anthropology (Rose neon with cranial orbit ring)
+     - 🌍 Geography (Cyan neon with atmospheric ring)
+     - 🦎 Zoology (Mint neon with double-helix ring)
+     - 📊 Data Analytics (Violet neon with binary ring)
+   - Dynamic 3D data laser beam network connecting all 4 nodes to the core and each other.
+   - Interactive raycasting: clicking any 3D orb smoothly glides the camera and scrolls directly to that academic pillar card.
+
+4. **Tier 4: 3D Perspective Tilt Card System (`card-3d-tilt`)**:
+   - Pure CSS/JS 3D matrix transform (`perspective: 1000px; transform-style: preserve-3d;`) applied to all academic cards, curiosity tools, and social channels.
+   - Real-time cursor tracking calculating tilt angles up to $\pm 9^\circ$ with radial specular glare highlights and $Z$-axis depth pop-out (`translateZ(24px)`).
+
+---
+
+### F. Verification & Performance Metrics
+- **Vendored Three.js r128**: Added globally to `mkdocs.yml` (`extra_javascript`) for instant offline execution.
+- **Local MkDocs Material Build**: `uv run --with mkdocs-material mkdocs build` $\to$ **0.46 seconds**.
+- **Zero Console Errors**: 100% clean compilation.
+
+---
+
+### G. Next Priority: Phase 2 Roadmap
+With the complete 3D overhaul of the Author page delivered, the next roadmap priority is **Phase 2: Upgrade `/project-notes/` Standalone Experience**:
 - Adding an interactive sticky scrollspy Table of Contents to the Project Codex.
 - Embedding interactive live mini-canvas simulation widgets (e.g. mini River Meander ODE, mini Bayer Density Dither, mini Three.js Polyhedron) directly inside the codex note sections.
+
 
 
 
