@@ -282,6 +282,9 @@ function initPage() {
   initNotesWorkspace();
   initScrollReveal();
   initCardTilt();
+  if (typeof window.initIrisCompanion === 'function') {
+    window.initIrisCompanion();
+  }
 }
 
 function initGlobal() {
