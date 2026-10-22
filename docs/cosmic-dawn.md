@@ -1,6 +1,6 @@
 ---
 title: "The Cosmic Dawn: The Empirical Universe — Architects of the Cosmos (Page 01)"
-description: "From the Big Bang and Recombination to Stellar Nucleosynthesis, the 1st Sun Ignition, Helioseismology, and Earth's Magnetospheric Shield. Complete scientific codex with interactive 3D WebGL simulations."
+description: "From the Big Bang and Recombination to the Stellar Lifecycle, the 1st Sun Ignition, Helioseismology, and Earth's Magnetospheric Shield. Complete scientific codex with interactive 3D WebGL and space portal engines."
 ---
 
 <!-- ==========================================================================
@@ -18,79 +18,59 @@ description: "From the Big Bang and Recombination to Stellar Nucleosynthesis, th
   </p>
 
   <div class="author-telemetry-tags">
-    <span class="telemetry-chip highlight-mint">🔭 Observational Boundary: z = 1100 (380k yr)</span>
-    <span class="telemetry-chip highlight-cyan">🛰️ JWST Deep Frontier: z = 14.32 (290 Myr)</span>
-    <span class="telemetry-chip highlight-amber">⚛️ Hoyle Resonance: 7.65 MeV</span>
-    <span class="telemetry-chip highlight-violet">☀️ Solar Ignition: 4.6 Billion Years Ago</span>
+    <span class="telemetry-chip highlight-mint">🔭 Observational Boundary: $z = 1100$ ($380\text{k yr}$)</span>
+    <span class="telemetry-chip highlight-cyan">🛰️ JWST Deep Frontier: $z = 14.32$ ($290\text{ Myr}$)</span>
+    <span class="telemetry-chip highlight-amber">⚛️ Hoyle Resonance: $7.65\text{ MeV}$</span>
+    <span class="telemetry-chip highlight-violet">☀️ Solar Ignition: $4.6\text{ Billion Years Ago}$</span>
     <span class="telemetry-chip">🛡️ Earth Geodynamo Active</span>
-  </div>
-
-  <!-- Quick Navigation Pills -->
-  <div class="cosmic-quicknav">
-    <a href="#act-1" class="cosmic-nav-pill">Act I: Waves &amp; Redshift</a>
-    <a href="#sim-redshift" class="cosmic-nav-pill highlight-amber">⚡ Redshift Sim</a>
-    <a href="#act-2" class="cosmic-nav-pill">Act II: Singularity &amp; Inflation</a>
-    <a href="#act-3" class="cosmic-nav-pill">Act III: Saha &amp; CMBR</a>
-    <a href="#act-4" class="cosmic-nav-pill">Act IV: Hubble &amp; JWST</a>
-    <a href="#act-5" class="cosmic-nav-pill">Act V: Forge of Elements</a>
-    <a href="#act-6" class="cosmic-nav-pill">Act VI: Sun's Ignition</a>
-    <a href="#sim-sun-3d" class="cosmic-nav-pill highlight-amber">☀️ 3D Sun Lab</a>
-    <a href="#sim-magnetosphere" class="cosmic-nav-pill highlight-amber">🛡️ Magnetosphere Sim</a>
-    <a href="#upsc-synergy" class="cosmic-nav-pill">UPSC Exam Codex</a>
   </div>
 </div>
 
 ---
 
-<!-- ==========================================================================
-     ACT I: THE LOOKING GLASS OF TIME
-     ========================================================================== -->
-<div class="act-header-banner" id="act-1">
-  <span class="act-badge badge-cyan">ACT I</span>
-  <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif;">The Looking Glass of Time: Waves, Energy &amp; The Cosmic Horizon</h2>
-</div>
+## Act I: The Looking Glass of Time — Waves, Energy & The Cosmic Horizon
 
 When you gaze into the night sky, you are never witnessing the cosmos as it currently exists. Because light propagates at a finite speed, every celestial observation is fundamentally an archaeology of the past. 
 
-This introduces a foundational epistemology in modern astrophysics:  
+This introduces a foundational question in modern observational astrophysics:  
 **How far back in cosmic history can humanity peer based on hard observational evidence, and where does observational evidence terminate—forcing us to rely on theoretical physics confirmed by particle colliders?**
 
-To establish this boundary, we must examine the physical vehicle carrying every cosmic message: **The Physics of Electromagnetic Waves**.
+To establish this boundary, we must examine the physical vehicle carrying every cosmic message: **The Physics of Waves**.
 
-<div class="equation-box">
-  <div class="equation-box-header">
-    <span>Governing Wave Equations</span>
-    <span>Fundamental Physics</span>
-  </div>
-  <div class="equation-box-body">
-    Every electromagnetic wave across the vacuum of space is governed by three immutable principles:
-    <div style="margin: 12px 0; font-size: 1.15rem; text-align: center;">
-      $$c = \lambda \cdot f \qquad \text{and} \qquad E = h \cdot f = \frac{h \cdot c}{\lambda}$$
-    </div>
-    Where $c \approx 299,792\text{ km/s}$ is the universal speed limit, $\lambda$ is wavelength, $f$ is frequency, and $h \approx 6.626 \times 10^{-34}\text{ J}\cdot\text{s}$ is Planck's constant. High-frequency waves ($\gamma$-rays, X-rays) pack lethal energy; low-frequency waves (infrared, microwaves, radio) carry gentle, low energy.
-  </div>
-</div>
+Every wave—whether sound, water, or light—is governed by three fundamental properties:
+
+1. **Speed ($c$):** The speed of a wave is determined by the medium it travels through. Across the vacuum of space, light travels at the universe's absolute speed limit: $c \approx 299,792\text{ km/s}$.
+2. **Wavelength ($\lambda$) & Frequency ($f$):** Wavelength is the spatial distance between two successive wave peaks, while frequency is the number of wave cycles passing a fixed point per second:
+$$
+c = \lambda \cdot f
+$$
+3. **Energy ($E$):** As quantum mechanics proved, a photon's energy is directly locked to its frequency:
+$$
+E = h \cdot f = \frac{h \cdot c}{\lambda}
+$$
+
+High-frequency waves pack intense, lethal energy—like Gamma rays, X-rays, and Ultraviolet light. Low-frequency waves carry gentle, low energy—like Infrared, Microwaves, and Radio waves.
 
 ### The Cosmic Twist: Cosmological Redshift
 
-As starlight traverses billions of light-years, it does not journey through static, Newtonian Euclidean space. The fabric of spacetime itself is continually expanding. And as spacetime stretches, it physically elongates the traveling wavelength of light!
+As starlight traverses billions of light-years, it does not journey through static, Newtonian space. The fabric of spacetime itself is continually expanding. And as spacetime stretches, it physically stretches the traveling wave of light!
 
-<div style="text-align: center; margin: 16px 0; font-size: 1.15rem;">
-  $$1 + z = \frac{\lambda_{\text{observed}}}{\lambda_{\text{emitted}}} = \frac{a(t_{\text{observed}})}{a(t_{\text{emitted}})}$$
-</div>
+Its wavelength elongates, its frequency steadily drops, and the wave **loses energy**:
 
-Where $z$ is the **Cosmological Redshift** and $a(t)$ is the cosmic scale factor of the universe. As wavelength ($\lambda$) elongates, frequency ($f$) drops, and the wave **loses energy**. 
+$$
+1 + z = \frac{\lambda_{\text{observed}}}{\lambda_{\text{emitted}}} = \frac{a(t_{\text{observed}})}{a(t_{\text{emitted}})}
+$$
 
-This resolves one of the greatest riddles in observational astronomy:  
-When the universe first became transparent, 380,000 years after the Big Bang, it unleashed a blinding, white-hot flash of optical light at **3,000 Kelvin**. Over 13.8 billion years of cosmic expansion, that primordial radiation was stretched by a factor of **1,100 times** ($z \approx 1100$). Its frequency collapsed, cooling down to a frigid **2.725 Kelvin**. 
+Where $z$ is the **Cosmological Redshift** and $a(t)$ is the cosmic scale factor of the universe.
 
-**That is why the oldest direct evidence of creation—the Cosmic Microwave Background Radiation (CMBR)—is detected today not as blazing optical starlight, but as cold, faint microwaves!**
+This explains a foundational mystery of astronomy:  
+When the universe first became transparent, 380,000 years after the Big Bang, it unleashed a blinding, white-hot flash of optical light at **3,000 Kelvin**. Yet over 13.8 billion years of expanding space, that ancient light was stretched by a factor of **1,100 times** ($z \approx 1100$). Its frequency collapsed.
+
+**That is why the oldest evidence of creation—the Cosmic Microwave Background Radiation (CMBR)—is detected today not as blazing visible light, but as cold, faint microwaves at 2.725 Kelvin!**
 
 ---
 
-<!-- ==========================================================================
-     INTERACTIVE SIMULATION 2: REDSHIFT & EXPANDING SPACETIME
-     ========================================================================== -->
+<!-- SIMULATION 1: COSMOLOGICAL REDSHIFT WAVE ENGINE -->
 <div class="interactive-lab-container" id="sim-redshift">
   <div class="sim-hud-header">
     <div class="sim-hud-title">
@@ -132,226 +112,196 @@ When the universe first became transparent, 380,000 years after the Big Bang, it
 
 <div class="evidence-split-card">
   <div class="evidence-half">
-    <div class="half-title">📡 Hard Observational Evidence Boundary</div>
+    <div class="half-title">📡 Observational Evidence Horizon: 380,000 Years</div>
     <p style="margin: 0; font-size: 0.92rem; line-height: 1.6; color: #cbd5e1;">
-      Electromagnetic waves can transport observational astronomers back only to the <strong>380,000-year mark</strong> ($z \approx 1100$). Before this threshold, the universe was an ultra-dense, opaque plasma that trapped all photons via continuous Thomson scattering. Light could not travel a fraction of a millimeter without crashing into a free electron.
+      Based on hard observational evidence, electromagnetic waves carry us back only to that <strong>380,000-year mark</strong> ($z \approx 1100$). For galaxies, Hubble saw back to 400 million years ($z = 10.60$), and JWST reached 290 million years ($z = 14.32$). Beyond 380,000 years, light hits an impenetrable brick wall: the infant universe was an opaque plasma fog of free electrons that trapped all photons via Thomson scattering.
     </p>
   </div>
   <div class="theory-half">
-    <div class="half-title">🔬 Theoretical Physics &amp; Collider Verification</div>
+    <div class="half-title">🔬 Theoretical Physics &amp; High-Energy Colliders</div>
     <p style="margin: 0; font-size: 0.92rem; line-height: 1.6; color: #cbd5e1;">
-      From 380,000 years back to the primordial instant of creation ($t = 0$), observation must yield to <strong>Theoretical Physics</strong>. These theories are empirically tested and verified in terrestrial high-energy particle accelerators, such as CERN’s Large Hadron Collider (LHC).
+      To cross that boundary—from 380,000 years back to the very instant of creation—evidence hands the torch to <strong>Theoretical Physics</strong>. These extreme quantum regimes are verified empirically by replicating primordial energies in particle colliders like CERN's Large Hadron Collider.
     </p>
   </div>
 </div>
 
 ---
 
-<!-- ==========================================================================
-     ACT II: THE THEORETICAL HORIZON
-     ========================================================================== -->
-<div class="act-header-banner" id="act-2">
-  <span class="act-badge badge-violet">ACT II</span>
-  <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif;">The Theoretical Horizon: Singularity, Inflation &amp; The Primordial Atom</h2>
-</div>
+## Act II: The Theoretical Horizon — Singularity, Inflation & The Primordial Atom
 
 Rewind the cosmic clock 13.8 billion years. There were no stars, no galaxies, no matter, and no empty space. There was neither a "before" nor an "outside." All of existence was locked inside a single geometric point of infinite density, infinite temperature, and zero volume: **The Point of Singularity**.
 
-### 1. The Planck Epoch ($t < 10^{-43}\text{ s}$)
-During the initial Planck time interval, temperatures stood at an unimaginable $T \sim 10^{32}\text{ Kelvin}$. Here, General Relativity collides with Quantum Mechanics, and all conventional equations cease to operate. The four fundamental interactions of the cosmos—**Gravity, the Strong Nuclear Force, the Weak Nuclear Force, and Electromagnetism**—were united into a single Superforce.
+### The Planck Epoch ($t < 10^{-43}\text{ seconds}$)
+Here, General Relativity collides with Quantum Mechanics, and all known equations of physics cease to operate. During the Planck Epoch, temperatures stood at an unimaginable:
+$$
+T \approx 10^{32}\text{ Kelvin}
+$$
+The four fundamental forces of nature—Gravity, the Strong Nuclear Force, the Weak Nuclear Force, and Electromagnetism—were fused into a single, unified **Superforce**.
 
-### 2. Cosmic Inflation ($10^{-36}\text{ s}$)
-As the infant universe expanded and cooled, spontaneous symmetry breaking fractured the Superforce. First, Gravity decoupled. Then, at $t \sim 10^{-36}\text{ seconds}$, the Strong Nuclear Force split away, releasing colossal latent vacuum energy and triggering **Cosmic Inflation**.
+### Cosmic Inflation ($t \sim 10^{-36}\text{ seconds}$)
+As the primordial cosmos cooled, spontaneous symmetry breaking ruptured the Superforce. First, Gravity tore away. Then, at $10^{-36}$ seconds, the Strong Nuclear Force decoupled, triggering the cataclysmic epoch of **Cosmic Inflation**.
 
-As formulated by theoretical physicist **Alan Guth**, in less than $10^{-32}$ seconds, spacetime expanded exponentially by a factor exceeding $10^{78}$! A microscopic quantum bubble stretched into an astronomical cosmos. This hyper-luminal expansion flattened the spatial curvature of the universe and permanently solved the **Horizon and Flatness Problems**, explaining why the cosmic microwave sky is astonishingly isotropic in every direction.
+As theoretical physicist **Alan Guth** demonstrated, in less than a trillionth of a trillionth of a second, spacetime expanded exponentially by a factor of:
+$$
+\text{Inflationary Expansion Factor} \approx 10^{78}
+$$
+This hyper-luminal expansion flattened the spatial curvature of spacetime, permanently solving the **Horizon and Flatness Problems** and explaining why the cosmic sky is so astonishingly uniform in every direction.
 
-### 3. The Higgs Mechanism & Hadron Formation ($t \sim 10^{-11}\text{ to }10^{-5}\text{ s}$)
-In the wake of Inflation, the cosmos seethed as an ultra-dense **Quark-Gluon Plasma**. Fundamental particles could not propagate freely without interacting with the omnipresent **Higgs Field**. Through the Higgs mechanism, quarks and leptons acquired rest mass, dragging their velocities below the speed of light.
+### The Higgs Field & Hadron Formation ($t \sim 10^{-11}\text{ to }10^{-5}\text{ seconds}$)
+In the wake of Inflation, the universe was an ultra-dense, turbulent **Quark-Gluon Plasma**. Yet fundamental particles could not roam freely: they collided with the omnipresent **Higgs Field**. Through the Higgs mechanism, quarks and leptons acquired mass, dragging their velocities below the speed of light.
 
-As temperature decayed past $10^{12}\text{ Kelvin}$, the strong nuclear force bound quarks into the first stable hadrons:
-- **Proton:** $u + u + d$ (Two Up Quarks, One Down Quark)
-- **Neutron:** $u + d + d$ (One Up Quark, Two Down Quarks)
+As the temperature dropped past $10^{12}\text{ Kelvin}$, gluons bound the quarks into the first stable hadrons:
+- **Proton:** Two Up Quarks + One Down Quark ($u + u + d$)
+- **Neutron:** Two Down Quarks + One Up Quark ($d + d + u$)
 
-### 4. Big Bang Nucleosynthesis ($t = 3\text{ to }20\text{ minutes}$)
-Between the third and twentieth minutes, the expanding universe functioned as a single, cosmic thermonuclear fusion reactor. Protons and neutrons fused into Helium-4 nuclei, accompanied by trace quantities of Deuterium and Lithium-7. The primordial elemental ratio was carved in stone:
-<div style="text-align: center; font-size: 1.25rem; font-weight: 700; color: #5df0a8; margin: 18px 0;">
-  75% HYDROGEN &bull; 25% HELIUM-4 &bull; TRACE LITHIUM-7
-</div>
+### Big Bang Nucleosynthesis ($t = 3\text{ to }20\text{ minutes}$)
+Between the third and twentieth minutes, the universe acted as a single, cosmic thermonuclear reactor. Protons and neutrons fused into Helium-4 nuclei, alongside trace amounts of Deuterium and Lithium-7. The primordial elemental composition of the universe was carved in stone:
+$$
+\mathbf{75\%\ \text{Hydrogen}} \qquad \mathbf{25\%\ \text{Helium-4}} \qquad \text{Trace Lithium-7}
+$$
 
-Yet the universe remained completely dark and opaque for 380,000 years.
-
----
-
-<!-- ==========================================================================
-     ACT III: THE FIRST EVIDENCE — RECOMBINATION & SAHA'S EQUATION
-     ========================================================================== -->
-<div class="act-header-banner" id="act-3">
-  <span class="act-badge badge-mint">ACT III</span>
-  <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif;">The First Evidence: Recombination, Saha's Equation &amp; The CMBR Ladder</h2>
-</div>
-
-As spacetime steadily expanded over 380,000 years, the thermal kinetic energy of the cosmic plasma declined. When the universe reached precisely **380,000 years of age**, a foundational thermodynamic law formulated in 1920 by legendary Indian astrophysicist **Meghnad Saha** took command:
-
-<div class="equation-box">
-  <div class="equation-box-header">
-    <span>The Saha Ionization Equation (1920)</span>
-    <span>Astrophysical Thermodynamics</span>
-  </div>
-  <div class="equation-box-body">
-    $$\frac{n_{i+1} n_e}{n_i} = \frac{2 g_{i+1}}{g_i} \left(\frac{2\pi m_e k_B T}{h^2}\right)^{3/2} \exp\left(-\frac{\chi_i}{k_B T}\right)$$
-    Where $\chi_i = 13.6\text{ eV}$ is the ionization potential of Hydrogen, $m_e$ is electron mass, and $n_e$ is electron density. While a simple comparison might suggest Hydrogen should capture electrons at $T \sim 157,000\text{ K}$, the enormous photon-to-baryon ratio ($\eta \approx 6 \times 10^{-10}$) creates an immense high-energy photon tail that delays neutral recombination until the temperature drops to precisely **3,000 Kelvin**.
-  </div>
-</div>
-
-At 3,000 Kelvin ($2,700\ ^\circ\text{C}$), thermal kinetic energy plummeted below 13.6 eV. In a cosmological heartbeat, protons captured free electrons into stable quantum orbits, assembling the universe's first neutral atoms: **Neutral Hydrogen**.
-
-This event is **The Epoch of Recombination**. Because free electrons were sequestered into neutral atoms, Thomson scattering ceased immediately. Optical depth plummeted to zero, liberating trapped photons to travel across the cosmos unimpeded in straight lines: **Photon Decoupling**.
-
-### The Cosmic Microwave Background Evidence Ladder
-
-<div class="card-3d-tilt-wrap">
-  <div class="academic-pillar-card pillar-anthro card-3d-tilt">
-    <div class="card-3d-glare"></div>
-    <div class="pillar-header pop-3d">
-      <h3 class="pillar-title">Humanity's Empirical Evidence Ladder</h3>
-      <span class="pillar-badge badge-anthro">Nobel Milestones</span>
-    </div>
-    <div class="pillar-subsections-grid pop-3d">
-      <div class="pillar-subcard">
-        <div class="pillar-subcard-title">1964 &bull; Penzias &amp; Wilson (Bell Labs)</div>
-        <p class="pillar-subcard-desc">Detected an inescapable, isotropic 4 GHz radio hiss with the Holmdel horn antenna—discovering the primordial glow of creation and winning the Nobel Prize.</p>
-      </div>
-      <div class="pillar-subcard">
-        <div class="pillar-subcard-title">1992 &bull; NASA COBE Satellite</div>
-        <p class="pillar-subcard-desc">FIRAS instrument confirmed the CMBR is the most flawless blackbody spectrum in nature ($T = 2.725\text{ K}$), verifying the Big Bang beyond doubt.</p>
-      </div>
-      <div class="pillar-subcard">
-        <div class="pillar-subcard-title">2003 &bull; NASA WMAP</div>
-        <p class="pillar-subcard-desc">Mapped cosmic temperature anisotropies with arcminute resolution, constraining cosmic age to $13.77\text{ Gyr}$ and confirming flat Euclidean geometry.</p>
-      </div>
-      <div class="pillar-subcard">
-        <div class="pillar-subcard-title">2013 &bull; ESA Planck Observatory</div>
-        <p class="pillar-subcard-desc">Delivered the gold-standard cosmic map: micro-Kelvin temperature variations ($18\ \mu\text{K}$) revealing the primordial <strong>Baryon Acoustic Oscillations</strong> that seeded galaxies.</p>
-      </div>
-    </div>
-  </div>
-</div>
+Yet, reality remained pitch-black for 380,000 years because free electrons continuously scattered all photons.
 
 ---
 
-<!-- ==========================================================================
-     ACT IV: THE DEEPEST GAZE — HUBBLE & JWST
-     ========================================================================== -->
-<div class="act-header-banner" id="act-4">
-  <span class="act-badge badge-amber">ACT IV</span>
-  <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif;">The Deepest Gaze: Expanding Spacetime, Hubble &amp; The JWST Revolution</h2>
-</div>
+## Act III: The First Evidence — Recombination, Saha's Equation & The CMBR Ladder
 
-In 1929, American astronomer Edwin Hubble analyzed the spectral absorption lines of distant nebulae, uncovering a systematic shift toward longer, redder wavelengths. He formulated **Hubble's Law**:
-<div style="text-align: center; margin: 14px 0; font-size: 1.25rem;">
-  $$v = H_0 \cdot d$$
-</div>
+As spacetime relentlessly expanded over 380,000 years, the cosmic temperature steadily decayed. And when the universe reached precisely **380,000 years of age**, a foundational law of physical chemistry formulated in 1920 by legendary Indian astrophysicist **Meghnad Saha** took command:
 
-Recessional velocity is directly proportional to distance: the farther a galaxy lies, the faster it appears to recede. Galaxies are not flying through pre-existing space; rather, **the fabric of spacetime itself is expanding**.
+$$
+\frac{n_{i+1} n_e}{n_i} = \frac{2 g_{i+1}}{g_i} \left(\frac{2\pi m_e k_B T}{h^2}\right)^{3/2} \exp\left(-\frac{\chi_i}{k_B T}\right)
+$$
 
-In 1998, astronomers studying Type Ia Supernovae discovered that approximately 5 billion years ago, cosmic expansion began accelerating, driven by **Dark Energy ($\Lambda$)**, which makes up $\sim 68.3\%$ of the total cosmic energy budget.
+Where $\chi_i = 13.6\text{ eV}$ is the ionization potential of Hydrogen. The cosmic temperature fell to exactly **3,000 Kelvin** ($2,700\ ^\circ\text{C}$). Thermal kinetic energy plummeted below the 13.6 electron-volt threshold. In an instant, protons captured free electrons into stable quantum shells, creating the universe's first neutral atoms: **Neutral Hydrogen**.
 
-<div class="card-3d-tilt-wrap">
-  <div class="academic-pillar-card pillar-geog card-3d-tilt">
-    <div class="card-3d-glare"></div>
-    <div class="pillar-header pop-3d">
-      <h3 class="pillar-title">Observational Leap: Hubble vs. JWST</h3>
-      <span class="pillar-badge badge-geog">Space Telescopes</span>
-    </div>
-    <div class="pillar-subsections-grid pop-3d">
-      <div class="pillar-subcard">
-        <div class="pillar-subcard-title">Hubble Space Telescope (1990)</div>
-        <p class="pillar-subcard-desc">Operates primarily in Optical/UV. Reached galaxy <strong>GN-z11</strong> ($z = 10.60$), viewing starlight from $400\text{ Myr}$ after the Big Bang before hitting its infrared dust limit.</p>
-      </div>
-      <div class="pillar-subcard">
-        <div class="pillar-subcard-title">James Webb Space Telescope (2021)</div>
-        <p class="pillar-subcard-desc">Stationed at Sun-Earth L2 ($1.5\times 10^6\text{ km}$). 6.5m gold-coated beryllium mirrors + NIRCam pierce cosmic dust in the infrared, detecting <strong>JADES-GS-z14-0</strong> at $z = 14.32$ (just $290\text{ Myr}$ after creation!).</p>
-      </div>
-    </div>
-  </div>
-</div>
+This historic watershed is known as **The Epoch of Recombination**. And the moment free electrons were locked away, the fog cleared. Optical depth dropped to zero, and trapped photons were liberated to travel freely across the cosmos in straight lines: **Photon Decoupling**. In a single cosmological heartbeat, the universe became crystal-clear and transparent!
+
+### The Cosmic Evidence Ladder
+Trace the empirical steps along humanity's evidence ladder:
+
+- **1964 &bull; Arno Penzias &amp; Robert Wilson (Bell Labs):** Aimed the Holmdel horn antenna at the sky and detected an unyielding, isotropic 4 GHz microwave hiss. It was the liberated afterglow of creation—earning them the Nobel Prize.
+- **1992 &bull; NASA COBE Satellite:** Measured this radiation with the FIRAS instrument and proved it was the most perfect blackbody spectrum ever observed in nature ($T = 2.725\text{ K}$), confirming the Big Bang beyond all scientific doubt.
+- **2003 &bull; NASA WMAP:** Mapped subtle temperature ripples across the cosmic sphere with unprecedented clarity, constraining the age of the universe to $13.77\text{ Billion Years}$.
+- **2013 &bull; ESA Planck Observatory:** Delivered the ultimate, gold-standard portrait of our infant universe: **The Cosmic Microwave Background Radiation (CMBR)**.
+
+Over 13.8 billion years of cosmic expansion, this primordial light cooled down to a frigid, uniform blackbody temperature:
+$$
+T_{\text{CMBR}} = 2.7255 \pm 0.0006\text{ Kelvin}
+$$
+
+The mottled red and blue patches on Planck's map represent temperature variations of **only one part in 100,000**—a mere $18\ \mu\text{K}$! These are the primordial **Baryon Acoustic Oscillations**—sound waves vibrating through the embryonic plasma that gathered dark matter and hydrogen gas, igniting the Cosmic Dawn!
 
 ---
 
-<!-- ==========================================================================
-     ACT V: THE FORGE OF THE ELEMENTS
-     ========================================================================== -->
-<div class="act-header-banner" id="act-5">
-  <span class="act-badge badge-rose">ACT V</span>
-  <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif;">The Forge of the Elements: Fred Hoyle, Chandrasekhar &amp; The Stardust Engine</h2>
-</div>
+## Act IV: The Deepest Gaze — Expanding Spacetime, Hubble & The JWST Revolution
 
-Following Big Bang Nucleosynthesis, the early universe was trapped with only Hydrogen and Helium. Early nuclear physicists faced a catastrophic barrier: **Nature possesses no stable atomic nuclei with mass numbers 5 or 8!**
-- If a proton collides with Helium-4, it forms Lithium-5, which decays in $10^{-22}\text{ s}$.
-- If two Helium-4 nuclei fuse, they form Beryllium-8, which splits in $10^{-16}\text{ s}$.
+In 1929, American astronomer Edwin Hubble analyzed the spectral absorption lines of distant nebulae, making an astounding discovery: Every distant galaxy exhibited a systematic shift toward longer, redder wavelengths. He formulated **Hubble's Law**:
 
-Where did Carbon, Oxygen, Silicon, Calcium, and Iron originate?
+$$
+v = H_0 \cdot d
+$$
 
-### The Hoyle State: Anthropic Quantum Resonance ($7.65\text{ MeV}$)
-In the 1950s, English astrophysicist **Fred Hoyle** realized that because Carbon exists in our bodies, stars must have devised a way to forge Carbon-12 by fusing three Helium nuclei (**The Triple-Alpha Process**). Standard quantum cross-sections showed the odds of a three-body alpha collision were infinitesimal.
+The velocity of recession is directly proportional to distance: the farther a galaxy lies, the faster it recedes from Earth! Expanding spacetime stretches the traveling waves of light passing through it.
 
-Hoyle reasoned backward: He predicted that Carbon-12 **must possess an excited quantum energy state at precisely 7.65 MeV** that amplifies the reaction rate by millions of times! Nuclear physicist William Fowler tested Hoyle's prediction at Caltech and confirmed the **Hoyle State** at exactly 7.65 MeV.
+In 1998, astronomers measuring **Type Ia Supernovae**—exploding white dwarf standard candles—uncovered a second revolutionary shock: Approximately 5 billion years ago, cosmic expansion began speeding up (**Accelerating Expansion**), driven by **Dark Energy ($\Lambda$)**, which constitutes over $68.3\%$ of the total cosmic energy density.
 
-In the landmark 1957 **B²FH paper** (Burbidge, Burbidge, Fowler, Hoyle), the nucleosynthetic stellar engine was unlocked: Every heavy atom in your body was synthesized inside the hearts of dying stars.
+### Telescopic Lookback: Hubble vs. JWST
 
-<div class="equation-box">
-  <div class="equation-box-header">
-    <span>The Chandrasekhar Limit (1930)</span>
-    <span>Relativistic Quantum Mechanics</span>
-  </div>
-  <div class="equation-box-body">
-    Stellar fusion proceeds in concentric onion shells up to <strong>Nickel-62 and Iron-56</strong>, the thermodynamic peak of the nuclear binding energy curve. Beyond iron, fusion consumes energy rather than releasing it. Gravity collapses the star, resisted only by <strong>Electron Degeneracy Pressure</strong>.
-    <div style="text-align: center; margin: 12px 0; font-size: 1.25rem;">
-      $$M_{\text{Ch}} \approx 1.44\ M_{\odot}$$
-    </div>
-    In 1930, 19-year-old Indian prodigy <strong>Subrahmanyan Chandrasekhar</strong> proved that electron degeneracy has an insurmountable ceiling at $1.44\ M_\odot$. When the collapsing iron core exceeds this mass, electrons are crushed into protons ($p + e^- \to n + \nu_e$), triggering a cataclysmic <strong>Type II Core-Collapse Supernova</strong>.
-  </div>
-</div>
+- **Hubble Space Telescope:** Captured the **Hubble Ultra Deep Field** in the constellation Fornax, reaching galaxy **GN-z11** ($z = 10.60$), viewing light from when the universe was only **400 million years old**. Yet Hubble hit an optical dust wall.
+- **James Webb Space Telescope (JWST):** Stationed $1.5\text{ million km}$ away at Sun-Earth Lagrange Point 2 (L2), equipped with gold-coated beryllium mirrors and NIRCam. In May 2024, JWST shattered all astronomical records by confirming galaxy **JADES-GS-z14-0**:
+$$
+z = 14.32 \qquad \text{Light emitted just } \mathbf{290\text{ Million Years}} \text{ after the Big Bang!}
+$$
 
-In this supernova blast, through **Rapid Neutron Capture (r-process)** with neutron fluxes exceeding $10^{20}\text{ n/cm}^3$, atomic nuclei gorge on neutrons to forge the heaviest elements in the cosmos: Gold ($^{197}\text{Au}$), Platinum ($^{195}\text{Pt}$), and Uranium ($^{238}\text{U}$).
-
-### The Thermodynamic Paradox Resolved
-How did disordered cosmic gas assemble into complex solar systems without violating the Second Law of Thermodynamics? Through **Gibbs Free Energy**:
-<div style="text-align: center; margin: 14px 0; font-size: 1.2rem;">
-  $$\Delta G = \Delta H - T\Delta S < 0$$
-</div>
-As atoms bind together, they release binding enthalpy ($\Delta H$). Radiating this heat into the freezing **2.725 Kelvin cosmic heat sink** of expanding space generates an astronomical entropy surge in the universe ($\Delta S = Q / T_{\text{sink}}$), purchasing local planetary order at the cost of global cosmic entropy!
+This discovery proved that massive stars formed far earlier than anticipated, initiating the reionization epoch.
 
 ---
 
-<!-- ==========================================================================
-     ACT VI: THE SUN'S IGNITION & SOLAR ANATOMY
-     ========================================================================== -->
-<div class="act-header-banner" id="act-6">
-  <span class="act-badge badge-amber">ACT VI</span>
-  <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif;">The Sun's Ignition: Helioseismology, The Tachocline &amp; The Planetary Shield</h2>
-</div>
+## The Stellar Lifecycle: The Cosmic Family Tree & The Periodic Table
 
-Approximately 4.6 billion years ago, inside the Orion Arm of the Milky Way, a passing supernova shockwave compressed a cold molecular cloud. Conserving angular momentum ($L = I\omega$), the collapsing cloud accelerated and flattened into a protoplanetary accretion disk. 
+Now that the first stars were blazing across the cosmos... how did they live, evolve, and die? To understand how the elements of the Periodic Table were created, we must trace the cosmic family tree of all stars: **The Stellar Lifecycle**.
 
-Over 99.8% of the nebula collapsed into the gravitational center. Core temperatures exceeded 15 million Kelvin, and the protostar ignited: **Proton-Proton Chain Thermonuclear Fusion**!
+Every star begins inside a vast, cold **Nebula**—a nursery of interstellar gas and dust. Under gravity, dense pockets collapse into dark, compact **Bok Globules**, condensing further into a glowing, rotating **Protostar**.
 
-<div class="equation-box">
-  <div class="equation-box-header">
-    <span>The Proton-Proton (p-p I) Fusion Chain</span>
-    <span>Solar Core Thermodynamics</span>
-  </div>
-  <div class="equation-box-body">
-    $$4p \to {}^4\text{He} + 2e^+ + 2\nu_e + 26.73\text{ MeV}$$
-    Mass deficit: $\Delta m \approx 0.71\%$ of starting mass. The Sun consumes 600 million tons of Hydrogen every second, converting $4.3\times 10^6\text{ tons}$ of mass directly into pure radiant energy via $E = mc^2$, powering solar luminosity ($L_\odot \approx 3.828 \times 10^{26}\text{ Watts}$).
-  </div>
-</div>
+Here, mass dictates cosmic destiny!
+- If an embryo gathers less than eight percent of the Sun's mass:
+$$
+M < 0.08\ M_{\odot}
+$$
+its core never reaches the 10 million Kelvin needed for hydrogen fusion. It becomes a **Brown Dwarf**—a failed star drifting in the dark.
+- But if it crosses that critical $0.08\ M_\odot$ mass threshold, thermonuclear fusion ignites! The star enters the **Main Sequence**, spending millions or billions of years in stable hydrostatic equilibrium.
+
+### The Divergence of Stellar Destiny
+When hydrogen in the core is finally exhausted, stellar destiny splits into two radically divergent paths:
+
+1. **For Low-to-Intermediate Mass Stars (like our Sun):**  
+   The star expands into a swollen **Red Giant**. Its core begins fusing helium, and eventually it gently puffs off its outer layers into a glowing, iridescent **Planetary Nebula**. At its center remains a dense, Earth-sized degenerate stellar ember: a **White Dwarf**, which over trillions of years will cool into a silent **Black Dwarf**.
+
+2. **For Massive Stars (exceeding eight solar masses, $M > 8\ M_\odot$):**  
+   They swell into colossal **Red Supergiants**! Inside these cosmic giants, gravity crushes the core to extreme temperatures, fusing fuels in concentric onion-like shells:
+$$
+\text{Hydrogen} \to \text{Helium} \to \text{Carbon \& Oxygen} \to \text{Silicon \& Sulfur} \to \mathbf{Nickel\text{-}62\ \&\ Iron\text{-}56}
+$$
 
 ---
 
-<!-- ==========================================================================
-     INTERACTIVE SIMULATION 1: 3D SUN ANATOMY & HELIOSEISMOLOGY
-     ========================================================================== -->
+## Act V: The Forge of the Elements — Fred Hoyle, Chandrasekhar & The Stardust Engine
+
+For decades, early cosmologists believed all elements were forged during the Big Bang. Yet nuclear physicists hit an insurmountable barrier: **Nature has no stable atomic nuclei with mass numbers 5 or 8!**
+- Adding a proton to Helium-4 forms Lithium-5, which decays in $10^{-22}\text{ s}$.
+- Fusing two Helium-4 nuclei forms Beryllium-8, which decays in $10^{-16}\text{ s}$.
+
+### Fred Hoyle & The 7.65 MeV Carbon Resonance
+In the early 1950s, English astrophysicist **Fred Hoyle** reasoned backward from the existence of life: If Carbon exists in human hands, stars must have found a way to forge Carbon-12 via the **Triple-Alpha Process** ($3 \times {}^4\text{He} \to {}^{12}\text{C}$). 
+
+Hoyle predicted that Carbon-12 **must possess an undiscovered, excited quantum resonance level at precisely 7.65 MeV**! William Fowler tested this at Caltech and confirmed the **Hoyle State** at exactly $7.654\text{ MeV}$, amplifying fusion by millions of times!
+
+In the landmark 1957 **B²FH paper** (Burbidge, Burbidge, Fowler, Hoyle), the truth was cemented: Every heavy element in your body was synthesized inside stars. **We are all stardust.**
+
+### The Chandrasekhar Limit ($1.44\ M_\odot$) & Supernova Nucleosynthesis
+Iron represents the most tightly bound nucleus in the cosmos. Fusing beyond iron consumes energy rather than releasing it. When an iron core forms, radiation pressure vanishes, resisted only by **Electron Degeneracy Pressure**.
+
+In 1930, 19-year-old Indian student **Subrahmanyan Chandrasekhar** proved that electron degeneracy has an unyielding physical ceiling:
+$$
+M_{\text{Chandrasekhar}} \approx 1.44\ M_{\odot}
+$$
+
+The moment the collapsing iron core exceeds $1.44\ M_\odot$, relativistic gravity crushes electrons into protons ($p + e^- \to n + \nu_e$). In a fraction of a second, an iron core the size of Earth collapses into a ball of pure neutrons just twenty kilometers wide! The infalling outer star slams into this incompressible neutron ball and detonates: **A Type II Core-Collapse Supernova!**
+
+In this blast, free neutron densities exceed:
+$$
+n_n > 10^{20}\text{ neutrons per cm}^3
+$$
+Through the **r-process (Rapid Neutron Capture)**, atomic nuclei gorge on neutrons faster than they decay, forging the heaviest elements in the universe: Gold ($^{197}\text{Au}$), Platinum ($^{195}\text{Pt}$), and Uranium ($^{238}\text{U}$)! What remains behind is an ultra-dense **Neutron Star**, or if the core exceeds three solar masses, it collapses into a **Black Hole**!
+
+### The Grand Cosmic Loop & Star Generations
+The supernova shockwave hurls all these forged heavy elements back into interstellar space, seeding a brand new, enriched nebula!
+- **Population III Stars:** The pristine first generation, born of pure Hydrogen and Helium with zero metals.
+- **Population II Stars:** Old, metal-poor stars formed from early enriched gas.
+- **Population I Stars (Our Sun):** Third-generation stars born billions of years later from rich, recycled nebular gas containing iron, silicon, carbon, and oxygen—making rocky planets and life possible!
+
+### The Thermodynamic Paradox
+The Second Law dictates that total entropy must increase ($\Delta S > 0$). How could cosmic gas assemble into ordered solar systems? Through **Gibbs Free Energy**:
+$$
+\Delta G = \Delta H - T\Delta S < 0
+$$
+As atoms bind together, they release binding heat ($\Delta H$). Radiating this heat into the freezing **2.725 Kelvin vacuum heat sink** of space causes an astronomical entropy surge in the universe ($\Delta S = Q / T_{\text{sink}}$), purchasing local planetary order at the cost of global cosmic entropy!
+
+---
+
+## Act VI: The Sun's Ignition — Helioseismology, The Tachocline & The Planetary Shield
+
+Approximately 4.6 billion years ago, inside the Orion Arm of the Milky Way, a passing supernova shockwave compressed a giant molecular cloud. Conserving angular momentum ($L = I\omega$), the collapsing cloud flattened into the **Protoplanetary Disk**.
+
+Over 99.8% of the mass collapsed into the center. Core temperatures reached 15 million Kelvin, igniting: **Proton-Proton Chain Thermonuclear Fusion**:
+$$
+4p \to {}^4\text{He} + 2e^+ + 2\nu_e + 26.73\text{ MeV}
+$$
+Mass defect: $\Delta m \approx 0.71\%$. Our star—**The Sun**—awakened!
+
+---
+
+<!-- SIMULATION 2: 3D SUN ANATOMY & HELIOSEISMIC CUTAWAY -->
 <div class="interactive-lab-container" id="sim-sun-3d">
   <div class="sim-hud-header">
     <div class="sim-hud-title">
@@ -391,16 +341,79 @@ Over 99.8% of the nebula collapsed into the gravitational center. Core temperatu
 ### Helioseismology: Listening to the Sound of the Sun
 Because solar photons undergo random-walk scattering taking **100,000 to 170,000 years** to escape from the core to the photosphere, astrophysicists cannot see the interior directly. Instead, **we listen to the acoustic resonances of the Sun**!
 
-Turbulent convective plumes continuously excite acoustic sound waves (**$p$-modes**) with a characteristic 5-minute resonance period ($3\text{ mHz}$). Spacecraft like NASA's SOHO, SDO, and India's **ADITYA-L1** decode these Doppler velocity shifts, revealing the Sun's most vital dynamo engine:
+Turbulent convective plumes continuously excite acoustic sound waves (**$p$-modes**) with a characteristic 5-minute resonance period ($3\text{ mHz}$). Spacecraft like NASA's SOHO, SDO, and India's **ADITYA-L1** decode these Doppler velocity shifts, revealing:
 
 ### The Tachocline ($r \approx 0.69\text{--}0.71\,R_\odot$)
-A razor-thin shear boundary ($\Delta r < 0.04\,R_\odot$) separating the rigidly rotating radiative interior from the differentially rotating convective envelope. Through the **Babcock-Leighton Dynamo**, the tachocline converts poloidal magnetic fields into intense toroidal magnetic ropes ($\Omega$-effect), generating the 11-year Schwabe sunspot cycle and space weather storms!
+A razor-thin shear boundary separating the rigidly rotating radiative interior from the differentially rotating convective envelope. Through the **Babcock-Leighton Dynamo**, the tachocline converts poloidal magnetic fields into intense toroidal magnetic ropes ($\Omega$-effect), driving the 11-year Schwabe sunspot cycle and solar storms!
 
 ---
 
-<!-- ==========================================================================
-     INTERACTIVE SIMULATION 3: SUN-EARTH MAGNETOSPHERE SHIELD
-     ========================================================================== -->
+<!-- SIMULATION 3: PLANET JUMPING 3D PORTAL STAGE -->
+### Planetary Architecture & The Frost Line ($2.7\text{ AU}$)
+
+Across the protoplanetary disk, at exactly **2.7 Astronomical Units**, ran an invisible thermodynamic frontier: **The Frost Line (Snowline)**.
+- **Inside 2.7 AU ($T > 150\text{ K}$):** Volatiles could not condense; only refractory silicates and metals formed the rocky inner worlds: Mercury, Venus, Earth, Mars.
+- **Beyond 2.7 AU ($T < 150\text{ K}$):** Water, methane, and ammonia froze into massive ice cores that vacuumed nebular gas to inflate Jupiter, Saturn, Uranus, Neptune.
+
+Step into the interactive **Planet Jumping Portal** below to explore these divergent planetary worlds in cinematic 3D perspective:
+
+<div class="planet-portal-viewport" id="planet-portal-experience" data-planet="mars">
+  <!-- Video Background Layers -->
+  <div class="portal-bgs" aria-hidden="true">
+    <video id="mars-background" class="portal-bg-video is-visible" muted loop playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4"></video>
+    <video id="earth-background" class="portal-bg-video" muted loop playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4"></video>
+    <video id="venus-background" class="portal-bg-video" muted loop playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/b30f64d9-1637-477a-83df-d0fc6461a422.mp4"></video>
+  </div>
+  <div class="portal-shade" aria-hidden="true"></div>
+
+  <!-- Hint Badge -->
+  <div class="portal-action-hint">
+    <span>✦ CLICK PORTAL TO TRAVEL</span>
+  </div>
+
+  <!-- Left Sidebar Planet List -->
+  <aside class="portal-sidebar-planets portal-chrome" id="portal-planet-list" aria-label="Planets"></aside>
+
+  <!-- Center Interactive 3D Perspective Portal Window -->
+  <canvas id="portal-canvas" class="portal-canvas-layer" aria-hidden="true"></canvas>
+  <section class="portal-interactive-box portal-chrome" aria-label="Next destination">
+    <div class="portal-dest-header">
+      <span>Next Destination:</span>
+      <span><span id="portal-next-number">[03]</span> <strong id="portal-next-name">Earth</strong></span>
+    </div>
+    <button class="portal-btn-window" id="portal-window-btn" type="button" aria-label="Travel through portal">
+      <video id="portal-video" muted loop playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4"></video>
+      <img id="portal-image" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg" alt="Mercury">
+      <video id="portal-transition-video" muted playsinline preload="auto" style="display:none;"></video>
+    </button>
+  </section>
+
+  <!-- Bottom Content: Giant Title & Fact Sheet -->
+  <section class="portal-content-bottom portal-chrome">
+    <h2 class="portal-giant-title" id="portal-planet-title">MARS</h2>
+    <dl class="portal-facts-dl" id="portal-facts-list"></dl>
+  </section>
+</div>
+
+### Asteroids, Comets & India's Impact Craters
+Leftover planetesimals became **Asteroids** (Carbonaceous C-types, Silicate S-types, Metallic M-types), carving massive impact structures:
+- **Lonar Lake (Maharashtra, India):** Rare hypervelocity impact crater in continental flood basalt.
+- **Dhala Structure (Madhya Pradesh, India):** Ancient $2.5\text{ Ga}$ impact structure in Bundelkhand craton.
+- **Ramgarh Crater (Rajasthan, India):** Prominent impact structure in the Vindhyan supergroup.
+
+Simultaneously, icy **Comets** developed dual tails:
+- **Type I Ion Tail:** Solar wind sweeps ionized gas directly anti-solar into a straight glowing blue tail.
+- **Type II Dust Tail:** Solar radiation pressure curves heavier particulate debris into a broad reflective white arc.
+
+---
+
+<!-- SIMULATION 4: SUN-EARTH MAGNETOSPHERE SHIELD -->
+### Earth's Planetary Shield: The Geodynamo
+
+Our Sun periodically unleashes violent Coronal Mass Ejections (CMEs, $1,000\text{ km/s}$) and solar wind storms. The **Carrington Event of 1859** demonstrated the catastrophic currents space weather can induce on terrestrial power grids.
+
+Earth survived because its liquid iron outer core operates as a colossal **Geodynamo**, generating an impenetrable magnetic shield: **The Magnetosphere**.
+
 <div class="interactive-lab-container" id="sim-magnetosphere">
   <div class="sim-hud-header">
     <div class="sim-hud-title">
@@ -427,32 +440,12 @@ A razor-thin shear boundary ($\Delta r < 0.04\,R_\odot$) separating the rigidly 
   </div>
 </div>
 
-### Planetary Architecture: The Frost Line & Impact Cratering
-Across the protoplanetary disk, at exactly **2.7 Astronomical Units (AU)**, ran an invisible thermodynamic boundary: **The Frost Line (Snowline)**.
-- **Inside 2.7 AU ($T > 150\text{ K}$):** Volatiles could not condense; only refractory silicates and metals formed the rocky terrestrial planets: Mercury, Venus, Earth, Mars.
-- **Beyond 2.7 AU ($T < 150\text{ K}$):** Water, methane, and ammonia froze into massive ice cores that vacuumed nebular gas to inflate Jupiter, Saturn, Uranus, Neptune.
-
-Leftover planetesimals became **Asteroids** (C-types, S-types, M-types), carving impact craters across Earth:
-- **Lonar Lake (Maharashtra, India):** Rare basaltic hypervelocity impact crater in Deccan Traps.
-- **Dhala Structure (Madhya Pradesh, India):** Ancient 2.5 Ga impact crater on Bundelkhand craton.
-- **Ramgarh Crater (Rajasthan, India):** Prominent impact structure in the Vindhyan supergroup.
-
-Simultaneously, icy **Comets** developed dual tails:
-- **Type I Ion Tail:** Solar wind sweeps ionized plasma directly anti-solar (straight glowing blue tail).
-- **Type II Dust Tail:** Solar radiation pressure gently curves heavier particulate debris into a broad white arc.
-
-### Earth's Planetary Shield: The Geodynamo
-Our Sun periodically unleashes violent Coronal Mass Ejections (CMEs, $1,000\text{ km/s}$) and intense solar flares. The **Carrington Event of 1859** demonstrated how geomagnetic storms can induce catastrophic currents.
-
-Earth survived because its liquid iron outer core operates as a colossal **Geodynamo**, generating an impenetrable magnetic shield: **The Magnetosphere**.
-- **Bow Shock:** Stands at $10\text{--}12\ R_\oplus$ sunward, slowing supersonic solar wind to subsonic speeds.
-- **Magnetopause & Van Allen Belts:** Deflect lethal plasma around the globe, funneling trace particles to magnetic poles to create glowing auroral curtains. Without this geomagnetic shield, solar wind would have stripped Earth's oceans and atmosphere—leaving us a desiccated wasteland like Mars!
-
 ---
 
-<!-- ==========================================================================
-     UPSC EXAMINATION SYNERGY DOSSIER
-     ========================================================================== -->
+## UPSC Civil Services Examination Synergy Matrix
+
+Episode 01 integrates core concepts tested across both Prelims and Mains papers:
+
 <div class="upsc-dossier-card" id="upsc-synergy">
   <div class="upsc-dossier-header">
     <h3 class="upsc-dossier-title">
@@ -461,26 +454,22 @@ Earth survived because its liquid iron outer core operates as a colossal **Geody
     <span class="upsc-tag">GS-1 &bull; GS-3 &bull; Prelims &bull; Mains</span>
   </div>
 
-  <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
-    Episode 01 integrates foundational topics tested repeatedly across the UPSC Civil Services Examination. Use this structured matrix for revision:
-  </p>
-
   <div class="pillar-subsections-grid">
     <div class="pillar-subcard">
       <div class="pillar-subcard-title" style="color: #ffb84d;">GS-1 Physical Geography: Solar System &amp; Planetary Geometry</div>
       <p class="pillar-subcard-desc">
-        • <strong>The Frost Line (2.7 AU):</strong> Mechanism segregating terrestrial inner planets from Jovian gas giants.<br>
-        • <strong>Meteorites &amp; Impact Craters in India:</strong> Lonar Lake (basalt impact), Dhala, Ramgarh.<br>
-        • <strong>Earth's Geodynamo:</strong> Convection in liquid outer core creating geomagnetic field and protecting biosphere.
+        • <strong>The Frost Line ($2.7\text{ AU}$):</strong> Thermodynamic mechanism partitioning terrestrial planets from Jovian gas giants.<br>
+        • <strong>Meteorite Impact Craters in India:</strong> Lonar Lake (basaltic impact crater), Dhala, Ramgarh.<br>
+        • <strong>Earth's Geodynamo:</strong> Thermal convection in the liquid outer core generating the geomagnetic dipole shield.
       </p>
     </div>
 
     <div class="pillar-subcard">
       <div class="pillar-subcard-title" style="color: #02d2e3;">GS-3 Science &amp; Technology: Space Missions &amp; Observatories</div>
       <p class="pillar-subcard-desc">
-        • <strong>Aditya-L1 Mission:</strong> Sun-Earth L1 Lagrange point orbit; instruments (VELC, SUIT, ASPEX, PAPA, MAG) monitoring CMEs, solar wind, and coronal heating.<br>
+        • <strong>Aditya-L1 Mission:</strong> Sun-Earth L1 Lagrange point orbit; payloads (VELC, SUIT, ASPEX, PAPA, MAG) monitoring CMEs, solar wind, and coronal heating.<br>
         • <strong>JWST vs Hubble:</strong> Infrared gold beryllium optics at L2 vs optical Low-Earth Orbit; spectroscopic redshift records ($z = 14.32$).<br>
-        • <strong>Indian Nobel Contributions:</strong> Meghnad Saha (Thermal Ionization Equation) &amp; Subrahmanyan Chandrasekhar (1.44 $M_\odot$ limit).
+        • <strong>Indian Nobel Contributions:</strong> Meghnad Saha (Thermal Ionization Equation) &amp; Subrahmanyan Chandrasekhar ($1.44\ M_\odot$ limit).
       </p>
     </div>
   </div>
@@ -489,27 +478,19 @@ Earth survived because its liquid iron outer core operates as a colossal **Geody
 ---
 
 <!-- ==========================================================================
-     EPISODE ROADMAP NAVIGATION
-     ========================================================================== -->
-<div style="display: flex; justify-content: space-between; align-items: center; margin: 40px 0 60px 0; flex-wrap: wrap; gap: 16px;">
-  <a href="../" class="btn-author-outline">
-    &larr; Return to Central Codex
-  </a>
-  <a href="../about/author/" class="btn-author-outline">
-    Meet Aditya &rarr;
-  </a>
-</div>
-
-<!-- ==========================================================================
      CLIENT-SIDE MODULE CONTROLLER
      ========================================================================== -->
 <script type="module">
-import { initSunAnatomy3D, initRedshiftSimulator, initMagnetosphereSimulator } from '../javascripts/cosmic-sims.js';
+import { initSunAnatomy3D, initRedshiftSimulator, initMagnetosphereSimulator, initPlanetJumpingPortal } from '../javascripts/cosmic-sims.js';
 
 function runCosmicEngines() {
   initSunAnatomy3D();
   initRedshiftSimulator();
   initMagnetosphereSimulator();
+  initPlanetJumpingPortal();
+  if (typeof window.renderMathEverywhere === 'function') {
+    window.renderMathEverywhere();
+  }
 }
 
 runCosmicEngines();

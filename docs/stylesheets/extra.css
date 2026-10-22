@@ -2441,6 +2441,251 @@ html {
   border: 1px solid rgba(255, 184, 77, 0.4);
 }
 
+/* ==========================================================================
+   PLANET JUMPING PORTAL ENGINE (CINEMATIC 3D PERSPECTIVE STAGE)
+   ========================================================================== */
+.planet-portal-viewport {
+  position: relative;
+  width: 100%;
+  height: 640px;
+  min-height: 580px;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #090807;
+  border: 1px solid rgba(140, 170, 240, 0.25);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  margin: 36px 0 44px 0;
+  isolation: isolate;
+  user-select: none;
+}
+
+.portal-bgs, .portal-bg-video, .portal-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.portal-bg-video {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 0;
+}
+
+.portal-bg-video.is-visible {
+  opacity: 1;
+}
+
+.portal-shade {
+  z-index: 1;
+  background: linear-gradient(to bottom, transparent 45%, rgba(0, 0, 0, 0.88) 100%);
+  pointer-events: none;
+}
+
+.portal-chrome {
+  position: absolute;
+  z-index: 4;
+  transition: opacity 0.45s ease, filter 0.45s ease;
+  pointer-events: auto;
+}
+
+.planet-portal-viewport.is-transitioning .portal-chrome {
+  opacity: 0;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+/* Sidebar planet list */
+.portal-sidebar-planets {
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+}
+
+.portal-planet-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.25s ease;
+}
+
+.portal-planet-item.active {
+  color: #fff;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.portal-planet-item.active::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #02d2e3;
+  box-shadow: 0 0 10px #02d2e3;
+}
+
+/* Center Portal Mask Window */
+.portal-interactive-box {
+  left: 50%;
+  top: 48%;
+  width: min(300px, 34vw);
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  text-align: center;
+}
+
+.portal-dest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.portal-dest-header strong {
+  font-size: 15px;
+  color: #fff;
+  margin-left: 6px;
+}
+
+.portal-btn-window {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 300 / 330;
+  border: 0;
+  border-radius: 70px;
+  background: transparent;
+  cursor: pointer;
+  box-shadow: none;
+  padding: 0;
+}
+
+.portal-btn-window video, .portal-btn-window img {
+  visibility: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.portal-canvas-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Bottom Content: Big Planet Title and Fact Grid */
+.portal-content-bottom {
+  left: 32px;
+  right: 32px;
+  bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  z-index: 6;
+}
+
+.portal-giant-title {
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+  font-size: clamp(68px, 11vw, 130px);
+  font-weight: 700;
+  line-height: 0.82;
+  margin: 0;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 40%, rgba(255, 255, 255, 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.portal-facts-dl {
+  width: min(440px, 45vw);
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.portal-fact-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.portal-fact-row:last-child {
+  border-bottom: none;
+}
+
+.portal-fact-row dt {
+  font-weight: 700;
+  color: #02d2e3;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.portal-fact-row dd {
+  margin: 0;
+  color: #e2e8f0;
+}
+
+.portal-action-hint {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #fff;
+  z-index: 6;
+}
+
+@media (max-width: 768px) {
+  .planet-portal-viewport {
+    height: 540px;
+  }
+  .portal-sidebar-planets {
+    display: none;
+  }
+  .portal-content-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    left: 18px;
+    right: 18px;
+    bottom: 16px;
+  }
+  .portal-facts-dl {
+    width: 100%;
+    font-size: 12px;
+  }
+  .portal-giant-title {
+    font-size: clamp(48px, 14vw, 76px);
+  }
+}
+
+
 
 
 
