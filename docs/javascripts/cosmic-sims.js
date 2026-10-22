@@ -768,339 +768,990 @@ export function initMagnetosphereSimulator() {
 }
 
 // =============================================================================
-// ENGINE 4: PLANET JUMPING 3D PORTAL STAGE
+// ENGINE 4: GLOBAL 3D COSMIC CHRONOS ENGINE & TEMPORAL CINEMA (Three.js)
 // =============================================================================
-export function initPlanetJumpingPortal() {
-  const root = document.getElementById('planet-portal-experience');
-  const canvas = document.getElementById('portal-canvas');
+export function initCosmicChronosEngine() {
+  const canvas = document.getElementById('cosmic-chronos-canvas');
+  if (!canvas) return;
+  if (canvas.dataset.initialized === 'true') return;
+  canvas.dataset.initialized = 'true';
+  document.body.classList.add('has-cosmic-canvas');
+
+  if (window.__cosmicChronosCleanup) {
+    window.__cosmicChronosCleanup();
+  }
+
+  let W = window.innerWidth;
+  let H = window.innerHeight;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x030408, 0.008);
+
+  const camera = new THREE.PerspectiveCamera(52, W / H, 0.1, 1000);
+  camera.position.set(0, 0, 42);
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: true,
+    powerPreference: 'high-performance'
+  });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+  // Circular sprite texture for stars, plasma and photons
+  function createGlowTexture() {
+    const c = document.createElement('canvas');
+    c.width = 64; c.height = 64;
+    const ctx = c.getContext('2d');
+    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.25, 'rgba(200,230,255,0.85)');
+    grad.addColorStop(0.6, 'rgba(100,160,255,0.3)');
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(c);
+  }
+  const glowTexture = createGlowTexture();
+
+  // 1. STARFIELD WITH RELATIVISTIC VELOCITY CONTRACTION
+  const starCount = 3600;
+  const starGeo = new THREE.BufferGeometry();
+  const starPos = new Float32Array(starCount * 3);
+  const starColors = new Float32Array(starCount * 3);
+  const starVel = new Float32Array(starCount);
+
+  const palette = [
+    [0.60, 0.75, 1.00],
+    [0.85, 0.92, 1.00],
+    [1.00, 0.96, 0.85],
+    [1.00, 0.80, 0.50],
+    [1.00, 0.45, 0.35]
+  ];
+
+  for (let i = 0; i < starCount; i++) {
+    starPos[i * 3] = (Math.random() - 0.5) * 160;
+    starPos[i * 3 + 1] = (Math.random() - 0.5) * 130;
+    starPos[i * 3 + 2] = (Math.random() - 0.5) * 160;
+    starVel[i] = 0.05 + Math.random() * 0.12;
+
+    const col = palette[Math.floor(Math.random() * palette.length)];
+    starColors[i * 3] = col[0];
+    starColors[i * 3 + 1] = col[1];
+    starColors[i * 3 + 2] = col[2];
+  }
+
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+  starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+  const starMat = new THREE.PointsMaterial({
+    size: 1.8,
+    map: glowTexture,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const starPoints = new THREE.Points(starGeo, starMat);
+  scene.add(starPoints);
+
+  // 2. SPACETIME GEODESIC CURVATURE GRID (Einstein's GR Tensor G_uv)
+  const gridW = 100, gridH = 100;
+  const gridSegs = 40;
+  const gridGeo = new THREE.PlaneGeometry(gridW, gridH, gridSegs, gridSegs);
+  gridGeo.rotateX(-Math.PI / 2.3);
+  gridGeo.translate(0, -9, 0);
+
+  const gridOrigY = new Float32Array(gridGeo.attributes.position.array.length);
+  gridOrigY.set(gridGeo.attributes.position.array);
+
+  const gridMat = new THREE.MeshBasicMaterial({
+    color: 0x02d2e3,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.14,
+    blending: THREE.AdditiveBlending
+  });
+  const spacetimeGrid = new THREE.Mesh(gridGeo, gridMat);
+  scene.add(spacetimeGrid);
+
+  // 3. MASTER EPOCH GROUPS (Continuum from 13.8 Ga to Present)
+  const masterEpochsGroup = new THREE.Group();
+  scene.add(masterEpochsGroup);
+
+  // --- EPOCH 0: Primordial Genesis & Expanding Redshift Waves (13.8 Ga -> 380k yr) ---
+  const ep0Group = new THREE.Group();
+  masterEpochsGroup.add(ep0Group);
+
+  const fbCount = 1000;
+  const fbGeo = new THREE.BufferGeometry();
+  const fbPos = new Float32Array(fbCount * 3);
+  const fbColors = new Float32Array(fbCount * 3);
+  for (let i = 0; i < fbCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos((Math.random() * 2) - 1);
+    const r = 0.5 + Math.random() * 5.5;
+    fbPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+    fbPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+    fbPos[i * 3 + 2] = r * Math.cos(phi);
+
+    fbColors[i * 3] = 1.0;
+    fbColors[i * 3 + 1] = 0.5 + Math.random() * 0.4;
+    fbColors[i * 3 + 2] = 0.8 + Math.random() * 0.2;
+  }
+  fbGeo.setAttribute('position', new THREE.BufferAttribute(fbPos, 3));
+  fbGeo.setAttribute('color', new THREE.BufferAttribute(fbColors, 3));
+  const fbMat = new THREE.PointsMaterial({
+    size: 2.4,
+    map: glowTexture,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.9,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const fireball = new THREE.Points(fbGeo, fbMat);
+  ep0Group.add(fireball);
+
+  // Expanding Cosmological Redshift Wave Rings
+  const waveRings = [];
+  const ringGeo = new THREE.RingGeometry(0.8, 1.1, 48);
+  for (let r = 0; r < 5; r++) {
+    const waveMat = new THREE.MeshBasicMaterial({
+      color: 0x8c68ff,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.7,
+      blending: THREE.AdditiveBlending
+    });
+    const ringMesh = new THREE.Mesh(ringGeo, waveMat);
+    ringMesh.rotation.x = Math.PI / 2.8;
+    ringMesh.userData = { offset: r * 0.2 };
+    ep0Group.add(ringMesh);
+    waveRings.push(ringMesh);
+  }
+
+  // --- EPOCH 1: Cosmic Dark Ages & JWST Frontier (380k yr -> 290 Myr) ---
+  const ep1Group = new THREE.Group();
+  masterEpochsGroup.add(ep1Group);
+
+  const jwstCount = 800;
+  const jwstGeo = new THREE.BufferGeometry();
+  const jwstPos = new Float32Array(jwstCount * 3);
+  const jwstColors = new Float32Array(jwstCount * 3);
+  for (let i = 0; i < jwstCount; i++) {
+    const arm = i % 2 === 0 ? 0 : Math.PI;
+    const dist = 2 + Math.random() * 14;
+    const angle = dist * 0.45 + arm + (Math.random() - 0.5) * 0.5;
+    jwstPos[i * 3] = Math.cos(angle) * dist;
+    jwstPos[i * 3 + 1] = (Math.random() - 0.5) * 2.2;
+    jwstPos[i * 3 + 2] = Math.sin(angle) * dist;
+
+    jwstColors[i * 3] = 0.1 + Math.random() * 0.3;
+    jwstColors[i * 3 + 1] = 0.8 + Math.random() * 0.2;
+    jwstColors[i * 3 + 2] = 1.0;
+  }
+  jwstGeo.setAttribute('position', new THREE.BufferAttribute(jwstPos, 3));
+  jwstGeo.setAttribute('color', new THREE.BufferAttribute(jwstColors, 3));
+  const jwstMat = new THREE.PointsMaterial({
+    size: 2.2,
+    map: glowTexture,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const earlyGalaxies = new THREE.Points(jwstGeo, jwstMat);
+  ep1Group.add(earlyGalaxies);
+
+  // --- EPOCH 2: Stellar Lifecycle & Supernova Nucleosynthesis ---
+  const ep2Group = new THREE.Group();
+  masterEpochsGroup.add(ep2Group);
+
+  const snCount = 1200;
+  const snGeo = new THREE.BufferGeometry();
+  const snPos = new Float32Array(snCount * 3);
+  const snVel = new Float32Array(snCount * 3);
+  const snColors = new Float32Array(snCount * 3);
+  for (let i = 0; i < snCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos((Math.random() * 2) - 1);
+    const speed = 0.08 + Math.random() * 0.22;
+    snVel[i * 3] = speed * Math.sin(phi) * Math.cos(theta);
+    snVel[i * 3 + 1] = speed * Math.sin(phi) * Math.sin(theta);
+    snVel[i * 3 + 2] = speed * Math.cos(phi);
+
+    snPos[i * 3] = 0;
+    snPos[i * 3 + 1] = 0;
+    snPos[i * 3 + 2] = 0;
+
+    const isGold = Math.random() > 0.4;
+    snColors[i * 3] = isGold ? 1.0 : 0.95;
+    snColors[i * 3 + 1] = isGold ? 0.75 : 0.25;
+    snColors[i * 3 + 2] = isGold ? 0.2 : 0.1;
+  }
+  snGeo.setAttribute('position', new THREE.BufferAttribute(snPos, 3));
+  snGeo.setAttribute('color', new THREE.BufferAttribute(snColors, 3));
+  const snMat = new THREE.PointsMaterial({
+    size: 2.0,
+    map: glowTexture,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.9,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const supernovaBlast = new THREE.Points(snGeo, snMat);
+  ep2Group.add(supernovaBlast);
+
+  // --- EPOCH 3: Birth of Our Sun & Solar Anatomy (4.6 Ga) ---
+  const ep3Group = new THREE.Group();
+  masterEpochsGroup.add(ep3Group);
+
+  const sunCenterGeo = new THREE.SphereGeometry(3.2, 32, 24);
+  const sunCenterMat = new THREE.MeshBasicMaterial({ color: 0xfff6dd });
+  const sunCore = new THREE.Mesh(sunCenterGeo, sunCenterMat);
+  ep3Group.add(sunCore);
+
+  const coronaGeo = new THREE.SphereGeometry(3.6, 24, 18);
+  const coronaMat = new THREE.MeshBasicMaterial({
+    color: 0xffa500,
+    transparent: true,
+    opacity: 0.65,
+    blending: THREE.AdditiveBlending
+  });
+  const coronaMesh = new THREE.Mesh(coronaGeo, coronaMat);
+  ep3Group.add(coronaMesh);
+
+  const diskCount = 1400;
+  const diskGeo = new THREE.BufferGeometry();
+  const diskPos = new Float32Array(diskCount * 3);
+  const diskColors = new Float32Array(diskCount * 3);
+  for (let i = 0; i < diskCount; i++) {
+    const r = 4.2 + Math.random() * 18;
+    const a = Math.random() * Math.PI * 2;
+    diskPos[i * 3] = Math.cos(a) * r;
+    diskPos[i * 3 + 1] = (Math.random() - 0.5) * 0.9 * (18 / r);
+    diskPos[i * 3 + 2] = Math.sin(a) * r;
+
+    diskColors[i * 3] = 1.0;
+    diskColors[i * 3 + 1] = 0.5 + Math.random() * 0.4;
+    diskColors[i * 3 + 2] = 0.15;
+  }
+  diskGeo.setAttribute('position', new THREE.BufferAttribute(diskPos, 3));
+  diskGeo.setAttribute('color', new THREE.BufferAttribute(diskColors, 3));
+  const diskMat = new THREE.PointsMaterial({
+    size: 2.0,
+    map: glowTexture,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.8,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const accretionDisk = new THREE.Points(diskGeo, diskMat);
+  accretionDisk.rotation.x = Math.PI / 4.2;
+  ep3Group.add(accretionDisk);
+
+  const loopCount = 4;
+  for (let l = 0; l < loopCount; l++) {
+    const loopGeo = new THREE.TorusGeometry(3.8, 0.05, 12, 36, Math.PI);
+    const loopMat = new THREE.MeshBasicMaterial({
+      color: 0x02d2e3,
+      transparent: true,
+      opacity: 0.7,
+      blending: THREE.AdditiveBlending
+    });
+    const loopMesh = new THREE.Mesh(loopGeo, loopMat);
+    loopMesh.rotation.y = (l * Math.PI) / loopCount;
+    loopMesh.rotation.x = Math.PI / 2 + (l * 0.2);
+    ep3Group.add(loopMesh);
+  }
+
+  // --- EPOCH 4: Earth's Geodynamo & Magnetospheric Shield ---
+  const ep4Group = new THREE.Group();
+  masterEpochsGroup.add(ep4Group);
+
+  const earthGeo = new THREE.SphereGeometry(2.0, 32, 24);
+  const earthMat = new THREE.MeshBasicMaterial({
+    color: 0x1565c0,
+    wireframe: true
+  });
+  const earthSphere = new THREE.Mesh(earthGeo, earthMat);
+  earthSphere.position.set(12, 0, 0);
+  ep4Group.add(earthSphere);
+
+  const bowCurve = new THREE.EllipseCurve(12, 0, 4.5, 7.5, Math.PI / 2, -Math.PI / 2, false, 0);
+  const bowPoints = bowCurve.getPoints(40);
+  const bowGeo = new THREE.BufferGeometry().setFromPoints(bowPoints.map(p => new THREE.Vector3(p.x, p.y, 0)));
+  const bowMat = new THREE.LineBasicMaterial({
+    color: 0x02d2e3,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending
+  });
+  const bowShock = new THREE.Line(bowGeo, bowMat);
+  ep4Group.add(bowShock);
+
+  const swCount = 700;
+  const swGeo = new THREE.BufferGeometry();
+  const swPos = new Float32Array(swCount * 3);
+  const swVel = new Float32Array(swCount);
+  for (let i = 0; i < swCount; i++) {
+    swPos[i * 3] = -25 + Math.random() * 50;
+    swPos[i * 3 + 1] = (Math.random() - 0.5) * 16;
+    swPos[i * 3 + 2] = (Math.random() - 0.5) * 16;
+    swVel[i] = 0.25 + Math.random() * 0.35;
+  }
+  swGeo.setAttribute('position', new THREE.BufferAttribute(swPos, 3));
+  const swMat = new THREE.PointsMaterial({
+    size: 2.2,
+    color: 0xffd54f,
+    map: glowTexture,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const solarWind = new THREE.Points(swGeo, swMat);
+  ep4Group.add(solarWind);
+
+  // STATE & TELEMETRY CONTROLLER
+  let timelineProgress = 0.0;
+  let targetTimelineProgress = 0.0;
+  let isAutoPlaying = false;
+  let warpActive = false;
+  let gravityLensActive = true;
+
+  let mouseX = 0, mouseY = 0;
+  let targetCamX = 0, targetCamY = 0;
+  let mouseVelocity = 0;
+  let lastMouseX = 0, lastMouseY = 0;
+  let lastTime = performance.now();
+
+  window.addEventListener('mousemove', (e) => {
+    const nx = (e.clientX / window.innerWidth) * 2 - 1;
+    const ny = -(e.clientY / window.innerHeight) * 2 + 1;
+    mouseX = nx;
+    mouseY = ny;
+    targetCamX = nx * 8.0;
+    targetCamY = ny * 6.0;
+
+    const dx = e.clientX - lastMouseX;
+    const dy = e.clientY - lastMouseY;
+    mouseVelocity = Math.sqrt(dx * dx + dy * dy);
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+  });
+
+  function updateScrollProgress() {
+    if (isAutoPlaying) return;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (maxScroll > 0) {
+      targetTimelineProgress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+    }
+  }
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  updateScrollProgress();
+
+  const slider = document.getElementById('chronos-time-slider');
+  const btnPlay = document.getElementById('chronos-btn-play');
+  const btnWarp = document.getElementById('chronos-btn-warp');
+  const btnLens = document.getElementById('chronos-btn-lens');
+  const epochLabel = document.getElementById('chronos-epoch-label');
+  const telTime = document.getElementById('tel-time');
+  const telRedshift = document.getElementById('tel-redshift');
+  const telTemp = document.getElementById('tel-temp');
+  const telScale = document.getElementById('tel-scale');
+  const markerButtons = document.querySelectorAll('.chronos-marker');
+
+  if (slider) {
+    slider.addEventListener('input', (e) => {
+      isAutoPlaying = false;
+      if (btnPlay) btnPlay.textContent = '▶ Auto-Play Tour';
+      targetTimelineProgress = parseFloat(e.target.value) / 100;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo({
+        top: targetTimelineProgress * maxScroll,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  if (btnPlay) {
+    btnPlay.addEventListener('click', () => {
+      isAutoPlaying = !isAutoPlaying;
+      btnPlay.textContent = isAutoPlaying ? '⏸ Pause Tour' : '▶ Auto-Play Tour';
+      btnPlay.classList.toggle('active', isAutoPlaying);
+    });
+  }
+
+  if (btnWarp) {
+    btnWarp.addEventListener('click', () => {
+      warpActive = !warpActive;
+      btnWarp.classList.toggle('active', warpActive);
+    });
+  }
+
+  if (btnLens) {
+    btnLens.addEventListener('click', () => {
+      gravityLensActive = !gravityLensActive;
+      btnLens.classList.toggle('active', gravityLensActive);
+    });
+  }
+
+  markerButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      isAutoPlaying = false;
+      if (btnPlay) btnPlay.textContent = '▶ Auto-Play Tour';
+      const step = parseFloat(btn.dataset.step) / 100;
+      targetTimelineProgress = step;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo({
+        top: step * maxScroll,
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  const epochData = [
+    { threshold: 0.18, name: 'EPOCH 01: PRIMORDIAL GENESIS (13.8 Ga)', time: '-13.8 Billion Years', z: 'z = 1100.0', temp: '3,000 K', scale: '0.00091' },
+    { threshold: 0.40, name: 'EPOCH 02: RECOMBINATION & COSMIC DARK AGES (290 Myr)', time: '-13.5 Billion Years', z: 'z = 14.32', temp: '30 K', scale: '0.065' },
+    { threshold: 0.65, name: 'EPOCH 03: STELLAR LIFECYCLE & SUPERNOVA FORGE', time: '-9.0 Billion Years', z: 'z = 1.80', temp: '15 K', scale: '0.357' },
+    { threshold: 0.88, name: 'EPOCH 04: SOLAR ACCRETION & 1st SUN IGNITION (4.6 Ga)', time: '-4.6 Billion Years', z: 'z = 0.42', temp: '5,778 K (Sun)', scale: '0.704' },
+    { threshold: 1.01, name: 'EPOCH 05: EARTH GEODYNAMO MAGNETOSPHERE SHIELD', time: 'Present Day (0 yr)', z: 'z = 0.00', temp: '2.725 K (CMB)', scale: '1.000' }
+  ];
+
+  function updateHUD(p) {
+    if (slider && !slider.matches(':active')) {
+      slider.value = (p * 100).toFixed(1);
+    }
+    const ep = epochData.find(e => p <= e.threshold) || epochData[epochData.length - 1];
+    if (epochLabel) epochLabel.textContent = ep.name;
+    if (telTime) telTime.textContent = ep.time;
+    if (telRedshift) telRedshift.textContent = ep.z;
+    if (telTemp) telTemp.textContent = ep.temp;
+    if (telScale) telScale.textContent = ep.scale;
+
+    markerButtons.forEach(btn => {
+      const step = parseFloat(btn.dataset.step) / 100;
+      btn.classList.toggle('active', Math.abs(p - step) < 0.12);
+    });
+  }
+
+  function getEpochWeight(p, center, width) {
+    const diff = (p - center) / width;
+    return Math.max(0, Math.min(1, Math.exp(-diff * diff * 3.5)));
+  }
+
+  let animId = null;
+
+  function render(now) {
+    animId = requestAnimationFrame(render);
+    const dt = Math.min((now - lastTime) * 0.001, 0.1);
+    lastTime = now;
+
+    if (isAutoPlaying) {
+      targetTimelineProgress += dt * 0.035;
+      if (targetTimelineProgress > 1.0) targetTimelineProgress = 0.0;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo({
+        top: targetTimelineProgress * maxScroll,
+        behavior: 'auto'
+      });
+    }
+
+    timelineProgress += (targetTimelineProgress - timelineProgress) * 0.08;
+    updateHUD(timelineProgress);
+
+    camera.position.x += (targetCamX - camera.position.x) * 0.04;
+    camera.position.y += (targetCamY - camera.position.y) * 0.04;
+    camera.lookAt(0, 0, 0);
+
+    mouseVelocity *= 0.94;
+    const dynamicWarp = warpActive ? 4.5 : 1.0 + Math.min(mouseVelocity * 0.06, 3.5);
+
+    // 1. Starfield
+    const posAttr = starGeo.attributes.position;
+    for (let i = 0; i < starCount; i++) {
+      let z = posAttr.getZ(i);
+      const v = starVel[i] * dynamicWarp;
+      z += v * 0.8;
+      if (z > 60) z = -100;
+      posAttr.setZ(i, z);
+    }
+    posAttr.needsUpdate = true;
+    starPoints.rotation.y += 0.0003;
+
+    // 2. Spacetime Curvature Grid
+    if (gravityLensActive) {
+      const gPos = gridGeo.attributes.position;
+      const count = gPos.count;
+      const targetWellX = mouseX * 25;
+      const targetWellZ = -mouseY * 20;
+
+      for (let i = 0; i < count; i++) {
+        const vx = gPos.getX(i);
+        const vz = gPos.getZ(i);
+        const distSq = (vx - targetWellX) * (vx - targetWellX) + (vz - targetWellZ) * (vz - targetWellZ);
+        const origY = gridOrigY[i * 3 + 1];
+        const depression = -6.5 * Math.exp(-distSq / 70.0);
+        gPos.setY(i, origY + depression);
+      }
+      gPos.needsUpdate = true;
+    }
+
+    // 3. Epoch Opacity & Animations
+    const w0 = getEpochWeight(timelineProgress, 0.10, 0.20);
+    const w1 = getEpochWeight(timelineProgress, 0.32, 0.22);
+    const w2 = getEpochWeight(timelineProgress, 0.55, 0.22);
+    const w3 = getEpochWeight(timelineProgress, 0.78, 0.22);
+    const w4 = getEpochWeight(timelineProgress, 0.95, 0.20);
+
+    ep0Group.visible = w0 > 0.01;
+    if (ep0Group.visible) {
+      fbMat.opacity = w0 * 0.9;
+      fireball.rotation.y += 0.005;
+      waveRings.forEach(ring => {
+        ring.material.opacity = w0 * 0.7;
+        const scale = 1.0 + ((now * 0.0008 + ring.userData.offset) % 1.0) * 14.0;
+        ring.scale.set(scale, scale, 1);
+        const hue = 0.75 - Math.min(scale / 15.0, 1.0) * 0.75;
+        ring.material.color.setHSL(hue, 0.9, 0.6);
+      });
+    }
+
+    ep1Group.visible = w1 > 0.01;
+    if (ep1Group.visible) {
+      jwstMat.opacity = w1 * 0.85;
+      earlyGalaxies.rotation.y += 0.003;
+      earlyGalaxies.rotation.z += 0.001;
+    }
+
+    ep2Group.visible = w2 > 0.01;
+    if (ep2Group.visible) {
+      snMat.opacity = w2 * 0.9;
+      const sAttr = snGeo.attributes.position;
+      const cycleTime = (now * 0.001) % 4.0;
+      for (let i = 0; i < snCount; i++) {
+        sAttr.setXYZ(
+          i,
+          snVel[i * 3] * cycleTime * 20,
+          snVel[i * 3 + 1] * cycleTime * 20,
+          snVel[i * 3 + 2] * cycleTime * 20
+        );
+      }
+      sAttr.needsUpdate = true;
+    }
+
+    ep3Group.visible = w3 > 0.01;
+    if (ep3Group.visible) {
+      coronaMat.opacity = w3 * 0.65;
+      diskMat.opacity = w3 * 0.8;
+      accretionDisk.rotation.y += 0.008;
+      sunCore.rotation.y += 0.004;
+    }
+
+    ep4Group.visible = w4 > 0.01;
+    if (ep4Group.visible) {
+      bowMat.opacity = w4 * 0.85;
+      swMat.opacity = w4 * 0.85;
+      earthSphere.rotation.y += 0.006;
+
+      const pAttr = swGeo.attributes.position;
+      for (let i = 0; i < swCount; i++) {
+        let x = pAttr.getX(i);
+        let y = pAttr.getY(i);
+        x += swVel[i] * 0.9;
+        if (x > 6.0 && x < 15.0 && Math.abs(y) < 5.0) {
+          y += (y >= 0 ? 0.08 : -0.08);
+          pAttr.setY(i, y);
+        }
+        if (x > 25) {
+          x = -25;
+          y = (Math.random() - 0.5) * 16;
+          pAttr.setY(i, y);
+        }
+        pAttr.setX(i, x);
+      }
+      pAttr.needsUpdate = true;
+    }
+
+    renderer.render(scene, camera);
+  }
+
+  animId = requestAnimationFrame(render);
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    camera.aspect = W / H;
+    camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+  }
+  window.addEventListener('resize', resize);
+
+  window.__cosmicChronosCleanup = () => {
+    cancelAnimationFrame(animId);
+    window.removeEventListener('resize', resize);
+    window.removeEventListener('scroll', updateScrollProgress);
+  };
+}
+
+// =============================================================================
+// ENGINE 5: 3D STELLAR GENESIS & FIRST SUN IGNITION STAGE (Three.js)
+// =============================================================================
+export function initStellarGenesisStage() {
+  const root = document.getElementById('stellar-genesis-stage');
+  const canvas = document.getElementById('stellar-stage-canvas');
   if (!root || !canvas) return;
   if (root.dataset.initialized === 'true') return;
   root.dataset.initialized = 'true';
 
-  const ctx = canvas.getContext('2d');
+  const container = canvas.parentElement;
+  let W = container.clientWidth || 800;
+  let H = container.clientHeight || 520;
 
-  const BASE = 'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P';
-  const TO_EARTH = `${BASE}/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4`;
-  const TO_VENUS = `${BASE}/b30f64d9-1637-477a-83df-d0fc6461a422.mp4`;
-  const MERCURY_IMG = `${BASE}/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg`;
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x050711);
 
-  const planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
+  const camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 100);
+  camera.position.set(0, 2.5, 14);
 
-  const states = {
-    mars: {
-      name: 'Mars',
-      next: 'Earth',
-      number: '[03]',
-      portal: TO_EARTH,
-      bgId: 'mars-background',
-      facts: [
-        ['Distance:', 'About 228 million km (1.5 AU from Sun).'],
-        ['Year:', '687 Earth days per Martian year.'],
-        ['Temperature:', '-60 °C mean, dropping to -125 °C at winter poles.'],
-        ['Atmosphere:', 'Very thin (95% CO₂), prone to global dust storms.']
-      ]
-    },
-    earth: {
-      name: 'Earth',
-      next: 'Venus',
-      number: '[02]',
-      portal: TO_VENUS,
-      bgId: 'earth-background',
-      facts: [
-        ['Distance:', '149.6 million km (1.0 AU from Sun).'],
-        ['Year:', '365.25 Earth days per orbit.'],
-        ['Temperature:', '15 °C mean, enabling stable liquid water.'],
-        ['Atmosphere:', '78% Nitrogen, 21% Oxygen, shielded by Geodynamo.']
-      ]
-    },
-    venus: {
-      name: 'Venus',
-      next: 'Mercury',
-      number: '[01]',
-      image: MERCURY_IMG,
-      bgId: 'venus-background',
-      facts: [
-        ['Distance:', '108.2 million km (0.72 AU from Sun).'],
-        ['Year:', '225 Earth days per orbit.'],
-        ['Temperature:', '465 °C — runaway greenhouse furnace.'],
-        ['Atmosphere:', '92 atmospheres of CO₂ with sulfuric acid clouds.']
-      ]
-    }
-  };
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: false,
+    powerPreference: 'high-performance'
+  });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-  let current = 'mars';
-  let busy = false;
-  let targetX = 0, targetY = 0;
-  let rotX = 0, rotY = 0;
-  let expansion = 0;
-  let maskScale = 1;
+  function createSoftTexture() {
+    const c = document.createElement('canvas');
+    c.width = 64; c.height = 64;
+    const ctx = c.getContext('2d');
+    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.3, 'rgba(255,200,100,0.8)');
+    grad.addColorStop(0.7, 'rgba(255,100,20,0.25)');
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(c);
+  }
+  const softTex = createSoftTexture();
 
-  const marsBg = document.getElementById('mars-background');
-  const earthBg = document.getElementById('earth-background');
-  const venusBg = document.getElementById('venus-background');
-  const portalBtn = document.getElementById('portal-window-btn');
-  const portalVideo = document.getElementById('portal-video');
-  const portalImage = document.getElementById('portal-image');
-  const transitionVideo = document.getElementById('portal-transition-video');
+  const forgeGroup = new THREE.Group();
+  scene.add(forgeGroup);
 
-  const planetTitleEl = document.getElementById('portal-planet-title');
-  const factsListEl = document.getElementById('portal-facts-list');
-  const planetListEl = document.getElementById('portal-planet-list');
-  const nextNameEl = document.getElementById('portal-next-name');
-  const nextNumEl = document.getElementById('portal-next-number');
+  // Phase 0: Bok Globule & Infalling Dark Cloud
+  const phase0Group = new THREE.Group();
+  forgeGroup.add(phase0Group);
+  const p0Count = 1200;
+  const p0Geo = new THREE.BufferGeometry();
+  const p0Pos = new Float32Array(p0Count * 3);
+  for (let i = 0; i < p0Count; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos((Math.random() * 2) - 1);
+    const r = 1.0 + Math.random() * 5.5;
+    p0Pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+    p0Pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+    p0Pos[i * 3 + 2] = r * Math.cos(phi);
+  }
+  p0Geo.setAttribute('position', new THREE.BufferAttribute(p0Pos, 3));
+  const p0Mat = new THREE.PointsMaterial({
+    size: 2.2,
+    color: 0x94a3b8,
+    map: softTex,
+    transparent: true,
+    opacity: 0.75,
+    blending: THREE.AdditiveBlending
+  });
+  const bokCloud = new THREE.Points(p0Geo, p0Mat);
+  phase0Group.add(bokCloud);
 
-  function renderState() {
-    const s = states[current];
-    root.setAttribute('data-planet', current);
+  // Phase 1: Rotating Protostar & Bipolar Herbig-Haro Jets
+  const phase1Group = new THREE.Group();
+  forgeGroup.add(phase1Group);
 
-    if (planetTitleEl) planetTitleEl.textContent = s.name.toUpperCase();
-    if (nextNameEl) nextNameEl.textContent = s.next;
-    if (nextNumEl) nextNumEl.textContent = s.number;
+  const p1DiskCount = 1600;
+  const p1DiskGeo = new THREE.BufferGeometry();
+  const p1DiskPos = new Float32Array(p1DiskCount * 3);
+  for (let i = 0; i < p1DiskCount; i++) {
+    const r = 1.2 + Math.random() * 6.5;
+    const a = Math.random() * Math.PI * 2;
+    p1DiskPos[i * 3] = Math.cos(a) * r;
+    p1DiskPos[i * 3 + 1] = (Math.random() - 0.5) * 0.4 * (6.5 / r);
+    p1DiskPos[i * 3 + 2] = Math.sin(a) * r;
+  }
+  p1DiskGeo.setAttribute('position', new THREE.BufferAttribute(p1DiskPos, 3));
+  const p1DiskMat = new THREE.PointsMaterial({
+    size: 2.0,
+    color: 0xffaa00,
+    map: softTex,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending
+  });
+  const protoDisk = new THREE.Points(p1DiskGeo, p1DiskMat);
+  protoDisk.rotation.x = Math.PI / 5;
+  phase1Group.add(protoDisk);
 
-    // Build facts
-    if (factsListEl) {
-      factsListEl.innerHTML = s.facts.map(([k, v]) => `
-        <div class="portal-fact-row">
-          <dt>${k}</dt>
-          <dd>${v}</dd>
-        </div>
-      `).join('');
-    }
+  const jetCount = 500;
+  const jetGeo = new THREE.BufferGeometry();
+  const jetPos = new Float32Array(jetCount * 3);
+  for (let i = 0; i < jetCount; i++) {
+    const sign = i % 2 === 0 ? 1 : -1;
+    const len = 0.5 + Math.random() * 6.5;
+    const spread = (len / 6.5) * 0.4;
+    jetPos[i * 3] = (Math.random() - 0.5) * spread;
+    jetPos[i * 3 + 1] = sign * len;
+    jetPos[i * 3 + 2] = (Math.random() - 0.5) * spread;
+  }
+  jetGeo.setAttribute('position', new THREE.BufferAttribute(jetPos, 3));
+  const jetMat = new THREE.PointsMaterial({
+    size: 2.2,
+    color: 0x02d2e3,
+    map: softTex,
+    transparent: true,
+    opacity: 0.9,
+    blending: THREE.AdditiveBlending
+  });
+  const bipolarJets = new THREE.Points(jetGeo, jetMat);
+  phase1Group.add(bipolarJets);
 
-    // Build planet list
-    if (planetListEl) {
-      planetListEl.innerHTML = planets.map(p => `
-        <div class="portal-planet-item ${p.toLowerCase() === current ? 'active' : ''}">
-          <span>${p}</span>
-        </div>
-      `).join('');
-    }
+  // Phase 2: T-Tauri Ignition & Dust Clearing
+  const phase2Group = new THREE.Group();
+  forgeGroup.add(phase2Group);
 
-    // Toggle background videos
-    [marsBg, earthBg, venusBg].forEach(v => {
-      if (!v) return;
-      if (v.id === s.bgId) {
-        v.classList.add('is-visible');
-        v.play().catch(() => {});
-      } else {
-        v.classList.remove('is-visible');
-        v.pause();
-      }
+  const p2BlastCount = 1400;
+  const p2Geo = new THREE.BufferGeometry();
+  const p2Pos = new Float32Array(p2BlastCount * 3);
+  const p2Vel = new Float32Array(p2BlastCount * 3);
+  for (let i = 0; i < p2BlastCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos((Math.random() * 2) - 1);
+    const spd = 0.05 + Math.random() * 0.12;
+    p2Vel[i * 3] = spd * Math.sin(phi) * Math.cos(theta);
+    p2Vel[i * 3 + 1] = spd * Math.sin(phi) * Math.sin(theta);
+    p2Vel[i * 3 + 2] = spd * Math.cos(phi);
+    p2Pos[i * 3] = 0; p2Pos[i * 3 + 1] = 0; p2Pos[i * 3 + 2] = 0;
+  }
+  p2Geo.setAttribute('position', new THREE.BufferAttribute(p2Pos, 3));
+  const p2Mat = new THREE.PointsMaterial({
+    size: 2.4,
+    color: 0xff6b00,
+    map: softTex,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending
+  });
+  const blastWave = new THREE.Points(p2Geo, p2Mat);
+  phase2Group.add(blastWave);
+
+  const sparkGeo = new THREE.SphereGeometry(1.2, 24, 18);
+  const sparkMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  const sparkMesh = new THREE.Mesh(sparkGeo, sparkMat);
+  phase2Group.add(sparkMesh);
+
+  // Phase 3: The Living Main Sequence Sun
+  const phase3Group = new THREE.Group();
+  forgeGroup.add(phase3Group);
+
+  const livingSunGeo = new THREE.SphereGeometry(2.2, 36, 28);
+  const livingSunMat = new THREE.MeshStandardMaterial({
+    color: 0xffa500,
+    emissive: 0xff5500,
+    emissiveIntensity: 0.85,
+    roughness: 0.3
+  });
+  const livingSun = new THREE.Mesh(livingSunGeo, livingSunMat);
+  phase3Group.add(livingSun);
+
+  const sunLight = new THREE.PointLight(0xffeedd, 3, 50);
+  phase3Group.add(sunLight);
+
+  for (let c = 0; c < 3; c++) {
+    const loopG = new THREE.TorusGeometry(2.5, 0.04, 12, 32, Math.PI);
+    const loopM = new THREE.MeshBasicMaterial({
+      color: 0x5df0a8,
+      transparent: true,
+      opacity: 0.75,
+      blending: THREE.AdditiveBlending
     });
+    const lMesh = new THREE.Mesh(loopG, loopM);
+    lMesh.rotation.z = (c * Math.PI) / 3;
+    lMesh.rotation.x = Math.PI / 2 + (c * 0.3);
+    phase3Group.add(lMesh);
+  }
 
-    // Update portal source
-    if (s.image) {
-      if (portalImage) portalImage.src = s.image;
+  const phaseData = [
+    {
+      title: 'BOK GLOBULE',
+      era: '4.60 Billion Years Ago',
+      temp: '10 to 100 Kelvin',
+      density: '10⁴ to 10⁶ particles/cm³',
+      state: 'Gravitational Infall & Fragmentation',
+      astro: 'Jeans Mass Instability (M > M_J)',
+      narrative: 'A cold, dark interstellar molecular cloud fragments under its own self-gravity. Silicate and carbonaceous dust particles shield the interior from interstellar radiation, allowing temperatures to drop to 10 K and triggering dense gravitational collapse into Bok globules.'
+    },
+    {
+      title: 'PROTOSTAR & JETS',
+      era: '4.58 Billion Years Ago',
+      temp: '1,000 to 100,000 Kelvin',
+      density: '10¹⁰ to 10¹⁴ particles/cm³',
+      state: 'Circumstellar Accretion Disk',
+      astro: 'Conservation of Angular Momentum',
+      narrative: 'As the core contracts, conservation of angular momentum spins up the collapsing gas into a flattened circumstellar accretion disk. Extreme magnetic fields channel infalling plasma to the poles, launching collimated relativistic Herbig-Haro jets!'
+    },
+    {
+      title: 'T-TAURI IGNITION',
+      era: '4.55 Billion Years Ago',
+      temp: '10,000,000 Kelvin (Core)',
+      density: '100 g/cm³ (Core)',
+      state: 'Thermonuclear p-p Fusion Onset',
+      astro: 'Quantum Tunneling & Gamow Peak',
+      narrative: 'Core temperature hits 10 million Kelvin, enabling protons to penetrate the Coulomb electrostatic barrier via quantum tunneling. The proton-proton chain reaction ignites! Violent radiation pressure and fierce T-Tauri solar winds blast away the nebular shroud.'
+    },
+    {
+      title: 'LIVING SUN',
+      era: 'Present (4.50 Billion Years)',
+      temp: '15.7M K (Core) / 5,778 K (Surface)',
+      density: '150 g/cm³ (Core)',
+      state: 'Hydrostatic Equilibrium (Main Sequence)',
+      astro: 'Babcock-Leighton Dynamo & Aditya-L1',
+      narrative: 'The Sun reaches perfect hydrostatic equilibrium: inward gravitational collapse is exactly balanced by outward thermonuclear radiation pressure. It continuously powers the solar wind, acoustic p-mode oscillations, and space weather across our solar system.'
+    }
+  ];
+
+  let currentPhase = 0;
+
+  function setPhase(idx) {
+    currentPhase = idx;
+    root.setAttribute('data-phase', idx);
+
+    const btns = root.querySelectorAll('.stellar-phase-btn');
+    btns.forEach((b, i) => b.classList.toggle('active', i === idx));
+
+    const d = phaseData[idx];
+    const titleEl = document.getElementById('stellar-phase-title');
+    const eraEl = document.getElementById('tel-era');
+    const tempEl = document.getElementById('tel-core-temp');
+    const denEl = document.getElementById('tel-core-density');
+    const stateEl = document.getElementById('tel-phys-state');
+    const astroEl = document.getElementById('tel-astro');
+    const narEl = document.getElementById('stellar-phase-narrative');
+
+    if (titleEl) titleEl.textContent = d.title;
+    if (eraEl) eraEl.textContent = d.era;
+    if (tempEl) tempEl.textContent = d.temp;
+    if (denEl) denEl.textContent = d.density;
+    if (stateEl) stateEl.textContent = d.state;
+    if (astroEl) astroEl.textContent = d.astro;
+    if (narEl) narEl.textContent = d.narrative;
+
+    phase0Group.visible = idx === 0;
+    phase1Group.visible = idx === 1;
+    phase2Group.visible = idx === 2;
+    phase3Group.visible = idx === 3;
+  }
+
+  const phaseBtns = root.querySelectorAll('.stellar-phase-btn');
+  phaseBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setPhase(parseInt(btn.dataset.phase, 10));
+    });
+  });
+
+  let isDragging = false;
+  let prevMouseX = 0, prevMouseY = 0;
+  let targetRotX = 0, targetRotY = 0;
+  let currentRotX = 0, currentRotY = 0;
+
+  canvas.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    prevMouseX = e.clientX;
+    prevMouseY = e.clientY;
+  });
+
+  window.addEventListener('mouseup', () => isDragging = false);
+
+  window.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      const dx = e.clientX - prevMouseX;
+      const dy = e.clientY - prevMouseY;
+      targetRotY += dx * 0.01;
+      targetRotX += dy * 0.01;
+      prevMouseX = e.clientX;
+      prevMouseY = e.clientY;
     } else {
-      if (portalVideo && portalVideo.src !== s.portal) {
-        portalVideo.src = s.portal;
-        portalVideo.load();
-        portalVideo.play().catch(() => {});
+      const rect = canvas.getBoundingClientRect();
+      if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+        const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+        targetRotY = nx * 0.6;
+        targetRotX = -ny * 0.4;
       }
     }
-  }
-
-  // Pointer Tilt Listener
-  root.addEventListener('mousemove', (e) => {
-    if (busy) return;
-    const rect = root.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    targetY = (x / rect.width - 0.5) * 32.0;
-    targetX = (y / rect.height - 0.5) * -28.0;
   });
 
-  root.addEventListener('mouseleave', () => {
-    targetX = 0;
-    targetY = 0;
-  });
-
-  // Canvas Sizing
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = root.clientWidth * dpr;
-    canvas.height = root.clientHeight * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  // Easing helper
-  function easeInOutCubic(t) {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  }
-
-  function animateValue(setter, duration) {
-    return new Promise(resolve => {
-      const start = performance.now();
-      function step(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        setter(easeInOutCubic(progress));
-        if (progress < 1) requestAnimationFrame(step);
-        else resolve();
-      }
-      requestAnimationFrame(step);
-    });
-  }
-
-  // Travel action
-  async function travel() {
-    if (busy || current === 'venus') return;
-    busy = true;
-    targetX = 0;
-    targetY = 0;
-
-    const next = current === 'mars' ? 'earth' : 'venus';
-    root.classList.add('is-transitioning');
-
-    if (transitionVideo) {
-      transitionVideo.src = states[current].portal;
-      transitionVideo.currentTime = 0;
-      transitionVideo.playbackRate = 1.3;
-      await transitionVideo.play().catch(() => {});
-    }
-
-    // Expand portal window to swallow screen
-    await animateValue(v => expansion = v, 1000);
-
-    // Commit to next planet
-    current = next;
-    renderState();
-
-    // Reopen mask window
-    expansion = 0;
-    maskScale = 0;
-    root.classList.remove('is-transitioning');
-
-    await animateValue(v => maskScale = v, 900);
-    busy = false;
-  }
-
-  if (portalBtn) {
-    portalBtn.addEventListener('click', travel);
-  }
-
-  // Render loop for 3D portal
-  let lastT = performance.now();
   let isVisible = true;
   const io = new IntersectionObserver(([entry]) => {
     isVisible = entry.isIntersecting;
   }, { threshold: 0.1 });
   io.observe(root);
 
-  function drawPortal(now) {
-    requestAnimationFrame(drawPortal);
+  let stageAnimId = null;
+
+  function renderStage(now) {
+    stageAnimId = requestAnimationFrame(renderStage);
     if (!isVisible) return;
 
-    const dt = Math.min(now - lastT, 40);
-    lastT = now;
+    currentRotX += (targetRotX - currentRotX) * 0.08;
+    currentRotY += (targetRotY - currentRotY) * 0.08;
 
-    rotX += (targetX - rotX) * Math.min(1, dt * 0.009);
-    rotY += (targetY - rotY) * Math.min(1, dt * 0.009);
+    forgeGroup.rotation.x = currentRotX;
+    forgeGroup.rotation.y = currentRotY + now * 0.0006;
 
-    const W = root.clientWidth;
-    const H = root.clientHeight;
-
-    ctx.clearRect(0, 0, W, H);
-
-    if (!portalBtn) return;
-    const rect = portalBtn.getBoundingClientRect();
-    const rootRect = root.getBoundingClientRect();
-
-    const rectCx = rect.left - rootRect.left + rect.width / 2;
-    const rectCy = rect.top - rootRect.top + rect.height / 2;
-
-    const e = expansion;
-    const cx = rectCx + (W / 2 - rectCx) * e;
-    const cy = rectCy + (H / 2 - rectCy) * e;
-
-    const baseW = rect.width + (W - rect.width) * e;
-    const baseH = rect.height + (H - rect.height) * e;
-
-    const scale = e ? 1 : maskScale;
-    const w = baseW * scale;
-    const h = baseH * scale;
-
-    const cornerRadius = 70 * (1 - e) * scale;
-    const rx = rotX * (1 - e);
-    const ry = rotY * (1 - e);
-
-    if (w > 2 && h > 2) {
-      // Build 44-point rounded-rect
-      const points = [];
-      const r = Math.min(cornerRadius, w / 2, h / 2);
-      const arcs = [
-        [w / 2 - r, -h / 2 + r, -Math.PI / 2, 0],
-        [w / 2 - r, h / 2 - r, 0, Math.PI / 2],
-        [-w / 2 + r, h / 2 - r, Math.PI / 2, Math.PI],
-        [-w / 2 + r, -h / 2 + r, Math.PI, Math.PI * 1.5]
-      ];
-
-      arcs.forEach(([ox, oy, sa, ea]) => {
-        for (let i = 0; i <= 10; i++) {
-          const a = sa + (ea - sa) * (i / 10);
-          points.push([ox + Math.cos(a) * r, oy + Math.sin(a) * r]);
-        }
-      });
-
-      // Perspective projection
-      const ax = rx * Math.PI / 180;
-      const ay = ry * Math.PI / 180;
-      const projected = points.map(([px, py]) => {
-        const xx = px * Math.cos(ay);
-        const yy = py * Math.cos(ax);
-        const z = px * Math.sin(ay) - py * Math.sin(ax);
-        const p = 850 / (850 + z);
-        return [cx + xx * p, cy + yy * p];
-      });
-
-      // Clip and render media inside portal
-      ctx.save();
-      ctx.beginPath();
-      projected.forEach(([sx, sy], idx) => {
-        if (idx === 0) ctx.moveTo(sx, sy);
-        else ctx.lineTo(sx, sy);
-      });
-      ctx.closePath();
-      ctx.clip();
-
-      // Draw active media in cover mode
-      const activeState = states[current];
-      const media = (expansion > 0.05 && transitionVideo) ? transitionVideo :
-                    (activeState.image ? portalImage : portalVideo);
-
-      if (media && (media.videoWidth || media.naturalWidth)) {
-        const mw = media.videoWidth || media.naturalWidth;
-        const mh = media.videoHeight || media.naturalHeight;
-        const sc = Math.max(W / mw, H / mh);
-        const dw = mw * sc;
-        const dh = mh * sc;
-        ctx.drawImage(media, (W - dw) / 2, (H - dh) / 2, dw, dh);
-      } else {
-        ctx.fillStyle = '#0a0910';
-        ctx.fillRect(0, 0, W, H);
+    if (currentPhase === 0) {
+      bokCloud.rotation.y += 0.002;
+    } else if (currentPhase === 1) {
+      protoDisk.rotation.z += 0.008;
+      bipolarJets.rotation.y += 0.01;
+    } else if (currentPhase === 2) {
+      const pAttr = p2Geo.attributes.position;
+      const cycle = (now * 0.001) % 2.5;
+      for (let i = 0; i < p2BlastCount; i++) {
+        pAttr.setXYZ(
+          i,
+          p2Vel[i * 3] * cycle * 24,
+          p2Vel[i * 3 + 1] * cycle * 24,
+          p2Vel[i * 3 + 2] * cycle * 24
+        );
       }
-
-      // Border outline on portal window
-      ctx.restore();
-
-      if (e < 0.95) {
-        ctx.save();
-        ctx.beginPath();
-        projected.forEach(([sx, sy], idx) => {
-          if (idx === 0) ctx.moveTo(sx, sy);
-          else ctx.lineTo(sx, sy);
-        });
-        ctx.closePath();
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.restore();
-      }
+      pAttr.needsUpdate = true;
+    } else if (currentPhase === 3) {
+      livingSun.rotation.y += 0.003;
     }
+
+    renderer.render(scene, camera);
   }
 
-  renderState();
-  requestAnimationFrame(drawPortal);
+  setPhase(0);
+  stageAnimId = requestAnimationFrame(renderStage);
+
+  window.addEventListener('resize', () => {
+    W = container.clientWidth || 800;
+    H = container.clientHeight || 520;
+    camera.aspect = W / H;
+    camera.updateProjectionMatrix();
+    renderer.setSize(W, H);
+  });
 }
+
+// Fallback no-op to protect any legacy calls
+export const initPlanetJumpingPortal = () => {};

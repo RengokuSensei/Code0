@@ -58,15 +58,18 @@ function initCursorGlow() {
 }
 
 /**
- * 2. 3D CARD TILT
+ * 2. 3D CARD TILT & SPECULAR CURSOR REFLECTION
  */
 function initCardTilt() {
   const isTouchDevice = ('ontouchstart' in window) || window.matchMedia('(hover: none)').matches;
   if (isTouchDevice) return;
 
-  const cards = document.querySelectorAll('.aa-card');
+  const cards = document.querySelectorAll('.aa-card, .interactive-lab-container, .pillar-subcard, .upsc-dossier-card, .stellar-genesis-stage, .cosmic-hero');
   
   cards.forEach(card => {
+    if (card.dataset.tiltInitialized === 'true') return;
+    card.dataset.tiltInitialized = 'true';
+
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -75,12 +78,14 @@ function initCardTilt() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       
-      const rotateX = ((y - centerY) / centerY) * -8;
-      const rotateY = ((x - centerX) / centerX) * 8;
+      const rotateX = ((y - centerY) / centerY) * -5;
+      const rotateY = ((x - centerX) / centerX) * 5;
       
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.015, 1.015, 1.015)`;
       card.style.setProperty('--glow-x', `${x}px`);
       card.style.setProperty('--glow-y', `${y}px`);
+      card.style.setProperty('--card-light-x', `${x}px`);
+      card.style.setProperty('--card-light-y', `${y}px`);
     });
     
     card.addEventListener('mouseleave', () => {

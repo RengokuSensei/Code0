@@ -6,6 +6,8 @@ description: "From the Big Bang and Recombination to the Stellar Lifecycle, the 
 <!-- ==========================================================================
      HERO SECTION: THE COSMIC DAWN (EPISODE 01 / PAGE 01)
      ========================================================================== -->
+<canvas id="cosmic-chronos-canvas" aria-hidden="true"></canvas>
+
 <div class="cosmic-hero">
   <div class="cosmic-hero-badge">
     <span>✦ ARCHITECTS OF THE COSMOS &bull; EPISODE 01 &bull; PAGE 01</span>
@@ -23,6 +25,41 @@ description: "From the Big Bang and Recombination to the Stellar Lifecycle, the 
     <span class="telemetry-chip highlight-amber">⚛️ Hoyle Resonance: $7.65\text{ MeV}$</span>
     <span class="telemetry-chip highlight-violet">☀️ Solar Ignition: $4.6\text{ Billion Years Ago}$</span>
     <span class="telemetry-chip">🛡️ Earth Geodynamo Active</span>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     COSMIC CHRONOS CINEMA DOCK (TEMPORAL MOVIE SCRUBBER HUD)
+     ========================================================================== -->
+<div class="chronos-cinema-dock" id="chronos-cinema-dock">
+  <div class="chronos-dock-header">
+    <div class="chronos-status-pill">
+      <span class="chronos-pulse-dot"></span>
+      <span id="chronos-epoch-label">EPOCH 01: PRIMORDIAL GENESIS (13.8 Ga)</span>
+    </div>
+    <div class="chronos-dock-controls">
+      <button type="button" class="chronos-btn active" id="chronos-btn-play" title="Play Cinematic Tour">▶ Auto-Play Tour</button>
+      <button type="button" class="chronos-btn" id="chronos-btn-warp" title="Toggle Relativistic Warp Streaks">⚡ Warp Streaks</button>
+      <button type="button" class="chronos-btn active" id="chronos-btn-lens" title="Toggle Einstein Spacetime Gravity Lens">🌀 Gravity Lens</button>
+    </div>
+  </div>
+
+  <div class="chronos-scrubber-track">
+    <input type="range" class="chronos-time-slider" id="chronos-time-slider" min="0" max="100" value="0" step="0.1" aria-label="Cosmic Time Continuum Slider">
+    <div class="chronos-epoch-markers">
+      <button type="button" class="chronos-marker active" data-step="0">13.8 Ga (Genesis)</button>
+      <button type="button" class="chronos-marker" data-step="25">380k yr (CMB)</button>
+      <button type="button" class="chronos-marker" data-step="50">290 Myr (JWST)</button>
+      <button type="button" class="chronos-marker" data-step="75">4.6 Ga (Sun Ignition)</button>
+      <button type="button" class="chronos-marker" data-step="100">0 yr (Geodynamo)</button>
+    </div>
+  </div>
+
+  <div class="chronos-telemetry-strip">
+    <div class="chronos-tel-item"><span>Cosmic Time:</span> <strong id="tel-time">-13.8 Billion Years</strong></div>
+    <div class="chronos-tel-item"><span>Spectral Redshift:</span> <strong id="tel-redshift">z = 1100.0</strong></div>
+    <div class="chronos-tel-item"><span>Thermal State:</span> <strong id="tel-temp">3,000 K</strong></div>
+    <div class="chronos-tel-item"><span>Scale Factor a(t):</span> <strong id="tel-scale">0.00091</strong></div>
   </div>
 </div>
 
@@ -348,62 +385,50 @@ A razor-thin shear boundary separating the rigidly rotating radiative interior f
 
 ---
 
-<!-- SIMULATION 3: PLANET JUMPING 3D PORTAL STAGE -->
-### Planetary Architecture & The Frost Line ($2.7\text{ AU}$)
+<!-- SIMULATION 3: 3D STELLAR GENESIS & FIRST SUN IGNITION STAGE -->
+### The 3D Stellar Genesis & First Sun Ignition Stage
 
-Across the protoplanetary disk, at exactly **2.7 Astronomical Units**, ran an invisible thermodynamic frontier: **The Frost Line (Snowline)**.
-- **Inside 2.7 AU ($T > 150\text{ K}$):** Volatiles could not condense; only refractory silicates and metals formed the rocky inner worlds: Mercury, Venus, Earth, Mars.
-- **Beyond 2.7 AU ($T < 150\text{ K}$):** Water, methane, and ammonia froze into massive ice cores that vacuumed nebular gas to inflate Jupiter, Saturn, Uranus, Neptune.
+Before our solar system formed, a cold, dark fragment of the primordial molecular cloud collapsed under self-gravitation. Witness the 4 evolutionary milestones that transformed a cold interstellar clump into our radiant living star:
 
-Step into the interactive **Planet Jumping Portal** below to explore these divergent planetary worlds in cinematic 3D perspective:
-
-<div class="planet-portal-viewport" id="planet-portal-experience" data-planet="mars">
-  <!-- Video Background Layers -->
-  <div class="portal-bgs" aria-hidden="true">
-    <video id="mars-background" class="portal-bg-video is-visible" muted loop playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4"></video>
-    <video id="earth-background" class="portal-bg-video" muted loop playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4"></video>
-    <video id="venus-background" class="portal-bg-video" muted loop playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/b30f64d9-1637-477a-83df-d0fc6461a422.mp4"></video>
-  </div>
-  <div class="portal-shade" aria-hidden="true"></div>
-
-  <!-- Hint Badge -->
-  <div class="portal-action-hint">
-    <span>✦ CLICK PORTAL TO TRAVEL</span>
-  </div>
-
-  <!-- Left Sidebar Planet List -->
-  <aside class="portal-sidebar-planets portal-chrome" id="portal-planet-list" aria-label="Planets"></aside>
-
-  <!-- Center Interactive 3D Perspective Portal Window -->
-  <canvas id="portal-canvas" class="portal-canvas-layer" aria-hidden="true"></canvas>
-  <section class="portal-interactive-box portal-chrome" aria-label="Next destination">
-    <div class="portal-dest-header">
-      <span>Next Destination:</span>
-      <span><span id="portal-next-number">[03]</span> <strong id="portal-next-name">Earth</strong></span>
+<div class="stellar-genesis-stage" id="stellar-genesis-stage" data-phase="0">
+  <div class="stellar-stage-header">
+    <div class="stellar-badge">
+      <span class="pulse-dot"></span>
+      <span>3D STELLAR FORGE &bull; THE GENESIS OF OUR LIVING SUN</span>
     </div>
-    <button class="portal-btn-window" id="portal-window-btn" type="button" aria-label="Travel through portal">
-      <video id="portal-video" muted loop playsinline preload="auto" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4"></video>
-      <img id="portal-image" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg" alt="Mercury">
-      <video id="portal-transition-video" muted playsinline preload="auto" style="display:none;"></video>
-    </button>
-  </section>
+    <div class="stellar-phase-nav" id="stellar-phase-nav">
+      <button type="button" class="stellar-phase-btn active" data-phase="0">01: BOK GLOBULE</button>
+      <button type="button" class="stellar-phase-btn" data-phase="1">02: PROTOSTAR &amp; JETS</button>
+      <button type="button" class="stellar-phase-btn" data-phase="2">03: T-TAURI IGNITION</button>
+      <button type="button" class="stellar-phase-btn" data-phase="3">04: LIVING SUN</button>
+    </div>
+  </div>
 
-  <!-- Bottom Content: Giant Title & Fact Sheet -->
-  <section class="portal-content-bottom portal-chrome">
-    <h2 class="portal-giant-title" id="portal-planet-title">MARS</h2>
-    <dl class="portal-facts-dl" id="portal-facts-list"></dl>
-  </section>
+  <div class="stellar-stage-viewport">
+    <canvas id="stellar-stage-canvas" class="stellar-stage-canvas"></canvas>
+
+    <div class="stellar-overlay-hud">
+      <h3 class="stellar-giant-title" id="stellar-phase-title">BOK GLOBULE</h3>
+      <div class="stellar-telemetry-grid" id="stellar-telemetry-grid">
+        <div class="stellar-tel-row"><span class="tel-k">Era:</span><span class="tel-v" id="tel-era">4.60 Billion Years Ago</span></div>
+        <div class="stellar-tel-row"><span class="tel-k">Core Temp:</span><span class="tel-v" id="tel-core-temp">10 to 100 Kelvin</span></div>
+        <div class="stellar-tel-row"><span class="tel-k">Density:</span><span class="tel-v" id="tel-core-density">10⁴ to 10⁶ particles/cm³</span></div>
+        <div class="stellar-tel-row"><span class="tel-k">Physical State:</span><span class="tel-v" id="tel-phys-state">Gravitational Infall &amp; Fragmentation</span></div>
+        <div class="stellar-tel-row"><span class="tel-k">Astrophysics:</span><span class="tel-v" id="tel-astro">Jeans Mass Instability ($M > M_J$)</span></div>
+      </div>
+    </div>
+
+    <div class="stellar-drag-hint">
+      <span>✦ HOVER &amp; DRAG TO ROTATE 3D FORGE</span>
+    </div>
+  </div>
+
+  <div class="stellar-stage-footer">
+    <div class="stellar-phase-narrative" id="stellar-phase-narrative">
+      A cold, dark interstellar molecular cloud fragments under its own self-gravity. Silicate and carbonaceous dust particles shield the interior from interstellar radiation, allowing temperatures to drop to 10 K and triggering dense gravitational collapse into Bok globules.
+    </div>
+  </div>
 </div>
-
-### Asteroids, Comets & India's Impact Craters
-Leftover planetesimals became **Asteroids** (Carbonaceous C-types, Silicate S-types, Metallic M-types), carving massive impact structures:
-- **Lonar Lake (Maharashtra, India):** Rare hypervelocity impact crater in continental flood basalt.
-- **Dhala Structure (Madhya Pradesh, India):** Ancient $2.5\text{ Ga}$ impact structure in Bundelkhand craton.
-- **Ramgarh Crater (Rajasthan, India):** Prominent impact structure in the Vindhyan supergroup.
-
-Simultaneously, icy **Comets** developed dual tails:
-- **Type I Ion Tail:** Solar wind sweeps ionized gas directly anti-solar into a straight glowing blue tail.
-- **Type II Dust Tail:** Solar radiation pressure curves heavier particulate debris into a broad reflective white arc.
 
 ---
 
@@ -456,11 +481,11 @@ Episode 01 integrates core concepts tested across both Prelims and Mains papers:
 
   <div class="pillar-subsections-grid">
     <div class="pillar-subcard">
-      <div class="pillar-subcard-title" style="color: #ffb84d;">GS-1 Physical Geography: Solar System &amp; Planetary Geometry</div>
+      <div class="pillar-subcard-title" style="color: #ffb84d;">GS-1 Physical Geography: Cosmological Evolution &amp; Geodynamo</div>
       <p class="pillar-subcard-desc">
-        • <strong>The Frost Line ($2.7\text{ AU}$):</strong> Thermodynamic mechanism partitioning terrestrial planets from Jovian gas giants.<br>
-        • <strong>Meteorite Impact Craters in India:</strong> Lonar Lake (basaltic impact crater), Dhala, Ramgarh.<br>
-        • <strong>Earth's Geodynamo:</strong> Thermal convection in the liquid outer core generating the geomagnetic dipole shield.
+        • <strong>Origin &amp; Evolution of the Universe:</strong> Big Bang nucleosynthesis, Hoyle resonance in carbon synthesis, and Population III/II/I stellar generations.<br>
+        • <strong>Earth's Geodynamo &amp; Magnetosphere:</strong> Fluid convection in the molten iron outer core, Coriolis effect, geomagnetic reversals, and solar wind shielding.<br>
+        • <strong>Heliophysics &amp; Space Weather:</strong> Coronal mass ejections, Carrington Event geomagnetism, and impacts on terrestrial power and satellite infrastructure.
       </p>
     </div>
 
@@ -481,13 +506,20 @@ Episode 01 integrates core concepts tested across both Prelims and Mains papers:
      CLIENT-SIDE MODULE CONTROLLER
      ========================================================================== -->
 <script type="module">
-import { initSunAnatomy3D, initRedshiftSimulator, initMagnetosphereSimulator, initPlanetJumpingPortal } from '../javascripts/cosmic-sims.js';
+import { 
+  initCosmicChronosEngine, 
+  initStellarGenesisStage, 
+  initSunAnatomy3D, 
+  initRedshiftSimulator, 
+  initMagnetosphereSimulator 
+} from '../javascripts/cosmic-sims.js';
 
 function runCosmicEngines() {
+  initCosmicChronosEngine();
+  initStellarGenesisStage();
   initSunAnatomy3D();
   initRedshiftSimulator();
   initMagnetosphereSimulator();
-  initPlanetJumpingPortal();
   if (typeof window.renderMathEverywhere === 'function') {
     window.renderMathEverywhere();
   }
