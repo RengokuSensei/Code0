@@ -23,7 +23,8 @@
     <a href="#15-canvas-native-motion-templates-spatial-transitions-animosapp-architecture" class="codex-jump-pill">15. animos.app Transitions</a>
     <a href="#16-multi-purpose-creative-scientific-visual-computing-theladybugapp-architecture" class="codex-jump-pill">16. Ladybug Multi-Engine</a>
     <a href="#17-master-session-ledger-handoff-protocol-multi-page-transition-blueprint" class="codex-jump-pill">17. Session Ledger</a>
-    <a href="#18-author-dossier-re-engineering-himalayan-topographic-telemetry" class="codex-jump-pill">18. Author &amp; HP Telemetry</a>
+    <a href="#18-author-page-studio-overhaul-iris-benchmark-3d-mascot-companion-authentic-dossier" class="codex-jump-pill">18. 3D Mascot Studio</a>
+    <a href="#19-page-01-architectural-deployment-the-cosmic-dawn-the-empirical-universe" class="codex-jump-pill highlight-pill">19. Cosmic Dawn (Page 01)</a>
   </div>
 </div>
 
@@ -1329,3 +1330,69 @@ Inspired by state-of-the-art interactive companion benchmarks (Iris AI hero):
   - Floating arm physics: Harmonic oscillation with phase offset `sin(t * 2.0 + phase)`.
   - Idle look-around: Smooth sinusoidal surveying when pointer is inactive for $> 3.5\text{s}$.
   - Performance optimization: `IntersectionObserver` automatically halts the render loop when scrolled off-screen, ensuring zero idle GPU consumption.
+
+---
+
+## 19. Page 01 Architectural Deployment: The Cosmic Dawn — The Empirical Universe
+
+### A. Architectural Context & Purpose
+With Section 18 completing the Author Page transformation, **Page 01: The Cosmic Dawn — The Empirical Universe** (`docs/cosmic-dawn.md`) deploys the foundational opening chapter of Aditya's Living UPSC & Scientific Codex. Spanning cosmic genesis to the ignition of our living Sun, it synthesizes empirical observational astronomy, theoretical particle physics, stellar nucleosynthesis, and helioseismology into an explorable web platform.
+
+### B. The 6-Act Master Scientific Monograph
+1. **Act I: The Looking Glass of Time**:
+   - Electromagnetic wave physics: $c = \lambda \cdot f$ and $E = h \cdot f$.
+   - Cosmological Redshift: $1 + z = \frac{\lambda_{\text{obs}}}{\lambda_{\text{emit}}} = \frac{a(t_0)}{a(t)}$.
+   - The $380,000$-year Thomson scattering opacity barrier ($\tau \gg 1$) vs modern infrared deep fields.
+2. **Act II: The Theoretical Horizon**:
+   - The Planck Epoch ($t < 10^{-43}\text{ s}$, $T \approx 10^{32}\text{ K}$, unified Superforce).
+   - Cosmic Inflation (Alan Guth, $10^{-36}\text{ s}$, $10^{78}\times$ expansion resolving Horizon & Flatness problems).
+   - Quark-Gluon Plasma, Higgs mechanism (mass acquisition), and Hadron formation (Protons $uud$, Neutrons $udd$).
+   - Big Bang Nucleosynthesis ($3\text{--}20\text{ min}$): $75\%$ Hydrogen, $25\%$ Helium-4, trace Lithium-7.
+3. **Act III: The First Evidence (Recombination & CMBR)**:
+   - Meghnad Saha's Ionization Equation (1920) dictating the 3,000 Kelvin ($0.26\text{ eV}$) neutral Hydrogen capture threshold.
+   - Photon Decoupling liberating the universe from opacity.
+   - The Nobel Evidence Ladder: Penzias & Wilson (1964) $\to$ COBE (1992, blackbody) $\to$ WMAP (2003) $\to$ Planck (2013, $T_0 = 2.725\text{ K}$, $18\,\mu\text{K}$ Baryon Acoustic Oscillations).
+4. **Act IV: The Deepest Gaze (Expanding Spacetime & JWST)**:
+   - Edwin Hubble's Law ($v = H_0 \cdot d$).
+   - 1998 Accelerating cosmic expansion driven by Dark Energy ($\Lambda \approx 68.3\%$).
+   - Hubble Ultra Deep Field (GN-z11, $z = 10.60$, $400\text{ Myr}$) vs JWST NIRCam at L2 (JADES-GS-z14-0, $z = 14.32$, $290\text{ Myr}$).
+5. **Act V: The Forge of the Elements (The Stardust Engine)**:
+   - Mass 5 and 8 nuclear instability gap.
+   - Fred Hoyle's anthropic prediction of the $7.65\text{ MeV}$ Carbon-12 excited resonance (Triple-Alpha Process).
+   - B²FH paper (1957) and concentric stellar fusion shells terminating at Nickel-62 / Iron-56.
+   - The Chandrasekhar Limit ($1.44\ M_\odot$, Subrahmanyan Chandrasekhar 1930) and Type II Supernova core collapse.
+   - Rapid neutron capture ($r$-process: Gold, Platinum, Uranium).
+   - Gibbs Free Energy ($\Delta G = \Delta H - T\Delta S < 0$) into the $2.725\text{ K}$ cosmic vacuum heat sink.
+6. **Act VI: The Sun's Ignition & Helioseismology**:
+   - Giant molecular cloud collapse (4.6 Gya) & angular momentum conservation ($L = I\omega$).
+   - Proton-Proton Chain Thermonuclear Fusion ($4p \to {}^4\text{He} + 2e^+ + 2\nu_e + 26.73\text{ MeV}$, $0.71\%$ mass defect).
+   - Radiative diffusion random walk ($100,000\text{ to }170,000\text{ years}$).
+   - Helioseismology: Probing the interior via 5-minute acoustic $p$-modes ($3\text{ mHz}$) across SOHO, SDO, and Aditya-L1.
+   - The Tachocline ($r \approx 0.70\,R_\odot$) & the Babcock-Leighton solar dynamo ($\Omega$-effect and $\alpha$-effect).
+   - Protoplanetary Frost Line at $2.7\text{ AU}$ partitioning rocky inner worlds from Jovian gas giants.
+   - Asteroid impacts (India's Lonar Lake, Dhala, Ramgarh) and Comets (Type I ion tail vs Type II dust tail).
+   - Space Weather: CMEs, the Carrington Event (1859), and Earth's Geodynamo / Magnetosphere Shield.
+
+---
+
+### C. The 3 Interactive Simulation Engines (`docs/javascripts/cosmic-sims.js`)
+1. **Engine 1: 3D Sun Anatomy & Helioseismic p-Mode Cutaway (`#sun-anatomy-canvas`)**:
+   - Built on Three.js r185 with a native $90^\circ$ quadrant cutaway showing the Thermonuclear Core ($r < 0.25\,R_\odot$), Radiative Zone, Tachocline shear ring, Convection Zone, Photosphere with sunspots, and Coronal Loops.
+   - Helioseismic 5-Min $p$-mode toggle: animates acoustic wave ripple pulses through the interior.
+   - Real-time layer telemetry HUD ($r/R_\odot$, $T$, $\rho$, transport mechanisms, and UPSC relevance).
+2. **Engine 2: Cosmological Redshift & Expanding Spacetime Simulator (`#redshift-canvas`)**:
+   - Canvas2D wave physics engine: dynamically scales wavelength $\lambda(z) = \lambda_0(1+z)$ and contracts frequency $f(z) = f_0 / (1+z)$ across expanding coordinate spacetime.
+   - Color transitions from blazing blue plasma ($3000\text{ K}$) $\to$ infrared $\to$ microwave ($2.725\text{ K}$).
+   - Interactive presets: CMBR ($z = 1100$), JWST ($z = 14.32$), Hubble ($z = 10.60$), Present Day ($z = 0$).
+3. **Engine 3: Sun-Earth Heliophysical Magnetosphere Shield (`#magnetosphere-canvas`)**:
+   - 220-particle charged plasma stream (solar wind) modeled with Lorentz force deflection around Earth's dipole field, Bow Shock, Magnetopause, and polar auroral rings.
+   - Interactive Geodynamo toggle: demonstrates atmospheric erosion under a Mars-like field collapse.
+   - Solar Storm toggle: compresses day-side standoff distance from $10.2\,R_\oplus$ to $4.8\,R_\oplus$ under a $1150\text{ km/s}$ CME.
+
+---
+
+### D. System Integration & Verification
+- **MkDocs Material Compilation**: Built cleanly via `uv run --with mkdocs-material mkdocs build` $\to$ **0.88s**.
+- **MathJax Integration**: Added to `overrides/main.html` for clean LaTeX rendering across all browsers.
+- **Top Navigation Updated**: Added `Cosmic Dawn (Page 01)` to `mkdocs.yml` and the floating cyber-glass capsule navbar in `overrides/home.html`.
+

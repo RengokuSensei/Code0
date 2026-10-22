@@ -285,6 +285,9 @@ function initPage() {
   if (typeof window.initIrisCompanion === 'function') {
     window.initIrisCompanion();
   }
+  if (typeof window.initCosmicSims === 'function') {
+    window.initCosmicSims();
+  }
 }
 
 function initGlobal() {

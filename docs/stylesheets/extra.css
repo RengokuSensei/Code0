@@ -1994,6 +1994,454 @@ html {
   opacity: 1;
 }
 
+/* ==========================================================================
+   EPISODE 01: COSMIC DAWN & INTERACTIVE SOLAR/COSMIC LAB SYSTEM
+   ========================================================================== */
+
+/* Hero Container */
+.cosmic-hero {
+  position: relative;
+  border-radius: 28px;
+  padding: 44px 40px;
+  margin: 20px 0 44px 0;
+  background: radial-gradient(130% 130% at 0% 0%, rgba(2, 210, 227, 0.12) 0%, rgba(14, 20, 44, 0.88) 45%, rgba(7, 9, 19, 0.98) 100%);
+  border: 1px solid rgba(140, 170, 240, 0.24);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+}
+
+.cosmic-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(2, 210, 227, 0.12);
+  border: 1px solid rgba(2, 210, 227, 0.35);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #02d2e3;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.cosmic-headline {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 0 0 14px 0;
+  background: linear-gradient(135deg, #ffffff 40%, #02d2e3 75%, #ffb84d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cosmic-subline {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: #cbd5e1;
+  max-width: 900px;
+  margin-bottom: 24px;
+}
+
+.cosmic-quicknav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.cosmic-nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(14, 20, 42, 0.75);
+  border: 1px solid rgba(140, 170, 240, 0.22);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cosmic-nav-pill:hover {
+  background: rgba(2, 210, 227, 0.18);
+  border-color: rgba(2, 210, 227, 0.55);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(2, 210, 227, 0.2);
+}
+
+.cosmic-nav-pill.highlight-amber {
+  border-color: rgba(255, 184, 77, 0.4);
+  color: #ffb84d;
+}
+
+.cosmic-nav-pill.highlight-amber:hover {
+  background: rgba(255, 184, 77, 0.18);
+  border-color: #ffb84d;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 184, 77, 0.25);
+}
+
+/* Act Section Badges */
+.act-header-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 48px 0 20px 0;
+  flex-wrap: wrap;
+}
+
+.act-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.act-badge.badge-cyan {
+  background: rgba(2, 210, 227, 0.15);
+  color: #02d2e3;
+  border: 1px solid rgba(2, 210, 227, 0.4);
+}
+
+.act-badge.badge-violet {
+  background: rgba(140, 104, 255, 0.15);
+  color: #bfa5ff;
+  border: 1px solid rgba(140, 104, 255, 0.4);
+}
+
+.act-badge.badge-mint {
+  background: rgba(93, 240, 168, 0.15);
+  color: #5df0a8;
+  border: 1px solid rgba(93, 240, 168, 0.4);
+}
+
+.act-badge.badge-amber {
+  background: rgba(255, 184, 77, 0.15);
+  color: #ffb84d;
+  border: 1px solid rgba(255, 184, 77, 0.4);
+}
+
+.act-badge.badge-rose {
+  background: rgba(255, 107, 139, 0.15);
+  color: #ff6b8b;
+  border: 1px solid rgba(255, 107, 139, 0.4);
+}
+
+/* Interactive Simulation Viewport Containers */
+.interactive-lab-container {
+  position: relative;
+  border-radius: 24px;
+  background: radial-gradient(circle at 50% 50%, rgba(14, 20, 42, 0.95) 0%, rgba(7, 9, 19, 0.98) 100%);
+  border: 1px solid rgba(140, 170, 240, 0.25);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  margin: 32px 0 44px 0;
+  overflow: hidden;
+}
+
+.sim-hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: rgba(10, 14, 30, 0.85);
+  border-bottom: 1px solid rgba(140, 170, 240, 0.18);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sim-hud-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: #02d2e3;
+  letter-spacing: 0.06em;
+}
+
+.sim-hud-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #5df0a8;
+  font-weight: 600;
+}
+
+.sim-canvas-viewport {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: #030408;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+@media (max-width: 768px) {
+  .sim-canvas-viewport {
+    height: 420px;
+  }
+}
+
+.sim-canvas-viewport canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sim-telemetry-overlay {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  background: rgba(7, 9, 19, 0.88);
+  border: 1px solid rgba(140, 170, 240, 0.25);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  pointer-events: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 10;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.sim-telemetry-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sim-telemetry-val {
+  font-weight: 700;
+  color: #02d2e3;
+}
+
+.sim-controls-dock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: rgba(10, 14, 30, 0.9);
+  border-top: 1px solid rgba(140, 170, 240, 0.18);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sim-button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.sim-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(140, 170, 240, 0.22);
+  color: #cbd5e1;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.sim-btn:hover {
+  background: rgba(2, 210, 227, 0.15);
+  border-color: rgba(2, 210, 227, 0.5);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.sim-btn.active {
+  background: rgba(2, 210, 227, 0.25);
+  border-color: #02d2e3;
+  color: #02d2e3;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(2, 210, 227, 0.3);
+}
+
+.sim-btn.pulse-active {
+  background: rgba(255, 184, 77, 0.22);
+  border-color: #ffb84d;
+  color: #ffb84d;
+  box-shadow: 0 0 12px rgba(255, 184, 77, 0.3);
+}
+
+/* Slider Controls */
+.sim-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  color: #cbd5e1;
+}
+
+.sim-range-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 140px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+  transition: background 0.2s;
+}
+
+.sim-range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #02d2e3;
+  cursor: pointer;
+  box-shadow: 0 0 10px #02d2e3;
+}
+
+/* Scientific Equation & Derivation Box */
+.equation-box {
+  background: rgba(14, 20, 42, 0.75);
+  border: 1px solid rgba(140, 170, 240, 0.22);
+  border-left: 4px solid #02d2e3;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.equation-box-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #02d2e3;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.equation-box-body {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* Evidence vs Theory Callout */
+.evidence-split-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 28px 0;
+}
+
+@media (max-width: 768px) {
+  .evidence-split-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+.evidence-half {
+  background: rgba(14, 20, 42, 0.65);
+  border: 1px solid rgba(93, 240, 168, 0.3);
+  border-radius: 16px;
+  padding: 22px;
+  backdrop-filter: blur(14px);
+}
+
+.theory-half {
+  background: rgba(14, 20, 42, 0.65);
+  border: 1px solid rgba(140, 104, 255, 0.3);
+  border-radius: 16px;
+  padding: 22px;
+  backdrop-filter: blur(14px);
+}
+
+.half-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.evidence-half .half-title {
+  color: #5df0a8;
+}
+
+.theory-half .half-title {
+  color: #bfa5ff;
+}
+
+/* UPSC Exam Synergy Dossier */
+.upsc-dossier-card {
+  background: radial-gradient(circle at 10% 20%, rgba(255, 184, 77, 0.08) 0%, transparent 60%), rgba(14, 20, 42, 0.85);
+  border: 1px solid rgba(255, 184, 77, 0.35);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin: 36px 0;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+}
+
+.upsc-dossier-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.upsc-dossier-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffb84d;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upsc-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 184, 77, 0.18);
+  color: #ffb84d;
+  border: 1px solid rgba(255, 184, 77, 0.4);
+}
+
+
 
 
 

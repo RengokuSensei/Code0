@@ -138,6 +138,7 @@ markdown_extensions:
 # Navigation Structure — Minimalist
 nav:
   - Home: index.md
+  - Cosmic Dawn (Page 01): cosmic-dawn.md
   - About Aditya: about/author.md
   - Project Codex & Notes: project-notes.md
 
