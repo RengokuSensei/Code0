@@ -768,32 +768,33 @@ export function initMagnetosphereSimulator() {
 }
 
 // =============================================================================
-// ENGINE 4: GLOBAL 3D COSMIC CHRONOS ENGINE & TEMPORAL CINEMA (Three.js)
+// ENGINE 4: GLOBAL 3D COSMIC CHRONOS THEATER & TEMPORAL CINEMA (Three.js)
 // =============================================================================
 export function initCosmicChronosEngine() {
-  const canvas = document.getElementById('cosmic-chronos-canvas');
-  if (!canvas) return;
+  const root = document.getElementById('cosmic-theater');
+  const container = document.getElementById('theater-viewport');
+  const canvas = document.getElementById('cosmic-theater-canvas');
+  if (!root || !container || !canvas) return;
   if (canvas.dataset.initialized === 'true') return;
   canvas.dataset.initialized = 'true';
-  document.body.classList.add('has-cosmic-canvas');
 
   if (window.__cosmicChronosCleanup) {
     window.__cosmicChronosCleanup();
   }
 
-  let W = window.innerWidth;
-  let H = window.innerHeight;
+  let W = container.clientWidth || 800;
+  let H = container.clientHeight || 560;
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x030408, 0.008);
 
-  const camera = new THREE.PerspectiveCamera(52, W / H, 0.1, 1000);
-  camera.position.set(0, 0, 42);
+  const camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 1000);
+  camera.position.set(0, 0, 38);
 
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     antialias: true,
-    alpha: true,
+    alpha: false,
     powerPreference: 'high-performance'
   });
   renderer.setSize(W, H);
@@ -1128,17 +1129,20 @@ export function initCosmicChronosEngine() {
 
   let mouseX = 0, mouseY = 0;
   let targetCamX = 0, targetCamY = 0;
+  let targetCamZ = 38;
   let mouseVelocity = 0;
   let lastMouseX = 0, lastMouseY = 0;
   let lastTime = performance.now();
 
-  window.addEventListener('mousemove', (e) => {
-    const nx = (e.clientX / window.innerWidth) * 2 - 1;
-    const ny = -(e.clientY / window.innerHeight) * 2 + 1;
+  // Mouse Orbit inside viewport
+  container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
     mouseX = nx;
     mouseY = ny;
-    targetCamX = nx * 8.0;
-    targetCamY = ny * 6.0;
+    targetCamX = nx * 12.0;
+    targetCamY = ny * 8.0;
 
     const dx = e.clientX - lastMouseX;
     const dy = e.clientY - lastMouseY;
@@ -1147,98 +1151,181 @@ export function initCosmicChronosEngine() {
     lastMouseY = e.clientY;
   });
 
-  function updateScrollProgress() {
-    if (isAutoPlaying) return;
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    if (maxScroll > 0) {
-      targetTimelineProgress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
-    }
-  }
-  window.addEventListener('scroll', updateScrollProgress, { passive: true });
-  updateScrollProgress();
-
-  const slider = document.getElementById('chronos-time-slider');
-  const btnPlay = document.getElementById('chronos-btn-play');
-  const btnWarp = document.getElementById('chronos-btn-warp');
-  const btnLens = document.getElementById('chronos-btn-lens');
-  const epochLabel = document.getElementById('chronos-epoch-label');
-  const telTime = document.getElementById('tel-time');
-  const telRedshift = document.getElementById('tel-redshift');
-  const telTemp = document.getElementById('tel-temp');
-  const telScale = document.getElementById('tel-scale');
-  const markerButtons = document.querySelectorAll('.chronos-marker');
-
-  if (slider) {
-    slider.addEventListener('input', (e) => {
-      isAutoPlaying = false;
-      if (btnPlay) btnPlay.textContent = '▶ Auto-Play Tour';
-      targetTimelineProgress = parseFloat(e.target.value) / 100;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      window.scrollTo({
-        top: targetTimelineProgress * maxScroll,
-        behavior: 'smooth'
-      });
-    });
-  }
-
-  if (btnPlay) {
-    btnPlay.addEventListener('click', () => {
-      isAutoPlaying = !isAutoPlaying;
-      btnPlay.textContent = isAutoPlaying ? '⏸ Pause Tour' : '▶ Auto-Play Tour';
-      btnPlay.classList.toggle('active', isAutoPlaying);
-    });
-  }
-
-  if (btnWarp) {
-    btnWarp.addEventListener('click', () => {
-      warpActive = !warpActive;
-      btnWarp.classList.toggle('active', warpActive);
-    });
-  }
-
-  if (btnLens) {
-    btnLens.addEventListener('click', () => {
-      gravityLensActive = !gravityLensActive;
-      btnLens.classList.toggle('active', gravityLensActive);
-    });
-  }
-
-  markerButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      isAutoPlaying = false;
-      if (btnPlay) btnPlay.textContent = '▶ Auto-Play Tour';
-      const step = parseFloat(btn.dataset.step) / 100;
-      targetTimelineProgress = step;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      window.scrollTo({
-        top: step * maxScroll,
-        behavior: 'smooth'
-      });
-    });
+  container.addEventListener('mouseleave', () => {
+    targetCamX = 0;
+    targetCamY = 0;
   });
 
+  // DOM Elements
+  const playBtn = document.getElementById('theater-btn-play');
+  const playIcon = document.getElementById('play-icon');
+  const playText = document.getElementById('play-text');
+  const warpBtn = document.getElementById('theater-btn-warp');
+  const lensBtn = document.getElementById('theater-btn-lens');
+  const pipBtn = document.getElementById('theater-btn-pip');
+  const fsBtn = document.getElementById('theater-btn-fs');
+  const scrubber = document.getElementById('theater-scrubber');
+  const captionTag = document.getElementById('caption-epoch-tag');
+  const captionText = document.getElementById('caption-text');
+  const epochPills = document.querySelectorAll('.epoch-pill');
+  const telTime = document.getElementById('theater-tel-time');
+  const telZ = document.getElementById('theater-tel-z');
+  const telTemp = document.getElementById('theater-tel-temp');
+  const telScale = document.getElementById('theater-tel-scale');
+
   const epochData = [
-    { threshold: 0.18, name: 'EPOCH 01: PRIMORDIAL GENESIS (13.8 Ga)', time: '-13.8 Billion Years', z: 'z = 1100.0', temp: '3,000 K', scale: '0.00091' },
-    { threshold: 0.40, name: 'EPOCH 02: RECOMBINATION & COSMIC DARK AGES (290 Myr)', time: '-13.5 Billion Years', z: 'z = 14.32', temp: '30 K', scale: '0.065' },
-    { threshold: 0.65, name: 'EPOCH 03: STELLAR LIFECYCLE & SUPERNOVA FORGE', time: '-9.0 Billion Years', z: 'z = 1.80', temp: '15 K', scale: '0.357' },
-    { threshold: 0.88, name: 'EPOCH 04: SOLAR ACCRETION & 1st SUN IGNITION (4.6 Ga)', time: '-4.6 Billion Years', z: 'z = 0.42', temp: '5,778 K (Sun)', scale: '0.704' },
-    { threshold: 1.01, name: 'EPOCH 05: EARTH GEODYNAMO MAGNETOSPHERE SHIELD', time: 'Present Day (0 yr)', z: 'z = 0.00', temp: '2.725 K (CMB)', scale: '1.000' }
+    {
+      threshold: 0.18,
+      name: 'EPOCH 01 • 13.8 BILLION YEARS AGO (PRIMORDIAL GENESIS)',
+      time: '-13.8 Billion Years',
+      z: 'z = 1100.0',
+      temp: '3,000 K',
+      scale: '0.00091',
+      caption: 'The universe detonates from an infinitesimal quantum singularity. Photons stretch across expanding spacetime, losing energy through Cosmological Redshift.',
+      camZ: 32
+    },
+    {
+      threshold: 0.40,
+      name: 'EPOCH 02 • 290 MILLION YEARS AFTER BIG BANG (JWST DEEP FRONTIER)',
+      time: '-13.5 Billion Years',
+      z: 'z = 14.32',
+      temp: '30 K',
+      scale: '0.065',
+      caption: 'Cosmic Dark Ages terminate as pristine hydrogen collapses. Hyper-massive Population III stars ignite, detected by JWST at record redshift z = 14.32.',
+      camZ: 38
+    },
+    {
+      threshold: 0.65,
+      name: 'EPOCH 03 • 9.0 BILLION YEARS AGO (STELLAR NUCLEOSYNTHESIS)',
+      time: '-9.0 Billion Years',
+      z: 'z = 1.80',
+      temp: '15 K',
+      scale: '0.357',
+      caption: 'Dying supergiants collapse under gravity. Cataclysmic Type II supernovae erupt, forging gold, platinum, and uranium via the rapid neutron capture r-process.',
+      camZ: 36
+    },
+    {
+      threshold: 0.88,
+      name: 'EPOCH 04 • 4.6 BILLION YEARS AGO (1st SUN IGNITION & ADITYA-L1)',
+      time: '-4.6 Billion Years',
+      z: 'z = 0.42',
+      temp: '5,778 K (Sun)',
+      scale: '0.704',
+      caption: 'Our proto-solar nebula collapses into a Keplerian disk. Core fusion ignites at 15 Million K, unleashing solar winds that clear the circumstellar dust shroud.',
+      camZ: 34
+    },
+    {
+      threshold: 1.01,
+      name: 'EPOCH 05 • PRESENT DAY (EARTH GEODYNAMO MAGNETOSPHERE SHIELD)',
+      time: 'Present Day (0 yr)',
+      z: 'z = 0.00',
+      temp: '2.725 K (CMB)',
+      scale: '1.000',
+      caption: "Earth's liquid outer core drives an electromagnetic geodynamo, deflecting 450 km/s solar wind storms and shielding the planetary biosphere.",
+      camZ: 32
+    }
   ];
 
   function updateHUD(p) {
-    if (slider && !slider.matches(':active')) {
-      slider.value = (p * 100).toFixed(1);
+    if (scrubber && !scrubber.matches(':active')) {
+      scrubber.value = (p * 100).toFixed(1);
     }
     const ep = epochData.find(e => p <= e.threshold) || epochData[epochData.length - 1];
-    if (epochLabel) epochLabel.textContent = ep.name;
+    if (captionTag) captionTag.textContent = ep.name;
+    if (captionText) captionText.textContent = ep.caption;
     if (telTime) telTime.textContent = ep.time;
-    if (telRedshift) telRedshift.textContent = ep.z;
+    if (telZ) telZ.textContent = ep.z;
     if (telTemp) telTemp.textContent = ep.temp;
     if (telScale) telScale.textContent = ep.scale;
+    targetCamZ = ep.camZ;
 
-    markerButtons.forEach(btn => {
-      const step = parseFloat(btn.dataset.step) / 100;
-      btn.classList.toggle('active', Math.abs(p - step) < 0.12);
+    epochPills.forEach(pill => {
+      const step = parseFloat(pill.dataset.step) / 100;
+      pill.classList.toggle('active', Math.abs(p - step) < 0.13);
+    });
+  }
+
+  // Play / Pause Movie Button
+  if (playBtn) {
+    playBtn.addEventListener('click', () => {
+      isAutoPlaying = !isAutoPlaying;
+      playBtn.classList.toggle('is-playing', isAutoPlaying);
+      if (playIcon) playIcon.textContent = isAutoPlaying ? '⏸' : '▶';
+      if (playText) playText.textContent = isAutoPlaying ? 'PAUSE MOVIE' : 'PLAY COSMIC MOVIE';
+      if (isAutoPlaying && targetTimelineProgress >= 0.98) {
+        targetTimelineProgress = 0.0;
+        timelineProgress = 0.0;
+      }
+    });
+  }
+
+  // Scrubber drag
+  if (scrubber) {
+    scrubber.addEventListener('input', (e) => {
+      isAutoPlaying = false;
+      if (playBtn) playBtn.classList.remove('is-playing');
+      if (playIcon) playIcon.textContent = '▶';
+      if (playText) playText.textContent = 'PLAY COSMIC MOVIE';
+      targetTimelineProgress = parseFloat(e.target.value) / 100;
+    });
+  }
+
+  // Epoch pills click
+  epochPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      isAutoPlaying = false;
+      if (playBtn) playBtn.classList.remove('is-playing');
+      if (playIcon) playIcon.textContent = '▶';
+      if (playText) playText.textContent = 'PLAY COSMIC MOVIE';
+      targetTimelineProgress = parseFloat(pill.dataset.step) / 100;
+    });
+  });
+
+  // Toggles
+  if (warpBtn) {
+    warpBtn.addEventListener('click', () => {
+      warpActive = !warpActive;
+      warpBtn.classList.toggle('active', warpActive);
+    });
+  }
+
+  if (lensBtn) {
+    lensBtn.addEventListener('click', () => {
+      gravityLensActive = !gravityLensActive;
+      lensBtn.classList.toggle('active', gravityLensActive);
+    });
+  }
+
+  // Fullscreen IMAX Toggle
+  if (fsBtn) {
+    fsBtn.addEventListener('click', () => {
+      root.classList.toggle('is-fullscreen');
+      const isFs = root.classList.contains('is-fullscreen');
+      fsBtn.classList.toggle('active', isFs);
+      fsBtn.textContent = isFs ? '✕ Exit IMAX' : '⛶ IMAX Fullscreen';
+      setTimeout(resize, 60);
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && root.classList.contains('is-fullscreen')) {
+      root.classList.remove('is-fullscreen');
+      if (fsBtn) {
+        fsBtn.classList.remove('active');
+        fsBtn.textContent = '⛶ IMAX Fullscreen';
+      }
+      setTimeout(resize, 60);
+    }
+  });
+
+  // PiP Floating Toggle
+  if (pipBtn) {
+    pipBtn.addEventListener('click', () => {
+      root.classList.toggle('is-pip');
+      const isPip = root.classList.contains('is-pip');
+      pipBtn.classList.toggle('active', isPip);
+      pipBtn.textContent = isPip ? '✕ Undock' : '📌 Dock PiP';
+      setTimeout(resize, 60);
     });
   }
 
@@ -1255,13 +1342,11 @@ export function initCosmicChronosEngine() {
     lastTime = now;
 
     if (isAutoPlaying) {
-      targetTimelineProgress += dt * 0.035;
-      if (targetTimelineProgress > 1.0) targetTimelineProgress = 0.0;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      window.scrollTo({
-        top: targetTimelineProgress * maxScroll,
-        behavior: 'auto'
-      });
+      targetTimelineProgress += dt * 0.038;
+      if (targetTimelineProgress > 1.0) {
+        targetTimelineProgress = 0.0;
+        timelineProgress = 0.0;
+      }
     }
 
     timelineProgress += (targetTimelineProgress - timelineProgress) * 0.08;
@@ -1269,6 +1354,7 @@ export function initCosmicChronosEngine() {
 
     camera.position.x += (targetCamX - camera.position.x) * 0.04;
     camera.position.y += (targetCamY - camera.position.y) * 0.04;
+    camera.position.z += (targetCamZ - camera.position.z) * 0.03;
     camera.lookAt(0, 0, 0);
 
     mouseVelocity *= 0.94;
@@ -1386,8 +1472,8 @@ export function initCosmicChronosEngine() {
   animId = requestAnimationFrame(render);
 
   function resize() {
-    W = window.innerWidth;
-    H = window.innerHeight;
+    W = container.clientWidth || 800;
+    H = container.clientHeight || 560;
     camera.aspect = W / H;
     camera.updateProjectionMatrix();
     renderer.setSize(W, H);
@@ -1397,9 +1483,9 @@ export function initCosmicChronosEngine() {
   window.__cosmicChronosCleanup = () => {
     cancelAnimationFrame(animId);
     window.removeEventListener('resize', resize);
-    window.removeEventListener('scroll', updateScrollProgress);
   };
 }
+
 
 // =============================================================================
 // ENGINE 5: 3D STELLAR GENESIS & FIRST SUN IGNITION STAGE (Three.js)
