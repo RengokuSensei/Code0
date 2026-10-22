@@ -766,3 +766,341 @@ export function initMagnetosphereSimulator() {
     H = canvas.height = container.clientHeight || 420;
   });
 }
+
+// =============================================================================
+// ENGINE 4: PLANET JUMPING 3D PORTAL STAGE
+// =============================================================================
+export function initPlanetJumpingPortal() {
+  const root = document.getElementById('planet-portal-experience');
+  const canvas = document.getElementById('portal-canvas');
+  if (!root || !canvas) return;
+  if (root.dataset.initialized === 'true') return;
+  root.dataset.initialized = 'true';
+
+  const ctx = canvas.getContext('2d');
+
+  const BASE = 'https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P';
+  const TO_EARTH = `${BASE}/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4`;
+  const TO_VENUS = `${BASE}/b30f64d9-1637-477a-83df-d0fc6461a422.mp4`;
+  const MERCURY_IMG = `${BASE}/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg`;
+
+  const planets = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];
+
+  const states = {
+    mars: {
+      name: 'Mars',
+      next: 'Earth',
+      number: '[03]',
+      portal: TO_EARTH,
+      bgId: 'mars-background',
+      facts: [
+        ['Distance:', 'About 228 million km (1.5 AU from Sun).'],
+        ['Year:', '687 Earth days per Martian year.'],
+        ['Temperature:', '-60 °C mean, dropping to -125 °C at winter poles.'],
+        ['Atmosphere:', 'Very thin (95% CO₂), prone to global dust storms.']
+      ]
+    },
+    earth: {
+      name: 'Earth',
+      next: 'Venus',
+      number: '[02]',
+      portal: TO_VENUS,
+      bgId: 'earth-background',
+      facts: [
+        ['Distance:', '149.6 million km (1.0 AU from Sun).'],
+        ['Year:', '365.25 Earth days per orbit.'],
+        ['Temperature:', '15 °C mean, enabling stable liquid water.'],
+        ['Atmosphere:', '78% Nitrogen, 21% Oxygen, shielded by Geodynamo.']
+      ]
+    },
+    venus: {
+      name: 'Venus',
+      next: 'Mercury',
+      number: '[01]',
+      image: MERCURY_IMG,
+      bgId: 'venus-background',
+      facts: [
+        ['Distance:', '108.2 million km (0.72 AU from Sun).'],
+        ['Year:', '225 Earth days per orbit.'],
+        ['Temperature:', '465 °C — runaway greenhouse furnace.'],
+        ['Atmosphere:', '92 atmospheres of CO₂ with sulfuric acid clouds.']
+      ]
+    }
+  };
+
+  let current = 'mars';
+  let busy = false;
+  let targetX = 0, targetY = 0;
+  let rotX = 0, rotY = 0;
+  let expansion = 0;
+  let maskScale = 1;
+
+  const marsBg = document.getElementById('mars-background');
+  const earthBg = document.getElementById('earth-background');
+  const venusBg = document.getElementById('venus-background');
+  const portalBtn = document.getElementById('portal-window-btn');
+  const portalVideo = document.getElementById('portal-video');
+  const portalImage = document.getElementById('portal-image');
+  const transitionVideo = document.getElementById('portal-transition-video');
+
+  const planetTitleEl = document.getElementById('portal-planet-title');
+  const factsListEl = document.getElementById('portal-facts-list');
+  const planetListEl = document.getElementById('portal-planet-list');
+  const nextNameEl = document.getElementById('portal-next-name');
+  const nextNumEl = document.getElementById('portal-next-number');
+
+  function renderState() {
+    const s = states[current];
+    root.setAttribute('data-planet', current);
+
+    if (planetTitleEl) planetTitleEl.textContent = s.name.toUpperCase();
+    if (nextNameEl) nextNameEl.textContent = s.next;
+    if (nextNumEl) nextNumEl.textContent = s.number;
+
+    // Build facts
+    if (factsListEl) {
+      factsListEl.innerHTML = s.facts.map(([k, v]) => `
+        <div class="portal-fact-row">
+          <dt>${k}</dt>
+          <dd>${v}</dd>
+        </div>
+      `).join('');
+    }
+
+    // Build planet list
+    if (planetListEl) {
+      planetListEl.innerHTML = planets.map(p => `
+        <div class="portal-planet-item ${p.toLowerCase() === current ? 'active' : ''}">
+          <span>${p}</span>
+        </div>
+      `).join('');
+    }
+
+    // Toggle background videos
+    [marsBg, earthBg, venusBg].forEach(v => {
+      if (!v) return;
+      if (v.id === s.bgId) {
+        v.classList.add('is-visible');
+        v.play().catch(() => {});
+      } else {
+        v.classList.remove('is-visible');
+        v.pause();
+      }
+    });
+
+    // Update portal source
+    if (s.image) {
+      if (portalImage) portalImage.src = s.image;
+    } else {
+      if (portalVideo && portalVideo.src !== s.portal) {
+        portalVideo.src = s.portal;
+        portalVideo.load();
+        portalVideo.play().catch(() => {});
+      }
+    }
+  }
+
+  // Pointer Tilt Listener
+  root.addEventListener('mousemove', (e) => {
+    if (busy) return;
+    const rect = root.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    targetY = (x / rect.width - 0.5) * 32.0;
+    targetX = (y / rect.height - 0.5) * -28.0;
+  });
+
+  root.addEventListener('mouseleave', () => {
+    targetX = 0;
+    targetY = 0;
+  });
+
+  // Canvas Sizing
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = root.clientWidth * dpr;
+    canvas.height = root.clientHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Easing helper
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function animateValue(setter, duration) {
+    return new Promise(resolve => {
+      const start = performance.now();
+      function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        setter(easeInOutCubic(progress));
+        if (progress < 1) requestAnimationFrame(step);
+        else resolve();
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  // Travel action
+  async function travel() {
+    if (busy || current === 'venus') return;
+    busy = true;
+    targetX = 0;
+    targetY = 0;
+
+    const next = current === 'mars' ? 'earth' : 'venus';
+    root.classList.add('is-transitioning');
+
+    if (transitionVideo) {
+      transitionVideo.src = states[current].portal;
+      transitionVideo.currentTime = 0;
+      transitionVideo.playbackRate = 1.3;
+      await transitionVideo.play().catch(() => {});
+    }
+
+    // Expand portal window to swallow screen
+    await animateValue(v => expansion = v, 1000);
+
+    // Commit to next planet
+    current = next;
+    renderState();
+
+    // Reopen mask window
+    expansion = 0;
+    maskScale = 0;
+    root.classList.remove('is-transitioning');
+
+    await animateValue(v => maskScale = v, 900);
+    busy = false;
+  }
+
+  if (portalBtn) {
+    portalBtn.addEventListener('click', travel);
+  }
+
+  // Render loop for 3D portal
+  let lastT = performance.now();
+  let isVisible = true;
+  const io = new IntersectionObserver(([entry]) => {
+    isVisible = entry.isIntersecting;
+  }, { threshold: 0.1 });
+  io.observe(root);
+
+  function drawPortal(now) {
+    requestAnimationFrame(drawPortal);
+    if (!isVisible) return;
+
+    const dt = Math.min(now - lastT, 40);
+    lastT = now;
+
+    rotX += (targetX - rotX) * Math.min(1, dt * 0.009);
+    rotY += (targetY - rotY) * Math.min(1, dt * 0.009);
+
+    const W = root.clientWidth;
+    const H = root.clientHeight;
+
+    ctx.clearRect(0, 0, W, H);
+
+    if (!portalBtn) return;
+    const rect = portalBtn.getBoundingClientRect();
+    const rootRect = root.getBoundingClientRect();
+
+    const rectCx = rect.left - rootRect.left + rect.width / 2;
+    const rectCy = rect.top - rootRect.top + rect.height / 2;
+
+    const e = expansion;
+    const cx = rectCx + (W / 2 - rectCx) * e;
+    const cy = rectCy + (H / 2 - rectCy) * e;
+
+    const baseW = rect.width + (W - rect.width) * e;
+    const baseH = rect.height + (H - rect.height) * e;
+
+    const scale = e ? 1 : maskScale;
+    const w = baseW * scale;
+    const h = baseH * scale;
+
+    const cornerRadius = 70 * (1 - e) * scale;
+    const rx = rotX * (1 - e);
+    const ry = rotY * (1 - e);
+
+    if (w > 2 && h > 2) {
+      // Build 44-point rounded-rect
+      const points = [];
+      const r = Math.min(cornerRadius, w / 2, h / 2);
+      const arcs = [
+        [w / 2 - r, -h / 2 + r, -Math.PI / 2, 0],
+        [w / 2 - r, h / 2 - r, 0, Math.PI / 2],
+        [-w / 2 + r, h / 2 - r, Math.PI / 2, Math.PI],
+        [-w / 2 + r, -h / 2 + r, Math.PI, Math.PI * 1.5]
+      ];
+
+      arcs.forEach(([ox, oy, sa, ea]) => {
+        for (let i = 0; i <= 10; i++) {
+          const a = sa + (ea - sa) * (i / 10);
+          points.push([ox + Math.cos(a) * r, oy + Math.sin(a) * r]);
+        }
+      });
+
+      // Perspective projection
+      const ax = rx * Math.PI / 180;
+      const ay = ry * Math.PI / 180;
+      const projected = points.map(([px, py]) => {
+        const xx = px * Math.cos(ay);
+        const yy = py * Math.cos(ax);
+        const z = px * Math.sin(ay) - py * Math.sin(ax);
+        const p = 850 / (850 + z);
+        return [cx + xx * p, cy + yy * p];
+      });
+
+      // Clip and render media inside portal
+      ctx.save();
+      ctx.beginPath();
+      projected.forEach(([sx, sy], idx) => {
+        if (idx === 0) ctx.moveTo(sx, sy);
+        else ctx.lineTo(sx, sy);
+      });
+      ctx.closePath();
+      ctx.clip();
+
+      // Draw active media in cover mode
+      const activeState = states[current];
+      const media = (expansion > 0.05 && transitionVideo) ? transitionVideo :
+                    (activeState.image ? portalImage : portalVideo);
+
+      if (media && (media.videoWidth || media.naturalWidth)) {
+        const mw = media.videoWidth || media.naturalWidth;
+        const mh = media.videoHeight || media.naturalHeight;
+        const sc = Math.max(W / mw, H / mh);
+        const dw = mw * sc;
+        const dh = mh * sc;
+        ctx.drawImage(media, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      } else {
+        ctx.fillStyle = '#0a0910';
+        ctx.fillRect(0, 0, W, H);
+      }
+
+      // Border outline on portal window
+      ctx.restore();
+
+      if (e < 0.95) {
+        ctx.save();
+        ctx.beginPath();
+        projected.forEach(([sx, sy], idx) => {
+          if (idx === 0) ctx.moveTo(sx, sy);
+          else ctx.lineTo(sx, sy);
+        });
+        ctx.closePath();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+
+  renderState();
+  requestAnimationFrame(drawPortal);
+}

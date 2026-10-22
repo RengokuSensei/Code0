@@ -288,6 +288,9 @@ function initPage() {
   if (typeof window.initCosmicSims === 'function') {
     window.initCosmicSims();
   }
+  if (typeof window.renderMathEverywhere === 'function') {
+    window.renderMathEverywhere();
+  }
 }
 
 function initGlobal() {
