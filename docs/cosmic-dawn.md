@@ -6,8 +6,6 @@ description: "From the Big Bang and Recombination to the Stellar Lifecycle, the 
 <!-- ==========================================================================
      HERO SECTION: THE COSMIC DAWN (EPISODE 01 / PAGE 01)
      ========================================================================== -->
-<canvas id="cosmic-chronos-canvas" aria-hidden="true"></canvas>
-
 <div class="cosmic-hero">
   <div class="cosmic-hero-badge">
     <span>✦ ARCHITECTS OF THE COSMOS &bull; EPISODE 01 &bull; PAGE 01</span>
@@ -29,37 +27,82 @@ description: "From the Big Bang and Recombination to the Stellar Lifecycle, the 
 </div>
 
 <!-- ==========================================================================
-     COSMIC CHRONOS CINEMA DOCK (TEMPORAL MOVIE SCRUBBER HUD)
+     COSMIC CINEMA: 13.8 BILLION YEAR TIME-WARP THEATER
      ========================================================================== -->
-<div class="chronos-cinema-dock" id="chronos-cinema-dock">
-  <div class="chronos-dock-header">
-    <div class="chronos-status-pill">
-      <span class="chronos-pulse-dot"></span>
-      <span id="chronos-epoch-label">EPOCH 01: PRIMORDIAL GENESIS (13.8 Ga)</span>
+<div class="cosmic-theater-container" id="cosmic-theater">
+  <!-- Top Theater Chrome Header -->
+  <div class="theater-header-bar">
+    <div class="theater-brand">
+      <span class="theater-live-dot"></span>
+      <span class="theater-brand-text">✦ COSMIC CINEMA &bull; 13.8 BILLION YEAR TIME CONTINUUM</span>
     </div>
-    <div class="chronos-dock-controls">
-      <button type="button" class="chronos-btn active" id="chronos-btn-play" title="Play Cinematic Tour">▶ Auto-Play Tour</button>
-      <button type="button" class="chronos-btn" id="chronos-btn-warp" title="Toggle Relativistic Warp Streaks">⚡ Warp Streaks</button>
-      <button type="button" class="chronos-btn active" id="chronos-btn-lens" title="Toggle Einstein Spacetime Gravity Lens">🌀 Gravity Lens</button>
-    </div>
-  </div>
-
-  <div class="chronos-scrubber-track">
-    <input type="range" class="chronos-time-slider" id="chronos-time-slider" min="0" max="100" value="0" step="0.1" aria-label="Cosmic Time Continuum Slider">
-    <div class="chronos-epoch-markers">
-      <button type="button" class="chronos-marker active" data-step="0">13.8 Ga (Genesis)</button>
-      <button type="button" class="chronos-marker" data-step="25">380k yr (CMB)</button>
-      <button type="button" class="chronos-marker" data-step="50">290 Myr (JWST)</button>
-      <button type="button" class="chronos-marker" data-step="75">4.6 Ga (Sun Ignition)</button>
-      <button type="button" class="chronos-marker" data-step="100">0 yr (Geodynamo)</button>
+    <div class="theater-actions">
+      <button type="button" class="theater-action-btn" id="theater-btn-pip" title="Toggle Floating Mini-Player">📌 Dock PiP</button>
+      <button type="button" class="theater-action-btn" id="theater-btn-fs" title="Toggle Fullscreen IMAX View">⛶ IMAX Fullscreen</button>
     </div>
   </div>
 
-  <div class="chronos-telemetry-strip">
-    <div class="chronos-tel-item"><span>Cosmic Time:</span> <strong id="tel-time">-13.8 Billion Years</strong></div>
-    <div class="chronos-tel-item"><span>Spectral Redshift:</span> <strong id="tel-redshift">z = 1100.0</strong></div>
-    <div class="chronos-tel-item"><span>Thermal State:</span> <strong id="tel-temp">3,000 K</strong></div>
-    <div class="chronos-tel-item"><span>Scale Factor a(t):</span> <strong id="tel-scale">0.00091</strong></div>
+  <!-- 3D WebGL Cinema Viewport -->
+  <div class="theater-viewport" id="theater-viewport">
+    <canvas id="cosmic-theater-canvas" class="theater-canvas"></canvas>
+
+    <!-- Cinematic Subtitles / Caption Overlay -->
+    <div class="theater-caption-overlay" id="theater-caption-overlay">
+      <div class="caption-epoch-tag" id="caption-epoch-tag">EPOCH 01 &bull; 13.8 BILLION YEARS AGO</div>
+      <div class="caption-text" id="caption-text">The universe expands from a quantum singularity. Photons stretch across expanding spacetime, losing energy through Cosmological Redshift.</div>
+    </div>
+
+    <!-- Free-Look / Mouse Interaction Hint -->
+    <div class="theater-hint-badge" id="theater-hint">
+      <span>✦ HOVER &amp; DRAG TO ORBIT 3D CAMERA &bull; MOUSE VELOCITY = WARP SPEED</span>
+    </div>
+  </div>
+
+  <!-- Bottom Theater Control Dock -->
+  <div class="theater-control-dock">
+    <div class="theater-dock-top">
+      <div class="theater-playback-group">
+        <button type="button" class="theater-play-btn" id="theater-btn-play">
+          <span class="play-icon" id="play-icon">▶</span>
+          <span id="play-text">PLAY COSMIC MOVIE</span>
+        </button>
+        <button type="button" class="theater-toggle-btn" id="theater-btn-warp">⚡ Warp Streaks</button>
+        <button type="button" class="theater-toggle-btn active" id="theater-btn-lens">🌀 Spacetime Lens</button>
+      </div>
+
+      <div class="theater-epoch-pills" id="theater-epoch-pills">
+        <button type="button" class="epoch-pill active" data-step="0">13.8 Ga (Genesis)</button>
+        <button type="button" class="epoch-pill" data-step="25">380k yr (CMB)</button>
+        <button type="button" class="epoch-pill" data-step="50">290 Myr (JWST)</button>
+        <button type="button" class="epoch-pill" data-step="75">4.6 Ga (Sun)</button>
+        <button type="button" class="epoch-pill" data-step="100">0 yr (Earth)</button>
+      </div>
+    </div>
+
+    <!-- Scrubber Slider Track -->
+    <div class="theater-scrubber-row">
+      <input type="range" class="theater-scrubber" id="theater-scrubber" min="0" max="100" value="0" step="0.1" aria-label="Cosmic Timeline Scrubber">
+    </div>
+
+    <!-- Real-Time Cosmic Telemetry Strip -->
+    <div class="theater-telemetry-row">
+      <div class="theater-tel-block">
+        <span class="tel-lbl">Cosmic Age:</span>
+        <strong class="tel-val" id="theater-tel-time">-13.8 Billion Years</strong>
+      </div>
+      <div class="theater-tel-block">
+        <span class="tel-lbl">Spectral Redshift:</span>
+        <strong class="tel-val" id="theater-tel-z">z = 1100.0</strong>
+      </div>
+      <div class="theater-tel-block">
+        <span class="tel-lbl">Radiation Temp:</span>
+        <strong class="tel-val" id="theater-tel-temp">3,000 K</strong>
+      </div>
+      <div class="theater-tel-block">
+        <span class="tel-lbl">Scale Factor a(t):</span>
+        <strong class="tel-val" id="theater-tel-scale">0.00091</strong>
+      </div>
+    </div>
   </div>
 </div>
 
