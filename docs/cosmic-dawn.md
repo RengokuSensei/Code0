@@ -29,6 +29,7 @@ description: "From the Big Bang and Recombination to the Stellar Lifecycle, the 
 <!-- ==========================================================================
      FRAMEFORGE SAAS CINEMA STUDIO: 13.8 BILLION YEAR CONTINUUM
      ========================================================================== -->
+<div class="cosmic-theater-wrapper" id="cosmic-theater-wrapper">
 <div class="cosmic-theater-container" id="cosmic-theater">
   <!-- Top Theater Header Bar -->
   <div class="theater-header-bar">
@@ -128,6 +129,7 @@ description: "From the Big Bang and Recombination to the Stellar Lifecycle, the 
       </div>
     </div>
   </div>
+</div>
 </div>
 
 ---
@@ -291,7 +293,7 @@ $$
 Between the third and twentieth minutes, the universe acted as a single, cosmic thermonuclear reactor. Protons and neutrons fused into Deuterium, and then into Helium-4 nuclei:
 
 $$
-p + n \;\longrightarrow\; \text{D} + \gamma \qquad \Longrightarrow \qquad \,^4\text{He} \quad (75\%\ \text{H},\; 25\%\ \text{He})
+p + n \;\longrightarrow\; \text{D} + \gamma \qquad \Longrightarrow \qquad {}^4\text{He} \quad (75\%\ \text{H},\; 25\%\ \text{He})
 $$
 
 The primordial elemental composition of the universe was carved in stone: **75% Hydrogen, 25% Helium-4, and trace Lithium-7**.
@@ -431,7 +433,7 @@ In the early 1950s, English astrophysicist **Fred Hoyle** reasoned backward from
 Hoyle predicted that Carbon-12 **must possess an undiscovered, excited quantum resonance level at precisely 7.65 MeV**! William Fowler tested this at Caltech and confirmed the **Hoyle State** at exactly $7.654\text{ MeV}$, amplifying fusion by millions of times:
 
 $$
-3 \,^4\text{He} \;\longrightarrow\; \,^8\text{Be} + \,^4\text{He} \;\longrightarrow\; \,^{12}\text{C}^* (7.654\text{ MeV}) \;\longrightarrow\; \,^{12}\text{C} + \gamma
+3 {}^4\text{He} \;\longrightarrow\; {}^8\text{Be} + {}^4\text{He} \;\longrightarrow\; {}^{12}\text{C}^* (7.654\text{ MeV}) \;\longrightarrow\; {}^{12}\text{C} + \gamma
 $$
 
 In the landmark 1957 **B²FH paper** (Burbidge, Burbidge, Fowler, Hoyle), the truth was cemented: Every heavy element in your body was synthesized inside stars. **We are all stardust.**
@@ -457,7 +459,7 @@ In a fraction of a second, an iron core the size of Earth collapses into a ball 
 In this blast, free neutron densities exceed $n_n > 10^{20}\text{ neutrons/cm}^3$. Through the **r-process (Rapid Neutron Capture)**, atomic nuclei gorge on neutrons faster than they decay, forging the heaviest elements in the universe:
 
 $$
-\tau_n \ll \tau_\beta \qquad \Longrightarrow \qquad \,^{56}\text{Fe} + n \;\longrightarrow\; \dots \;\longrightarrow\; \,^{197}\text{Au},\; \,^{195}\text{Pt},\; \,^{238}\text{U}
+\tau_n \ll \tau_\beta \qquad \Longrightarrow \qquad {}^{56}\text{Fe} + n \;\longrightarrow\; \dots \;\longrightarrow\; {}^{197}\text{Au},\; {}^{195}\text{Pt},\; {}^{238}\text{U}
 $$
 
 What remains behind is an ultra-dense **Neutron Star**, or if the core exceeds three solar masses, it collapses into a **Black Hole**!
@@ -500,7 +502,7 @@ Approximately 4.6 billion years ago, inside the Orion Arm of the Milky Way, a pa
 Over 99.8% of the mass collapsed into the center. Core temperatures reached 15 million Kelvin, igniting: **Proton-Proton Chain Thermonuclear Fusion**:
 
 $$
-4p \;\longrightarrow\; \,^4\text{He} + 2e^+ + 2\nu_e + 26.73\text{ MeV} \qquad (\Delta m \approx 0.71\%)
+4p \;\longrightarrow\; {}^4\text{He} + 2e^+ + 2\nu_e + 26.73\text{ MeV} \qquad (\Delta m \approx 0.71\%)
 $$
 
 Our star—**The Sun**—awakened!
@@ -727,7 +729,8 @@ function runCosmicEngines() {
 runCosmicEngines();
 window.initCosmicSims = runCosmicEngines;
 
-if (typeof window.document$ !== 'undefined') {
-  window.document$.subscribe(runCosmicEngines);
+const doc$ = (typeof document$ !== 'undefined') ? document$ : (typeof window.document$ !== 'undefined' ? window.document$ : null);
+if (doc$) {
+  doc$.subscribe(runCosmicEngines);
 }
 </script>

@@ -62,4 +62,13 @@
 {% block scripts %}
   {{ super() }}
   <script type="module" src="{{ base_url }}/javascripts/getlayers-init.js"></script>
+  <script>
+    if (typeof document$ !== 'undefined') {
+      document$.subscribe(function() {
+        if (typeof window.renderMathEverywhere === 'function') {
+          window.renderMathEverywhere();
+        }
+      });
+    }
+  </script>
 {% endblock %}

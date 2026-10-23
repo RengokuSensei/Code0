@@ -64,7 +64,7 @@ function initCardTilt() {
   const isTouchDevice = ('ontouchstart' in window) || window.matchMedia('(hover: none)').matches;
   if (isTouchDevice) return;
 
-  const cards = document.querySelectorAll('.aa-card, .interactive-lab-container, .pillar-subcard, .upsc-dossier-card, .stellar-genesis-stage, .cosmic-hero');
+  const cards = document.querySelectorAll('.aa-card, .pillar-subcard, .upsc-dossier-card, .cosmic-hero');
   
   cards.forEach(card => {
     if (card.dataset.tiltInitialized === 'true') return;

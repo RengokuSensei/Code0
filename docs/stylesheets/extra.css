@@ -2599,8 +2599,7 @@ html {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  min-height: 480px;
-  max-height: 640px;
+  max-height: 680px;
   overflow: hidden;
   background: #05070c;
 }
@@ -2957,6 +2956,15 @@ html {
 }
 
 /* Sticky Picture-in-Picture (PiP) Mode */
+.cosmic-theater-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.cosmic-theater-wrapper.pip-active {
+  min-height: 580px;
+}
+
 .cosmic-theater-container.is-pip {
   position: fixed !important;
   bottom: 24px !important;
