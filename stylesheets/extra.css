@@ -2442,7 +2442,6 @@ html {
 }
 
 /* ==========================================================================
-/* ==========================================================================
    COSMIC CINEMA: FRAMEFORGE SAAS BROADCAST MOTION STUDIO
    1080p Broadcast Standard / Glassmorphism / Real-Time Narration Subtitles
    ========================================================================== */
@@ -3011,19 +3010,24 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 12px;
-  background: rgba(13, 17, 28, 0.7);
+  background: rgba(13, 17, 28, 0.75);
   border: 1px solid rgba(0, 240, 255, 0.2);
   border-radius: 12px;
-  padding: 8px 16px;
+  padding: 10px 16px;
   margin: 18px 0 24px 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .cinema-jump-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.84rem;
   font-weight: 600;
   color: #cbd5e1;
+  flex: 1 1 auto;
+  min-width: 200px;
 }
 
 .cinema-jump-btn {
@@ -3033,13 +3037,15 @@ html {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.74rem;
   font-weight: 700;
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .cinema-jump-btn:hover {
@@ -3048,6 +3054,7 @@ html {
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
 }
 
+/* ==========================================================================
    3D STELLAR GENESIS & FIRST SUN IGNITION STAGE
    ========================================================================== */
 .stellar-genesis-stage {
