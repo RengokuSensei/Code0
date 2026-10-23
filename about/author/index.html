@@ -1878,6 +1878,15 @@ if (typeof window.document$ !== 'undefined') {
       
     
   <script type="module" src="../../javascripts/getlayers-init.js"></script>
+  <script>
+    if (typeof document$ !== 'undefined') {
+      document$.subscribe(function() {
+        if (typeof window.renderMathEverywhere === 'function') {
+          window.renderMathEverywhere();
+        }
+      });
+    }
+  </script>
 
   </body>
 </html>

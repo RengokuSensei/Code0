@@ -394,6 +394,8 @@ export function initRedshiftSimulator() {
   const canvas = document.getElementById('redshift-canvas');
   const slider = document.getElementById('redshift-slider');
   if (!canvas || !slider) return;
+  if (canvas.dataset.initialized === 'true') return;
+  canvas.dataset.initialized = 'true';
 
   const ctx = canvas.getContext('2d');
   const container = canvas.parentElement;
@@ -558,6 +560,8 @@ export function initRedshiftSimulator() {
 export function initMagnetosphereSimulator() {
   const canvas = document.getElementById('magnetosphere-canvas');
   if (!canvas) return;
+  if (canvas.dataset.initialized === 'true') return;
+  canvas.dataset.initialized = 'true';
 
   const ctx = canvas.getContext('2d');
   const container = canvas.parentElement;
@@ -895,7 +899,7 @@ export const FORMULA_CUES = [
     time: 475.0,
     endTime: 510.0,
     title: "Big Bang Nucleosynthesis (BBN)",
-    katex: "p + n \\to \\text{D} + \\gamma \\quad \\Longrightarrow \\quad \\,^4\\text{He} \\; (75\\% \\text{ H}, 25\\% \\text{ He})",
+    katex: "p + n \\to \\text{D} + \\gamma \\quad \\Longrightarrow \\quad {}^4\\text{He} \\; (75\\% \\text{ H}, 25\\% \\text{ He})",
     desc: "First 3 to 20 minutes: Deuterium bottleneck breaks, fusing primordial helium with trace Lithium-7."
   },
 
@@ -964,14 +968,14 @@ export const FORMULA_CUES = [
     time: 1135.0,
     endTime: 1210.0,
     title: "Nuclear Binding Energy Curve",
-    katex: "\\text{Peak at } \\,^{56}\\text{Fe} \\; (8.79\\text{ MeV/nucleon}) \\quad \\Longrightarrow \\quad \\text{Exothermic Limit}",
+    katex: "\\text{Peak at } {}^{56}\\text{Fe} \\; (8.79\\text{ MeV/nucleon}) \\quad \\Longrightarrow \\quad \\text{Exothermic Limit}",
     desc: "Fusion releases net energy up to Iron-56. Fusing heavier elements absorbs energy, triggering core collapse."
   },
   {
     time: 1215.0,
     endTime: 1290.0,
     title: "Fred Hoyle's 7.65 MeV Carbon Resonance",
-    katex: "3 \\,^4\\text{He} \\to \\,^8\\text{Be} + \\,^4\\text{He} \\to \\,^{12}\\text{C}^* (7.654\\text{ MeV}) \\to \\,^{12}\\text{C} + \\gamma",
+    katex: "3 {}^4\\text{He} \\to {}^8\\text{Be} + {}^4\\text{He} \\to {}^{12}\\text{C}^* (7.654\\text{ MeV}) \\to {}^{12}\\text{C} + \\gamma",
     desc: "Overcoming the unstable Beryllium-8 bottleneck (10^-16s) via Hoyle's predicted nuclear excited state."
   },
   {
@@ -985,7 +989,7 @@ export const FORMULA_CUES = [
     time: 1375.0,
     endTime: 1550.0,
     title: "Type II Supernova & r-Process Nucleosynthesis",
-    katex: "\\tau_n \\ll \\tau_\\beta \\quad \\Longrightarrow \\quad \\,^{56}\\text{Fe} + n \\to \\dots \\to \\,^{197}\\text{Au}, \\,^{238}\\text{U}",
+    katex: "\\tau_n \\ll \\tau_\\beta \\quad \\Longrightarrow \\quad {}^{56}\\text{Fe} + n \\to \\dots \\to {}^{197}\\text{Au}, {}^{238}\\text{U}",
     desc: "Neutron flux so dense that nuclei gorge on neutrons before beta-decaying, forging Gold and Platinum!"
   },
 
@@ -994,7 +998,7 @@ export const FORMULA_CUES = [
     time: 1560.0,
     endTime: 1640.0,
     title: "Thermonuclear Solar Core Fusion",
-    katex: "4 \\,^1\\text{H} \\to \\,^4\\text{He} + 2e^+ + 2\\nu_e + 26.73\\text{ MeV}, \\quad T = 1.57 \\times 10^7 \\text{ K}",
+    katex: "4 {}^1\\text{H} \\to {}^4\\text{He} + 2e^+ + 2\\nu_e + 26.73\\text{ MeV}, \\quad T = 1.57 \\times 10^7 \\text{ K}",
     desc: "Sun converts 600 million tons of hydrogen into helium every second via the proton-proton chain."
   },
   {
@@ -2412,6 +2416,7 @@ export const NARRATION_CUES = [
 export class CosmicBroadcastStudio {
   constructor() {
     this.container = document.getElementById('cosmic-theater');
+    this.wrapper = document.getElementById('cosmic-theater-wrapper') || (this.container ? this.container.parentElement : null);
     this.canvas = document.getElementById('broadcast-canvas');
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext('2d');
@@ -2433,9 +2438,8 @@ export class CosmicBroadcastStudio {
     // Simulation Particle Stores
     this.initSimStores();
 
-    // Event Listeners & Observers
+    // Event Listeners
     this.initEventListeners();
-    this.initPiPObserver();
     this.updateHUDTime();
 
     // Render loop
@@ -2553,35 +2557,35 @@ export class CosmicBroadcastStudio {
     }
   }
 
-  initPiPObserver() {
-    if (!this.container || typeof IntersectionObserver === 'undefined') return;
+  dockPiP() {
+    if (!this.container) return;
+    this.container.classList.add('is-pip');
+    if (this.wrapper) this.wrapper.classList.add('pip-active');
+    const pipBtn = document.getElementById('theater-btn-pip');
+    if (pipBtn) pipBtn.textContent = '📌 Undock Player';
+  }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        // If scrolled past top of screen and not user dismissed
-        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
-          if (!this.userDismissedPip) {
-            this.container.classList.add('is-pip');
-          }
-        } else if (entry.isIntersecting) {
-          this.container.classList.remove('is-pip');
-          this.userDismissedPip = false;
-        }
-      });
-    }, { threshold: 0.15 });
-
-    observer.observe(this.container);
+  undockPiP() {
+    if (!this.container) return;
+    this.container.classList.remove('is-pip');
+    if (this.wrapper) this.wrapper.classList.remove('pip-active');
+    const pipBtn = document.getElementById('theater-btn-pip');
+    if (pipBtn) pipBtn.textContent = '📌 Dock PiP';
   }
 
   togglePiP() {
     if (!this.container) return;
     if (this.container.classList.contains('is-pip')) {
-      this.container.classList.remove('is-pip');
-      this.userDismissedPip = true;
+      this.undockPiP();
     } else {
-      this.container.classList.add('is-pip');
-      this.userDismissedPip = false;
+      this.dockPiP();
     }
+  }
+
+  scrollToTheater() {
+    if (!this.container) return;
+    this.undockPiP();
+    this.container.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   toggleFullscreen() {
@@ -2750,6 +2754,15 @@ export class CosmicBroadcastStudio {
     if (textEl && activeCue.text && textEl.dataset.curText !== activeCue.text) {
       textEl.dataset.curText = activeCue.text;
       textEl.innerHTML = activeCue.text;
+      if (typeof renderMathInElement === 'function') {
+        renderMathInElement(textEl, {
+          delimiters: [
+            {left: '$$', right: '$$', display: false},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
     }
   }
 
@@ -3376,9 +3389,17 @@ export function initCosmicChronosEngine() {
 
 window.seekCosmicAct = function(actId) {
   if (window.__activeCosmicStudio) {
-    window.__activeCosmicStudio.seekToAct(actId);
-    if (!window.__activeCosmicStudio.isPlaying) {
-      window.__activeCosmicStudio.togglePlay();
+    const studio = window.__activeCosmicStudio;
+    studio.seekToAct(actId);
+    if (!studio.isPlaying) {
+      studio.togglePlay();
+    }
+    if (studio.container) {
+      const rect = studio.container.getBoundingClientRect();
+      const inView = rect.top >= -80 && rect.bottom <= (window.innerHeight + 80);
+      if (!inView && !studio.container.classList.contains('is-pip')) {
+        studio.dockPiP();
+      }
     }
   }
 };
