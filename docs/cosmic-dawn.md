@@ -148,7 +148,7 @@ To establish this boundary, we must examine the physical vehicle carrying every 
 
 Every wave—whether sound, water, or light—is governed by three fundamental properties:
 
-1. **Speed ($c$):** The speed of a wave is determined by the medium it travels through. Across the vacuum of space, light travels at the universe's absolute speed limit: $c pprox 299,792	ext{ km/s}$.
+1. **Speed ($c$):** The speed of a wave is determined by the medium it travels through. Across the vacuum of space, light travels at the universe's absolute speed limit: $c \approx 299,792\text{ km/s}$.
 2. **Wavelength ($\lambda$) & Frequency ($f$):** Wavelength is the spatial distance between two successive wave peaks, while frequency is the number of wave cycles passing a fixed point per second:
 
 $$
@@ -158,7 +158,7 @@ $$
 3. **Energy ($E$):** As quantum mechanics proved, a photon's energy is directly locked to its frequency:
 
 $$
-E = h \cdot f = rac{h \cdot c}{\lambda}
+E = h \cdot f = \frac{h \cdot c}{\lambda}
 $$
 
 High-frequency waves pack intense, lethal energy—like Gamma rays, X-rays, and Ultraviolet light. Low-frequency waves carry gentle, low energy—like Infrared, Microwaves, and Radio waves.
@@ -170,16 +170,16 @@ As starlight traverses billions of light-years, it does not journey through stat
 Its wavelength elongates, its frequency steadily drops, and the wave **loses energy**:
 
 $$
-1 + z = rac{\lambda_{	ext{observed}}}{\lambda_{	ext{emitted}}} = rac{a(t_{	ext{observed}})}{a(t_{	ext{emitted}})}
+1 + z = \frac{\lambda_{\text{observed}}}{\lambda_{\text{emitted}}} = \frac{a(t_{\text{observed}})}{a(t_{\text{emitted}})}
 $$
 
 Where $z$ is the **Cosmological Redshift** and $a(t)$ is the cosmic scale factor of the universe.
 
 This explains a foundational mystery of astronomy:  
-When the universe first became transparent, 380,000 years after the Big Bang, it unleashed a blinding, white-hot flash of optical light at **3,000 Kelvin**. Yet over 13.8 billion years of expanding space, that ancient light was stretched by a factor of **1,100 times** ($z pprox 1100$). Its frequency collapsed, cooling down to a frigid, uniform blackbody temperature:
+When the universe first became transparent, 380,000 years after the Big Bang, it unleashed a blinding, white-hot flash of optical light at **3,000 Kelvin**. Yet over 13.8 billion years of expanding space, that ancient light was stretched by a factor of **1,100 times** ($z \approx 1100$). Its frequency collapsed, cooling down to a frigid, uniform blackbody temperature:
 
 $$
-T(z) = T_0 \cdot (1 + z) \qquad \Longrightarrow \qquad 3,000	ext{ K} \;\longrightarrow\; 2.725	ext{ K}
+T(z) = T_0 \cdot (1 + z) \qquad \Longrightarrow \qquad 3,000\text{ K} \;\longrightarrow\; 2.725\text{ K}
 $$
 
 **That is why the oldest evidence of creation—the Cosmic Microwave Background Radiation (CMBR)—is detected today not as blazing visible light, but as cold, faint microwaves at 2.725 Kelvin!**
@@ -226,18 +226,14 @@ $$
   </div>
 </div>
 
-<div class="evidence-split-card" markdown="1">
-  <div class="evidence-half" markdown="1">
+<div class="evidence-split-card">
+  <div class="evidence-half">
     <div class="half-title">📡 Observational Evidence Horizon: 380,000 Years</div>
-    <p style="margin: 0; font-size: 0.92rem; line-height: 1.6; color: #cbd5e1;">
-      Based on hard observational evidence, electromagnetic waves carry us back only to that <strong>380,000-year mark</strong> ($z pprox 1100$). For galaxies, Hubble saw back to 400 million years ($z = 10.60$), and JWST reached 290 million years ($z = 14.32$). Beyond 380,000 years, light hits an impenetrable brick wall: the infant universe was an opaque plasma fog of free electrons that trapped all photons via Thomson scattering.
-    </p>
+    <p>Based on hard observational evidence, electromagnetic waves carry us back only to that <strong>380,000-year mark</strong> ($z \approx 1100$). For galaxies, Hubble saw back to 400 million years ($z = 10.60$), and JWST reached 290 million years ($z = 14.32$). Beyond 380,000 years, light hits an impenetrable brick wall: the infant universe was an opaque plasma fog of free electrons that trapped all photons via Thomson scattering.</p>
   </div>
-  <div class="theory-half" markdown="1">
+  <div class="theory-half">
     <div class="half-title">🔬 Theoretical Physics &amp; High-Energy Colliders</div>
-    <p style="margin: 0; font-size: 0.92rem; line-height: 1.6; color: #cbd5e1;">
-      To cross that boundary—from 380,000 years back to the very instant of creation—evidence hands the torch to <strong>Theoretical Physics</strong>. These extreme quantum regimes are verified empirically by replicating primordial energies in particle colliders like CERN's Large Hadron Collider.
-    </p>
+    <p>To cross that boundary—from 380,000 years back to the very instant of creation—evidence hands the torch to <strong>Theoretical Physics</strong>. These extreme quantum regimes are verified empirically by replicating primordial energies in particle colliders like CERN's Large Hadron Collider.</p>
   </div>
 </div>
 
@@ -257,13 +253,13 @@ Rewind the cosmic clock 13.8 billion years. There were no stars, no galaxies, no
 Here, General Relativity collides with Quantum Mechanics, and all known equations of physics cease to operate. The fundamental Planck timescale represents the boundary of known quantum gravity:
 
 $$
-t_{	ext{Planck}} = \sqrt{rac{\hbar G}{c^5}} pprox 5.39 	imes 10^{-44}	ext{ seconds}
+t_{\text{Planck}} = \sqrt{\frac{\hbar G}{c^5}} \approx 5.39 \times 10^{-44}\text{ seconds}
 $$
 
 During the Planck Epoch, temperatures stood at an unimaginable:
 
 $$
-T pprox 10^{32}	ext{ Kelvin}
+T \approx 10^{32}\text{ Kelvin}
 $$
 
 The four fundamental forces of nature—Gravity, the Strong Nuclear Force, the Weak Nuclear Force, and Electromagnetism—were fused into a single, unified **Superforce**.
@@ -275,7 +271,7 @@ As the primordial cosmos cooled, spontaneous symmetry breaking ruptured the Supe
 As theoretical physicist **Alan Guth** demonstrated, in less than a trillionth of a trillionth of a second, spacetime expanded exponentially driven by the scalar inflaton field:
 
 $$
-a(t) = a_i \cdot e^{H t} \qquad \Longrightarrow \qquad 	ext{Expansion Factor} > 10^{78}
+a(t) = a_i \cdot e^{H t} \qquad \Longrightarrow \qquad \text{Expansion Factor} > 10^{78}
 $$
 
 This hyper-luminal expansion flattened the spatial curvature of spacetime, permanently solving the **Horizon and Flatness Problems** and explaining why the cosmic sky is so astonishingly uniform in every direction.
@@ -284,10 +280,10 @@ This hyper-luminal expansion flattened the spatial curvature of spacetime, perma
 
 In the wake of Inflation, the universe was an ultra-dense, turbulent **Quark-Gluon Plasma**. Yet fundamental particles could not roam freely: they collided with the omnipresent **Higgs Field**. Through the Higgs mechanism, quarks and leptons acquired mass, dragging their velocities below the speed of light.
 
-As the temperature dropped past $10^{12}	ext{ Kelvin}$, gluons bound the quarks into the first stable hadrons:
+As the temperature dropped past $10^{12}\text{ Kelvin}$, gluons bound the quarks into the first stable hadrons:
 
 $$
-u + u + d \;\longrightarrow\; p^+ \quad (938.3	ext{ MeV}), \qquad u + d + d \;\longrightarrow\; n^0 \quad (939.6	ext{ MeV})
+u + u + d \;\longrightarrow\; p^+ \quad (938.3\text{ MeV}), \qquad u + d + d \;\longrightarrow\; n^0 \quad (939.6\text{ MeV})
 $$
 
 ### Big Bang Nucleosynthesis: Primordial Thermonuclear Reactor (3 to 20 Minutes)
@@ -295,7 +291,7 @@ $$
 Between the third and twentieth minutes, the universe acted as a single, cosmic thermonuclear reactor. Protons and neutrons fused into Deuterium, and then into Helium-4 nuclei:
 
 $$
-p + n \;\longrightarrow\; 	ext{D} + \gamma \qquad \Longrightarrow \qquad \,^4	ext{He} \quad (75\%\ 	ext{H},\; 25\%\ 	ext{He})
+p + n \;\longrightarrow\; \text{D} + \gamma \qquad \Longrightarrow \qquad \,^4\text{He} \quad (75\%\ \text{H},\; 25\%\ \text{He})
 $$
 
 The primordial elemental composition of the universe was carved in stone: **75% Hydrogen, 25% Helium-4, and trace Lithium-7**.
@@ -303,7 +299,7 @@ The primordial elemental composition of the universe was carved in stone: **75% 
 Yet, reality remained pitch-black for 380,000 years because free electrons continuously scattered all photons through Thomson scattering:
 
 $$
-\sigma_{	ext{T}} = rac{8\pi}{3} \left(rac{e^2}{4\piarepsilon_0 m_e c^2}ight)^2 pprox 6.65 	imes 10^{-29}	ext{ m}^2
+\sigma_{\text{T}} = \frac{8\pi}{3} \left(\frac{e^2}{4\pi\varepsilon_0 m_e c^2}\right)^2 \approx 6.65 \times 10^{-29}\text{ m}^2
 $$
 
 ---
@@ -318,15 +314,15 @@ $$
 As spacetime relentlessly expanded over 380,000 years, the cosmic temperature steadily decayed. And when the universe reached precisely **380,000 years of age**, a foundational law of physical chemistry formulated in 1920 by legendary Indian astrophysicist **Meghnad Saha** took command:
 
 $$
-rac{n_{i+1} n_e}{n_i} = rac{2 g_{i+1}}{g_i} \left(rac{2\pi m_e k_B T}{h^2}ight)^{3/2} \exp\left(-rac{\chi_i}{k_B T}ight)
+\frac{n_{i+1} n_e}{n_i} = \frac{2 g_{i+1}}{g_i} \left(\frac{2\pi m_e k_B T}{h^2}\right)^{3/2} \exp\left(-\frac{\chi_i}{k_B T}\right)
 $$
 
-Where $\chi_i = 13.6	ext{ eV}$ is the ionization potential of Hydrogen. The cosmic temperature fell to exactly **3,000 Kelvin** ($2,700\ ^\circ	ext{C}$). Thermal kinetic energy plummeted below the 13.6 electron-volt threshold. In an instant, protons captured free electrons into stable quantum shells, creating the universe's first neutral atoms: **Neutral Hydrogen**.
+Where $\chi_i = 13.6\text{ eV}$ is the ionization potential of Hydrogen. The cosmic temperature fell to exactly **3,000 Kelvin** ($2,700\ ^\circ\text{C}$). Thermal kinetic energy plummeted below the 13.6 electron-volt threshold. In an instant, protons captured free electrons into stable quantum shells, creating the universe's first neutral atoms: **Neutral Hydrogen**.
 
 This historic watershed is known as **The Epoch of Recombination**. And the moment free electrons were locked away, the fog cleared. Optical depth dropped to zero:
 
 $$
-	au = \int n_e \sigma_{	ext{T}} c \, dt \;\longrightarrow\; 0 \qquad \Longrightarrow \qquad 	ext{Cosmic Transparency}
+\tau = \int n_e \sigma_{\text{T}} c \, dt \;\longrightarrow\; 0 \qquad \Longrightarrow \qquad \text{Cosmic Transparency}
 $$
 
 Trapped photons were liberated to travel freely across the cosmos in straight lines: **Photon Decoupling**. In a single cosmological heartbeat, the universe became crystal-clear and transparent!
@@ -339,16 +335,13 @@ Trace the empirical steps along humanity's evidence ladder:
 - **1992 &bull; NASA COBE Satellite:** Measured this radiation with the FIRAS instrument and proved it was the most perfect blackbody spectrum ever observed in nature, confirming the Big Bang beyond all scientific doubt:
 
 $$
-I(
-u, T) = rac{2h
-u^3}{c^2} rac{1}{e^{rac{h
-u}{k_B T}} - 1}, \qquad T_{	ext{CMBR}} = 2.7255 \pm 0.0006	ext{ Kelvin}
+I(\nu, T) = \frac{2h\nu^3}{c^2} \frac{1}{e^{\frac{h\nu}{k_B T}} - 1}, \qquad T_{\text{CMBR}} = 2.7255 \pm 0.0006\text{ Kelvin}
 $$
 
-- **2003 &bull; NASA WMAP:** Mapped subtle temperature ripples across the cosmic sphere with unprecedented clarity, constraining the age of the universe to $13.77	ext{ Billion Years}$.
+- **2003 &bull; NASA WMAP:** Mapped subtle temperature ripples across the cosmic sphere with unprecedented clarity, constraining the age of the universe to $13.77\text{ Billion Years}$.
 - **2013 &bull; ESA Planck Observatory:** Delivered the ultimate, gold-standard portrait of our infant universe: **The Cosmic Microwave Background Radiation (CMBR)**.
 
-The mottled red and blue patches on Planck's map represent temperature variations of **only one part in 100,000**—a mere $18\ \mu	ext{K}$! These are the primordial **Baryon Acoustic Oscillations**—sound waves vibrating through the embryonic plasma that gathered dark matter and hydrogen gas, igniting the Cosmic Dawn!
+The mottled red and blue patches on Planck's map represent temperature variations of **only one part in 100,000**—a mere $18\ \mu\text{K}$! These are the primordial **Baryon Acoustic Oscillations**—sound waves vibrating through the embryonic plasma that gathered dark matter and hydrogen gas, igniting the Cosmic Dawn!
 
 ---
 
@@ -362,7 +355,7 @@ The mottled red and blue patches on Planck's map represent temperature variation
 In 1929, American astronomer Edwin Hubble analyzed the spectral absorption lines of distant nebulae, making an astounding discovery: Every distant galaxy exhibited a systematic shift toward longer, redder wavelengths. He formulated **Hubble's Law**:
 
 $$
-v = H_0 \cdot d, \qquad H_0 pprox 70	ext{ km/s/Mpc}
+v = H_0 \cdot d, \qquad H_0 \approx 70\text{ km/s/Mpc}
 $$
 
 The velocity of recession is directly proportional to distance: the farther a galaxy lies, the faster it recedes from Earth! Expanding spacetime stretches the traveling waves of light passing through it.
@@ -370,16 +363,16 @@ The velocity of recession is directly proportional to distance: the farther a ga
 In 1998, astronomers measuring **Type Ia Supernovae**—exploding white dwarf standard candles—uncovered a second revolutionary shock: Approximately 5 billion years ago, cosmic expansion began speeding up (**Accelerating Expansion**), driven by **Dark Energy ($\Lambda$)**, which constitutes over $68.3\%$ of the total cosmic energy density:
 
 $$
-\Omega_\Lambda pprox 68.3\%, \qquad \Omega_m pprox 26.8\%, \qquad \Omega_b pprox 4.9\%
+\Omega_\Lambda \approx 68.3\%, \qquad \Omega_m \approx 26.8\%, \qquad \Omega_b \approx 4.9\%
 $$
 
 ### Telescopic Lookback: Hubble vs. JWST
 
 - **Hubble Space Telescope:** Captured the **Hubble Ultra Deep Field** in the constellation Fornax, reaching galaxy **GN-z11** ($z = 10.60$), viewing light from when the universe was only **400 million years old**. Yet Hubble hit an optical dust wall.
-- **James Webb Space Telescope (JWST):** Stationed $1.5	ext{ million km}$ away at Sun-Earth Lagrange Point 2 (L2), equipped with gold-coated beryllium mirrors and NIRCam. In May 2024, JWST shattered all astronomical records by confirming galaxy **JADES-GS-z14-0**:
+- **James Webb Space Telescope (JWST):** Stationed $1.5\text{ million km}$ away at Sun-Earth Lagrange Point 2 (L2), equipped with gold-coated beryllium mirrors and NIRCam. In May 2024, JWST shattered all astronomical records by confirming galaxy **JADES-GS-z14-0**:
 
 $$
-z = 14.32 \qquad \Longrightarrow \qquad t_{	ext{lookback}} = 13.51	ext{ Billion Years} \quad (\mathbf{290	ext{ Myr after Big Bang}})
+z = 14.32 \qquad \Longrightarrow \qquad t_{\text{lookback}} = 13.51\text{ Billion Years} \quad (\mathbf{290\text{ Myr after Big Bang}})
 $$
 
 This discovery proved that massive stars formed far earlier than anticipated, initiating the reionization epoch.
@@ -393,7 +386,7 @@ Now that the first stars were blazing across the cosmos... how did they live, ev
 Every star begins inside a vast, cold **Nebula**—a nursery of interstellar gas and dust. Under gravity, dense pockets collapse into dark, compact **Bok Globules**, governed by the **Jeans Instability Criterion**:
 
 $$
-M > M_J pprox \left(rac{5 k_B T}{G \mu m_H}ight)^{3/2} \left(rac{3}{4\pi ho}ight)^{1/2}
+M > M_J \approx \left(\frac{5 k_B T}{G \mu m_H}\right)^{3/2} \left(\frac{3}{4\pi \rho}\right)^{1/2}
 $$
 
 Condensing further into a glowing, rotating **Protostar**.
@@ -414,7 +407,7 @@ When hydrogen in the core is finally exhausted, stellar destiny splits into two 
    They swell into colossal **Red Supergiants**! Inside these cosmic giants, gravity crushes the core to extreme temperatures, fusing fuels in concentric onion-like shells:
 
 $$
-	ext{Hydrogen} \;\longrightarrow\; 	ext{Helium} \;\longrightarrow\; 	ext{Carbon \& Oxygen} \;\longrightarrow\; 	ext{Silicon \& Sulfur} \;\longrightarrow\; \mathbf{Nickel	ext{-}62\ \&\ Iron	ext{-}56}
+\text{Hydrogen} \;\longrightarrow\; \text{Helium} \;\longrightarrow\; \text{Carbon \& Oxygen} \;\longrightarrow\; \text{Silicon \& Sulfur} \;\longrightarrow\; \mathbf{Nickel\text{-}62\ \&\ Iron\text{-}56}
 $$
 
 ---
@@ -428,17 +421,17 @@ $$
 
 For decades, early cosmologists believed all elements were forged during the Big Bang. Yet nuclear physicists hit an insurmountable barrier: **Nature has no stable atomic nuclei with mass numbers 5 or 8!**
 
-- Adding a proton to Helium-4 forms Lithium-5, which decays in $10^{-22}	ext{ s}$.
-- Fusing two Helium-4 nuclei forms Beryllium-8, which decays in $10^{-16}	ext{ s}$.
+- Adding a proton to Helium-4 forms Lithium-5, which decays in $10^{-22}\text{ s}$.
+- Fusing two Helium-4 nuclei forms Beryllium-8, which decays in $10^{-16}\text{ s}$.
 
 ### Fred Hoyle & The 7.65 MeV Carbon Resonance
 
-In the early 1950s, English astrophysicist **Fred Hoyle** reasoned backward from the existence of life: If Carbon exists in human hands, stars must have found a way to forge Carbon-12 via the **Triple-Alpha Process** ($3 	imes {}^4	ext{He} 	o {}^{12}	ext{C}$).
+In the early 1950s, English astrophysicist **Fred Hoyle** reasoned backward from the existence of life: If Carbon exists in human hands, stars must have found a way to forge Carbon-12 via the **Triple-Alpha Process** ($3 \times {}^4\text{He} \to {}^{12}\text{C}$).
 
-Hoyle predicted that Carbon-12 **must possess an undiscovered, excited quantum resonance level at precisely 7.65 MeV**! William Fowler tested this at Caltech and confirmed the **Hoyle State** at exactly $7.654	ext{ MeV}$, amplifying fusion by millions of times:
+Hoyle predicted that Carbon-12 **must possess an undiscovered, excited quantum resonance level at precisely 7.65 MeV**! William Fowler tested this at Caltech and confirmed the **Hoyle State** at exactly $7.654\text{ MeV}$, amplifying fusion by millions of times:
 
 $$
-3 \,^4	ext{He} \;\longrightarrow\; \,^8	ext{Be} + \,^4	ext{He} \;\longrightarrow\; \,^{12}	ext{C}^* (7.654	ext{ MeV}) \;\longrightarrow\; \,^{12}	ext{C} + \gamma
+3 \,^4\text{He} \;\longrightarrow\; \,^8\text{Be} + \,^4\text{He} \;\longrightarrow\; \,^{12}\text{C}^* (7.654\text{ MeV}) \;\longrightarrow\; \,^{12}\text{C} + \gamma
 $$
 
 In the landmark 1957 **B²FH paper** (Burbidge, Burbidge, Fowler, Hoyle), the truth was cemented: Every heavy element in your body was synthesized inside stars. **We are all stardust.**
@@ -450,22 +443,21 @@ Iron represents the most tightly bound nucleus in the cosmos. Fusing beyond iron
 In 1930, 19-year-old Indian student **Subrahmanyan Chandrasekhar** proved that electron degeneracy has an unyielding physical ceiling:
 
 $$
-M_{	ext{Chandrasekhar}} pprox rac{\omega_3^0}{4\pi}\left(rac{h c}{G}ight)^{3/2}\left(rac{Z}{A m_H}ight)^2 pprox 1.44\ M_\odot
+M_{\text{Chandrasekhar}} \approx \frac{\omega_3^0}{4\pi}\left(\frac{h c}{G}\right)^{3/2}\left(\frac{Z}{A m_H}\right)^2 \approx 1.44\ M_\odot
 $$
 
 The moment the collapsing iron core exceeds $1.44\ M_\odot$, relativistic gravity crushes electrons into protons:
 
 $$
-p + e^- \;\longrightarrow\; n + 
-u_e
+p + e^- \;\longrightarrow\; n + \nu_e
 $$
 
 In a fraction of a second, an iron core the size of Earth collapses into a ball of pure neutrons just twenty kilometers wide! The infalling outer star slams into this incompressible neutron ball and detonates: **A Type II Core-Collapse Supernova!**
 
-In this blast, free neutron densities exceed $n_n > 10^{20}	ext{ neutrons/cm}^3$. Through the **r-process (Rapid Neutron Capture)**, atomic nuclei gorge on neutrons faster than they decay, forging the heaviest elements in the universe:
+In this blast, free neutron densities exceed $n_n > 10^{20}\text{ neutrons/cm}^3$. Through the **r-process (Rapid Neutron Capture)**, atomic nuclei gorge on neutrons faster than they decay, forging the heaviest elements in the universe:
 
 $$
-	au_n \ll 	au_eta \qquad \Longrightarrow \qquad \,^{56}	ext{Fe} + n \;\longrightarrow\; \dots \;\longrightarrow\; \,^{197}	ext{Au},\; \,^{195}	ext{Pt},\; \,^{238}	ext{U}
+\tau_n \ll \tau_\beta \qquad \Longrightarrow \qquad \,^{56}\text{Fe} + n \;\longrightarrow\; \dots \;\longrightarrow\; \,^{197}\text{Au},\; \,^{195}\text{Pt},\; \,^{238}\text{U}
 $$
 
 What remains behind is an ultra-dense **Neutron Star**, or if the core exceeds three solar masses, it collapses into a **Black Hole**!
@@ -489,7 +481,7 @@ $$
 As atoms bind together, they release binding heat ($\Delta H$). Radiating this heat into the freezing **2.725 Kelvin vacuum heat sink** of space causes an astronomical entropy surge in the universe:
 
 $$
-\Delta S_{	ext{universe}} = rac{Q}{T_{	ext{sink}}} \qquad (T_{	ext{sink}} = 2.725	ext{ K})
+\Delta S_{\text{universe}} = \frac{Q}{T_{\text{sink}}} \qquad (T_{\text{sink}} = 2.725\text{ K})
 $$
 
 Purchasing local planetary order at the cost of global cosmic entropy!
@@ -508,8 +500,7 @@ Approximately 4.6 billion years ago, inside the Orion Arm of the Milky Way, a pa
 Over 99.8% of the mass collapsed into the center. Core temperatures reached 15 million Kelvin, igniting: **Proton-Proton Chain Thermonuclear Fusion**:
 
 $$
-4p \;\longrightarrow\; \,^4	ext{He} + 2e^+ + 2
-u_e + 26.73	ext{ MeV} \qquad (\Delta m pprox 0.71\%)
+4p \;\longrightarrow\; \,^4\text{He} + 2e^+ + 2\nu_e + 26.73\text{ MeV} \qquad (\Delta m \approx 0.71\%)
 $$
 
 Our star—**The Sun**—awakened!
@@ -558,27 +549,25 @@ Our star—**The Sun**—awakened!
 Because solar photons undergo random-walk scattering taking **100,000 to 170,000 years** to escape from the core to the photosphere:
 
 $$
-t_{	ext{diff}} pprox rac{R^2}{c \cdot l_{	ext{mfp}}} pprox 100,000	ext{--}170,000	ext{ Years}
+t_{\text{diff}} \approx \frac{R^2}{c \cdot l_{\text{mfp}}} \approx 100,000\text{--}170,000\text{ Years}
 $$
 
 Astrophysicists cannot see the interior directly. Instead, **we listen to the acoustic resonances of the Sun**!
 
-Turbulent convective plumes continuously excite acoustic sound waves (**$p$-modes**) with a characteristic 5-minute resonance period ($3	ext{ mHz}$):
+Turbulent convective plumes continuously excite acoustic sound waves (**$p$-modes**) with a characteristic 5-minute resonance period ($3\text{ mHz}$):
 
 $$
-
-abla^2 \psi - rac{1}{c_s^2} rac{\partial^2 \psi}{\partial t^2} = 0, \qquad c_s = \sqrt{rac{\gamma k_B T}{\mu m_H}}
+\nabla^2 \psi - \frac{1}{c_s^2} \frac{\partial^2 \psi}{\partial t^2} = 0, \qquad c_s = \sqrt{\frac{\gamma k_B T}{\mu m_H}}
 $$
 
-Spacecraft like NASA's SOHO, SDO, and India's **ADITYA-L1** (stationed at Sun-Earth L1, $r_{	ext{L1}} pprox 1.5 	imes 10^6	ext{ km}$) decode these Doppler velocity shifts, revealing:
+Spacecraft like NASA's SOHO, SDO, and India's **ADITYA-L1** (stationed at Sun-Earth L1, $r_{\text{L1}} \approx 1.5 \times 10^6\text{ km}$) decode these Doppler velocity shifts, revealing:
 
 ### The Tachocline: Radial Shear & Magnetic Dynamo
 
-A razor-thin shear boundary ($r pprox 0.69	ext{--}0.71\,R_\odot$) separating the rigidly rotating radiative interior from the differentially rotating convective envelope:
+A razor-thin shear boundary ($r \approx 0.69\text{--}0.71\,R_\odot$) separating the rigidly rotating radiative interior from the differentially rotating convective envelope:
 
 $$
-rac{\partial \Omega}{\partial r} 
-e 0 \qquad \Longrightarrow \qquad lpha\Omega	ext{-Dynamo (Babcock-Leighton Cycle)}
+\frac{\partial \Omega}{\partial r} \ne 0 \qquad \Longrightarrow \qquad \alpha\Omega\text{-Dynamo (Babcock-Leighton Cycle)}
 $$
 
 Through this shear, the tachocline converts poloidal magnetic fields into intense toroidal magnetic ropes ($\Omega$-effect), driving the 11-year Schwabe sunspot cycle and solar storms!
@@ -635,18 +624,18 @@ Before our solar system formed, a cold, dark fragment of the primordial molecula
 <!-- SIMULATION 4: SUN-EARTH MAGNETOSPHERE SHIELD -->
 ### Earth's Planetary Shield: The Geodynamo
 
-Our Sun periodically unleashes violent Coronal Mass Ejections (CMEs, $1,000	ext{ km/s}$) and solar wind storms. The **Carrington Event of 1859** demonstrated the catastrophic currents space weather can induce on terrestrial power grids.
+Our Sun periodically unleashes violent Coronal Mass Ejections (CMEs, $1,000\text{ km/s}$) and solar wind storms. The **Carrington Event of 1859** demonstrated the catastrophic currents space weather can induce on terrestrial power grids.
 
 Earth survived because its liquid iron outer core operates as a colossal **Geodynamo**, generating an impenetrable magnetic shield governed by the **Lorentz Force**:
 
 $$
-\mathbf{F} = q(\mathbf{E} + \mathbf{v} 	imes \mathbf{B})
+\mathbf{F} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B})
 $$
 
 The day-side standoff distance of Earth's magnetopause is determined by the balance between dynamic solar wind pressure and Earth's geomagnetic field pressure:
 
 $$
-r_{	ext{mp}} pprox \left(rac{B_0^2}{2\mu_0 ho v_{	ext{sw}}^2}ight)^{1/6} pprox 10\ R_{	ext{Earth}}
+r_{\text{mp}} \approx \left(\frac{B_0^2}{2\mu_0 \rho v_{\text{sw}}^2}\right)^{1/6} \approx 10\ R_{\text{Earth}}
 $$
 
 <div class="interactive-lab-container" id="sim-magnetosphere">
