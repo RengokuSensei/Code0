@@ -770,726 +770,2625 @@ export function initMagnetosphereSimulator() {
 // =============================================================================
 // ENGINE 4: GLOBAL 3D COSMIC CHRONOS THEATER & TEMPORAL CINEMA (Three.js)
 // =============================================================================
-export function initCosmicChronosEngine() {
-  const root = document.getElementById('cosmic-theater');
-  const container = document.getElementById('theater-viewport');
-  const canvas = document.getElementById('cosmic-theater-canvas');
-  if (!root || !container || !canvas) return;
-  if (canvas.dataset.initialized === 'true') return;
-  canvas.dataset.initialized = 'true';
+// =============================================================================
+// ENGINE 4: FRAMEFORGE SAAS CINEMA STUDIO — EPISODE 01: THE COSMIC DAWN
+// Procedural Broadcast Cinema Engine with Real-Time Synchronized Subtitles
+// =============================================================================
 
-  if (window.__cosmicChronosCleanup) {
-    window.__cosmicChronosCleanup();
+export const ACT_DEFINITIONS = [
+  {
+    id: 1,
+    title: "Act I: The Looking Glass of Time",
+    subtitle: "Wave Mechanics, Energy & Cosmological Redshift",
+    start: 0.0,
+    end: 266.88,
+    duration: 266.88,
+    color: "#00f0ff",
+    theme: "cyan"
+  },
+  {
+    id: 2,
+    title: "Act II: The Theoretical Horizon",
+    subtitle: "Singularity, Cosmic Inflation & Primordial Nucleosynthesis",
+    start: 266.88,
+    end: 512.016,
+    duration: 245.136,
+    color: "#9d4edd",
+    theme: "violet"
+  },
+  {
+    id: 3,
+    title: "Act III: The First Evidence",
+    subtitle: "Thomson Fog, Saha's Ionization & CMBR Decoupling",
+    start: 512.016,
+    end: 775.104,
+    duration: 263.088,
+    color: "#06d6a0",
+    theme: "emerald"
+  },
+  {
+    id: 4,
+    title: "Act IV: The Deepest Gaze",
+    subtitle: "Hubble Expansion, Dark Energy & JWST Frontier",
+    start: 775.104,
+    end: 1045.776,
+    duration: 270.672,
+    color: "#3a86ff",
+    theme: "blue"
+  },
+  {
+    id: 5,
+    title: "Act V: The Forge of the Elements",
+    subtitle: "Bok Globules, Triple-Alpha, Chandrasekhar & Supernova r-Process",
+    start: 1045.776,
+    end: 1552.872,
+    duration: 507.096,
+    color: "#ff006e",
+    theme: "crimson"
+  },
+  {
+    id: 6,
+    title: "Act VI: The Sun's Ignition & Terrestrial Shield",
+    subtitle: "Helioseismology, The Tachocline Dynamo & Earth's Magnetosphere",
+    start: 1552.872,
+    end: 2249.736,
+    duration: 696.864,
+    color: "#ffb703",
+    theme: "gold"
+  }
+];
+
+export const FORMULA_CUES = [
+  // Act I
+  {
+    time: 25.0,
+    endTime: 80.0,
+    title: "Wave Mechanics & Phase Velocity",
+    katex: "c = \\lambda \\cdot f",
+    desc: "Speed of light in vacuo (299,792 km/s) equals wavelength multiplied by frequency."
+  },
+  {
+    time: 85.0,
+    endTime: 140.0,
+    title: "Planck-Einstein Quantum Energy Relation",
+    katex: "E = h \\cdot f = \\frac{h \\cdot c}{\\lambda}",
+    desc: "Energy is directly proportional to frequency; high-f gamma carries lethal energy, low-f radio carries gentle energy."
+  },
+  {
+    time: 145.0,
+    endTime: 215.0,
+    title: "Cosmological Redshift Parameter",
+    katex: "z = \\frac{\\lambda_{\\text{obs}} - \\lambda_{\\text{emit}}}{\\lambda_{\\text{emit}}} = \\frac{a_0}{a(t)} - 1",
+    desc: "As the metric of spacetime expands, traveling wavepackets physically stretch, shedding energy."
+  },
+  {
+    time: 220.0,
+    endTime: 265.0,
+    title: "CMBR Relic Thermal Expansion",
+    katex: "T(z) = T_0 \\cdot (1 + z) \\quad \\Longrightarrow \\quad 3,000\\text{ K} \\to 2.725\\text{ K}",
+    desc: "Recombination flash cooled by a factor of 1,100 over 13.8 billion years of cosmic expansion."
+  },
+
+  // Act II
+  {
+    time: 275.0,
+    endTime: 335.0,
+    title: "Quantum Gravity & Planck Epoch",
+    katex: "t_{\\text{Planck}} = \\sqrt{\\frac{\\hbar G}{c^5}} \\approx 5.39 \\times 10^{-44} \\text{ s}",
+    desc: "Boundary of known physics where spacetime curvature and quantum fluctuations unify at 10^32 K."
+  },
+  {
+    time: 340.0,
+    endTime: 405.0,
+    title: "Alan Guth's Cosmic Inflation",
+    katex: "a(t) = a_i \\cdot e^{H t} \\quad (10^{-36}\\text{ s} \\to 10^{-32}\\text{ s})",
+    desc: "Exponential superluminal expansion driven by scalar inflaton field, expanding space by factor > 10^26."
+  },
+  {
+    time: 410.0,
+    endTime: 470.0,
+    title: "Quark-Gluon Hadronization",
+    katex: "u + u + d \\to p^+ (938.3\\text{ MeV}), \\quad u + d + d \\to n^0 (939.6\\text{ MeV})",
+    desc: "At 1 microsecond (T ~ 2 trillion K), asymptotic freedom yields to color confinement, forging baryons."
+  },
+  {
+    time: 475.0,
+    endTime: 510.0,
+    title: "Big Bang Nucleosynthesis (BBN)",
+    katex: "p + n \\to \\text{D} + \\gamma \\quad \\Longrightarrow \\quad \\,^4\\text{He} \\; (75\\% \\text{ H}, 25\\% \\text{ He})",
+    desc: "First 3 to 20 minutes: Deuterium bottleneck breaks, fusing primordial helium with trace Lithium-7."
+  },
+
+  // Act III
+  {
+    time: 520.0,
+    endTime: 580.0,
+    title: "Thomson Scattering Optical Depth",
+    katex: "\\sigma_{\\text{T}} = \\frac{8\\pi}{3} \\left(\\frac{e^2}{4\\pi\\varepsilon_0 m_e c^2}\\right)^2 \\approx 6.65 \\times 10^{-29} \\text{ m}^2",
+    desc: "Photons trapped in an opaque fog, constantly scattering off free electrons with zero mean free path."
+  },
+  {
+    time: 585.0,
+    endTime: 650.0,
+    title: "Meghnad Saha's Ionization Equation",
+    katex: "\\frac{n_i n_e}{n_0} = \\left(\\frac{2\\pi m_e k T}{h^2}\\right)^{3/2} e^{-\\frac{\\chi}{k T}}",
+    desc: "At 3,000 K (380,000 yr), thermal ionization drops below binding energy (13.6 eV); hydrogen neutralizes."
+  },
+  {
+    time: 655.0,
+    endTime: 730.0,
+    title: "Photon Decoupling & Last Scattering",
+    katex: "\\tau = \\int n_e \\sigma_T c \\, dt \\to 0 \\quad \\Longrightarrow \\quad \\text{Cosmic Transparency}",
+    desc: "Free electrons vanish into atomic shells; photons decouple and travel freely as the CMBR."
+  },
+  {
+    time: 735.0,
+    endTime: 774.0,
+    title: "CMBR Blackbody Precision (COBE FIRAS)",
+    katex: "I(\\nu, T) = \\frac{2h\\nu^3}{c^2} \\frac{1}{e^{\\frac{h\\nu}{kT}} - 1}, \\quad T_0 = 2.7255 \\pm 0.0006 \\text{ K}",
+    desc: "The most perfect blackbody spectrum measured in nature, discovered by Penzias & Wilson in 1965."
+  },
+
+  // Act IV
+  {
+    time: 785.0,
+    endTime: 855.0,
+    title: "Hubble-Lemaître Law of Cosmic Expansion",
+    katex: "v = H_0 \\cdot d, \\quad H_0 \\approx 70 \\text{ km/s/Mpc}",
+    desc: "Apparent recession velocity is directly proportional to proper distance, proving metric space expansion."
+  },
+  {
+    time: 860.0,
+    endTime: 935.0,
+    title: "Friedmann Energy Density Budget",
+    katex: "\\Omega_{\\Lambda} \\approx 68.3\\%, \\quad \\Omega_m \\approx 26.8\\%, \\quad \\Omega_b \\approx 4.9\\%",
+    desc: "Universe dominated by repulsive Dark Energy (Lambda) accelerating the expansion of spacetime."
+  },
+  {
+    time: 940.0,
+    endTime: 1044.0,
+    title: "JWST High-Redshift Frontier",
+    katex: "z = 14.32 \\implies t_{\\text{lookback}} = 13.51 \\text{ Gyr} \\quad (\\text{JADES-GS-z14-0})",
+    desc: "Observing luminous early galaxies just 290 million years after the Big Bang using gold-coated beryllium optics."
+  },
+
+  // Act V
+  {
+    time: 1055.0,
+    endTime: 1130.0,
+    title: "Jeans Instability Criterion (Bok Globule)",
+    katex: "M > M_J \\approx \\left(\\frac{5 k T}{G \\mu m_H}\\right)^{3/2} \\left(\\frac{3}{4\\pi \\rho}\\right)^{1/2}",
+    desc: "Gravitational self-attraction overcomes internal thermal gas pressure, initiating protostellar collapse."
+  },
+  {
+    time: 1135.0,
+    endTime: 1210.0,
+    title: "Nuclear Binding Energy Curve",
+    katex: "\\text{Peak at } \\,^{56}\\text{Fe} \\; (8.79\\text{ MeV/nucleon}) \\quad \\Longrightarrow \\quad \\text{Exothermic Limit}",
+    desc: "Fusion releases net energy up to Iron-56. Fusing heavier elements absorbs energy, triggering core collapse."
+  },
+  {
+    time: 1215.0,
+    endTime: 1290.0,
+    title: "Fred Hoyle's 7.65 MeV Carbon Resonance",
+    katex: "3 \\,^4\\text{He} \\to \\,^8\\text{Be} + \\,^4\\text{He} \\to \\,^{12}\\text{C}^* (7.654\\text{ MeV}) \\to \\,^{12}\\text{C} + \\gamma",
+    desc: "Overcoming the unstable Beryllium-8 bottleneck (10^-16s) via Hoyle's predicted nuclear excited state."
+  },
+  {
+    time: 1295.0,
+    endTime: 1370.0,
+    title: "Chandrasekhar Mass Limit",
+    katex: "M_{\\text{Ch}} \\approx \\frac{\\omega_3^0}{4\\pi} \\left(\\frac{h c}{G}\\right)^{3/2} \\left(\\frac{Z}{A m_H}\\right)^2 \\approx 1.44 \\, M_\\odot",
+    desc: "Maximum stable mass supported by relativistic electron degeneracy pressure before catastrophic collapse."
+  },
+  {
+    time: 1375.0,
+    endTime: 1550.0,
+    title: "Type II Supernova & r-Process Nucleosynthesis",
+    katex: "\\tau_n \\ll \\tau_\\beta \\quad \\Longrightarrow \\quad \\,^{56}\\text{Fe} + n \\to \\dots \\to \\,^{197}\\text{Au}, \\,^{238}\\text{U}",
+    desc: "Neutron flux so dense that nuclei gorge on neutrons before beta-decaying, forging Gold and Platinum!"
+  },
+
+  // Act VI
+  {
+    time: 1560.0,
+    endTime: 1640.0,
+    title: "Thermonuclear Solar Core Fusion",
+    katex: "4 \\,^1\\text{H} \\to \\,^4\\text{He} + 2e^+ + 2\\nu_e + 26.73\\text{ MeV}, \\quad T = 1.57 \\times 10^7 \\text{ K}",
+    desc: "Sun converts 600 million tons of hydrogen into helium every second via the proton-proton chain."
+  },
+  {
+    time: 1645.0,
+    endTime: 1730.0,
+    title: "The Radiative Zone Photon Random Walk",
+    katex: "t_{\\text{diff}} \\approx \\frac{R^2}{c \\cdot l_{\\text{mfp}}} \\approx 100,000\\text{--}170,000 \\text{ Years}",
+    desc: "High-energy gamma rays scatter billions of times across dense plasma before emerging as optical photons."
+  },
+  {
+    time: 1735.0,
+    endTime: 1830.0,
+    title: "The Tachocline & Solar Magnetic Dynamo",
+    katex: "r \\approx 0.70 \\, R_\\odot, \\quad \\frac{\\partial \\Omega}{\\partial r} \\ne 0 \\quad \\Longrightarrow \\quad \\alpha\\Omega\\text{-Dynamo}",
+    desc: "Extreme radial shear between rigidly rotating radiative core and differentially rotating convection zone."
+  },
+  {
+    time: 1835.0,
+    endTime: 1930.0,
+    title: "Helioseismology Acoustic p-Modes",
+    katex: "\\nabla^2 \\psi - \\frac{1}{c_s^2} \\frac{\\partial^2 \\psi}{\\partial t^2} = 0, \\quad c_s = \\sqrt{\\frac{\\gamma k T}{\\mu m_H}}",
+    desc: "Trapped acoustic sound waves resonate within the solar interior, mapping density and sound speed."
+  },
+  {
+    time: 1935.0,
+    endTime: 2060.0,
+    title: "Aditya-L1 Halo Orbit at Sun-Earth L1",
+    katex: "r_{\\text{L1}} \\approx R \\left(\\frac{M_E}{3 M_S}\\right)^{1/3} \\approx 1.5 \\times 10^6 \\text{ km from Earth}",
+    desc: "Continuous unhindered view of the Sun for coronal mass ejection tracking and space weather alerts."
+  },
+  {
+    time: 2065.0,
+    endTime: 2245.0,
+    title: "Earth's Dipole Magnetosphere & Bow Shock",
+    katex: "\\mathbf{F} = q(\\mathbf{E} + \\mathbf{v} \\times \\mathbf{B}), \\quad r_{\\text{mp}} \\approx \\left(\\frac{B_0^2}{2\\mu_0 \\rho v_{\\text{sw}}^2}\\right)^{1/6}",
+    desc: "Geodynamo outer core creates magnetic dipole shield, deflecting hypersonic CME plasma into polar Auroras!"
+  }
+];
+
+export const NARRATION_CUES = [
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 0.0,
+    "end": 8.36,
+    "text": "When you look into the night sky, you are looking backward in time."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 8.36,
+    "end": 19.29,
+    "text": "Because light takes time to travel, you never see the universe as it is\u2014only as it was."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 19.29,
+    "end": 36.01,
+    "text": "This raises a crucial question: To find out, we must understand how cosmic messengers travel: Every wave\u2014whether sound, water, or light\u2014is governed by three fundamental properties:"
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 36.01,
+    "end": 63.67,
+    "text": "First: **SPEED**. The speed of a wave is determined by the medium it travels through. While light slows down when passing through water or glass, across the vacuum of space it travels at the universe's absolute speed limit: 300,000 kilometers per second ($)."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 63.67,
+    "end": 84.89,
+    "text": "Second: **WAVELENGTH AND FREQUENCY**. Wavelength is the distance between two wave peaks ($\\lambda$), while frequency ($) is the number of waves that pass every second, linked by the equation  = \\lambda \\cdot f$."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 84.89,
+    "end": 98.39,
+    "text": "And Third: **ENERGY**. As quantum physics proved, a wave's energy is directly locked to its frequency: 18929E = h \\cdot f18929"
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 98.39,
+    "end": 106.11,
+    "text": "High-frequency waves pack intense, lethal energy\u2014like Gamma rays, X-rays, and Ultraviolet light."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 106.11,
+    "end": 113.18,
+    "text": "Low-frequency waves carry gentle, low energy\u2014like Infrared, Microwaves, and Radio waves."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 113.18,
+    "end": 125.4,
+    "text": "Here is the cosmic twist: As light travels across billions of light-years, it does not travel through static space."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 125.4,
+    "end": 130.55,
+    "text": "The fabric of spacetime itself is continually expanding."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 130.55,
+    "end": 138.26,
+    "text": "And as spacetime stretches, it physically stretches the traveling wave of light!"
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 138.26,
+    "end": 145.98,
+    "text": "Its wavelength elongates, its frequency steadily drops, and the wave **LOSES ENERGY**."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 145.98,
+    "end": 148.55,
+    "text": "This is **<span class=\"hl-cyan\">COSMOLOGICAL REDSHIFT</span>**."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 148.55,
+    "end": 167.85,
+    "text": "This explains a foundational mystery of astronomy: When the universe first became transparent, 380,000 years after the Big Bang, it unleashed a blinding, white-hot flash of light at <span class=\"hl-gold\">3,000 Kelvin</span>."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 167.85,
+    "end": 182.64,
+    "text": "Yet over 13.8 billion years of expanding space, that ancient traveling light lost so much energy that its wavelength stretched by 1,100 times!"
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 182.64,
+    "end": 184.57,
+    "text": "Its frequency collapsed."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 184.57,
+    "end": 200.64,
+    "text": "This establishes the ultimate boundary of observational astronomy: Based on hard physical evidence, electromagnetic waves can take us back only to that 380,000-year mark\u2014the <span class=\"hl-gold\">CMBR</span>."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 200.64,
+    "end": 223.15,
+    "text": "For galaxies, the Hubble Space Telescope saw back to 400 million years after the Big Bang, and the James Webb Space Telescope's infrared mirrors shattered all records by capturing ancient starlight from 290 million years."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 223.15,
+    "end": 241.8,
+    "text": "Beyond 380,000 years, however, light hits an impenetrable brick wall: the infant universe was a dense, opaque plasma fog that trapped all photons. No telescope can ever photograph it."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 241.8,
+    "end": 258.52,
+    "text": "To cross that boundary\u2014from 380,000 years back to the very instant of creation\u2014evidence hands the torch to **THEORETICAL PHYSICS**, verified by giant particle colliders like CERN."
+  },
+  {
+    "act": 1,
+    "badge": "ACT I \u2022 REDSHIFT & WAVE MECHANICS",
+    "start": 258.52,
+    "end": 266.88,
+    "text": "So let us journey back to the very beginning\u2014where our theories take us."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 266.88,
+    "end": 271.49,
+    "text": "Rewind the cosmic clock 13.8 billion years."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 271.49,
+    "end": 279.4,
+    "text": "There were no stars, no galaxies, no matter, and no empty space."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 279.4,
+    "end": 296.53,
+    "text": "There was neither a \"before\" nor an \"outside.\" All of existence was locked inside a single geometric point of infinite density, infinite temperature, and zero volume:"
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 296.53,
+    "end": 307.08,
+    "text": "Here, General Relativity collides with Quantum Mechanics, and all known equations of physics cease to operate."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 307.08,
+    "end": 315.64,
+    "text": "During the Planck Epoch\u2014the first $10^{-43}$ seconds\u2014temperatures stood at an unimaginable $10^{32}\\text{ Kelvin}$."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 315.64,
+    "end": 330.14,
+    "text": "The four fundamental forces of nature\u2014Gravity, the Strong Nuclear Force, the Weak Nuclear Force, and Electromagnetism\u2014were fused into a single, unified Superforce."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 330.14,
+    "end": 337.39,
+    "text": "As the primordial cosmos cooled, spontaneous symmetry breaking ruptured the Superforce."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 337.39,
+    "end": 340.03,
+    "text": "First, Gravity tore away."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 340.03,
+    "end": 350.57,
+    "text": "Then, at $10^{-36}$ seconds, the Strong Nuclear Force decoupled, triggering the cataclysmic epoch of **<span class=\"hl-cyan\">COSMIC INFLATION</span>**."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 350.57,
+    "end": 372.31,
+    "text": "As theoretical physicist Alan Guth demonstrated, in less than a trillionth of a trillionth of a second, spacetime expanded exponentially by a factor of $10^{78}$\u2014stretching a subatomic quantum bubble into a macroscopic universe."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 372.31,
+    "end": 390.77,
+    "text": "This hyper-luminal expansion flattened the geometry of spacetime, permanently solving the Horizon and Flatness problems and explaining why the cosmic sky is so astonishingly uniform in every direction."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 390.77,
+    "end": 399.33,
+    "text": "In the wake of Inflation, the universe was an ultra-dense, turbulent **<span class=\"hl-rose\">QUARK-GLUON PLASMA</span>**."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 399.33,
+    "end": 403.95,
+    "text": "Yet fundamental particles could not roam freely."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 403.95,
+    "end": 408.56,
+    "text": "They collided with the omnipresent **<span class=\"hl-gold\">HIGGS FIELD</span>**."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 408.56,
+    "end": 419.76,
+    "text": "Through the Higgs mechanism, quarks and leptons acquired mass, dragging their velocities below the speed of light."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 419.76,
+    "end": 436.89,
+    "text": "As the temperature dropped past $10^{12}\\text{ Kelvin}$, gluons bound the quarks into the first stable hadrons: Two up quarks and one down quark formed the **PROTON**."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 436.89,
+    "end": 443.48,
+    "text": "Two down quarks and one up quark formed the **NEUTRON**."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 443.48,
+    "end": 462.59,
+    "text": "Between the third and twentieth minutes, the universe acted as a single, cosmic thermonuclear reactor: Protons and neutrons fused into Helium-4 nuclei, alongside trace amounts of Deuterium and Lithium-7."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 462.59,
+    "end": 472.48,
+    "text": "The primordial elemental composition of the universe was carved in stone: Yet, reality remained pitch-black."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 472.48,
+    "end": 480.39,
+    "text": "For 380,000 years, the universe was an impenetrable, incandescent, opaque electronic fog."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 480.39,
+    "end": 492.91,
+    "text": "Because temperatures exceeded hundreds of thousands of Kelvin, electrons had too much thermal kinetic energy to bind with protons."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 492.91,
+    "end": 506.74,
+    "text": "Light photons could not travel a fraction of a millimeter without crashing into a free electron\u2014a process known as <span class=\"hl-gold\">Thomson scattering</span>."
+  },
+  {
+    "act": 2,
+    "badge": "ACT II \u2022 SINGULARITY & INFLATION",
+    "start": 506.74,
+    "end": 512.02,
+    "text": "When did the very first light break free?"
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 512.02,
+    "end": 520.09,
+    "text": "As spacetime relentlessly expanded over 380,000 years, the cosmic temperature steadily decayed."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 520.09,
+    "end": 532.2,
+    "text": "And when the universe reached precisely **380,000 YEARS OF AGE**, a foundational law of physical chemistry took command:"
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 532.2,
+    "end": 548.35,
+    "text": "Formulated in 1920 by the legendary Indian astrophysicist **<span class=\"hl-emerald\">Meghnad Saha</span>**, this thermodynamic formula dictated the exact threshold where thermal ionization yielded to atomic capture."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 548.35,
+    "end": 555.08,
+    "text": "The cosmic temperature fell to exactly **<span class=\"hl-gold\">3,000 KELVIN</span>** ($2,700\\text{ }^\\circ\\text{C}$)."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 555.08,
+    "end": 563.15,
+    "text": "Thermal kinetic energy plummeted below the 13.6 electron-volt ionization potential of Hydrogen."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 563.15,
+    "end": 581.32,
+    "text": "In an instant, protons captured free electrons into stable quantum shells, creating the universe's first neutral atoms: This historic watershed is known as **THE <span class=\"hl-emerald\">EPOCH OF RECOMBINATION</span>**."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 581.32,
+    "end": 588.72,
+    "text": "And the moment free electrons were locked away, the fog cleared."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 588.72,
+    "end": 601.51,
+    "text": "Optical depth dropped to zero, and trapped photons were liberated to travel freely across the cosmos in straight lines\u2014"
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 601.51,
+    "end": 605.54,
+    "text": "an event known as **<span class=\"hl-gold\">PHOTON DECOUPLING</span>**."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 605.54,
+    "end": 612.94,
+    "text": "In a single cosmological heartbeat, the universe became crystal-clear and transparent!"
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 612.94,
+    "end": 619.0,
+    "text": "This is where theory transforms into hard, measurable evidence."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 619.0,
+    "end": 640.53,
+    "text": "Trace the empirical steps along humanity's **Cosmic Evidence Ladder**: In **1964**, at Bell Laboratories in New Jersey, radio astronomers Arno Penzias and Robert Wilson aimed their Holmdel horn antenna at the sky."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 640.53,
+    "end": 653.32,
+    "text": "No matter where they pointed it, day or night, summer or winter, they detected an unyielding, isotropic microwave hiss."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 653.32,
+    "end": 658.7,
+    "text": "It was not pigeon droppings or city interference."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 658.7,
+    "end": 666.77,
+    "text": "It was the liberated afterglow of creation itself\u2014earning them the Nobel Prize."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 666.77,
+    "end": 680.9,
+    "text": "In **1992**, NASA's **COBE Satellite** measured this radiation and proved it was the most perfect blackbody spectrum ever observed in nature,"
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 680.9,
+    "end": 686.29,
+    "text": "confirming the Big Bang beyond all scientific doubt."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 686.29,
+    "end": 696.38,
+    "text": "In **2003**, NASA's **WMAP** mapped subtle temperature ripples across the cosmic sphere with unprecedented clarity."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 696.38,
+    "end": 708.49,
+    "text": "And in **2013**, the European Space Agency\u2019s **PLANCK OBSERVATORY** delivered the ultimate, gold-standard portrait of our infant universe:"
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 708.49,
+    "end": 720.6,
+    "text": "Over 13.8 billion years of cosmic expansion, this primordial light has been redshifted by a factor of 1,100,"
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 720.6,
+    "end": 732.04,
+    "text": "cooling from a dazzling <span class=\"hl-gold\">3,000 Kelvin</span> down to a frigid, uniform blackbody temperature of exactly **<span class=\"hl-cyan\">2.725 KELVIN</span>**."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 732.04,
+    "end": 748.86,
+    "text": "Look closely at the mottled red and blue patches on this map: They represent temperature variations of **ONLY ONE PART IN 100,000**\u2014a mere 18 micro-Kelvin!"
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 748.86,
+    "end": 757.61,
+    "text": "These are the primordial **Baryon Acoustic Oscillations**\u2014sound waves vibrating through the embryonic plasma."
+  },
+  {
+    "act": 3,
+    "badge": "ACT III \u2022 SAHA EQUATION & RECOMBINATION",
+    "start": 757.61,
+    "end": 775.1,
+    "text": "These minuscule density ripples created gravitational wells that gathered dark matter and hydrogen gas, igniting the **Cosmic Dawn** and birthing the very first stars and galaxies!"
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 775.1,
+    "end": 781.85,
+    "text": "In 1929, American astronomer Edwin Hubble fundamentally transformed human cosmology."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 781.85,
+    "end": 798.73,
+    "text": "Analyzing the spectral absorption lines of distant nebulae, he made an astounding discovery: Every distant galaxy exhibited a systematic shift toward longer, redder wavelengths\u2014**<span class=\"hl-cyan\">COSMOLOGICAL REDSHIFT</span>**."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 798.73,
+    "end": 818.98,
+    "text": "Hubble formulated his historic law: $$v = H_0 \\cdot d$$ The velocity of recession is directly proportional to distance: the farther a galaxy lies, the faster it recedes from Earth!"
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 818.98,
+    "end": 823.7,
+    "text": "Galaxies are not flying through pre-existing space."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 823.7,
+    "end": 829.1,
+    "text": "Rather, **THE FABRIC OF SPACETIME ITSELF IS EXPANDING**."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 829.1,
+    "end": 847.33,
+    "text": "Just as raisins inside baking bread separate from one another because the dough between them expands, expanding spacetime stretches the traveling waves of light passing through it."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 847.33,
+    "end": 859.48,
+    "text": "Seven decades later, in 1998, astronomers measuring **Type Ia Supernovae**\u2014exploding white dwarf stars acting as cosmic standard candles\u2014"
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 859.48,
+    "end": 870.28,
+    "text": "uncovered a second revolutionary shock: The expansion of the universe was not slowing down under gravity."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 870.28,
+    "end": 877.7,
+    "text": "Approximately 5 billion years ago, cosmic expansion began speeding up\u2014**ACCELERATING EXPANSION**!"
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 877.7,
+    "end": 894.58,
+    "text": "Driving this runaway expansion is an elusive, negative-pressure vacuum energy: **<span class=\"hl-rose\">DARK ENERGY</span> ($\\Lambda$)**, which constitutes over 68% of the total energy density of our universe."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 894.58,
+    "end": 907.4,
+    "text": "Because the speed of light is finite, looking deeper into space means looking deeper into the dawn of time."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 907.4,
+    "end": 920.23,
+    "text": "When NASA's **Hubble Space Telescope** stared into an apparently empty, dark patch of the constellation Fornax for ten days,"
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 920.23,
+    "end": 927.65,
+    "text": "it uncovered nearly 10,000 ancient galaxies\u2014the legendary **HUBBLE ULTRA DEEP FIELD**."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 927.65,
+    "end": 935.75,
+    "text": "Among them was the ultimate frontier galaxy of the optical era: **GN-z11**."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 935.75,
+    "end": 949.93,
+    "text": "With a redshift of $z = 10.60$, Hubble caught light that departed when the universe was only 400 million years old."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 949.93,
+    "end": 968.15,
+    "text": "Yet Hubble was fundamentally limited: cosmic expansion had shifted the earliest ultraviolet light entirely into the infrared, shrouding the first stars behind dense veils of interstellar dust."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 968.15,
+    "end": 983.68,
+    "text": "Humanity answered by constructing its greatest astronomical observatory: Stationed 1.5 million kilometers away at the gravitational haven of **Sun-Earth Lagrange Point 2 (L2)**,"
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 983.68,
+    "end": 993.8,
+    "text": "<span class=\"hl-gold\">JWST</span> deployed its cryogenically chilled, gold-coated beryllium primary mirrors and its revolutionary **Near-Infrared Camera (NIRCam)**."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 993.8,
+    "end": 998.53,
+    "text": "Infrared wavelengths pierce cosmic dust with ease."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 998.53,
+    "end": 1003.93,
+    "text": "And in May 2024, <span class=\"hl-gold\">JWST</span> rewrote astrophysical history."
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 1003.93,
+    "end": 1012.03,
+    "text": "It confirmed the most distant galaxy ever witnessed by human civilization: **JADES-GS-z14-0**!"
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 1012.03,
+    "end": 1014.73,
+    "text": "Redshift: **$z = 14.32$**!"
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 1014.73,
+    "end": 1024.85,
+    "text": "<span class=\"hl-gold\">JWST</span> captured an entire, luminous galaxy blazing only **290 MILLION YEARS AFTER THE BIG BANG**!"
+  },
+  {
+    "act": 4,
+    "badge": "ACT IV \u2022 HUBBLE EXPANSION & JWST",
+    "start": 1024.85,
+    "end": 1045.78,
+    "text": "This profound observation shattered previous theoretical models, proving that massive stars formed far earlier than anticipated, initiating the cosmic reionization that prepared the stage for the next great chapter of creation."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1045.78,
+    "end": 1051.97,
+    "text": "Now that the first stars were blazing across the cosmos..."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1051.97,
+    "end": 1060.64,
+    "text": "it was time for the creation of the remaining elements of the Periodic Table!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1060.64,
+    "end": 1071.16,
+    "text": "For decades, early cosmologists believed that all the elements in nature were manufactured during the Big Bang."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1071.16,
+    "end": 1087.88,
+    "text": "Yet when nuclear physicists attempted to calculate the reactions, they hit a fatal, insurmountable roadblock: Nature has no stable atomic nuclei with mass numbers 5 or 8!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1087.88,
+    "end": 1099.02,
+    "text": "If you add a proton to Helium-4, it falls apart in less than a septillionth of a second."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1099.02,
+    "end": 1107.69,
+    "text": "If you fuse two Helium-4 nuclei together, they form Beryllium-8, which decays almost instantaneously!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1107.69,
+    "end": 1113.88,
+    "text": "The universe was hopelessly trapped with only Hydrogen and Helium."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1113.88,
+    "end": 1120.08,
+    "text": "Where did Carbon, Oxygen, Silicon, Calcium, and Iron come from?"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1120.08,
+    "end": 1129.36,
+    "text": "In the early 1950s, an eccentric English astrophysicist named **<span class=\"hl-gold\">Fred Hoyle</span>** took on this puzzle."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1129.36,
+    "end": 1134.32,
+    "text": "Hoyle looked at the living world around him."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1134.32,
+    "end": 1152.27,
+    "text": "He looked at his own hands, made of carbon chains, and realized a simple, undeniable truth: If Carbon exists, and if human beings are here to contemplate the cosmos,"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1152.27,
+    "end": 1158.46,
+    "text": "then stars **MUST** have found a way to forge Carbon!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1158.46,
+    "end": 1172.09,
+    "text": "Hoyle calculated that inside the searing cores of red giant stars, three Helium nuclei\u2014three alpha particles\u2014must collide almost simultaneously to form Carbon-12:"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1172.09,
+    "end": 1173.94,
+    "text": "The **Triple-Alpha Process**."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1173.94,
+    "end": 1181.99,
+    "text": "Yet standard quantum calculations showed the odds of this happening were virtually zero."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1181.99,
+    "end": 1193.14,
+    "text": "The reaction was far too slow to produce even a fraction of the carbon observed in the universe."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1193.14,
+    "end": 1203.66,
+    "text": "Then, Hoyle experienced a flash of pure scientific genius: He reasoned backward from the existence of life."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1203.66,
+    "end": 1217.9,
+    "text": "He predicted that there **MUST EXIST** an undiscovered, excited quantum energy state inside the Carbon-12 nucleus\u2014 at an exact resonance of **<span class=\"hl-gold\"><span class=\"hl-gold\">7.65 MeV</span></span>**!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1217.9,
+    "end": 1227.81,
+    "text": "This resonance would act as a quantum stepping-stone, amplifying the fusion rate by millions of times!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1227.81,
+    "end": 1237.72,
+    "text": "Hoyle walked into the Kellogg Radiation Laboratory at Caltech, where nuclear physicist William Fowler was experimenting."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1237.72,
+    "end": 1248.86,
+    "text": "Fowler was skeptical\u2014why should an astronomer tell nuclear physicists about an unobserved energy level in a carbon nucleus?"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1248.86,
+    "end": 1251.34,
+    "text": "Yet Hoyle was relentless."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1251.34,
+    "end": 1258.15,
+    "text": "Fowler\u2019s team calibrated their particle accelerator, bombarded beryllium targets, and searched."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1258.15,
+    "end": 1269.29,
+    "text": "And to their absolute astonishment, the **<span class=\"hl-gold\">Hoyle State</span>** was discovered\u2014at precisely <span class=\"hl-gold\">7.65 MeV</span>, exactly where Hoyle had predicted!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1269.29,
+    "end": 1275.49,
+    "text": "That single quantum resonance level is the reason Carbon exists."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1275.49,
+    "end": 1286.63,
+    "text": "As Hoyle and his collaborators demonstrated in their landmark 1957 paper\u2014alongside Margaret Burbidge, Geoffrey Burbidge, and William Fowler:"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1286.63,
+    "end": 1292.82,
+    "text": "Every heavy element in your body was synthesized inside stars."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1292.82,
+    "end": 1308.3,
+    "text": "From Carbon, massive stars fuse heavier fuels in concentric layers like an onion: Carbon fuses to Neon and Oxygen... Oxygen fuses to Silicon and Sulfur..."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1308.3,
+    "end": 1322.54,
+    "text": "Until silicon fuses into the ultimate thermodynamic peak of the nuclear binding curve: Iron represents the most tightly bound nucleus in the cosmos."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1322.54,
+    "end": 1328.73,
+    "text": "Fusing elements beyond iron does not release energy\u2014it consumes energy!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1328.73,
+    "end": 1337.4,
+    "text": "When a massive star develops an inert iron core, its thermonuclear engine shuts down."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1337.4,
+    "end": 1345.45,
+    "text": "Outward radiation pressure vanishes, and gravity attempts to crush the core into oblivion."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1345.45,
+    "end": 1354.74,
+    "text": "The core resists through **ELECTRON DEGENERACY PRESSURE**\u2014the quantum rule that electrons cannot occupy identical states."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1354.74,
+    "end": 1372.08,
+    "text": "Yet in 1930, an extraordinary nineteen-year-old Indian student named **<span class=\"hl-emerald\">Subrahmanyan Chandrasekhar</span>**, traveling by ship from Madras to Cambridge, combined quantum mechanics with Einstein's Special Relativity on scrap paper."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1372.08,
+    "end": 1390.03,
+    "text": "Chandrasekhar proved that this quantum shield had an unyielding physical ceiling: The moment the collapsing iron core exceeds 1.44 solar masses, relativistic gravity crushes the electrons directly into protons:"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1390.03,
+    "end": 1409.23,
+    "text": "$$p + e^- \\to n + \\nu_e$$ In a fraction of a second, an iron core the size of Earth collapses into a ball of pure neutrons just twenty kilometers wide!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1409.23,
+    "end": 1427.18,
+    "text": "The infalling outer star slams into this incompressible neutron ball and detonates in a cataclysmic explosion: In this unimaginable blast, free neutron densities exceed $10^{20}\\text{ neutrons per cubic centimeter}$."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1427.18,
+    "end": 1443.9,
+    "text": "Through the **<span class=\"hl-gold\">r-process</span> (Rapid Neutron Capture)**, atomic nuclei gorge on neutrons faster than they can decay, forging the heaviest elements in the universe: Gold, Platinum, and Uranium!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1443.9,
+    "end": 1455.66,
+    "text": "Yet notice the thermodynamic paradox: The Second Law of Thermodynamics dictates that total entropy ($\\Delta S$) must always increase."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1455.66,
+    "end": 1463.09,
+    "text": "How could disorganized cosmic gas assemble into complex molecules and solar systems?"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1463.09,
+    "end": 1474.24,
+    "text": "The answer is governed by **GIBBS FREE ENERGY**: $$\\Delta G = \\Delta H - T\\Delta S < 0$$"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1474.24,
+    "end": 1480.43,
+    "text": "As atoms bind together, they release binding heat ($\\Delta H$)."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1480.43,
+    "end": 1484.76,
+    "text": "And into what does this heat disperse?"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1484.76,
+    "end": 1492.19,
+    "text": "Into the ultimate thermodynamic heat sink: **THE <span class=\"hl-cyan\">2.725 KELVIN</span> VACUUM OF SPACE**!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1492.19,
+    "end": 1506.43,
+    "text": "Because entropy change is $\\Delta S = \\frac{Q}{T}$, radiating heat into a freezing 2.7 Kelvin sink dramatically increases the entropy of the surroundings!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1506.43,
+    "end": 1516.34,
+    "text": "Local order in our solar system was purchased by increasing the global entropy of the universe!"
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1516.34,
+    "end": 1529.34,
+    "text": "Inside cold interstellar molecular clouds ($10\\text{ to }30\\text{ Kelvin}$), microscopic **Interstellar Dust Grains** of silicates and iron served as catalytic workbenches."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1529.34,
+    "end": 1541.73,
+    "text": "Gaseous atoms adhered to grain surfaces, migrated via quantum tunneling, and assembled Water ($\\text{H}_2\\text{O}$), Methane ($\\text{CH}_4$), and prebiotic amino acids."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1541.73,
+    "end": 1544.82,
+    "text": "The cosmic pantry was stocked."
+  },
+  {
+    "act": 5,
+    "badge": "ACT V \u2022 HOYLE STATE & SUPERNOVA",
+    "start": 1544.82,
+    "end": 1552.87,
+    "text": "The stage was set for the birth of our own star: **The Sun**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1552.87,
+    "end": 1569.56,
+    "text": "Approximately 4.6 billion years ago, inside the Orion Arm of the Milky Way, a passing supernova shockwave compressed a giant molecular cloud of gas and dust."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1569.56,
+    "end": 1586.88,
+    "text": "Under the inviolable law of **Conservation of Angular Momentum**, as the cloud contracted under its own gravity, its rotational speed accelerated, flattening into a vast accretion disk:"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1586.88,
+    "end": 1594.58,
+    "text": "Over $99.8\\%$ of the nebula's mass collapsed into the central gravitational well."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1594.58,
+    "end": 1618.32,
+    "text": "Core temperatures soared past 15 million Kelvin, and the central protostar ignited: Four hydrogen protons fused into a single Helium-4 nucleus, converting a 0.71% mass defect directly into 26.73 mega-electron-volts of radiant energy via $E = mc^2$."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1618.32,
+    "end": 1620.25,
+    "text": "Our star\u2014**THE SUN**\u2014awakened!"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1620.25,
+    "end": 1627.95,
+    "text": "Outward thermal radiation pressure precisely balanced inward gravitational collapse, establishing **HYDROSTATIC EQUILIBRIUM**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1627.95,
+    "end": 1643.99,
+    "text": "Yet to understand our Sun, we must place it in the grand architecture of stellar evolution: Every star begins inside a cold, dark **DIFFUSE NEBULA**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1643.99,
+    "end": 1654.9,
+    "text": "As gravity tightens its grip, pockets of gas condense into dense, opaque knots known as **BOK GLOBULES**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1654.9,
+    "end": 1671.58,
+    "text": "Inside each globule, gravitational collapse drives temperatures upward until a glowing **PROTOSTAR** is born, shrouded in accretion dust and blasting supersonic bipolar jets into the void."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1671.58,
+    "end": 1693.4,
+    "text": "Here, nature arrives at its first decisive evolutionary fork: If the collapsing mass falls below **0.08 SOLAR MASSES** (approximately 80 Jupiter masses), core pressure and temperature never cross the threshold to ignite hydrogen fusion."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1693.4,
+    "end": 1704.31,
+    "text": "These failed stars become **BROWN DWARFS**\u2014sub-stellar objects slowly radiating away their gravitational heat over trillions of years."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1704.31,
+    "end": 1713.93,
+    "text": "Only protostars exceeding $0.08\\ M_\\odot$ ignite core hydrogen fusion, settling triumphantly onto the **MAIN SEQUENCE**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1713.93,
+    "end": 1727.41,
+    "text": "From here, mass dictates destiny along two dramatically divergent paths: For low-to-medium mass stars like our Sun (under 8 solar masses):"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1727.41,
+    "end": 1735.75,
+    "text": "The star burns hydrogen steadily on the main sequence for billions of years."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1735.75,
+    "end": 1746.66,
+    "text": "When core hydrogen exhausts, the core contracts while the outer envelope swells into an enormous **RED GIANT**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1746.66,
+    "end": 1768.48,
+    "text": "Eventually, the dying star gently puffs off its outer layers, creating an iridescent **PLANETARY NEBULA**, leaving behind an ultra-dense, Earth-sized ember of carbon and oxygen: a **WHITE DWARF**, held up by electron degeneracy pressure."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1768.48,
+    "end": 1778.74,
+    "text": "Over hundreds of billions of years, it will slowly cool into a cold, dark **BLACK DWARF**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1778.74,
+    "end": 1792.22,
+    "text": "For massive stars exceeding 8 solar masses: They burn through their nuclear fuel with reckless fury, swelling into colossal **RED SUPERGIANTS**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1792.22,
+    "end": 1807.62,
+    "text": "When their iron cores exceed the 1.44 solar mass Chandrasekhar limit, the core collapses in a millisecond, detonating in a violent **TYPE II SUPERNOVA**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1807.62,
+    "end": 1819.17,
+    "text": "In this cataclysm, an astronomical flood of neutrons triggers the $r$-process, forging the universe's gold, platinum, and uranium."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1819.17,
+    "end": 1842.27,
+    "text": "What remains of the core is crushed beyond atomic limits: Into a 20-kilometer **NEUTRON STAR**, or if the core exceeds 3 solar masses (the Tolman-Oppenheimer-Volkoff limit), gravity wins completely, tearing open spacetime into a **BLACK HOLE**!"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1842.27,
+    "end": 1853.82,
+    "text": "And here is the ultimate cosmic cycle: The explosive debris of supernovae and planetary nebulae does not disappear."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1853.82,
+    "end": 1867.29,
+    "text": "It shoots across interstellar space, seeding the cosmos with carbon, oxygen, iron, and gold\u2014condensing once again into a **NEW, ENRICHED NEBULA**!"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1867.29,
+    "end": 1891.68,
+    "text": "This explains why our Sun is profoundly different from the stars of the ancient past: The earliest stars\u2014**POPULATION III STARS**\u2014formed from pristine Big Bang gas containing zero metals. They were hyper-massive titans that lived fast and died young."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1891.68,
+    "end": 1898.1,
+    "text": "Our Sun, by contrast, is a third-generation **POPULATION I STAR**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1898.1,
+    "end": 1912.85,
+    "text": "It was born from a recycled nebula that had been enriched by the ashes of two or three previous generations of dying stars!"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1912.85,
+    "end": 1920.55,
+    "text": "That is why our solar system contains iron, silicon, calcium, and gold."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1920.55,
+    "end": 1932.1,
+    "text": "Without this multi-generational stellar recycling, there would be no rocky planets, no iron cores, and no living beings!"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1932.1,
+    "end": 1953.28,
+    "text": "Yet how can astrophysicists map the opaque interior of the Sun when a single photon takes over 100,000 to 170,000 years of random walk diffusion to escape from the core to the surface?"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1953.28,
+    "end": 1959.06,
+    "text": "Because **WE LISTEN TO THE SOUND OF THE SUN**!"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1959.06,
+    "end": 1968.04,
+    "text": "Turbulent thermal convection in the Sun's outer convective zone generates continuous acoustic pressure waves."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1968.04,
+    "end": 1978.31,
+    "text": "The Sun resonates like a colossal bell, vibrating in millions of distinct five-minute acoustic modes (**$p$-modes**)!"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1978.31,
+    "end": 1993.06,
+    "text": "Using **<span class=\"hl-cyan\">HELIOSEISMOLOGY</span>**, instruments aboard NASA's SOHO, SDO, and India's **<span class=\"hl-emerald\">ADITYA-L1</span>** spacecraft have probed the Sun\u2019s internal anatomy, uncovering its most critical dynamic engine:"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 1993.06,
+    "end": 2007.82,
+    "text": "This razor-thin shear boundary between the rigidly rotating radiative core and the differentially rotating convective envelope generates the Sun\u2019s colossal Babcock-Leighton magnetic dynamo!"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2007.82,
+    "end": 2025.79,
+    "text": "Across the surrounding protoplanetary disk, at exactly **2.7 ASTRONOMICAL UNITS**, ran an invisible thermodynamic frontier: Inside 2.7 AU, intense solar heat kept temperatures above 150 Kelvin ($-123\\text{ }^\\circ\\text{C}$)."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2025.79,
+    "end": 2039.27,
+    "text": "Volatiles could not condense; only refractory silicates and metals remained solid, forming the rocky inner worlds: Mercury, Venus, Earth, and Mars."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2039.27,
+    "end": 2058.52,
+    "text": "Beyond 2.7 AU, water, ammonia, and methane froze into abundant solid ice crystals, building massive cores that vacuumed up nebular gas to inflate the giants: Jupiter, Saturn, Uranus, and Neptune."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2058.52,
+    "end": 2074.56,
+    "text": "Leftover planetesimals became **ASTEROIDS**\u2014Carbonaceous C-types, Silicate S-types, and Metallic M-types\u2014 carving massive impact craters across Earth, including South Africa's Vredefort, and India's renowned impact structures:"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2074.56,
+    "end": 2080.33,
+    "text": "Simultaneously, icy **COMETS**\u2014Fred Whipple's \"dirty snowballs\"\u2014plunged toward the Sun."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2080.33,
+    "end": 2100.22,
+    "text": "Solar Wind swept their ionized gases directly anti-solar into glowing blue **Type I Ion Tails**, while Solar Radiation Pressure gently curved their particulate debris into broad, reflective **Type II Dust Tails**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2100.22,
+    "end": 2107.28,
+    "text": "Yet our Sun is not merely a benevolent beacon of light."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2107.28,
+    "end": 2116.27,
+    "text": "It periodically unleashes violent **Coronal Mass Ejections (CMEs)** and a relentless, 900-kilometer-per-second **Solar Wind**."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2116.27,
+    "end": 2129.1,
+    "text": "The catastrophic Carrington Event of 1859 demonstrated the destructive power of these space weather storms, inducing massive geomagnetically induced currents."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2129.1,
+    "end": 2134.23,
+    "text": "How did Earth survive this perpetual stellar onslaught?"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2134.23,
+    "end": 2155.41,
+    "text": "Because deep within Earth\u2019s liquid iron outer core, the **<span class=\"hl-emerald\">GEODYNAMO</span>** generated an impenetrable shield: Our **Bow Shock**, **Magnetopause**, and **Van Allen Radiation Belts** deflect the lethal charged solar plasma safely around the globe."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2155.41,
+    "end": 2168.88,
+    "text": "Without this geomagnetic shield, the solar wind would have stripped away our atmosphere, leaving Earth a sterile, desolated desert, like Mars!"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2168.88,
+    "end": 2183.0,
+    "text": "Our journey, which began in the blinding quantum flash of the Big Bang, has traversed the ancient microwave light of the <span class=\"hl-gold\">CMBR</span>,"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2183.0,
+    "end": 2197.12,
+    "text": "witnessed the birth of the earliest galaxies through the gold mirrors of Webb, descended into the nuclear fires of dying supergiant stars,"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2197.12,
+    "end": 2204.18,
+    "text": "and arrived safely beneath the magnetic shield of our living Earth."
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2204.18,
+    "end": 2218.94,
+    "text": "Yet the greatest mysteries are only now beginning to unfold: How did simple atoms organize into twenty distinct crystalline phases of water ice?"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2218.94,
+    "end": 2226.64,
+    "text": "Why did Jupiter's gravity shatter Comet Shoemaker-Levy 9 at the Roche Limit?"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2226.64,
+    "end": 2233.05,
+    "text": "Why did Venus transform into a 92-atmosphere runaway greenhouse hell?"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2233.05,
+    "end": 2243.32,
+    "text": "And how did Earth\u2019s precise one-atmosphere surface pressure prevent our oceans from evaporating into the void?"
+  },
+  {
+    "act": 6,
+    "badge": "ACT VI \u2022 TACHOCLINE & GEODYNAMO",
+    "start": 2243.32,
+    "end": 2249.74,
+    "text": "Join us for the next chapter in this cosmic journey:"
+  }
+];
+
+export class CosmicBroadcastStudio {
+  constructor() {
+    this.container = document.getElementById('cosmic-theater');
+    this.canvas = document.getElementById('broadcast-canvas');
+    if (!this.canvas) return;
+    this.ctx = this.canvas.getContext('2d');
+    this.scrubber = document.getElementById('timeline-slider');
+
+    this.currentTime = 0;
+    this.duration = 2249.736;
+    this.isPlaying = false;
+    this.speed = 1.0;
+    this.currentActIndex = 0;
+    this.lastTimestamp = performance.now();
+    this.isScrubbing = false;
+    this.userDismissedPip = false;
+
+    // Dimensions
+    this.W = this.canvas.width = 1920;
+    this.H = this.canvas.height = 1080;
+
+    // Simulation Particle Stores
+    this.initSimStores();
+
+    // Event Listeners & Observers
+    this.initEventListeners();
+    this.initPiPObserver();
+    this.updateHUDTime();
+
+    // Render loop
+    this.renderLoop = this.renderLoop.bind(this);
+    requestAnimationFrame(this.renderLoop);
   }
 
-  let W = container.clientWidth || 800;
-  let H = container.clientHeight || 560;
-
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x030408, 0.008);
-
-  const camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 1000);
-  camera.position.set(0, 0, 38);
-
-  const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: true,
-    alpha: false,
-    powerPreference: 'high-performance'
-  });
-  renderer.setSize(W, H);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-
-  // Circular sprite texture for stars, plasma and photons
-  function createGlowTexture() {
-    const c = document.createElement('canvas');
-    c.width = 64; c.height = 64;
-    const ctx = c.getContext('2d');
-    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-    grad.addColorStop(0, 'rgba(255,255,255,1)');
-    grad.addColorStop(0.25, 'rgba(200,230,255,0.85)');
-    grad.addColorStop(0.6, 'rgba(100,160,255,0.3)');
-    grad.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 64, 64);
-    return new THREE.CanvasTexture(c);
-  }
-  const glowTexture = createGlowTexture();
-
-  // 1. STARFIELD WITH RELATIVISTIC VELOCITY CONTRACTION
-  const starCount = 3600;
-  const starGeo = new THREE.BufferGeometry();
-  const starPos = new Float32Array(starCount * 3);
-  const starColors = new Float32Array(starCount * 3);
-  const starVel = new Float32Array(starCount);
-
-  const palette = [
-    [0.60, 0.75, 1.00],
-    [0.85, 0.92, 1.00],
-    [1.00, 0.96, 0.85],
-    [1.00, 0.80, 0.50],
-    [1.00, 0.45, 0.35]
-  ];
-
-  for (let i = 0; i < starCount; i++) {
-    starPos[i * 3] = (Math.random() - 0.5) * 160;
-    starPos[i * 3 + 1] = (Math.random() - 0.5) * 130;
-    starPos[i * 3 + 2] = (Math.random() - 0.5) * 160;
-    starVel[i] = 0.05 + Math.random() * 0.12;
-
-    const col = palette[Math.floor(Math.random() * palette.length)];
-    starColors[i * 3] = col[0];
-    starColors[i * 3 + 1] = col[1];
-    starColors[i * 3 + 2] = col[2];
-  }
-
-  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-  starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
-
-  const starMat = new THREE.PointsMaterial({
-    size: 1.8,
-    map: glowTexture,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.85,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-  const starPoints = new THREE.Points(starGeo, starMat);
-  scene.add(starPoints);
-
-  // 2. SPACETIME GEODESIC CURVATURE GRID (Einstein's GR Tensor G_uv)
-  const gridW = 100, gridH = 100;
-  const gridSegs = 40;
-  const gridGeo = new THREE.PlaneGeometry(gridW, gridH, gridSegs, gridSegs);
-  gridGeo.rotateX(-Math.PI / 2.3);
-  gridGeo.translate(0, -9, 0);
-
-  const gridOrigY = new Float32Array(gridGeo.attributes.position.array.length);
-  gridOrigY.set(gridGeo.attributes.position.array);
-
-  const gridMat = new THREE.MeshBasicMaterial({
-    color: 0x02d2e3,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.14,
-    blending: THREE.AdditiveBlending
-  });
-  const spacetimeGrid = new THREE.Mesh(gridGeo, gridMat);
-  scene.add(spacetimeGrid);
-
-  // 3. MASTER EPOCH GROUPS (Continuum from 13.8 Ga to Present)
-  const masterEpochsGroup = new THREE.Group();
-  scene.add(masterEpochsGroup);
-
-  // --- EPOCH 0: Primordial Genesis & Expanding Redshift Waves (13.8 Ga -> 380k yr) ---
-  const ep0Group = new THREE.Group();
-  masterEpochsGroup.add(ep0Group);
-
-  const fbCount = 1000;
-  const fbGeo = new THREE.BufferGeometry();
-  const fbPos = new Float32Array(fbCount * 3);
-  const fbColors = new Float32Array(fbCount * 3);
-  for (let i = 0; i < fbCount; i++) {
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos((Math.random() * 2) - 1);
-    const r = 0.5 + Math.random() * 5.5;
-    fbPos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-    fbPos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-    fbPos[i * 3 + 2] = r * Math.cos(phi);
-
-    fbColors[i * 3] = 1.0;
-    fbColors[i * 3 + 1] = 0.5 + Math.random() * 0.4;
-    fbColors[i * 3 + 2] = 0.8 + Math.random() * 0.2;
-  }
-  fbGeo.setAttribute('position', new THREE.BufferAttribute(fbPos, 3));
-  fbGeo.setAttribute('color', new THREE.BufferAttribute(fbColors, 3));
-  const fbMat = new THREE.PointsMaterial({
-    size: 2.4,
-    map: glowTexture,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.9,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-  const fireball = new THREE.Points(fbGeo, fbMat);
-  ep0Group.add(fireball);
-
-  // Expanding Cosmological Redshift Wave Rings
-  const waveRings = [];
-  const ringGeo = new THREE.RingGeometry(0.8, 1.1, 48);
-  for (let r = 0; r < 5; r++) {
-    const waveMat = new THREE.MeshBasicMaterial({
-      color: 0x8c68ff,
-      side: THREE.DoubleSide,
-      transparent: true,
-      opacity: 0.7,
-      blending: THREE.AdditiveBlending
-    });
-    const ringMesh = new THREE.Mesh(ringGeo, waveMat);
-    ringMesh.rotation.x = Math.PI / 2.8;
-    ringMesh.userData = { offset: r * 0.2 };
-    ep0Group.add(ringMesh);
-    waveRings.push(ringMesh);
-  }
-
-  // --- EPOCH 1: Cosmic Dark Ages & JWST Frontier (380k yr -> 290 Myr) ---
-  const ep1Group = new THREE.Group();
-  masterEpochsGroup.add(ep1Group);
-
-  const jwstCount = 800;
-  const jwstGeo = new THREE.BufferGeometry();
-  const jwstPos = new Float32Array(jwstCount * 3);
-  const jwstColors = new Float32Array(jwstCount * 3);
-  for (let i = 0; i < jwstCount; i++) {
-    const arm = i % 2 === 0 ? 0 : Math.PI;
-    const dist = 2 + Math.random() * 14;
-    const angle = dist * 0.45 + arm + (Math.random() - 0.5) * 0.5;
-    jwstPos[i * 3] = Math.cos(angle) * dist;
-    jwstPos[i * 3 + 1] = (Math.random() - 0.5) * 2.2;
-    jwstPos[i * 3 + 2] = Math.sin(angle) * dist;
-
-    jwstColors[i * 3] = 0.1 + Math.random() * 0.3;
-    jwstColors[i * 3 + 1] = 0.8 + Math.random() * 0.2;
-    jwstColors[i * 3 + 2] = 1.0;
-  }
-  jwstGeo.setAttribute('position', new THREE.BufferAttribute(jwstPos, 3));
-  jwstGeo.setAttribute('color', new THREE.BufferAttribute(jwstColors, 3));
-  const jwstMat = new THREE.PointsMaterial({
-    size: 2.2,
-    map: glowTexture,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.85,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-  const earlyGalaxies = new THREE.Points(jwstGeo, jwstMat);
-  ep1Group.add(earlyGalaxies);
-
-  // --- EPOCH 2: Stellar Lifecycle & Supernova Nucleosynthesis ---
-  const ep2Group = new THREE.Group();
-  masterEpochsGroup.add(ep2Group);
-
-  const snCount = 1200;
-  const snGeo = new THREE.BufferGeometry();
-  const snPos = new Float32Array(snCount * 3);
-  const snVel = new Float32Array(snCount * 3);
-  const snColors = new Float32Array(snCount * 3);
-  for (let i = 0; i < snCount; i++) {
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos((Math.random() * 2) - 1);
-    const speed = 0.08 + Math.random() * 0.22;
-    snVel[i * 3] = speed * Math.sin(phi) * Math.cos(theta);
-    snVel[i * 3 + 1] = speed * Math.sin(phi) * Math.sin(theta);
-    snVel[i * 3 + 2] = speed * Math.cos(phi);
-
-    snPos[i * 3] = 0;
-    snPos[i * 3 + 1] = 0;
-    snPos[i * 3 + 2] = 0;
-
-    const isGold = Math.random() > 0.4;
-    snColors[i * 3] = isGold ? 1.0 : 0.95;
-    snColors[i * 3 + 1] = isGold ? 0.75 : 0.25;
-    snColors[i * 3 + 2] = isGold ? 0.2 : 0.1;
-  }
-  snGeo.setAttribute('position', new THREE.BufferAttribute(snPos, 3));
-  snGeo.setAttribute('color', new THREE.BufferAttribute(snColors, 3));
-  const snMat = new THREE.PointsMaterial({
-    size: 2.0,
-    map: glowTexture,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.9,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-  const supernovaBlast = new THREE.Points(snGeo, snMat);
-  ep2Group.add(supernovaBlast);
-
-  // --- EPOCH 3: Birth of Our Sun & Solar Anatomy (4.6 Ga) ---
-  const ep3Group = new THREE.Group();
-  masterEpochsGroup.add(ep3Group);
-
-  const sunCenterGeo = new THREE.SphereGeometry(3.2, 32, 24);
-  const sunCenterMat = new THREE.MeshBasicMaterial({ color: 0xfff6dd });
-  const sunCore = new THREE.Mesh(sunCenterGeo, sunCenterMat);
-  ep3Group.add(sunCore);
-
-  const coronaGeo = new THREE.SphereGeometry(3.6, 24, 18);
-  const coronaMat = new THREE.MeshBasicMaterial({
-    color: 0xffa500,
-    transparent: true,
-    opacity: 0.65,
-    blending: THREE.AdditiveBlending
-  });
-  const coronaMesh = new THREE.Mesh(coronaGeo, coronaMat);
-  ep3Group.add(coronaMesh);
-
-  const diskCount = 1400;
-  const diskGeo = new THREE.BufferGeometry();
-  const diskPos = new Float32Array(diskCount * 3);
-  const diskColors = new Float32Array(diskCount * 3);
-  for (let i = 0; i < diskCount; i++) {
-    const r = 4.2 + Math.random() * 18;
-    const a = Math.random() * Math.PI * 2;
-    diskPos[i * 3] = Math.cos(a) * r;
-    diskPos[i * 3 + 1] = (Math.random() - 0.5) * 0.9 * (18 / r);
-    diskPos[i * 3 + 2] = Math.sin(a) * r;
-
-    diskColors[i * 3] = 1.0;
-    diskColors[i * 3 + 1] = 0.5 + Math.random() * 0.4;
-    diskColors[i * 3 + 2] = 0.15;
-  }
-  diskGeo.setAttribute('position', new THREE.BufferAttribute(diskPos, 3));
-  diskGeo.setAttribute('color', new THREE.BufferAttribute(diskColors, 3));
-  const diskMat = new THREE.PointsMaterial({
-    size: 2.0,
-    map: glowTexture,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.8,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-  const accretionDisk = new THREE.Points(diskGeo, diskMat);
-  accretionDisk.rotation.x = Math.PI / 4.2;
-  ep3Group.add(accretionDisk);
-
-  const loopCount = 4;
-  for (let l = 0; l < loopCount; l++) {
-    const loopGeo = new THREE.TorusGeometry(3.8, 0.05, 12, 36, Math.PI);
-    const loopMat = new THREE.MeshBasicMaterial({
-      color: 0x02d2e3,
-      transparent: true,
-      opacity: 0.7,
-      blending: THREE.AdditiveBlending
-    });
-    const loopMesh = new THREE.Mesh(loopGeo, loopMat);
-    loopMesh.rotation.y = (l * Math.PI) / loopCount;
-    loopMesh.rotation.x = Math.PI / 2 + (l * 0.2);
-    ep3Group.add(loopMesh);
-  }
-
-  // --- EPOCH 4: Earth's Geodynamo & Magnetospheric Shield ---
-  const ep4Group = new THREE.Group();
-  masterEpochsGroup.add(ep4Group);
-
-  const earthGeo = new THREE.SphereGeometry(2.0, 32, 24);
-  const earthMat = new THREE.MeshBasicMaterial({
-    color: 0x1565c0,
-    wireframe: true
-  });
-  const earthSphere = new THREE.Mesh(earthGeo, earthMat);
-  earthSphere.position.set(12, 0, 0);
-  ep4Group.add(earthSphere);
-
-  const bowCurve = new THREE.EllipseCurve(12, 0, 4.5, 7.5, Math.PI / 2, -Math.PI / 2, false, 0);
-  const bowPoints = bowCurve.getPoints(40);
-  const bowGeo = new THREE.BufferGeometry().setFromPoints(bowPoints.map(p => new THREE.Vector3(p.x, p.y, 0)));
-  const bowMat = new THREE.LineBasicMaterial({
-    color: 0x02d2e3,
-    transparent: true,
-    opacity: 0.85,
-    blending: THREE.AdditiveBlending
-  });
-  const bowShock = new THREE.Line(bowGeo, bowMat);
-  ep4Group.add(bowShock);
-
-  const swCount = 700;
-  const swGeo = new THREE.BufferGeometry();
-  const swPos = new Float32Array(swCount * 3);
-  const swVel = new Float32Array(swCount);
-  for (let i = 0; i < swCount; i++) {
-    swPos[i * 3] = -25 + Math.random() * 50;
-    swPos[i * 3 + 1] = (Math.random() - 0.5) * 16;
-    swPos[i * 3 + 2] = (Math.random() - 0.5) * 16;
-    swVel[i] = 0.25 + Math.random() * 0.35;
-  }
-  swGeo.setAttribute('position', new THREE.BufferAttribute(swPos, 3));
-  const swMat = new THREE.PointsMaterial({
-    size: 2.2,
-    color: 0xffd54f,
-    map: glowTexture,
-    transparent: true,
-    opacity: 0.85,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-  const solarWind = new THREE.Points(swGeo, swMat);
-  ep4Group.add(solarWind);
-
-  // STATE & TELEMETRY CONTROLLER
-  let timelineProgress = 0.0;
-  let targetTimelineProgress = 0.0;
-  let isAutoPlaying = false;
-  let warpActive = false;
-  let gravityLensActive = true;
-
-  let mouseX = 0, mouseY = 0;
-  let targetCamX = 0, targetCamY = 0;
-  let targetCamZ = 38;
-  let mouseVelocity = 0;
-  let lastMouseX = 0, lastMouseY = 0;
-  let lastTime = performance.now();
-
-  // Mouse Orbit inside viewport
-  container.addEventListener('mousemove', (e) => {
-    const rect = container.getBoundingClientRect();
-    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-    mouseX = nx;
-    mouseY = ny;
-    targetCamX = nx * 12.0;
-    targetCamY = ny * 8.0;
-
-    const dx = e.clientX - lastMouseX;
-    const dy = e.clientY - lastMouseY;
-    mouseVelocity = Math.sqrt(dx * dx + dy * dy);
-    lastMouseX = e.clientX;
-    lastMouseY = e.clientY;
-  });
-
-  container.addEventListener('mouseleave', () => {
-    targetCamX = 0;
-    targetCamY = 0;
-  });
-
-  // DOM Elements
-  const playBtn = document.getElementById('theater-btn-play');
-  const playIcon = document.getElementById('play-icon');
-  const playText = document.getElementById('play-text');
-  const warpBtn = document.getElementById('theater-btn-warp');
-  const lensBtn = document.getElementById('theater-btn-lens');
-  const pipBtn = document.getElementById('theater-btn-pip');
-  const fsBtn = document.getElementById('theater-btn-fs');
-  const scrubber = document.getElementById('theater-scrubber');
-  const captionTag = document.getElementById('caption-epoch-tag');
-  const captionText = document.getElementById('caption-text');
-  const epochPills = document.querySelectorAll('.epoch-pill');
-  const telTime = document.getElementById('theater-tel-time');
-  const telZ = document.getElementById('theater-tel-z');
-  const telTemp = document.getElementById('theater-tel-temp');
-  const telScale = document.getElementById('theater-tel-scale');
-
-  const epochData = [
-    {
-      threshold: 0.18,
-      name: 'EPOCH 01 • 13.8 BILLION YEARS AGO (PRIMORDIAL GENESIS)',
-      time: '-13.8 Billion Years',
-      z: 'z = 1100.0',
-      temp: '3,000 K',
-      scale: '0.00091',
-      caption: 'The universe detonates from an infinitesimal quantum singularity. Photons stretch across expanding spacetime, losing energy through Cosmological Redshift.',
-      camZ: 32
-    },
-    {
-      threshold: 0.40,
-      name: 'EPOCH 02 • 290 MILLION YEARS AFTER BIG BANG (JWST DEEP FRONTIER)',
-      time: '-13.5 Billion Years',
-      z: 'z = 14.32',
-      temp: '30 K',
-      scale: '0.065',
-      caption: 'Cosmic Dark Ages terminate as pristine hydrogen collapses. Hyper-massive Population III stars ignite, detected by JWST at record redshift z = 14.32.',
-      camZ: 38
-    },
-    {
-      threshold: 0.65,
-      name: 'EPOCH 03 • 9.0 BILLION YEARS AGO (STELLAR NUCLEOSYNTHESIS)',
-      time: '-9.0 Billion Years',
-      z: 'z = 1.80',
-      temp: '15 K',
-      scale: '0.357',
-      caption: 'Dying supergiants collapse under gravity. Cataclysmic Type II supernovae erupt, forging gold, platinum, and uranium via the rapid neutron capture r-process.',
-      camZ: 36
-    },
-    {
-      threshold: 0.88,
-      name: 'EPOCH 04 • 4.6 BILLION YEARS AGO (1st SUN IGNITION & ADITYA-L1)',
-      time: '-4.6 Billion Years',
-      z: 'z = 0.42',
-      temp: '5,778 K (Sun)',
-      scale: '0.704',
-      caption: 'Our proto-solar nebula collapses into a Keplerian disk. Core fusion ignites at 15 Million K, unleashing solar winds that clear the circumstellar dust shroud.',
-      camZ: 34
-    },
-    {
-      threshold: 1.01,
-      name: 'EPOCH 05 • PRESENT DAY (EARTH GEODYNAMO MAGNETOSPHERE SHIELD)',
-      time: 'Present Day (0 yr)',
-      z: 'z = 0.00',
-      temp: '2.725 K (CMB)',
-      scale: '1.000',
-      caption: "Earth's liquid outer core drives an electromagnetic geodynamo, deflecting 450 km/s solar wind storms and shielding the planetary biosphere.",
-      camZ: 32
-    }
-  ];
-
-  function updateHUD(p) {
-    if (scrubber && !scrubber.matches(':active')) {
-      scrubber.value = (p * 100).toFixed(1);
-    }
-    const ep = epochData.find(e => p <= e.threshold) || epochData[epochData.length - 1];
-    if (captionTag) captionTag.textContent = ep.name;
-    if (captionText) captionText.textContent = ep.caption;
-    if (telTime) telTime.textContent = ep.time;
-    if (telZ) telZ.textContent = ep.z;
-    if (telTemp) telTemp.textContent = ep.temp;
-    if (telScale) telScale.textContent = ep.scale;
-    targetCamZ = ep.camZ;
-
-    epochPills.forEach(pill => {
-      const step = parseFloat(pill.dataset.step) / 100;
-      pill.classList.toggle('active', Math.abs(p - step) < 0.13);
-    });
-  }
-
-  // Play / Pause Movie Button
-  if (playBtn) {
-    playBtn.addEventListener('click', () => {
-      isAutoPlaying = !isAutoPlaying;
-      playBtn.classList.toggle('is-playing', isAutoPlaying);
-      if (playIcon) playIcon.textContent = isAutoPlaying ? '⏸' : '▶';
-      if (playText) playText.textContent = isAutoPlaying ? 'PAUSE MOVIE' : 'PLAY COSMIC MOVIE';
-      if (isAutoPlaying && targetTimelineProgress >= 0.98) {
-        targetTimelineProgress = 0.0;
-        timelineProgress = 0.0;
-      }
-    });
-  }
-
-  // Scrubber drag
-  if (scrubber) {
-    scrubber.addEventListener('input', (e) => {
-      isAutoPlaying = false;
-      if (playBtn) playBtn.classList.remove('is-playing');
-      if (playIcon) playIcon.textContent = '▶';
-      if (playText) playText.textContent = 'PLAY COSMIC MOVIE';
-      targetTimelineProgress = parseFloat(e.target.value) / 100;
-    });
-  }
-
-  // Epoch pills click
-  epochPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      isAutoPlaying = false;
-      if (playBtn) playBtn.classList.remove('is-playing');
-      if (playIcon) playIcon.textContent = '▶';
-      if (playText) playText.textContent = 'PLAY COSMIC MOVIE';
-      targetTimelineProgress = parseFloat(pill.dataset.step) / 100;
-    });
-  });
-
-  // Toggles
-  if (warpBtn) {
-    warpBtn.addEventListener('click', () => {
-      warpActive = !warpActive;
-      warpBtn.classList.toggle('active', warpActive);
-    });
-  }
-
-  if (lensBtn) {
-    lensBtn.addEventListener('click', () => {
-      gravityLensActive = !gravityLensActive;
-      lensBtn.classList.toggle('active', gravityLensActive);
-    });
-  }
-
-  // Fullscreen IMAX Toggle
-  if (fsBtn) {
-    fsBtn.addEventListener('click', () => {
-      root.classList.toggle('is-fullscreen');
-      const isFs = root.classList.contains('is-fullscreen');
-      fsBtn.classList.toggle('active', isFs);
-      fsBtn.textContent = isFs ? '✕ Exit IMAX' : '⛶ IMAX Fullscreen';
-      setTimeout(resize, 60);
-    });
-  }
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && root.classList.contains('is-fullscreen')) {
-      root.classList.remove('is-fullscreen');
-      if (fsBtn) {
-        fsBtn.classList.remove('active');
-        fsBtn.textContent = '⛶ IMAX Fullscreen';
-      }
-      setTimeout(resize, 60);
-    }
-  });
-
-  // PiP Floating Toggle
-  if (pipBtn) {
-    pipBtn.addEventListener('click', () => {
-      root.classList.toggle('is-pip');
-      const isPip = root.classList.contains('is-pip');
-      pipBtn.classList.toggle('active', isPip);
-      pipBtn.textContent = isPip ? '✕ Undock' : '📌 Dock PiP';
-      setTimeout(resize, 60);
-    });
-  }
-
-  function getEpochWeight(p, center, width) {
-    const diff = (p - center) / width;
-    return Math.max(0, Math.min(1, Math.exp(-diff * diff * 3.5)));
-  }
-
-  let animId = null;
-
-  function render(now) {
-    animId = requestAnimationFrame(render);
-    const dt = Math.min((now - lastTime) * 0.001, 0.1);
-    lastTime = now;
-
-    if (isAutoPlaying) {
-      targetTimelineProgress += dt * 0.038;
-      if (targetTimelineProgress > 1.0) {
-        targetTimelineProgress = 0.0;
-        timelineProgress = 0.0;
-      }
-    }
-
-    timelineProgress += (targetTimelineProgress - timelineProgress) * 0.08;
-    updateHUD(timelineProgress);
-
-    camera.position.x += (targetCamX - camera.position.x) * 0.04;
-    camera.position.y += (targetCamY - camera.position.y) * 0.04;
-    camera.position.z += (targetCamZ - camera.position.z) * 0.03;
-    camera.lookAt(0, 0, 0);
-
-    mouseVelocity *= 0.94;
-    const dynamicWarp = warpActive ? 4.5 : 1.0 + Math.min(mouseVelocity * 0.06, 3.5);
-
-    // 1. Starfield
-    const posAttr = starGeo.attributes.position;
-    for (let i = 0; i < starCount; i++) {
-      let z = posAttr.getZ(i);
-      const v = starVel[i] * dynamicWarp;
-      z += v * 0.8;
-      if (z > 60) z = -100;
-      posAttr.setZ(i, z);
-    }
-    posAttr.needsUpdate = true;
-    starPoints.rotation.y += 0.0003;
-
-    // 2. Spacetime Curvature Grid
-    if (gravityLensActive) {
-      const gPos = gridGeo.attributes.position;
-      const count = gPos.count;
-      const targetWellX = mouseX * 25;
-      const targetWellZ = -mouseY * 20;
-
-      for (let i = 0; i < count; i++) {
-        const vx = gPos.getX(i);
-        const vz = gPos.getZ(i);
-        const distSq = (vx - targetWellX) * (vx - targetWellX) + (vz - targetWellZ) * (vz - targetWellZ);
-        const origY = gridOrigY[i * 3 + 1];
-        const depression = -6.5 * Math.exp(-distSq / 70.0);
-        gPos.setY(i, origY + depression);
-      }
-      gPos.needsUpdate = true;
-    }
-
-    // 3. Epoch Opacity & Animations
-    const w0 = getEpochWeight(timelineProgress, 0.10, 0.20);
-    const w1 = getEpochWeight(timelineProgress, 0.32, 0.22);
-    const w2 = getEpochWeight(timelineProgress, 0.55, 0.22);
-    const w3 = getEpochWeight(timelineProgress, 0.78, 0.22);
-    const w4 = getEpochWeight(timelineProgress, 0.95, 0.20);
-
-    ep0Group.visible = w0 > 0.01;
-    if (ep0Group.visible) {
-      fbMat.opacity = w0 * 0.9;
-      fireball.rotation.y += 0.005;
-      waveRings.forEach(ring => {
-        ring.material.opacity = w0 * 0.7;
-        const scale = 1.0 + ((now * 0.0008 + ring.userData.offset) % 1.0) * 14.0;
-        ring.scale.set(scale, scale, 1);
-        const hue = 0.75 - Math.min(scale / 15.0, 1.0) * 0.75;
-        ring.material.color.setHSL(hue, 0.9, 0.6);
+  initSimStores() {
+    // Act 2: QGP Quarks
+    this.quarks = [];
+    for (let i = 0; i < 280; i++) {
+      this.quarks.push({
+        x: Math.random() * this.W,
+        y: Math.random() * this.H,
+        vx: (Math.random() - 0.5) * 6,
+        vy: (Math.random() - 0.5) * 6,
+        type: Math.random() > 0.5 ? 'up' : 'down',
+        color: ['#00f0ff', '#ff2a6d', '#ffb703', '#9d4edd'][Math.floor(Math.random() * 4)],
+        radius: 4.5 + Math.random() * 3
       });
     }
 
-    ep1Group.visible = w1 > 0.01;
-    if (ep1Group.visible) {
-      jwstMat.opacity = w1 * 0.85;
-      earlyGalaxies.rotation.y += 0.003;
-      earlyGalaxies.rotation.z += 0.001;
+    // Act 3: Thomson Fog Electrons & Photons
+    this.electrons = [];
+    for (let i = 0; i < 240; i++) {
+      this.electrons.push({
+        x: Math.random() * this.W,
+        y: Math.random() * this.H,
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+        radius: 3.5,
+        bound: false
+      });
     }
 
-    ep2Group.visible = w2 > 0.01;
-    if (ep2Group.visible) {
-      snMat.opacity = w2 * 0.9;
-      const sAttr = snGeo.attributes.position;
-      const cycleTime = (now * 0.001) % 4.0;
-      for (let i = 0; i < snCount; i++) {
-        sAttr.setXYZ(
-          i,
-          snVel[i * 3] * cycleTime * 20,
-          snVel[i * 3 + 1] * cycleTime * 20,
-          snVel[i * 3 + 2] * cycleTime * 20
-        );
-      }
-      sAttr.needsUpdate = true;
+    this.photons = [];
+    for (let i = 0; i < 180; i++) {
+      this.photons.push({
+        x: Math.random() * this.W,
+        y: Math.random() * this.H,
+        vx: (Math.random() - 0.5) * 12,
+        vy: (Math.random() - 0.5) * 12,
+        scatterCount: 0
+      });
     }
 
-    ep3Group.visible = w3 > 0.01;
-    if (ep3Group.visible) {
-      coronaMat.opacity = w3 * 0.65;
-      diskMat.opacity = w3 * 0.8;
-      accretionDisk.rotation.y += 0.008;
-      sunCore.rotation.y += 0.004;
+    // Act 6: Solar Wind & CME Plasma
+    this.solarWind = [];
+    for (let i = 0; i < 300; i++) {
+      this.solarWind.push({
+        x: Math.random() * this.W * 0.5,
+        y: Math.random() * this.H,
+        vx: 8 + Math.random() * 8,
+        vy: (Math.random() - 0.5) * 1.5,
+        charge: Math.random() > 0.5 ? 1 : -1,
+        color: Math.random() > 0.3 ? '#ffb703' : '#00f0ff'
+      });
     }
-
-    ep4Group.visible = w4 > 0.01;
-    if (ep4Group.visible) {
-      bowMat.opacity = w4 * 0.85;
-      swMat.opacity = w4 * 0.85;
-      earthSphere.rotation.y += 0.006;
-
-      const pAttr = swGeo.attributes.position;
-      for (let i = 0; i < swCount; i++) {
-        let x = pAttr.getX(i);
-        let y = pAttr.getY(i);
-        x += swVel[i] * 0.9;
-        if (x > 6.0 && x < 15.0 && Math.abs(y) < 5.0) {
-          y += (y >= 0 ? 0.08 : -0.08);
-          pAttr.setY(i, y);
-        }
-        if (x > 25) {
-          x = -25;
-          y = (Math.random() - 0.5) * 16;
-          pAttr.setY(i, y);
-        }
-        pAttr.setX(i, x);
-      }
-      pAttr.needsUpdate = true;
-    }
-
-    renderer.render(scene, camera);
   }
 
-  animId = requestAnimationFrame(render);
+  initEventListeners() {
+    const playBtn = document.getElementById('btn-play-pause');
+    if (playBtn) {
+      playBtn.addEventListener('click', () => this.togglePlay());
+    }
 
-  function resize() {
-    W = container.clientWidth || 800;
-    H = container.clientHeight || 560;
-    camera.aspect = W / H;
-    camera.updateProjectionMatrix();
-    renderer.setSize(W, H);
+    // Keyboard Spacebar
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        this.togglePlay();
+      }
+    });
+
+    // Timeline Scrubber
+    if (this.scrubber) {
+      this.scrubber.addEventListener('input', (e) => {
+        this.isScrubbing = true;
+        this.currentTime = parseFloat(e.target.value);
+        this.updateHUDTime();
+      });
+      this.scrubber.addEventListener('change', (e) => {
+        this.isScrubbing = false;
+        this.currentTime = parseFloat(e.target.value);
+        this.updateHUDTime();
+      });
+    }
+
+    // Act Navigation Pills
+    document.querySelectorAll('.act-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const actId = parseInt(btn.dataset.act, 10);
+        this.seekToAct(actId);
+      });
+    });
+
+    // Speed Selector Buttons
+    document.querySelectorAll('.speed-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const spd = parseFloat(btn.dataset.speed);
+        this.setSpeed(spd);
+      });
+    });
+
+    // PiP Button
+    const pipBtn = document.getElementById('theater-btn-pip');
+    if (pipBtn) {
+      pipBtn.addEventListener('click', () => this.togglePiP());
+    }
+
+    // Fullscreen Button
+    const fsBtn = document.getElementById('theater-btn-fs');
+    if (fsBtn) {
+      fsBtn.addEventListener('click', () => this.toggleFullscreen());
+    }
   }
-  window.addEventListener('resize', resize);
 
-  window.__cosmicChronosCleanup = () => {
-    cancelAnimationFrame(animId);
-    window.removeEventListener('resize', resize);
-  };
+  initPiPObserver() {
+    if (!this.container || typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // If scrolled past top of screen and not user dismissed
+        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+          if (!this.userDismissedPip) {
+            this.container.classList.add('is-pip');
+          }
+        } else if (entry.isIntersecting) {
+          this.container.classList.remove('is-pip');
+          this.userDismissedPip = false;
+        }
+      });
+    }, { threshold: 0.15 });
+
+    observer.observe(this.container);
+  }
+
+  togglePiP() {
+    if (!this.container) return;
+    if (this.container.classList.contains('is-pip')) {
+      this.container.classList.remove('is-pip');
+      this.userDismissedPip = true;
+    } else {
+      this.container.classList.add('is-pip');
+      this.userDismissedPip = false;
+    }
+  }
+
+  toggleFullscreen() {
+    if (!this.container) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      this.container.requestFullscreen().catch(err => {
+        this.container.classList.toggle('is-fullscreen');
+      });
+    }
+  }
+
+  togglePlay() {
+    this.isPlaying = !this.isPlaying;
+    this.lastTimestamp = performance.now();
+    this.updatePlayBtn();
+  }
+
+  setSpeed(speedVal) {
+    this.speed = parseFloat(speedVal) || 1.0;
+    document.querySelectorAll('.speed-btn').forEach(btn => {
+      btn.classList.toggle('active', parseFloat(btn.dataset.speed) === this.speed);
+    });
+  }
+
+  updatePlayBtn() {
+    const playBtn = document.getElementById('btn-play-pause');
+    if (playBtn) {
+      playBtn.innerHTML = this.isPlaying ? '❚❚' : '▶';
+      playBtn.title = this.isPlaying ? 'Pause' : 'Play (Spacebar)';
+    }
+  }
+
+  seekToAct(actId) {
+    const act = ACT_DEFINITIONS.find(a => a.id === actId);
+    if (act) {
+      this.currentTime = act.start;
+      this.lastTimestamp = performance.now();
+      this.updateHUDTime();
+    }
+  }
+
+  updateHUDTime() {
+    if (this.scrubber && !this.isScrubbing) {
+      this.scrubber.value = this.currentTime;
+    }
+
+    // Time readout
+    const curStr = this.formatTime(this.currentTime);
+    const totStr = this.formatTime(this.duration);
+    const readoutEl = document.getElementById('time-current');
+    if (readoutEl) readoutEl.textContent = `${curStr} / ${totStr}`;
+
+    // Determine Active Act
+    const activeAct = ACT_DEFINITIONS.find(a => this.currentTime >= a.start && this.currentTime < a.end) || ACT_DEFINITIONS[ACT_DEFINITIONS.length - 1];
+    if (activeAct && activeAct.id !== this.currentActIndex) {
+      this.currentActIndex = activeAct.id;
+      document.querySelectorAll('.act-pill').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.dataset.act, 10) === activeAct.id);
+      });
+      const titleEl = document.getElementById('live-act-title');
+      if (titleEl) titleEl.textContent = activeAct.title;
+    }
+
+    // Update Telemetry & KaTeX Formula
+    this.updateTelemetryAndFormula();
+
+    // Update Real-Time Narration Subtitles
+    this.updateNarrationSubtitles();
+  }
+
+  formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    const ms = Math.floor((s % 1) * 10);
+    return `${m.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}.${ms}`;
+  }
+
+  updateTelemetryAndFormula() {
+    const t = this.currentTime;
+
+    let epochStr = "13.8 Billion Years";
+    let tempStr = "2.725 K";
+    let redshiftStr = "z = 0.00";
+    let scaleStr = "a = 1.000";
+
+    if (t < 266.88) {
+      epochStr = "Wave Mechanics / Redshift";
+      const zProgress = Math.min(1100, Math.pow((t / 266.88), 2) * 1100);
+      redshiftStr = `z = ${zProgress.toFixed(1)}`;
+      tempStr = `${(2.7255 * (1 + zProgress)).toFixed(1)} K`;
+      scaleStr = `a = ${(1 / (1 + zProgress)).toFixed(4)}`;
+    } else if (t < 512.016) {
+      epochStr = "Planck to BBN (10^-43s - 20min)";
+      tempStr = "10^32 K → 10^9 K";
+      redshiftStr = "z > 10^8";
+      scaleStr = "a ~ 10^-8";
+    } else if (t < 775.104) {
+      epochStr = "Recombination (380,000 yr)";
+      tempStr = "3,000 K → 2.725 K";
+      redshiftStr = "z = 1,100";
+      scaleStr = "a = 0.0009";
+    } else if (t < 1045.776) {
+      epochStr = "Hubble Frontier (JWST Era)";
+      tempStr = "20 K → 2.725 K";
+      redshiftStr = "z = 14.32 → 0";
+      scaleStr = "a = 0.065 → 1.0";
+    } else if (t < 1552.872) {
+      epochStr = "Stellar Genesis & Supernovae";
+      tempStr = "T_core = 10^7 K - 10^9 K";
+      redshiftStr = "Pop III / II Stars";
+      scaleStr = "a = 0.1 → 0.6";
+    } else {
+      epochStr = "Solar System & Earth Shield";
+      tempStr = "Sun Core: 1.57 × 10^7 K";
+      redshiftStr = "Aditya-L1 / Dipole";
+      scaleStr = "1.0 AU";
+    }
+
+    const epochEl = document.getElementById('tel-epoch');
+    const tempEl = document.getElementById('tel-temp');
+    const zEl = document.getElementById('tel-z');
+    const aEl = document.getElementById('tel-a');
+
+    if (epochEl) epochEl.textContent = epochStr;
+    if (tempEl) tempEl.textContent = tempStr;
+    if (zEl) zEl.textContent = redshiftStr;
+    if (aEl) aEl.textContent = scaleStr;
+
+    // Check Formula Cues
+    const activeCue = FORMULA_CUES.find(c => t >= c.time && t <= c.endTime);
+    const cardEl = document.getElementById('formula-card');
+    const titleEl = document.getElementById('formula-title');
+    const slotEl = document.getElementById('formula-katex');
+    const descEl = document.getElementById('formula-desc');
+
+    if (activeCue && cardEl) {
+      cardEl.classList.remove('hidden');
+      if (titleEl) titleEl.textContent = activeCue.title;
+      if (descEl) descEl.textContent = activeCue.desc;
+      if (slotEl && slotEl.dataset.curKatex !== activeCue.katex) {
+        slotEl.dataset.curKatex = activeCue.katex;
+        if (window.katex) {
+          window.katex.render(activeCue.katex, slotEl, { displayMode: true, throwOnError: false });
+        } else {
+          slotEl.textContent = activeCue.katex;
+        }
+      }
+    } else if (cardEl) {
+      cardEl.classList.add('hidden');
+    }
+  }
+
+  updateNarrationSubtitles() {
+    const t = this.currentTime;
+    const activeCue = NARRATION_CUES.find(c => t >= c.start && t < c.end) || NARRATION_CUES[0];
+
+    const badgeEl = document.getElementById('subtitle-act-badge');
+    const textEl = document.getElementById('subtitle-text');
+
+    if (badgeEl && activeCue.badge && badgeEl.textContent !== activeCue.badge) {
+      badgeEl.textContent = activeCue.badge;
+    }
+
+    if (textEl && activeCue.text && textEl.dataset.curText !== activeCue.text) {
+      textEl.dataset.curText = activeCue.text;
+      textEl.innerHTML = activeCue.text;
+    }
+  }
+
+  // ===========================================================================
+  // 3. MASTER RENDER DISPATCHER (60 FPS Procedural SaaS Pipeline)
+  // ===========================================================================
+  renderLoop(now) {
+    requestAnimationFrame(this.renderLoop);
+
+    const dt = Math.min(0.1, (now - this.lastTimestamp) / 1000);
+    this.lastTimestamp = now;
+
+    if (this.isPlaying) {
+      this.currentTime += dt * this.speed;
+      if (this.currentTime >= this.duration) {
+        this.currentTime = 0;
+      }
+      this.updateHUDTime();
+    }
+
+    const act = ACT_DEFINITIONS.find(a => this.currentTime >= a.start && this.currentTime < a.end) || ACT_DEFINITIONS[0];
+    const actTime = Math.max(0, this.currentTime - act.start);
+    const progress = Math.min(1, actTime / act.duration);
+
+    // Clear Base Frame
+    this.ctx.fillStyle = '#05070c';
+    this.ctx.fillRect(0, 0, this.W, this.H);
+
+    // Render Corresponding Act Visual Module
+    switch (act.id) {
+      case 1:
+        this.renderAct1(actTime, progress);
+        break;
+      case 2:
+        this.renderAct2(actTime, progress);
+        break;
+      case 3:
+        this.renderAct3(actTime, progress);
+        break;
+      case 4:
+        this.renderAct4(actTime, progress);
+        break;
+      case 5:
+        this.renderAct5(actTime, progress);
+        break;
+      case 6:
+        this.renderAct6(actTime, progress);
+        break;
+      default:
+        this.renderAct1(actTime, progress);
+    }
+  }
+
+  // ===========================================================================
+  // PROCEDURAL CANVAS SIMULATION MODULES (ACTS I THROUGH VI)
+  // ===========================================================================
+  renderAct1(actTime, progress) {
+    const ctx = this.ctx;
+    const W = this.W;
+    const H = this.H;
+
+    // 1. Spacetime Expansion Grid
+    const scale = 1.0 + progress * 4.0;
+    const gridSpacing = 40 * (1.0 + (progress % 0.25) * 4.0);
+
+    ctx.save();
+    ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
+    ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += gridSpacing) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, H);
+      ctx.stroke();
+    }
+    for (let y = 0; y < H; y += gridSpacing) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(W, y);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // 2. Traveling Sine Wave with Progressive Redshift
+    // Wavelength increases with progress (blue 400nm -> red 700nm -> IR)
+    const wavelength = 60 + progress * 240;
+    const k = (Math.PI * 2) / wavelength;
+    const c = 8.0; // Invariant speed of light
+    const omega = c * k;
+
+    // Wave color interpolation
+    let waveColor = '#00f0ff';
+    if (progress > 0.75) waveColor = '#ff2a6d';
+    else if (progress > 0.45) waveColor = '#ffb703';
+    else if (progress > 0.25) waveColor = '#06d6a0';
+
+    ctx.save();
+    ctx.shadowColor = waveColor;
+    ctx.shadowBlur = 24;
+    ctx.strokeStyle = waveColor;
+    ctx.lineWidth = 4.5;
+
+    ctx.beginPath();
+    const centerY = H * 0.52;
+    const amp = 90 / Math.sqrt(scale); // Amplitude decays as energy drains
+
+    for (let x = 0; x <= W; x += 4) {
+      const y = centerY + Math.sin(k * x - omega * actTime) * amp;
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Wavepacket Envelope Modulation
+    ctx.lineWidth = 2.0;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 4) {
+      const envelope = amp * Math.exp(-Math.pow((x - (actTime * 350) % (W + 600) + 300) / 220, 2));
+      const y = centerY + Math.sin(k * x - omega * actTime) * envelope;
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.restore();
+
+    // 3. Comoving Galaxies pulling apart
+    const galaxyCount = 7;
+    for (let i = 0; i < galaxyCount; i++) {
+      const baseX = W * 0.15 + (W * 0.7) * (i / (galaxyCount - 1));
+      const shiftedX = W * 0.5 + (baseX - W * 0.5) * (1.0 + progress * 0.8);
+      const gy = centerY + (i % 2 === 0 ? -180 : 180);
+
+      ctx.save();
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 18;
+      ctx.beginPath();
+      ctx.arc(shiftedX, gy, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Velocity Arrow
+      ctx.strokeStyle = '#00f0ff';
+      ctx.lineWidth = 2;
+      const vLen = (shiftedX - W * 0.5) * 0.15 * progress;
+      ctx.beginPath();
+      ctx.moveTo(shiftedX, gy);
+      ctx.lineTo(shiftedX + vLen, gy);
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  renderAct2(actTime, progress) {
+    const ctx = this.ctx;
+    const W = this.W;
+    const H = this.H;
+
+    const centerX = W * 0.5;
+    const centerY = H * 0.5;
+
+    if (progress < 0.25) {
+      // Phase A: Singularity Point & Quantum Fluctuations
+      const p = progress / 0.25;
+      const pulse = 10 + Math.sin(actTime * 18) * 6;
+
+      ctx.save();
+      const grad = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 120);
+      grad.addColorStop(0, '#ffffff');
+      grad.addColorStop(0.2, '#9d4edd');
+      grad.addColorStop(0.6, 'rgba(157, 78, 221, 0.2)');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.shadowColor = '#ffffff';
+      ctx.shadowBlur = 40;
+      ctx.fillStyle = '#fff';
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, pulse, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    } else if (progress < 0.55) {
+      // Phase B: Exponential Inflationary Shockwave
+      const p = (progress - 0.25) / 0.3;
+      const r = Math.pow(p, 2.5) * W * 0.8;
+
+      ctx.save();
+      ctx.strokeStyle = '#00f0ff';
+      ctx.lineWidth = 6 * (1 - p);
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 30;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Radiating expanding lattice lines
+      ctx.strokeStyle = 'rgba(157, 78, 221, 0.35)';
+      ctx.lineWidth = 1.5;
+      for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 8) {
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(centerX + Math.cos(angle) * r, centerY + Math.sin(angle) * r);
+        ctx.stroke();
+      }
+      ctx.restore();
+    } else {
+      // Phase C: Quark-Gluon Plasma & Hadronization into Protons/Neutrons
+      ctx.save();
+      this.quarks.forEach(q => {
+        q.x += q.vx;
+        q.y += q.vy;
+        if (q.x < 50 || q.x > W - 50) q.vx *= -1;
+        if (q.y < 50 || q.y > H - 50) q.vy *= -1;
+
+        ctx.shadowColor = q.color;
+        ctx.shadowBlur = 12;
+        ctx.fillStyle = q.color;
+        ctx.beginPath();
+        ctx.arc(q.x, q.y, q.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Gluon Flux Tubes (Lines connecting nearby quarks)
+      ctx.strokeStyle = 'rgba(255, 183, 3, 0.15)';
+      ctx.lineWidth = 1.5;
+      for (let i = 0; i < 40; i++) {
+        const q1 = this.quarks[i * 2];
+        const q2 = this.quarks[i * 2 + 1];
+        if (q1 && q2) {
+          ctx.beginPath();
+          ctx.moveTo(q1.x, q1.y);
+          ctx.lineTo(q2.x, q2.y);
+          ctx.stroke();
+        }
+      }
+      ctx.restore();
+    }
+  }
+
+  renderAct3(actTime, progress) {
+    const ctx = this.ctx;
+    const W = this.W;
+    const H = this.H;
+
+    // Opacity clears as progress advances (Recombination 3000K -> transparent)
+    const fogAlpha = Math.max(0, 0.7 - progress * 0.85);
+
+    // Opaque Thomson Plasma Background
+    ctx.fillStyle = `rgba(255, 160, 60, ${fogAlpha * 0.35})`;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.save();
+    // Electrons
+    this.electrons.forEach((e, idx) => {
+      e.x += e.vx;
+      e.y += e.vy;
+      if (e.x < 0 || e.x > W) e.vx *= -1;
+      if (e.y < 0 || e.y > H) e.vy *= -1;
+
+      if (progress > 0.45) {
+        // Bound in hydrogen orbit!
+        const protonX = W * 0.15 + (idx % 12) * (W * 0.07);
+        const protonY = H * 0.2 + Math.floor(idx / 12) * (H * 0.04);
+        const angle = actTime * 6 + idx;
+        const orbitR = 18;
+
+        ctx.fillStyle = '#ff2a6d'; // Proton core
+        ctx.beginPath();
+        ctx.arc(protonX, protonY, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)'; // Orbit ring
+        ctx.beginPath();
+        ctx.arc(protonX, protonY, orbitR, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = '#00f0ff'; // Bound electron
+        ctx.beginPath();
+        ctx.arc(protonX + Math.cos(angle) * orbitR, protonY + Math.sin(angle) * orbitR, 3, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Free electron scattering
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.6)';
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, e.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+
+    // Photons: chaotic zig-zag before recombination, straight laser beams after!
+    this.photons.forEach(p => {
+      if (progress < 0.45) {
+        // Scattering pinball
+        p.x += p.vx;
+        p.y += p.vy;
+        if (Math.random() < 0.08) {
+          p.vx = (Math.random() - 0.5) * 14;
+          p.vy = (Math.random() - 0.5) * 14;
+        }
+      } else {
+        // Decoupled straight-line propagation
+        p.x += Math.sign(p.vx || 1) * 16;
+      }
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+
+      ctx.fillStyle = progress > 0.45 ? 'rgba(255, 230, 150, 0.85)' : 'rgba(255, 100, 50, 0.5)';
+      ctx.shadowColor = '#ffb703';
+      ctx.shadowBlur = 8;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.restore();
+  }
+
+  renderAct4(actTime, progress) {
+    const ctx = this.ctx;
+    const W = this.W;
+    const H = this.H;
+
+    // Coordinate Graph: Velocity vs Distance (Hubble Diagram)
+    const originX = W * 0.18;
+    const originY = H * 0.78;
+    const axisW = W * 0.64;
+    const axisH = H * 0.52;
+
+    ctx.save();
+    // Grid Lines
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.lineWidth = 1;
+    for (let x = originX; x <= originX + axisW; x += axisW / 6) {
+      ctx.beginPath();
+      ctx.moveTo(x, originY);
+      ctx.lineTo(x, originY - axisH);
+      ctx.stroke();
+    }
+    for (let y = originY; y >= originY - axisH; y -= axisH / 5) {
+      ctx.beginPath();
+      ctx.moveTo(originX, y);
+      ctx.lineTo(originX + axisW, y);
+      ctx.stroke();
+    }
+
+    // Axes
+    ctx.strokeStyle = '#8a9bb8';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(originX, originY - axisH - 20);
+    ctx.lineTo(originX, originY);
+    ctx.lineTo(originX + axisW + 20, originY);
+    ctx.stroke();
+
+    // Labels
+    ctx.fillStyle = '#8a9bb8';
+    ctx.font = '12px "Space Grotesk", sans-serif';
+    ctx.fillText("Proper Distance (Mpc)", originX + axisW * 0.4, originY + 32);
+    ctx.save();
+    ctx.translate(originX - 45, originY - axisH * 0.45);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("Recession Velocity v (km/s)", 0, 0);
+    ctx.restore();
+
+    // Linear Hubble Line (v = H0 * d)
+    ctx.strokeStyle = '#00f0ff';
+    ctx.lineWidth = 3.5;
+    ctx.shadowColor = '#00f0ff';
+    ctx.shadowBlur = 18;
+    ctx.beginPath();
+    ctx.moveTo(originX, originY);
+    ctx.lineTo(originX + axisW * progress, originY - axisH * progress);
+    ctx.stroke();
+
+    // Galaxy Data Points Scatter
+    for (let i = 1; i <= 24; i++) {
+      const frac = i / 25;
+      if (frac <= progress) {
+        const scatterX = originX + axisW * frac + (Math.sin(i * 13) * 14);
+        const scatterY = originY - axisH * frac + (Math.cos(i * 17) * 14);
+
+        ctx.fillStyle = frac > 0.8 ? '#ff2a6d' : '#ffb703';
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(scatterX, scatterY, 5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  renderAct5(actTime, progress) {
+    const ctx = this.ctx;
+    const W = this.W;
+    const H = this.H;
+    const cx = W * 0.5;
+    const cy = H * 0.5;
+
+    if (progress < 0.35) {
+      // Phase A: Bok Globule Jeans Gravitational Collapse
+      const p = progress / 0.35;
+      const r = Math.max(25, (1.0 - p) * 320);
+
+      ctx.save();
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+      grad.addColorStop(0, '#ffb703');
+      grad.addColorStop(0.3, 'rgba(255, 42, 109, 0.7)');
+      grad.addColorStop(0.8, 'rgba(10, 14, 25, 0.9)');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r * 1.4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Accreting infall filaments
+      ctx.strokeStyle = 'rgba(255, 183, 3, 0.3)';
+      ctx.lineWidth = 1.5;
+      for (let i = 0; i < 16; i++) {
+        const ang = (i / 16) * Math.PI * 2 + actTime * 0.5;
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(ang) * (r + 140), cy + Math.sin(ang) * (r + 140));
+        ctx.lineTo(cx + Math.cos(ang) * r, cy + Math.sin(ang) * r);
+        ctx.stroke();
+      }
+      ctx.restore();
+    } else if (progress < 0.7) {
+      // Phase B: Protostar Core Ignition & Triple-Alpha Fusion
+      ctx.save();
+      // Glowing Core
+      ctx.shadowColor = '#ffb703';
+      ctx.shadowBlur = 50;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(cx, cy, 65, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bipolar Hypersonic Plasma Jets
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.85)';
+      ctx.lineWidth = 18;
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 30;
+
+      // Top Jet
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - 65);
+      ctx.lineTo(cx, cy - 380);
+      ctx.stroke();
+
+      // Bottom Jet
+      ctx.beginPath();
+      ctx.moveTo(cx, cy + 65);
+      ctx.lineTo(cx, cy + 380);
+      ctx.stroke();
+      ctx.restore();
+    } else {
+      // Phase C: Type II Supernova Detonation & Gold/Platinum r-Process Synthesis
+      const p = (progress - 0.7) / 0.3;
+      const blastR = p * W * 0.75;
+
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+      ctx.lineWidth = 8 * (1 - p);
+      ctx.shadowColor = '#ffb703';
+      ctx.shadowBlur = 40;
+      ctx.beginPath();
+      ctx.arc(cx, cy, blastR, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Golden & Platinum Debris Cloud
+      for (let i = 0; i < 90; i++) {
+        const ang = (i / 90) * Math.PI * 2 + (i % 5);
+        const dist = blastR * (0.4 + (i % 7) * 0.08);
+        const px = cx + Math.cos(ang) * dist;
+        const py = cy + Math.sin(ang) * dist;
+
+        ctx.fillStyle = i % 2 === 0 ? '#ffb703' : '#e0e8f5'; // Gold or Platinum
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.arc(px, py, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  renderAct6(actTime, progress) {
+    const ctx = this.ctx;
+    const W = this.W;
+    const H = this.H;
+
+    const sunX = W * 0.22;
+    const sunY = H * 0.5;
+    const earthX = W * 0.82;
+    const earthY = H * 0.5;
+
+    ctx.save();
+    // 1. Sun Layer Cutaway (Core, Radiative, Tachocline, Convection)
+    // Convection Zone (Outer)
+    ctx.fillStyle = '#ff8500';
+    ctx.shadowColor = '#ff8500';
+    ctx.shadowBlur = 40;
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, 140, 0, Math.PI * 2);
+    ctx.fill();
+
+    // The Tachocline Shear Boundary Layer (Highlighted Ring)
+    ctx.strokeStyle = '#00f0ff';
+    ctx.lineWidth = 4;
+    ctx.shadowColor = '#00f0ff';
+    ctx.shadowBlur = 18;
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, 105, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Radiative Zone
+    ctx.fillStyle = '#ffaa00';
+    ctx.shadowBlur = 20;
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, 95, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Thermonuclear Core (15 Million Kelvin)
+    ctx.fillStyle = '#ffffff';
+    ctx.shadowColor = '#ffffff';
+    ctx.shadowBlur = 30;
+    ctx.beginPath();
+    ctx.arc(sunX, sunY, 45, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Sun Labels
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '11px "Space Grotesk", sans-serif';
+    ctx.fillText("CORE (15 MK)", sunX - 35, sunY + 4);
+    ctx.fillStyle = '#00f0ff';
+    ctx.fillText("TACHOCLINE (0.70 R)", sunX - 55, sunY - 115);
+
+    // 2. Solar Wind & Coronal Mass Ejection (CME) Stream
+    this.solarWind.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Deflection around Earth's Dipole Bow Shock!
+      const dx = p.x - earthX;
+      const dy = p.y - earthY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 120 && dx < 0) {
+        // Hypersonic plasma deflected by Lorentz force!
+        p.vy += Math.sign(dy || 1) * 3.5;
+        p.vx *= 0.85;
+      }
+
+      if (p.x > W) {
+        p.x = sunX + 140;
+        p.y = sunY + (Math.random() - 0.5) * 220;
+        p.vx = 8 + Math.random() * 8;
+        p.vy = (Math.random() - 0.5) * 2;
+      }
+
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // 3. Earth & Dipole Magnetic Shield
+    // Dipole Field Lines
+    ctx.strokeStyle = 'rgba(6, 214, 160, 0.4)';
+    ctx.lineWidth = 2;
+    for (let r = 50; r <= 130; r += 25) {
+      ctx.beginPath();
+      ctx.ellipse(earthX, earthY, r * 1.3, r * 0.8, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    // Bow Shock (Parabolic Deflection Boundary)
+    ctx.strokeStyle = '#00f0ff';
+    ctx.lineWidth = 3.5;
+    ctx.shadowColor = '#00f0ff';
+    ctx.shadowBlur = 20;
+    ctx.beginPath();
+    ctx.arc(earthX - 35, earthY, 130, Math.PI * 0.65, Math.PI * 1.35);
+    ctx.stroke();
+
+    // Earth Sphere
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = '#1d3557';
+    ctx.beginPath();
+    ctx.arc(earthX, earthY, 28, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Continents / Atmosphere
+    ctx.fillStyle = '#06d6a0';
+    ctx.beginPath();
+    ctx.arc(earthX - 4, earthY - 4, 16, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '11px "Space Grotesk", sans-serif';
+    ctx.fillText("EARTH DIPOLE SHIELD", earthX - 60, earthY + 55);
+    ctx.restore();
+  }
 }
 
+// Global Studio Registry
+let activeStudio = null;
 
-// =============================================================================
-// ENGINE 5: 3D STELLAR GENESIS & FIRST SUN IGNITION STAGE (Three.js)
-// =============================================================================
+export function initCosmicCinemaStudio() {
+  const canvas = document.getElementById('broadcast-canvas');
+  if (!canvas) return;
+  if (canvas.dataset.initialized === 'true') return;
+  canvas.dataset.initialized = 'true';
+
+  activeStudio = new CosmicBroadcastStudio();
+  window.__activeCosmicStudio = activeStudio;
+}
+
+export function initCosmicChronosEngine() {
+  initCosmicCinemaStudio();
+}
+
+window.seekCosmicAct = function(actId) {
+  if (window.__activeCosmicStudio) {
+    window.__activeCosmicStudio.seekToAct(actId);
+    if (!window.__activeCosmicStudio.isPlaying) {
+      window.__activeCosmicStudio.togglePlay();
+    }
+  }
+};
+
+window.toggleCosmicCinema = function() {
+  if (window.__activeCosmicStudio) {
+    window.__activeCosmicStudio.togglePlay();
+  }
+};
+
 export function initStellarGenesisStage() {
   const root = document.getElementById('stellar-genesis-stage');
   const canvas = document.getElementById('stellar-stage-canvas');
