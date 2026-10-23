@@ -2442,34 +2442,36 @@ html {
 }
 
 /* ==========================================================================
-   COSMIC CINEMA: 13.8 BILLION YEAR TIME-WARP THEATER
+/* ==========================================================================
+   COSMIC CINEMA: FRAMEFORGE SAAS BROADCAST MOTION STUDIO
+   1080p Broadcast Standard / Glassmorphism / Real-Time Narration Subtitles
    ========================================================================== */
 .cosmic-theater-container {
   position: relative;
   width: 100%;
   margin: 28px 0 36px 0;
-  border-radius: 24px;
+  border-radius: 20px;
   overflow: hidden;
-  background: #04060d;
-  border: 1px solid rgba(140, 170, 240, 0.28);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  background: #05070c;
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   isolation: isolate;
   user-select: none;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Header Bar */
 .theater-header-bar {
-  padding: 14px 22px;
+  padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  background: rgba(8, 12, 26, 0.85);
-  border-bottom: 1px solid rgba(140, 170, 240, 0.16);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(13, 17, 28, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: 10;
   position: relative;
 }
@@ -2480,18 +2482,19 @@ html {
   gap: 10px;
 }
 
-.theater-live-dot {
+.recording-indicator {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #02d2e3;
-  box-shadow: 0 0 10px #02d2e3;
-  animation: theaterPulse 2s infinite ease-in-out;
+  background: #ff2a6d;
+  box-shadow: 0 0 10px #ff2a6d;
+  animation: pulse-rec 1.4s infinite;
 }
 
-@keyframes theaterPulse {
-  0%, 100% { transform: scale(1); opacity: 0.95; }
-  50% { transform: scale(1.35); opacity: 0.45; }
+@keyframes pulse-rec {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
 }
 
 .theater-brand-text {
@@ -2499,7 +2502,69 @@ html {
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.05em;
-  color: #02d2e3;
+  color: #f0f4fc;
+  text-transform: uppercase;
+}
+
+.badge-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  background: rgba(0, 240, 255, 0.12);
+  color: #00f0ff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  font-weight: 600;
+}
+
+.badge-tag.live-badge {
+  color: #ffb703;
+  border-color: rgba(255, 183, 3, 0.4);
+  background: rgba(255, 183, 3, 0.1);
+}
+
+/* Telemetry Cockpit (Top Center / Right) */
+.telemetry-cockpit {
+  display: flex;
+  gap: 12px;
+  background: rgba(8, 12, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 14px;
+  border-radius: 10px;
+}
+
+.telemetry-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 75px;
+}
+
+.telemetry-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8a9bb8;
+}
+
+.telemetry-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #00f0ff;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+  white-space: nowrap;
+}
+
+.telemetry-val.gold {
+  color: #ffb703;
+  text-shadow: 0 0 8px rgba(255, 183, 3, 0.4);
+}
+
+.telemetry-val.crimson {
+  color: #ff2a6d;
+  text-shadow: 0 0 8px rgba(255, 42, 109, 0.4);
 }
 
 .theater-actions {
@@ -2526,24 +2591,19 @@ html {
 
 .theater-action-btn:hover {
   color: #fff;
-  border-color: #02d2e3;
-  background: rgba(2, 210, 227, 0.15);
+  border-color: #00f0ff;
+  background: rgba(0, 240, 255, 0.15);
 }
 
-.theater-action-btn.active {
-  background: rgba(2, 210, 227, 0.25);
-  border-color: #02d2e3;
-  color: #fff;
-}
-
-/* 3D WebGL Cinema Viewport */
+/* 1080p Cinema Viewport */
 .theater-viewport {
   position: relative;
   width: 100%;
-  height: 560px;
+  aspect-ratio: 16 / 9;
   min-height: 480px;
+  max-height: 640px;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 50%, #0d142e 0%, #030408 100%);
+  background: #05070c;
 }
 
 .theater-canvas {
@@ -2553,270 +2613,363 @@ html {
   height: 100%;
   display: block;
   z-index: 1;
-  cursor: grab;
 }
 
-.theater-canvas:active {
-  cursor: grabbing;
-}
-
-/* Cinematic Subtitle / Narrative Caption Overlay */
-.theater-caption-overlay {
+.metric-grid-overlay {
   position: absolute;
-  bottom: 22px;
-  left: 24px;
-  right: 24px;
-  max-width: 680px;
-  z-index: 5;
+  inset: 0;
   pointer-events: none;
-  background: rgba(5, 8, 20, 0.82);
-  border: 1px solid rgba(140, 170, 240, 0.28);
-  border-radius: 14px;
-  padding: 14px 20px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 2;
+}
+
+.cinematic-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.85);
+  background: radial-gradient(circle at center, transparent 65%, rgba(2, 4, 8, 0.75) 100%);
+  z-index: 3;
+}
+
+/* Floating KaTeX Formula Card Overlay */
+.formula-card-container {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 8;
+  pointer-events: none;
+  max-width: 440px;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.formula-card {
+  background: rgba(13, 17, 28, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid #00f0ff;
+  border-radius: 12px;
+  padding: 12px 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  transition: opacity 0.3s ease;
+  gap: 6px;
+  pointer-events: auto;
 }
 
-.caption-epoch-tag {
-  color: #02d2e3;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.formula-card.hidden {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
 }
 
-.caption-text {
-  color: #f1f5f9;
+.formula-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.formula-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00f0ff;
 }
 
-.theater-hint-badge {
+.formula-katex-slot {
+  font-size: 1.05rem;
+  color: #fff;
+  padding: 4px 0;
+}
+
+.formula-desc {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: #8a9bb8;
+  margin: 0;
+}
+
+/* Dedicated Narration Subtitle Container */
+.narration-subtitle-container {
   position: absolute;
-  top: 18px;
-  right: 20px;
-  z-index: 5;
-  padding: 4px 12px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  z-index: 8;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.subtitle-act-badge {
+  display: inline-block;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.68rem;
-  color: #94a3b8;
-  pointer-events: none;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  font-weight: 700;
+  color: #00f0ff;
+  background: rgba(5, 7, 12, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  letter-spacing: 0.06em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.subtitle-text {
+  max-width: 900px;
+  background: rgba(5, 8, 18, 0.88);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 12px;
+  padding: 12px 22px;
+  color: #f8fafc;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.96rem;
+  line-height: 1.5;
+  font-weight: 500;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+}
+
+@keyframes subFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtitle Glowing Keyword Spans */
+.hl-cyan {
+  color: #00f0ff;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+.hl-gold {
+  color: #ffb703;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(255, 183, 3, 0.4);
+}
+.hl-rose {
+  color: #ff2a6d;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(255, 42, 109, 0.4);
+}
+.hl-violet {
+  color: #b57edc;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(181, 126, 220, 0.4);
+}
+.hl-emerald {
+  color: #06d6a0;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(6, 214, 160, 0.4);
 }
 
 /* Control Dock */
 .theater-control-dock {
-  padding: 16px 22px;
-  background: rgba(8, 12, 26, 0.9);
-  border-top: 1px solid rgba(140, 170, 240, 0.16);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  padding: 14px 22px;
+  background: rgba(13, 17, 28, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: 10;
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-}
-
-.theater-dock-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
   gap: 12px;
 }
 
-.theater-playback-group {
+/* Act Navigation Pills */
+.act-pill-bar {
   display: flex;
-  align-items: center;
   gap: 8px;
+  background: rgba(8, 12, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 5px 8px;
+  border-radius: 999px;
+  align-self: flex-start;
   flex-wrap: wrap;
 }
 
-.theater-play-btn {
-  background: linear-gradient(135deg, #02d2e3 0%, #8c68ff 100%);
-  color: #030408;
+.act-pill {
+  background: transparent;
   border: none;
-  padding: 7px 18px;
-  border-radius: 999px;
+  color: #8a9bb8;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  box-shadow: 0 0 16px rgba(2, 210, 227, 0.35);
+  gap: 5px;
 }
 
-.theater-play-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 24px rgba(2, 210, 227, 0.55);
-}
-
-.theater-play-btn.is-playing {
-  background: linear-gradient(135deg, #ffb84d 0%, #ff5252 100%);
-  color: #fff;
-  box-shadow: 0 0 20px rgba(255, 184, 77, 0.45);
-}
-
-.theater-toggle-btn {
-  background: rgba(14, 20, 44, 0.7);
-  color: #cbd5e1;
-  border: 1px solid rgba(140, 170, 240, 0.22);
-  padding: 6px 13px;
-  border-radius: 999px;
+.act-pill span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  font-size: 0.68rem;
+  opacity: 0.7;
 }
 
-.theater-toggle-btn:hover {
-  color: #fff;
-  border-color: #02d2e3;
+.act-pill:hover {
+  color: #f0f4fc;
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.theater-toggle-btn.active {
-  background: rgba(2, 210, 227, 0.2);
-  border-color: #02d2e3;
-  color: #02d2e3;
-  box-shadow: 0 0 12px rgba(2, 210, 227, 0.25);
+.act-pill.active {
+  background: #00f0ff;
+  color: #05070c;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+  font-weight: 700;
 }
 
-.theater-epoch-pills {
+/* Master Dock */
+.master-dock {
   display: flex;
   align-items: center;
-  gap: 5px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-.epoch-pill {
-  background: rgba(14, 20, 44, 0.6);
-  border: 1px solid rgba(140, 170, 240, 0.18);
-  color: #94a3b8;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  padding: 5px 11px;
-  border-radius: 999px;
+.dock-left-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+}
+
+.play-pause-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #00f0ff;
+  background: rgba(0, 240, 255, 0.12);
+  color: #00f0ff;
+  font-size: 15px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
+  flex-shrink: 0;
 }
 
-.epoch-pill:hover,
-.epoch-pill.active {
+.play-pause-btn:hover {
+  background: #00f0ff;
+  color: #05070c;
+  transform: scale(1.08);
+}
+
+.speed-selector-group {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.speed-btn {
+  background: transparent;
+  border: none;
+  color: #8a9bb8;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 7px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.speed-btn:hover {
   color: #fff;
-  border-color: #02d2e3;
-  background: rgba(2, 210, 227, 0.18);
-  box-shadow: 0 0 10px rgba(2, 210, 227, 0.2);
 }
 
-/* Scrubber */
-.theater-scrubber-row {
-  width: 100%;
+.speed-btn.active {
+  background: rgba(0, 240, 255, 0.2);
+  color: #00f0ff;
+  font-weight: 700;
 }
 
-.theater-scrubber {
+.timeline-scrubber-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.time-readout-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: #8a9bb8;
+}
+
+.time-readout-row .act-title-live {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  color: #f0f4fc;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.timeline-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
   height: 6px;
-  background: linear-gradient(90deg, #8c68ff 0%, #02d2e3 35%, #ffb84d 70%, #ff5252 100%);
-  border-radius: 999px;
+  background: linear-gradient(90deg, #9d4edd 0%, #00f0ff 30%, #ffb703 65%, #ff2a6d 100%);
+  border-radius: 3px;
   outline: none;
   cursor: pointer;
 }
 
-.theater-scrubber::-webkit-slider-thumb {
+.timeline-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid #02d2e3;
-  box-shadow: 0 0 14px #02d2e3;
-  cursor: grab;
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff;
+  cursor: pointer;
   transition: transform 0.15s ease;
 }
 
-.theater-scrubber::-webkit-slider-thumb:active {
+.timeline-slider::-webkit-slider-thumb:hover {
   transform: scale(1.3);
-  cursor: grabbing;
 }
 
-/* Telemetry Row */
-.theater-telemetry-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(140, 170, 240, 0.12);
-}
-
-.theater-tel-block {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.tel-lbl {
-  font-size: 0.68rem;
-  color: #94a3b8;
-  text-transform: uppercase;
-}
-
-.tel-val {
-  font-size: 0.84rem;
-  color: #f1f5f9;
-  font-weight: 600;
-}
-
-/* Fullscreen Mode */
-.cosmic-theater-container.is-fullscreen {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 99999 !important;
-  border-radius: 0 !important;
-  margin: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.cosmic-theater-container.is-fullscreen .theater-viewport {
-  flex: 1 1 auto !important;
-  height: auto !important;
-}
-
-/* Sticky PiP Mode */
+/* Sticky Picture-in-Picture (PiP) Mode */
 .cosmic-theater-container.is-pip {
   position: fixed !important;
   bottom: 24px !important;
   right: 24px !important;
   width: min(440px, 92vw) !important;
   height: auto !important;
-  z-index: 9000 !important;
-  border-radius: 18px !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 24px rgba(2, 210, 227, 0.3) !important;
+  z-index: 9999 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 24px rgba(0, 240, 255, 0.3) !important;
   margin: 0 !important;
   animation: pipSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid #00f0ff !important;
 }
 
 @keyframes pipSlideIn {
@@ -2825,47 +2978,76 @@ html {
 }
 
 .cosmic-theater-container.is-pip .theater-viewport {
+  aspect-ratio: auto !important;
   height: 220px !important;
   min-height: 220px !important;
 }
 
-.cosmic-theater-container.is-pip .theater-caption-overlay {
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  padding: 8px 12px;
-}
-
-.cosmic-theater-container.is-pip .caption-text {
-  font-size: 0.78rem;
-  line-height: 1.35;
-}
-
-.cosmic-theater-container.is-pip .theater-hint-badge,
-.cosmic-theater-container.is-pip .theater-epoch-pills,
-.cosmic-theater-container.is-pip .theater-telemetry-row {
+.cosmic-theater-container.is-pip .telemetry-cockpit,
+.cosmic-theater-container.is-pip .formula-card-container,
+.cosmic-theater-container.is-pip .act-pill-bar,
+.cosmic-theater-container.is-pip .speed-selector-group {
   display: none !important;
 }
 
-@media (max-width: 768px) {
-  .theater-viewport {
-    height: 380px;
-  }
-  .theater-caption-overlay {
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
-    padding: 10px 14px;
-  }
-  .caption-text {
-    font-size: 0.8rem;
-  }
-  .theater-epoch-pills {
-    display: none;
-  }
+.cosmic-theater-container.is-pip .narration-subtitle-container {
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
 }
 
-/* ==========================================================================
+.cosmic-theater-container.is-pip .subtitle-text {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  padding: 6px 12px;
+}
+
+.cosmic-theater-container.is-pip .theater-control-dock {
+  padding: 8px 14px;
+}
+
+/* Quick Jump Act Trigger in Markdown Sections */
+.cinema-jump-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(13, 17, 28, 0.7);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 12px;
+  padding: 8px 16px;
+  margin: 18px 0 24px 0;
+}
+
+.cinema-jump-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.cinema-jump-btn {
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #00f0ff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cinema-jump-btn:hover {
+  background: #00f0ff;
+  color: #05070c;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
    3D STELLAR GENESIS & FIRST SUN IGNITION STAGE
    ========================================================================== */
 .stellar-genesis-stage {
