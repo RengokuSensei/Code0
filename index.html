@@ -1780,6 +1780,8 @@
         <!-- Streamlined Navigation Links -->
         <div class="nav-center-menu">
           <a href="cosmic-dawn/" class="nav-pill-link highlight-pill"><span class="pulse-dot"></span> Cosmic Dawn</a>
+          <a href="voice-studio/" class="nav-pill-link highlight-pill" style="border-color: rgba(2, 210, 227, 0.4);"><span class="pulse-dot" style="background:#02d2e3;"></span> Voice Studio 🎙️</a>
+          <a href="#voice-studio-home" class="nav-pill-link" style="color: #02d2e3;">⚡ Quick Voice</a>
           <a href="#convergence-lab" class="nav-pill-link">3D Lab</a>
           <a href="#atlas" class="nav-pill-link">Atlas</a>
           <a href="project-notes/" class="nav-pill-link">Codex</a>
@@ -1847,6 +1849,10 @@
               <a href="cosmic-dawn/" class="btn btn-primary magnet-btn">
                 <span>🌌 Explore Cosmic Dawn (Page 01)</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#voice-studio-home" class="btn btn-outline" style="border-color: #02d2e3; color: #02d2e3; background: rgba(2, 210, 227, 0.12);">
+                <span>🎙️ Generate Hindi Voice</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
               </a>
               <a href="#convergence-lab" class="btn btn-outline">
                 <span>Launch 3D Simulations</span>
@@ -1916,6 +1922,110 @@
               </div>
             </div>
           </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         VOICE STUDIO HOME: LIVE SCRIPT-TO-VOICE GENERATOR SECTION
+         ========================================================================== -->
+    <section class="section" id="voice-studio-home" style="padding: 3.5rem 0; background: linear-gradient(180deg, rgba(9, 10, 15, 0.98), rgba(14, 16, 25, 0.95)); border-top: 1px solid rgba(2, 210, 227, 0.25); border-bottom: 1px solid rgba(2, 210, 227, 0.25); position: relative; z-index: 10;">
+      <div class="container">
+        
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <div class="section-eyebrow" style="color: #02d2e3; font-weight: 700; letter-spacing: 0.1em; display: flex; align-items: center; gap: 8px;">
+              <span class="live-pulse" style="background: #02d2e3;"></span>
+              <span>AI AUDIO LAB &bull; SCRIPT-TO-VOICE GENERATOR // LIVE</span>
+            </div>
+            <h2 class="section-title" style="margin: 0.5rem 0 0 0; font-size: 2.2rem; color: #fff;">
+              Paste Any Script &bull; Generate Natural Hindi Speech
+            </h2>
+            <p style="color: #94a3b8; font-size: 0.95rem; margin: 0.4rem 0 0 0; max-width: 680px;">
+              Synthesize and test Hindi narration directly in your browser. Runs 100% on GitHub Pages without requiring local setup or subscription fees.
+            </p>
+          </div>
+          <div>
+            <a href="voice-studio/" class="btn btn-outline" style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc; font-size: 0.85rem; padding: 8px 16px;">
+              <span>Full Benchmark Shootout &rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <div style="background: rgba(18, 20, 32, 0.9); border: 1px solid rgba(2, 210, 227, 0.3); border-radius: 16px; padding: 2rem; box-shadow: 0 16px 48px rgba(0,0,0,0.6);">
+          
+          <!-- Quick Presets -->
+          <div style="display: flex; gap: 0.6rem; margin-bottom: 1rem; flex-wrap: wrap;">
+            <button type="button" id="home-load-hindi" style="background: rgba(2, 210, 227, 0.15); border: 1px solid #02d2e3; color: #02d2e3; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600;">
+              📝 25s Hindi Script (Cosmic Dawn)
+            </button>
+            <button type="button" id="home-load-full" style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600;">
+              🌌 Full Act I Passage
+            </button>
+            <button type="button" id="home-clear-text" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: #94a3b8; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;">
+              ✕ Clear
+            </button>
+          </div>
+
+          <!-- Textarea Input -->
+          <div style="margin-bottom: 1.25rem;">
+            <label for="home-tts-text" style="display: block; font-size: 0.85rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">
+              Narration Script:
+            </label>
+            <textarea id="home-tts-text" rows="4" style="width: 100%; background: #090a0f; border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; color: #f8fafc; padding: 1rem; font-family: 'Inter', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.6; resize: vertical; outline: none; box-sizing: border-box;" placeholder="Type or paste narration script here...">क्या आपने कभी रात के सन्नाटे में... आकाश की ओर देखा है? जब आप तारों को देखते हैं... तो असल में आप समय में पीछे देख रहे होते हैं। तो सवाल यह उठता है... कि ठोस वैज्ञानिक प्रमाणों के आधार पर... हम समय में कितना पीछे देख सकते हैं?</textarea>
+          </div>
+
+          <!-- Controls Row -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; align-items: center;">
+            <div>
+              <label for="home-tts-engine" style="display: block; font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.35rem;">Voice Engine:</label>
+              <select id="home-tts-engine" style="width: 100%; background: #090a0f; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #f8fafc; padding: 8px 12px; font-size: 0.85rem; outline: none;">
+                <option value="cloud_neural" selected>🌐 Cloud Neural Hindi (Google Authentic Stream)</option>
+                <option value="browser_speech">📱 Browser Device Voices (Web Speech API)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="home-tts-speed" style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.35rem;">
+                <span>Speaking Rate:</span>
+                <span id="home-tts-speed-val" style="color: #02d2e3;">1.00×</span>
+              </label>
+              <input type="range" id="home-tts-speed" min="0.75" max="1.30" step="0.05" value="1.00" style="width: 100%; accent-color: #02d2e3;">
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+            <button type="button" id="home-btn-speak" style="background: linear-gradient(135deg, #02d2e3, #0284c7); color: #090a0f; font-weight: 700; border: none; padding: 12px 28px; border-radius: 10px; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(2, 210, 227, 0.3); transition: transform 0.15s ease;">
+              <span>▶ Generate &amp; Speak Hindi</span>
+            </button>
+            <button type="button" id="home-btn-stop" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; font-weight: 600; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-size: 0.9rem;">
+              ■ Stop
+            </button>
+          </div>
+
+          <!-- Telemetry & Waveform Box -->
+          <div style="background: rgba(9, 10, 15, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 600; color: #94a3b8; text-transform: uppercase;">Audio Output Stream</span>
+              <span id="home-live-status" style="font-size: 0.75rem; color: #10b981; font-weight: 600;">● Engine Ready</span>
+            </div>
+            
+            <canvas id="home-audio-visualizer" width="800" height="50" style="width: 100%; height: 50px; background: #050608; border-radius: 6px;"></canvas>
+
+            <div id="home-audio-wrap" style="display: none; margin-top: 0.75rem;">
+              <audio id="home-audio-player" controls referrerpolicy="no-referrer" style="width: 100%; border-radius: 6px;"></audio>
+              <div style="margin-top: 0.35rem; display: flex; justify-content: flex-end;">
+                <a id="home-download-link" href="#" download="hindi_narration.mp3" style="font-size: 0.8rem; color: #02d2e3; text-decoration: none; font-weight: 600;">⬇ Download Generated Audio</a>
+              </div>
+            </div>
+
+            <div id="home-audio-log" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #64748b; margin-top: 0.4rem;">
+              Ready. Click "Generate & Speak Hindi" to test instant narration.
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -5097,6 +5207,143 @@
         card.style.setProperty('--mouse-y', `${y}px`);
       });
     });
+
+    // 15. Homepage Live Voice Generator Engine
+    (function initHomeVoiceStudio() {
+      const shortHindi = "क्या आपने कभी रात के सन्नाटे में... आकाश की ओर देखा है? जब आप तारों को देखते हैं... तो असल में आप समय में पीछे देख रहे होते हैं। तो सवाल यह उठता है... कि ठोस वैज्ञानिक प्रमाणों के आधार पर... हम समय में कितना पीछे देख सकते हैं?";
+      const fullHindi = "जब आप रात के आसमान को देखते हैं, तो आप वास्तव में समय में पीछे देख रहे होते हैं। क्योंकि प्रकाश को यात्रा करने में समय लगता है, आप ब्रह्मांड को कभी वैसा नहीं देख पाते जैसा वह आज है, बल्कि वैसा देखते हैं जैसा वह अतीत में था। तो सवाल यह उठता है कि प्रमाण के आधार पर हम समय में कितना पीछे देख सकते हैं, और कहाँ जाकर हमारे टेलिस्कोप्स की आँखें बंद हो जाती हैं?";
+
+      const textArea = document.getElementById("home-tts-text");
+      const engineSelect = document.getElementById("home-tts-engine");
+      const speedSlider = document.getElementById("home-tts-speed");
+      const speedVal = document.getElementById("home-tts-speed-val");
+      const btnSpeak = document.getElementById("home-btn-speak");
+      const btnStop = document.getElementById("home-btn-stop");
+      const liveStatus = document.getElementById("home-live-status");
+      const audioWrap = document.getElementById("home-audio-wrap");
+      const audioPlayer = document.getElementById("home-audio-player");
+      const downloadLink = document.getElementById("home-download-link");
+      const logDiv = document.getElementById("home-audio-log");
+      const canvas = document.getElementById("home-audio-visualizer");
+      if (!canvas || !btnSpeak) return;
+      const ctx = canvas.getContext("2d");
+
+      document.getElementById("home-load-hindi").onclick = () => { textArea.value = shortHindi; };
+      document.getElementById("home-load-full").onclick = () => { textArea.value = fullHindi; };
+      document.getElementById("home-clear-text").onclick = () => { textArea.value = ""; };
+      speedSlider.oninput = () => { speedVal.innerText = speedSlider.value + "×"; };
+
+      let animId = null;
+      function drawWave(active) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const bars = 50;
+        const barW = canvas.width / bars;
+        for (let i = 0; i < bars; i++) {
+          const h = active ? Math.random() * 38 + 6 : 4;
+          const grad = ctx.createLinearGradient(0, canvas.height, 0, 0);
+          grad.addColorStop(0, "#02d2e3");
+          grad.addColorStop(1, "#8b5cf6");
+          ctx.fillStyle = grad;
+          ctx.fillRect(i * barW + 2, (canvas.height - h) / 2, barW - 4, h);
+        }
+        if (active) animId = requestAnimationFrame(() => drawWave(true));
+      }
+      drawWave(false);
+
+      btnStop.onclick = () => {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        if (audioPlayer) { audioPlayer.pause(); audioPlayer.currentTime = 0; }
+        if (animId) cancelAnimationFrame(animId);
+        drawWave(false);
+        liveStatus.innerText = "● Stopped";
+        liveStatus.style.color = "#94a3b8";
+      };
+
+      btnSpeak.onclick = () => {
+        const text = textArea.value.trim();
+        if (!text) return alert("Please enter some narration text!");
+        btnStop.onclick();
+
+        const engine = engineSelect.value;
+        if (engine === "cloud_neural") {
+          liveStatus.innerText = "⏳ Loading Cloud Audio Stream...";
+          liveStatus.style.color = "#02d2e3";
+          logDiv.innerText = "Connecting to Google Cloud Hindi speech stream...";
+
+          const clauses = text.split(/([।?!,\n]+)/).filter(c => c.trim().length > 0);
+          const combined = [];
+          let cur = "";
+          for (let c of clauses) {
+            cur += c;
+            if (cur.length > 25 || /[।?!]/.test(c)) {
+              combined.push(cur.trim());
+              cur = "";
+            }
+          }
+          if (cur.trim()) combined.push(cur.trim());
+
+          let idx = 0;
+          function playNext() {
+            if (idx >= combined.length) {
+              liveStatus.innerText = "● Finished";
+              liveStatus.style.color = "#10b981";
+              if (animId) cancelAnimationFrame(animId);
+              drawWave(false);
+              logDiv.innerText = "Playback complete.";
+              return;
+            }
+            const chunk = combined[idx];
+            const isHindi = /[\u0900-\u097F]/.test(chunk);
+            const lang = isHindi ? "hi" : "en";
+            const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${encodeURIComponent(chunk)}`;
+
+            audioWrap.style.display = "block";
+            audioPlayer.src = url;
+            audioPlayer.playbackRate = parseFloat(speedSlider.value);
+            audioPlayer.play().catch(e => console.log(e));
+
+            downloadLink.href = url;
+            downloadLink.download = `hindi_audio_${idx + 1}.mp3`;
+
+            drawWave(true);
+            liveStatus.innerText = `● Speaking clause ${idx + 1}/${combined.length}`;
+            liveStatus.style.color = "#02d2e3";
+            logDiv.innerText = `Speaking [${lang.toUpperCase()}]: "${chunk.substring(0, 45)}..."`;
+
+            audioPlayer.onended = () => {
+              idx++;
+              setTimeout(playNext, 280);
+            };
+          }
+          playNext();
+        } else {
+          // Browser native
+          if (!('speechSynthesis' in window)) return alert("Speech Synthesis not supported in this browser!");
+          const utter = new SpeechSynthesisUtterance(text);
+          utter.rate = parseFloat(speedSlider.value);
+          const isHindi = /[\u0900-\u097F]/.test(text);
+          const allV = window.speechSynthesis.getVoices();
+          if (isHindi) {
+            const hV = allV.find(v => v.lang.startsWith("hi") || v.name.toLowerCase().includes("hindi"));
+            if (hV) utter.voice = hV;
+            utter.lang = "hi-IN";
+          }
+          utter.onstart = () => {
+            liveStatus.innerText = "● Speaking via Device Voice";
+            liveStatus.style.color = "#34d399";
+            logDiv.innerText = `Speaking via device voice: ${utter.voice ? utter.voice.name : 'System Default'}...`;
+            drawWave(true);
+          };
+          utter.onend = () => {
+            liveStatus.innerText = "● Finished";
+            liveStatus.style.color = "#10b981";
+            if (animId) cancelAnimationFrame(animId);
+            drawWave(false);
+          };
+          window.speechSynthesis.speak(utter);
+        }
+      };
+    })();
   </script>
 </body>
 </html>
