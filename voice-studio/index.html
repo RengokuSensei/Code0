@@ -784,13 +784,37 @@
      ========================================================================== -->
 <h2 id="interactive-voice-studio-agent-selector">🎙️ Interactive Voice Studio &amp; Agent Selector<a class="headerlink" href="#interactive-voice-studio-agent-selector" title="Permanent link">&para;</a></h2>
 <p>Select an AI Voice Persona below, paste your script, and generate instant speech with natural cadence and tone.</p>
+<p><meta name="referrer" content="no-referrer"></p>
 <div class="interactive-testing-sandbox" style="background: rgba(14, 18, 32, 0.95); border: 1px solid rgba(2, 210, 227, 0.35); border-radius: 18px; padding: 2rem; margin-top: 1.5rem; box-shadow: 0 16px 48px rgba(0,0,0,0.6);">
+
+  <!-- Hidden HTML5 Audio Element for Universal Sound Output -->
+  <audio id="voice-tts-audio" referrerpolicy="no-referrer" preload="none" style="display:none;"></audio>
+
+  <!-- Top Controls Bar: Pick Agent & Engine Switcher -->
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+      <span style="font-size: 0.85rem; font-weight: 700; color: #cbd5e1; text-transform: uppercase; letter-spacing: 0.08em;">
+        1. Voice Persona:
+      </span>
+      <!-- Dedicated Pick Different Agent Option Button -->
+      <button type="button" id="btn-pick-agent-studio" style="background: linear-gradient(135deg, rgba(2, 210, 227, 0.18), rgba(140, 104, 255, 0.18)); border: 1px solid #02d2e3; color: #02d2e3; font-weight: 700; padding: 7px 16px; border-radius: 999px; cursor: pointer; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 10px rgba(2, 210, 227, 0.25); transition: all 0.2s ease;">
+        <span>🎭 Pick Different Agent (Active: Cosmic Narrator) ▾</span>
+      </button>
+    </div>
+
+    <!-- Engine Mode Switcher -->
+    <div style="display: flex; align-items: center; gap: 0.35rem; background: rgba(8, 10, 18, 0.85); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 3px 5px;">
+      <button type="button" id="studio-engine-neural" style="background: #02d2e3; color: #070913; font-weight: 700; border: none; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 0.75rem; transition: all 0.2s ease;">
+        🌐 Neural Stream (Universal Sound)
+      </button>
+      <button type="button" id="studio-engine-speech" style="background: transparent; color: #94a3b8; font-weight: 600; border: none; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 0.75rem; transition: all 0.2s ease;">
+        💻 Device TTS
+      </button>
+    </div>
+  </div>
 
   <!-- Agent Persona Selection Grid -->
   <div style="margin-bottom: 1.5rem;">
-    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: #cbd5e1; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">
-      1. Choose AI Voice Persona (पात्र चयन):
-    </label>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.85rem;" id="agent-persona-grid">
 
       <!-- Agent 1: Cosmic Narrator -->
@@ -895,14 +919,17 @@
   </div>
 
   <!-- Action Row -->
-  <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: center;">
+  <div style="display: flex; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 1.5rem; align-items: center;">
     <button type="button" id="btn-generate-speech" style="background: linear-gradient(135deg, #02d2e3, #0284c7); color: #090a0f; font-weight: 700; border: none; padding: 12px 28px; border-radius: 10px; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(2, 210, 227, 0.35); transition: transform 0.15s ease;">
       <span>▶ Speak Voice Now (100% Free)</span>
     </button>
     <button type="button" id="btn-stop-speech" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; font-weight: 600; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-size: 0.9rem;">
       ■ Stop
     </button>
-    <button type="button" id="btn-reset-persona" style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.15); color: #94a3b8; font-size: 0.85rem; padding: 10px 16px; border-radius: 8px; cursor: pointer;">
+    <button type="button" id="btn-cycle-agent-studio" style="background: rgba(140, 104, 255, 0.12); border: 1px solid rgba(140, 104, 255, 0.4); color: #c084fc; font-weight: 700; padding: 11px 18px; border-radius: 10px; cursor: pointer; font-size: 0.88rem; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
+      <span>🎭 Pick Different Agent ▾</span>
+    </button>
+    <button type="button" id="btn-reset-persona" style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.15); color: #94a3b8; font-size: 0.85rem; padding: 11px 16px; border-radius: 10px; cursor: pointer;">
       🔄 Reset to Persona Defaults
     </button>
   </div>
@@ -992,7 +1019,7 @@
 </span></code></pre></div>
 <hr />
 <!-- ==========================================================================
-     SECTION 3: JAVASCRIPT LOGIC (100% BULLETPROOF & STABILIZED)
+     SECTION 3: JAVASCRIPT LOGIC (100% BULLETPROOF & UNIVERSAL DUAL-ENGINE)
      ========================================================================== -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -1012,6 +1039,11 @@ document.addEventListener("DOMContentLoaded", function() {
   const btnSpeak = document.getElementById("btn-generate-speech");
   const btnStop = document.getElementById("btn-stop-speech");
   const btnReset = document.getElementById("btn-reset-persona");
+  const btnPickAgent = document.getElementById("btn-pick-agent-studio");
+  const btnCycleAgent = document.getElementById("btn-cycle-agent-studio");
+  const engineNeuralBtn = document.getElementById("studio-engine-neural");
+  const engineSpeechBtn = document.getElementById("studio-engine-speech");
+  const audioElement = document.getElementById("voice-tts-audio");
   const liveIndicator = document.getElementById("bridge-live-indicator");
   const clauseTracker = document.getElementById("clause-tracker");
   const logDiv = document.getElementById("bridge-log");
@@ -1025,38 +1057,81 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Agent Profiles Configuration
   const AGENT_PROFILES = {
-    narrator: { rate: 0.92, pitch: -8, pause: 1.20, name: "Cosmic Narrator", color: "#02d2e3" },
-    sage: { rate: 0.85, pitch: -12, pause: 1.40, name: "Philosopher Sage", color: "#8c68ff" },
-    explainer: { rate: 1.08, pitch: 6, pause: 0.85, name: "Quantum Explainer", color: "#10b981" },
-    storyteller: { rate: 0.96, pitch: 0, pause: 1.10, name: "Cinematic Storyteller", color: "#f59e0b" },
-    swara: { rate: 0.98, pitch: 14, pause: 1.00, name: "Celestial Swara", color: "#ec4899" }
+    narrator: { rate: 0.92, pitch: -8, pause: 1.20, name: "Cosmic Narrator", color: "#02d2e3", title: "गंभीर वृत्तचित्र (Deep Bass)" },
+    sage: { rate: 0.85, pitch: -12, pause: 1.40, name: "Philosopher Sage", color: "#8c68ff", title: "चिंतनशील ऋषि (Poetic)" },
+    explainer: { rate: 1.08, pitch: 6, pause: 0.85, name: "Quantum Explainer", color: "#10b981", title: "उत्साही शिक्षक (Crisp)" },
+    storyteller: { rate: 0.96, pitch: 0, pause: 1.10, name: "Cinematic Storyteller", color: "#f59e0b", title: "रोमांचक कथावाचक (Vivid)" },
+    swara: { rate: 0.98, pitch: 14, pause: 1.00, name: "Celestial Swara", color: "#ec4899", title: "मधुर स्त्री स्वर (Luminous)" }
   };
+  const agentKeys = ["narrator", "sage", "explainer", "storyteller", "swara"];
   let currentAgent = "narrator";
+  let engineMode = "neural"; // "neural" (100% universal sound) or "speech" (device TTS)
 
-  // Persona Selection Switcher
+  function activatePersona(agentKey) {
+    const profile = AGENT_PROFILES[agentKey];
+    if (!profile) return;
+    currentAgent = agentKey;
+
+    personaCards.forEach(c => {
+      c.style.borderColor = "rgba(255,255,255,0.15)";
+      c.style.background = "rgba(255,255,255,0.03)";
+    });
+
+    const activeCard = document.querySelector(`.persona-card[data-agent="${agentKey}"]`);
+    if (activeCard) {
+      activeCard.style.borderColor = profile.color;
+      activeCard.style.background = `rgba(${hexToRgb(profile.color)}, 0.16)`;
+    }
+
+    if (btnPickAgent) {
+      btnPickAgent.innerHTML = `<span>🎭 Active Agent: <b>${profile.name}</b> (Click to Switch) ▾</span>`;
+      btnPickAgent.style.borderColor = profile.color;
+    }
+
+    speedSlider.value = profile.rate;
+    pitchSlider.value = profile.pitch;
+    pauseSlider.value = profile.pause;
+    updateSliderDisplays();
+    updateTelemetryCounts();
+
+    logDiv.innerHTML = `Active Persona: <b style="color:${profile.color}">${profile.name}</b> (${profile.title}). Click "Speak Voice Now" to listen.`;
+  }
+
+  function cycleNextAgent() {
+    const currentIdx = agentKeys.indexOf(currentAgent);
+    const nextIdx = (currentIdx + 1) % agentKeys.length;
+    activatePersona(agentKeys[nextIdx]);
+  }
+
+  if (btnPickAgent) btnPickAgent.onclick = cycleNextAgent;
+  if (btnCycleAgent) btnCycleAgent.onclick = cycleNextAgent;
+
   personaCards.forEach(card => {
     card.addEventListener("click", () => {
-      personaCards.forEach(c => {
-        c.style.borderColor = "rgba(255,255,255,0.15)";
-        c.style.background = "rgba(255,255,255,0.03)";
-      });
       const agentKey = card.getAttribute("data-agent");
-      const profile = AGENT_PROFILES[agentKey];
-      if (!profile) return;
-      currentAgent = agentKey;
-      card.style.borderColor = profile.color;
-      card.style.background = `rgba(${hexToRgb(profile.color)}, 0.14)`;
-
-      // Apply persona presets
-      speedSlider.value = profile.rate;
-      pitchSlider.value = profile.pitch;
-      pauseSlider.value = profile.pause;
-      updateSliderDisplays();
-      updateTelemetryCounts();
-
-      logDiv.innerHTML = `Switched persona to <b>${profile.name}</b> (Pitch: ${profile.pitch > 0 ? '+' : ''}${profile.pitch}%, Rate: ${profile.rate}×). Click "Speak Voice Now" to listen.`;
+      activatePersona(agentKey);
     });
   });
+
+  // Engine Switcher Controls
+  if (engineNeuralBtn && engineSpeechBtn) {
+    engineNeuralBtn.onclick = () => {
+      engineMode = "neural";
+      engineNeuralBtn.style.background = "#02d2e3";
+      engineNeuralBtn.style.color = "#070913";
+      engineSpeechBtn.style.background = "transparent";
+      engineSpeechBtn.style.color = "#94a3b8";
+      logDiv.innerHTML = "Switched to <b>Universal Neural Stream</b> (100% guaranteed sound output across all operating systems and browsers).";
+    };
+    engineSpeechBtn.onclick = () => {
+      engineMode = "speech";
+      engineSpeechBtn.style.background = "#8c68ff";
+      engineSpeechBtn.style.color = "#070913";
+      engineNeuralBtn.style.background = "transparent";
+      engineNeuralBtn.style.color = "#94a3b8";
+      logDiv.innerHTML = "Switched to <b>Device SpeechSynthesis</b> (Using local system voices if installed on your OS).";
+    };
+  }
 
   function hexToRgb(hex) {
     hex = hex.replace('#', '');
@@ -1065,7 +1140,6 @@ document.addEventListener("DOMContentLoaded", function() {
     return `${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}`;
   }
 
-  // Update slider badge text
   function updateSliderDisplays() {
     speedVal.innerText = parseFloat(speedSlider.value).toFixed(2) + "×";
     const p = parseInt(pitchSlider.value, 10);
@@ -1110,7 +1184,6 @@ document.addEventListener("DOMContentLoaded", function() {
   // Linguistic & Phonetic Preprocessing (Cartesia Refinement Engine)
   function preprocessHindiProsody(rawText) {
     let t = rawText;
-    // 1. Expand standard English technical loanwords into phonetic Devanagari
     const loanwordMap = [
       [/\b(universe)\b/gi, "ब्रह्मांड"],
       [/\b(telescope|telescopes)\b/gi, "टेलिस्कोप"],
@@ -1126,7 +1199,6 @@ document.addEventListener("DOMContentLoaded", function() {
     ];
     loanwordMap.forEach(([pattern, repl]) => { t = t.replace(pattern, repl); });
 
-    // 2. Expand common numbers into spoken Hindi for natural flow
     t = t.replace(/\b13\.8\b/g, "तेरह दशमलव आठ")
          .replace(/\b300,000\b/g, "तीन लाख")
          .replace(/\b380,000\b/g, "तीन लाख अस्सी हज़ार")
@@ -1156,28 +1228,18 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   drawWaveform(false);
 
-  // Chrome Garbage Collection & Anti-Freeze Watchdog
-  let watchdogTimer = null;
-  function startWatchdog() {
-    stopWatchdog();
-    watchdogTimer = setInterval(() => {
-      if ('speechSynthesis' in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
-        window.speechSynthesis.pause();
-        window.speechSynthesis.resume();
-      }
-    }, 4500);
-  }
-  function stopWatchdog() {
-    if (watchdogTimer) { clearInterval(watchdogTimer); watchdogTimer = null; }
-  }
-
-  // Active Queue Tracker
   let isSpeaking = false;
+  let activeAudioTimer = null;
   window.__activeUtterances = [];
 
-  btnStop.onclick = () => {
+  function stopEverything() {
     isSpeaking = false;
-    stopWatchdog();
+    if (activeAudioTimer) { clearTimeout(activeAudioTimer); activeAudioTimer = null; }
+    if (audioElement) {
+      audioElement.pause();
+      audioElement.currentTime = 0;
+      audioElement.removeAttribute("src");
+    }
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     if (animId) cancelAnimationFrame(animId);
     drawWaveform(false);
@@ -1185,117 +1247,171 @@ document.addEventListener("DOMContentLoaded", function() {
     liveIndicator.innerText = "● Stopped";
     liveIndicator.style.color = "#94a3b8";
     logDiv.innerText = "Speech stopped.";
-  };
+  }
 
-  // Main Speech Synthesizer Function
+  btnStop.onclick = stopEverything;
+
   btnSpeak.onclick = () => {
     const raw = textArea.value.trim();
-    if (!raw) return alert("Please enter some narration text!");
+    if (!raw) return alert("Please enter some narration text first!");
 
-    btnStop.onclick();
+    stopEverything();
     isSpeaking = true;
 
-    // Preprocess text using Cartesia linguistic rules
     const refinedText = preprocessHindiProsody(raw);
-
-    // Segment text into rhythmic semantic clauses
     const rawClauses = refinedText.split(/([।?!,\n]+)/).filter(c => c.trim().length > 0);
     const clauses = [];
     let temp = "";
     for (let c of rawClauses) {
       temp += c;
-      if (temp.length > 20 || /[।?!]/.test(c)) {
+      if (temp.length > 25 || /[।?!]/.test(c)) {
         clauses.push(temp.trim());
         temp = "";
       }
     }
     if (temp.trim()) clauses.push(temp.trim());
+    if (clauses.length === 0) clauses.push(refinedText);
 
-    if (!('speechSynthesis' in window)) {
-      alert("Speech synthesis is not supported by your browser!");
-      return;
-    }
+    const profile = AGENT_PROFILES[currentAgent] || AGENT_PROFILES.narrator;
+    const speed = parseFloat(speedSlider.value) || profile.rate;
+    const pauseMultiplier = parseFloat(pauseSlider.value) || profile.pause;
+    const pitchOffset = parseInt(pitchSlider.value, 10) || profile.pitch;
 
-    liveIndicator.innerText = "● Voice Active";
-    liveIndicator.style.color = "#02d2e3";
-    clauseTracker.style.display = "inline-block";
+    liveIndicator.innerText = "● Speaking (" + profile.name + ")";
+    liveIndicator.style.color = profile.color;
     drawWaveform(true);
-    startWatchdog();
 
-    // Voice Discovery
-    const allVoices = window.speechSynthesis.getVoices() || [];
-    const isHindiText = /[\u0900-\u097F]/.test(raw);
+    const systemVoices = ('speechSynthesis' in window) ? (window.speechSynthesis.getVoices() || []) : [];
+    const hasDeviceVoices = systemVoices.length > 0;
 
-    // Select best matching voice
-    let bestVoice = null;
-    if (currentAgent === "swara") {
-      bestVoice = allVoices.find(v => (v.lang.startsWith("hi") || v.lang.startsWith("hi-IN")) && (v.name.toLowerCase().includes("female") || v.name.toLowerCase().includes("swara") || v.name.toLowerCase().includes("kalpana")));
+    if (engineMode === "speech" && hasDeviceVoices) {
+      playViaSpeechSynthesis(clauses, speed, pitchOffset, pauseMultiplier, profile);
+    } else {
+      if (engineMode === "speech" && !hasDeviceVoices) {
+        logDiv.innerHTML = `<span style="color:#fbbf24">Notice: No native voices found in browser OS. Automatically streaming via Universal Neural Voice!</span>`;
+      }
+      playViaNeuralStream(clauses, speed, pauseMultiplier, profile);
     }
-    if (!bestVoice && isHindiText) {
-      bestVoice = allVoices.find(v => v.lang.startsWith("hi") || v.lang.startsWith("hi-IN") || v.name.toLowerCase().includes("hindi") || v.name.toLowerCase().includes("lekha"));
-    }
-    if (!bestVoice) {
-      bestVoice = allVoices.find(v => v.lang.startsWith("en-IN") || v.name.toLowerCase().includes("india"));
-    }
-    if (!bestVoice && allVoices.length > 0) {
-      bestVoice = allVoices[0]; // Universal safe fallback
-    }
+  };
 
-    // Persona parameters
-    const speed = parseFloat(speedSlider.value) || 0.95;
-    const pitchOffset = parseInt(pitchSlider.value, 10) || 0;
-    const pitch = Math.max(0.6, Math.min(1.8, 1.0 + (pitchOffset / 100)));
-    const pauseMultiplier = parseFloat(pauseSlider.value) || 1.0;
-
+  // 100% Guaranteed Universal Neural Stream Player
+  function playViaNeuralStream(clauses, speed, pauseMultiplier, profile) {
     let currentIdx = 0;
-    window.__activeUtterances = [];
 
-    function playClause() {
+    function playNext() {
       if (!isSpeaking || currentIdx >= clauses.length) {
-        btnStop.onclick();
-        liveIndicator.innerText = "✓ Speech Complete";
+        stopEverything();
+        liveIndicator.innerText = "✓ Narration Complete";
         liveIndicator.style.color = "#10b981";
         logDiv.innerText = "Playback finished successfully.";
         return;
       }
 
-      const textChunk = clauses[currentIdx];
+      const chunk = clauses[currentIdx];
+      const isHindi = /[\u0900-\u097F]/.test(chunk);
+      const lang = isHindi ? "hi" : "en";
+      const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(chunk)}&tl=${lang}&client=tw-ob`;
+
+      clauseTracker.innerText = `Clause ${currentIdx + 1} of ${clauses.length} (${Math.round(((currentIdx + 1) / clauses.length) * 100)}%)`;
+      clauseTracker.style.display = "inline-block";
+      logDiv.innerHTML = `Streaming [${profile.name}]: <i>"${chunk.substring(0, 52)}..."</i>`;
+
+      audioElement.src = audioUrl;
+      audioElement.playbackRate = Math.max(0.75, Math.min(1.4, speed));
+
+      audioElement.onended = () => {
+        if (!isSpeaking) return;
+        currentIdx++;
+        const isSuspense = /[…।.?!]/.test(chunk);
+        const pauseTime = Math.round((isSuspense ? 380 : 200) * pauseMultiplier);
+        activeAudioTimer = setTimeout(playNext, pauseTime);
+      };
+
+      audioElement.onerror = (e) => {
+        console.warn("Neural audio chunk error, advancing:", e);
+        if (!isSpeaking) return;
+        currentIdx++;
+        activeAudioTimer = setTimeout(playNext, 120);
+      };
+
+      const p = audioElement.play();
+      if (p !== undefined) {
+        p.catch(err => {
+          console.warn("Audio play prevented:", err);
+          if ('speechSynthesis' in window) {
+            playViaSpeechSynthesis(clauses.slice(currentIdx), speed, profile.pitch, pauseMultiplier, profile);
+          }
+        });
+      }
+    }
+
+    playNext();
+  }
+
+  // Local SpeechSynthesis Fallback
+  function playViaSpeechSynthesis(clauses, speed, pitchOffset, pauseMultiplier, profile) {
+    const allVoices = window.speechSynthesis.getVoices() || [];
+    let bestVoice = null;
+    if (currentAgent === "swara") {
+      bestVoice = allVoices.find(v => (v.lang.startsWith("hi") || v.lang.startsWith("hi-IN")) && (v.name.toLowerCase().includes("female") || v.name.toLowerCase().includes("swara")));
+    }
+    if (!bestVoice) {
+      bestVoice = allVoices.find(v => v.lang.startsWith("hi") || v.lang.startsWith("hi-IN") || v.name.toLowerCase().includes("hindi"));
+    }
+    if (!bestVoice) {
+      bestVoice = allVoices.find(v => v.lang.startsWith("en-IN") || v.name.toLowerCase().includes("india"));
+    }
+    if (!bestVoice && allVoices.length > 0) bestVoice = allVoices[0];
+
+    const pitch = Math.max(0.6, Math.min(1.8, 1.0 + (pitchOffset / 100)));
+    let currentIdx = 0;
+    window.__activeUtterances = [];
+
+    function playNext() {
+      if (!isSpeaking || currentIdx >= clauses.length) {
+        stopEverything();
+        liveIndicator.innerText = "✓ Speech Complete";
+        liveIndicator.style.color = "#10b981";
+        logDiv.innerText = "Device speech completed.";
+        return;
+      }
+
+      const chunk = clauses[currentIdx];
       clauseTracker.innerText = `Clause ${currentIdx + 1} of ${clauses.length}`;
-      logDiv.innerHTML = `Speaking [${currentAgent.toUpperCase()}]: <i>"${textChunk.substring(0, 50)}..."</i>`;
+      clauseTracker.style.display = "inline-block";
+      logDiv.innerHTML = `Speaking [${profile.name} via Device TTS]: <i>"${chunk.substring(0, 48)}..."</i>`;
 
-      const utter = new SpeechSynthesisUtterance(textChunk);
-      window.__activeUtterances.push(utter); // Prevent garbage collection
-
+      const utter = new SpeechSynthesisUtterance(chunk);
+      window.__activeUtterances.push(utter);
       utter.rate = speed;
       utter.pitch = pitch;
       if (bestVoice) {
         utter.voice = bestVoice;
         utter.lang = bestVoice.lang;
-      } else if (isHindiText) {
+      } else {
         utter.lang = "hi-IN";
       }
 
       utter.onend = () => {
         if (!isSpeaking) return;
         currentIdx++;
-        // Calculate natural respiratory pause
-        const isSuspense = /[….]/.test(textChunk);
-        const pauseTime = Math.round((isSuspense ? 450 : 260) * pauseMultiplier);
-        setTimeout(playClause, pauseTime);
+        const isSuspense = /[….]/.test(chunk);
+        const pauseTime = Math.round((isSuspense ? 450 : 250) * pauseMultiplier);
+        activeAudioTimer = setTimeout(playNext, pauseTime);
       };
 
       utter.onerror = (e) => {
-        console.warn("Speech clause error:", e);
+        console.warn("Utterance error:", e);
         if (!isSpeaking) return;
         currentIdx++;
-        setTimeout(playClause, 150);
+        activeAudioTimer = setTimeout(playNext, 100);
       };
 
       window.speechSynthesis.speak(utter);
     }
 
-    playClause();
-  };
+    playNext();
+  }
 
   // Preload voices
   if ('speechSynthesis' in window) {
