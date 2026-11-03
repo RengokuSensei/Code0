@@ -100,12 +100,12 @@ Select an AI Voice Persona below, paste your script, and generate instant speech
         <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.4;">Dynamic pitch modulation with theatrical tension and suspense.</div>
       </div>
 
-      <!-- Agent 5: Celestial Swara -->
+      <!-- Agent 5: Siya / Swara -->
       <div class="persona-card" data-agent="swara" style="background: rgba(236, 72, 153, 0.08); border: 1px solid rgba(236, 72, 153, 0.3); border-radius: 12px; padding: 1rem; cursor: pointer; transition: all 0.2s ease;">
-        <div style="font-size: 1.25rem; margin-bottom: 0.35rem;">👩</div>
-        <div style="font-weight: 700; font-size: 0.95rem; color: #fff;">Celestial Swara</div>
-        <div style="font-size: 0.75rem; color: #f472b6; font-weight: 600; margin-bottom: 0.4rem;">मधुर स्त्री स्वर (Luminous)</div>
-        <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.4;">Crystal clear, gentle feminine timbre with soothing documentary flow.</div>
+        <div style="font-size: 1.25rem; margin-bottom: 0.35rem;">✨</div>
+        <div style="font-weight: 700; font-size: 0.95rem; color: #fff;">Siya / Swara</div>
+        <div style="font-size: 0.75rem; color: #f472b6; font-weight: 600; margin-bottom: 0.4rem;">Cartesia Siya (Bright Conversationalist)</div>
+        <div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.4;">Expressive, warm, conversational Hindi flow modeled after Cartesia's Siya voice.</div>
       </div>
 
     </div>
@@ -291,13 +291,13 @@ document.addEventListener("DOMContentLoaded", function() {
   if (!canvas || !btnSpeak) return;
   const ctx = canvas.getContext("2d");
 
-  // Agent Profiles Configuration
+  // Agent Profiles Configuration (Refined with Cartesia Siya Conversational Dynamics)
   const AGENT_PROFILES = {
     narrator: { rate: 0.92, pitch: -8, pause: 1.20, name: "Cosmic Narrator", color: "#02d2e3", title: "गंभीर वृत्तचित्र (Deep Bass)" },
     sage: { rate: 0.85, pitch: -12, pause: 1.40, name: "Philosopher Sage", color: "#8c68ff", title: "चिंतनशील ऋषि (Poetic)" },
     explainer: { rate: 1.08, pitch: 6, pause: 0.85, name: "Quantum Explainer", color: "#10b981", title: "उत्साही शिक्षक (Crisp)" },
     storyteller: { rate: 0.96, pitch: 0, pause: 1.10, name: "Cinematic Storyteller", color: "#f59e0b", title: "रोमांचक कथावाचक (Vivid)" },
-    swara: { rate: 0.98, pitch: 14, pause: 1.00, name: "Celestial Swara", color: "#ec4899", title: "मधुर स्त्री स्वर (Luminous)" }
+    swara: { rate: 1.02, pitch: 16, pause: 0.95, name: "Siya / Swara", color: "#ec4899", title: "Cartesia Siya (Bright Conversationalist)" }
   };
   const agentKeys = ["narrator", "sage", "explainer", "storyteller", "swara"];
   let currentAgent = "narrator";
@@ -552,14 +552,26 @@ document.addEventListener("DOMContentLoaded", function() {
       clauseTracker.style.display = "inline-block";
       logDiv.innerHTML = `Streaming [${profile.name}]: <i>"${chunk.substring(0, 52)}..."</i>`;
 
+      // Dynamic Conversational Rubato (Cartesia Siya pacing modulation)
+      let dynamicRate = speed;
+      if (/\?/.test(chunk)) {
+        dynamicRate = speed * 1.05; // Light buoyant lift on questions
+      } else if (/[….]/.test(chunk) || /सन्नाटे|पीछे|अतीत|गहरा|विशाल/.test(chunk)) {
+        dynamicRate = speed * 0.92; // Atmospheric deceleration on imagery
+      } else if (/क्योंकि|इसलिए|तो असल में|परंतु|लेकिन/.test(chunk)) {
+        dynamicRate = speed * 1.08; // Natural conversational pickup on conjunctions
+      }
+
       audioElement.src = audioUrl;
-      audioElement.playbackRate = Math.max(0.75, Math.min(1.4, speed));
+      audioElement.playbackRate = Math.max(0.75, Math.min(1.4, dynamicRate));
 
       audioElement.onended = () => {
         if (!isSpeaking) return;
         currentIdx++;
-        const isSuspense = /[…।.?!]/.test(chunk);
-        const pauseTime = Math.round((isSuspense ? 380 : 200) * pauseMultiplier);
+        const isQuestion = /\?/.test(chunk);
+        const isSuspense = /[….]/.test(chunk);
+        const basePause = isQuestion ? 420 : (isSuspense ? 360 : 190);
+        const pauseTime = Math.round(basePause * pauseMultiplier);
         activeAudioTimer = setTimeout(playNext, pauseTime);
       };
 
