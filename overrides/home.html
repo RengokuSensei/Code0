@@ -2052,6 +2052,37 @@
             <textarea id="home-tts-text" rows="4" style="width: 100%; background: #080a12; border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; color: #f8fafc; padding: 1rem; font-family: 'Inter', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.6; resize: vertical; outline: none; box-sizing: border-box;" placeholder="Type or paste narration script here...">क्या आपने कभी रात के सन्नाटे में... आकाश की ओर देखा है? जब आप तारों को देखते हैं... तो असल में आप समय में पीछे देख रहे होते हैं। तो सवाल यह उठता है... कि ठोस वैज्ञानिक प्रमाणों के आधार पर... हम समय में कितना पीछे देख सकते हैं?</textarea>
           </div>
 
+          <!-- 3. Emotional Affect & Vibe (भाव व रस: OpenAI Smoothness + Indic Bhaav) -->
+          <div style="margin-bottom: 1.25rem; background: rgba(8, 10, 18, 0.65); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1rem 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem; flex-wrap: wrap; gap: 0.5rem;">
+              <label style="font-size: 0.85rem; font-weight: 600; color: #cbd5e1; display: flex; align-items: center; gap: 8px;">
+                <span>3. Emotional Affect &amp; Vibe (भाव व रस):</span>
+                <span id="home-active-emotion-badge" style="font-size: 0.72rem; background: rgba(2, 210, 227, 0.15); color: #02d2e3; padding: 2px 8px; border-radius: 999px; font-weight: 600;">🌌 विस्मय (Cosmic Wonder)</span>
+              </label>
+              <span style="font-size: 0.72rem; color: #64748b; font-family: 'JetBrains Mono', monospace;">OpenAI.fm Smoothness + Indic Soul</span>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="home-emotion-preset-wrap">
+              <button type="button" class="home-emotion-btn active-emotion" data-emotion="wonder" style="background: rgba(2, 210, 227, 0.16); border: 1px solid #02d2e3; color: #02d2e3; padding: 6px 13px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600; transition: all 0.2s ease;">
+                🌌 विस्मय (Wonder)
+              </button>
+              <button type="button" class="home-emotion-btn" data-emotion="mystery" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); color: #94a3b8; padding: 6px 13px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600; transition: all 0.2s ease;">
+                🔮 रहस्य (Mystery)
+              </button>
+              <button type="button" class="home-emotion-btn" data-emotion="conversational" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); color: #94a3b8; padding: 6px 13px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600; transition: all 0.2s ease;">
+                ⚡ जीवंत (Conversational)
+              </button>
+              <button type="button" class="home-emotion-btn" data-emotion="philosophical" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); color: #94a3b8; padding: 6px 13px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600; transition: all 0.2s ease;">
+                📜 चिंतन (Philosophical)
+              </button>
+              <button type="button" class="home-emotion-btn" data-emotion="dramatic" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); color: #94a3b8; padding: 6px 13px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600; transition: all 0.2s ease;">
+                🔥 उत्साह (Dramatic)
+              </button>
+            </div>
+            <div id="home-emotion-desc" style="font-size: 0.75rem; color: #64748b; margin-top: 0.4rem; font-style: italic;">
+              विस्मयकारी ब्रह्मांडीय स्वर: विचारमग्न ठहराव, कोमल साँस व विस्मय भरा चढ़ाव (Solves OpenAI's flat emotion).
+            </div>
+          </div>
+
           <!-- Fine-Tuning Tone Controls -->
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; background: rgba(8, 10, 18, 0.75); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.15rem;">
             <div>
@@ -5337,6 +5368,96 @@
       let currentAgent = "narrator";
       let engineMode = "neural"; // "neural" (100% universal sound) or "speech" (device TTS)
 
+      // Emotion & Affect Presets (OpenAI Smoothness + Indic Bhaav & Ras)
+      const EMOTION_PRESETS = {
+        wonder: {
+          name: "🌌 विस्मय (Cosmic Wonder)",
+          rateMod: 0.94,
+          pitchOffset: 6,
+          pauseMod: 1.25,
+          color: "#02d2e3",
+          desc: "विस्मयकारी ब्रह्मांडीय स्वर: विचारमग्न ठहराव, कोमल साँस व विस्मय भरा चढ़ाव (Solves OpenAI's flat emotion)."
+        },
+        mystery: {
+          name: "🔮 रहस्य (Deep Mystery)",
+          rateMod: 0.86,
+          pitchOffset: -8,
+          pauseMod: 1.45,
+          color: "#8c68ff",
+          desc: "गंभीर फुसफुसाहट भरा रहस्यमय स्वर: मंद गति, गहरे विचारशील विराम व सूक्ष्म गंभीरता।"
+        },
+        conversational: {
+          name: "⚡ जीवंत (Conversational / Siya)",
+          rateMod: 1.04,
+          pitchOffset: 16,
+          pauseMod: 0.95,
+          color: "#ec4899",
+          desc: "स्वाभाविक जीवंत बातचीत: तीव्र प्रश्नोत्तरी, खिलखिलाता स्वर व सहज मानवीय प्रवाह।"
+        },
+        philosophical: {
+          name: "📜 चिंतन (Philosophical Depth)",
+          rateMod: 0.90,
+          pitchOffset: -4,
+          pauseMod: 1.35,
+          color: "#f59e0b",
+          desc: "दार्शनिक वजन व गंभीरता: प्रत्येक शब्द का संतुलित स्पष्ट उच्चारण व शास्त्रीय गरिमा।"
+        },
+        dramatic: {
+          name: "🔥 उत्साह (Dramatic Urgency)",
+          rateMod: 1.10,
+          pitchOffset: 6,
+          pauseMod: 0.85,
+          color: "#ef4444",
+          desc: "ऊर्जावान तात्कालिकता: तीव्र गति, स्पष्ट आघात व रोमांचकारी चरम सीमा।"
+        }
+      };
+      let currentEmotion = "wonder";
+
+      const emotionBtns = document.querySelectorAll(".home-emotion-btn");
+      const emotionBadge = document.getElementById("home-active-emotion-badge");
+      const emotionDesc = document.getElementById("home-emotion-desc");
+
+      function activateEmotion(emotionKey) {
+        const ep = EMOTION_PRESETS[emotionKey];
+        if (!ep) return;
+        currentEmotion = emotionKey;
+
+        emotionBtns.forEach(btn => {
+          if (btn.getAttribute("data-emotion") === emotionKey) {
+            btn.style.background = `rgba(${hexToRgb(ep.color)}, 0.16)`;
+            btn.style.borderColor = ep.color;
+            btn.style.color = ep.color;
+          } else {
+            btn.style.background = "rgba(255, 255, 255, 0.04)";
+            btn.style.borderColor = "rgba(255, 255, 255, 0.12)";
+            btn.style.color = "#94a3b8";
+          }
+        });
+
+        if (emotionBadge) {
+          emotionBadge.innerText = ep.name;
+          emotionBadge.style.color = ep.color;
+          emotionBadge.style.background = `rgba(${hexToRgb(ep.color)}, 0.15)`;
+        }
+        if (emotionDesc) {
+          emotionDesc.innerText = ep.desc;
+        }
+
+        speedSlider.value = ep.rateMod;
+        pitchSlider.value = ep.pitchOffset;
+        pauseSlider.value = ep.pauseMod;
+        updateSliderDisplays();
+        updateCounts();
+
+        logDiv.innerHTML = `Active Emotion: <b style="color:${ep.color}">${ep.name}</b>. ${ep.desc}`;
+      }
+
+      emotionBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          activateEmotion(btn.getAttribute("data-emotion"));
+        });
+      });
+
       function activatePersona(agentKey) {
         const profile = AGENT_PROFILES[agentKey];
         if (!profile) return;
@@ -5586,14 +5707,21 @@
           }
           logDiv.innerHTML = `Streaming [${profile.name}]: <i>"${chunk.substring(0, 52)}..."</i>`;
 
-          // Dynamic Conversational Rubato (Cartesia Siya pacing modulation)
+          // Dynamic Emotional Rubato & Affect Pacing (OpenAI Smoothness + Native Indic Bhaav)
           let dynamicRate = speed;
-          if (/\?/.test(chunk)) {
-            dynamicRate = speed * 1.05; // Light buoyant lift on questions
-          } else if (/[….]/.test(chunk) || /सन्नाटे|पीछे|अतीत|गहरा|विशाल/.test(chunk)) {
-            dynamicRate = speed * 0.92; // Atmospheric deceleration on imagery
-          } else if (/क्योंकि|इसलिए|तो असल में|परंतु|लेकिन/.test(chunk)) {
-            dynamicRate = speed * 1.08; // Natural conversational pickup on conjunctions
+          const isQuestion = /\?/.test(chunk);
+          const isAtmospheric = /[….]/.test(chunk) || /सन्नाटे|पीछे|अतीत|गहरा|विशाल|शून्य|रहस्य|अंधकार/.test(chunk);
+          const isConnective = /क्योंकि|इसलिए|तो असल में|परंतु|लेकिन|बल्कि|आधार पर/.test(chunk);
+          const isScientific = /ब्रह्मांड|प्रकाश-वर्ष|सिंगुलैरिटी|वैज्ञानिक|प्रमाण|टेलिस्कोप/.test(chunk);
+
+          if (isQuestion) {
+            dynamicRate = speed * 1.06; // Buoyant interrogative lift
+          } else if (isAtmospheric) {
+            dynamicRate = speed * 0.90; // Deep evocative deceleration on cosmic imagery
+          } else if (isConnective) {
+            dynamicRate = speed * 1.07; // Natural conversational momentum on conjunctions
+          } else if (isScientific) {
+            dynamicRate = speed * 0.94; // Measured gravitas on heavy scientific concepts
           }
 
           audioElement.src = audioUrl;
@@ -5602,9 +5730,7 @@
           audioElement.onended = () => {
             if (!isSpeaking) return;
             currentIdx++;
-            const isQuestion = /\?/.test(chunk);
-            const isSuspense = /[….]/.test(chunk);
-            const basePause = isQuestion ? 420 : (isSuspense ? 360 : 190);
+            const basePause = isQuestion ? 460 : (isAtmospheric ? 390 : 190);
             const pauseTime = Math.round(basePause * pauseMultiplier);
             activeAudioTimer = setTimeout(playNext, pauseTime);
           };
