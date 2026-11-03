@@ -1977,11 +1977,12 @@
           </div>
 
           <!-- Controls Row -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; align-items: center;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem; align-items: center;">
             <div>
               <label for="home-tts-engine" style="display: block; font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.35rem;">Voice Engine:</label>
               <select id="home-tts-engine" style="width: 100%; background: #090a0f; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #f8fafc; padding: 8px 12px; font-size: 0.85rem; outline: none;">
-                <option value="cloud_neural" selected>🌐 Cloud Neural Hindi (Google Authentic Stream)</option>
+                <option value="cartesia_sonic" selected>⚡ Cartesia Sonic (Voice 4459a9a5... — Master Hindi)</option>
+                <option value="cloud_neural">🌐 Cloud Neural Hindi (Google Authentic Stream)</option>
                 <option value="browser_speech">📱 Browser Device Voices (Web Speech API)</option>
               </select>
             </div>
@@ -1992,6 +1993,18 @@
                 <span id="home-tts-speed-val" style="color: #02d2e3;">1.00×</span>
               </label>
               <input type="range" id="home-tts-speed" min="0.75" max="1.30" step="0.05" value="1.00" style="width: 100%; accent-color: #02d2e3;">
+            </div>
+          </div>
+
+          <!-- Cartesia Homepage API Key Box -->
+          <div id="home-cartesia-box" style="display: block; background: rgba(2, 210, 227, 0.08); border: 1px solid rgba(2, 210, 227, 0.3); border-radius: 10px; padding: 0.85rem 1.15rem; margin-bottom: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.5rem;">
+              <span style="font-size: 0.8rem; font-weight: 700; color: #02d2e3;">⚡ Cartesia Voice ID: 4459a9a5-69d6-4680-b970-e13dc51845b6</span>
+              <a href="https://play.cartesia.ai/" target="_blank" style="font-size: 0.75rem; color: #38bdf8; text-decoration: underline; font-weight: 600;">Get Free Key on play.cartesia.ai ↗</a>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input type="password" id="home-cartesia-key" placeholder="Enter Cartesia API Key (sk_car_...)" style="flex: 1; background: #090a0f; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: #fff; padding: 6px 10px; font-size: 0.85rem;">
+              <button type="button" id="home-btn-save-key" style="background: #02d2e3; color: #090a0f; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">Save</button>
             </div>
           </div>
 
@@ -5225,8 +5238,32 @@
       const downloadLink = document.getElementById("home-download-link");
       const logDiv = document.getElementById("home-audio-log");
       const canvas = document.getElementById("home-audio-visualizer");
+      const cartesiaBox = document.getElementById("home-cartesia-box");
+      const cartesiaKeyInput = document.getElementById("home-cartesia-key");
+      const btnSaveKey = document.getElementById("home-btn-save-key");
       if (!canvas || !btnSpeak) return;
       const ctx = canvas.getContext("2d");
+
+      // Load saved Cartesia key
+      const savedKey = localStorage.getItem("cartesia_api_key");
+      if (savedKey && cartesiaKeyInput) cartesiaKeyInput.value = savedKey;
+
+      if (btnSaveKey) {
+        btnSaveKey.onclick = () => {
+          localStorage.setItem("cartesia_api_key", cartesiaKeyInput.value.trim());
+          alert("✓ Cartesia API Key saved in browser!");
+          liveStatus.innerText = "● Cartesia Key Stored";
+          liveStatus.style.color = "#02d2e3";
+        };
+      }
+
+      if (engineSelect) {
+        engineSelect.onchange = () => {
+          if (cartesiaBox) {
+            cartesiaBox.style.display = (engineSelect.value === "cartesia_sonic") ? "block" : "none";
+          }
+        };
+      }
 
       document.getElementById("home-load-hindi").onclick = () => { textArea.value = shortHindi; };
       document.getElementById("home-load-full").onclick = () => { textArea.value = fullHindi; };
@@ -5259,12 +5296,88 @@
         liveStatus.style.color = "#94a3b8";
       };
 
-      btnSpeak.onclick = () => {
+      btnSpeak.onclick = async () => {
         const text = textArea.value.trim();
         if (!text) return alert("Please enter some narration text!");
         btnStop.onclick();
 
         const engine = engineSelect.value;
+
+        // Engine 0: Cartesia Sonic State Space Model
+        if (engine === "cartesia_sonic") {
+          const apiKey = (cartesiaKeyInput ? cartesiaKeyInput.value.trim() : "") || localStorage.getItem("cartesia_api_key");
+          if (!apiKey) {
+            liveStatus.innerText = "⚠️ Cartesia Key Required";
+            liveStatus.style.color = "#f59e0b";
+            logDiv.innerHTML = 'Enter Cartesia API key above, or select <b>"Cloud Neural Hindi"</b> in dropdown for zero-setup stream!';
+            if (cartesiaBox) cartesiaBox.style.display = "block";
+            return;
+          }
+
+          liveStatus.innerText = "⏳ Calling Cartesia Sonic SSM (~100ms)...";
+          liveStatus.style.color = "#02d2e3";
+          logDiv.innerText = "Streaming master Hindi from Cartesia Sonic (Voice: 4459a9a5...)...";
+
+          try {
+            const resp = await fetch("https://api.cartesia.ai/tts/bytes", {
+              method: "POST",
+              headers: {
+                "X-API-Key": apiKey,
+                "Cartesia-Version": "2024-06-10",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                model_id: "sonic-multilingual",
+                transcript: text,
+                voice: {
+                  mode: "id",
+                  id: "4459a9a5-69d6-4680-b970-e13dc51845b6"
+                },
+                language: "hi",
+                output_format: {
+                  container: "mp3",
+                  bit_rate: 128000,
+                  sample_rate: 44100
+                }
+              })
+            });
+
+            if (!resp.ok) {
+              const err = await resp.text();
+              throw new Error(`Cartesia error ${resp.status}: ${err}`);
+            }
+
+            const blob = await resp.blob();
+            const blobUrl = URL.createObjectURL(blob);
+
+            audioWrap.style.display = "block";
+            audioPlayer.src = blobUrl;
+            audioPlayer.playbackRate = parseFloat(speedSlider.value);
+            audioPlayer.play();
+            drawWave(true);
+
+            downloadLink.href = blobUrl;
+            downloadLink.download = `cartesia_hindi_master.mp3`;
+
+            liveStatus.innerText = "✓ Cartesia Sonic Hindi Synthesized";
+            liveStatus.style.color = "#10b981";
+            logDiv.innerText = "Cartesia Sonic SSM audio streamed and played (Voice 4459a9a5...).";
+
+            audioPlayer.onended = () => {
+              if (animId) cancelAnimationFrame(animId);
+              drawWave(false);
+              liveStatus.innerText = "● Playback Complete";
+            };
+
+          } catch (e) {
+            liveStatus.innerText = "⚠️ Cartesia Request Failed";
+            liveStatus.style.color = "#ef4444";
+            logDiv.innerText = "Error: " + e.message;
+          }
+          return;
+        }
+
+        // Engine 1: Cloud Neural Google Stream
         if (engine === "cloud_neural") {
           liveStatus.innerText = "⏳ Loading Cloud Audio Stream...";
           liveStatus.style.color = "#02d2e3";
