@@ -1930,112 +1930,156 @@
     <!-- ==========================================================================
          VOICE STUDIO HOME: LIVE SCRIPT-TO-VOICE GENERATOR SECTION
          ========================================================================== -->
-    <section class="section" id="voice-studio-home" style="padding: 3.5rem 0; background: linear-gradient(180deg, rgba(9, 10, 15, 0.98), rgba(14, 16, 25, 0.95)); border-top: 1px solid rgba(2, 210, 227, 0.25); border-bottom: 1px solid rgba(2, 210, 227, 0.25); position: relative; z-index: 10;">
+    <section class="section" id="voice-studio-home" style="padding: 3.5rem 0; background: linear-gradient(180deg, rgba(7, 9, 19, 0.98), rgba(12, 16, 32, 0.95)); border-top: 1px solid rgba(2, 210, 227, 0.25); border-bottom: 1px solid rgba(2, 210, 227, 0.25); position: relative; z-index: 10;">
       <div class="container">
         
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
           <div>
             <div class="section-eyebrow" style="color: #02d2e3; font-weight: 700; letter-spacing: 0.1em; display: flex; align-items: center; gap: 8px;">
               <span class="live-pulse" style="background: #02d2e3;"></span>
-              <span>AI AUDIO LAB &bull; SCRIPT-TO-VOICE GENERATOR // LIVE</span>
+              <span>AI AUDIO LAB &bull; 5-AGENT MULTI-PERSONA VOICE STUDIO</span>
             </div>
             <h2 class="section-title" style="margin: 0.5rem 0 0 0; font-size: 2.2rem; color: #fff;">
-              Paste Any Script &bull; Generate Natural Hindi Speech
+              Paste Any Script &bull; Speak in Distinct Voice Personas
             </h2>
-            <p style="color: #94a3b8; font-size: 0.95rem; margin: 0.4rem 0 0 0; max-width: 680px;">
-              Synthesize and test Hindi narration directly in your browser. Runs 100% on GitHub Pages without requiring local setup or subscription fees.
+            <p style="color: #94a3b8; font-size: 0.95rem; margin: 0.4rem 0 0 0; max-width: 720px;">
+              100% free client-side speech synthesis with Cartesia-inspired Hindi prosody, schwa syncope, and dynamic breathing cadence. Zero API keys, zero subscriptions.
             </p>
           </div>
           <div>
-            <a href="voice-studio/" class="btn btn-outline" style="border-color: rgba(139, 92, 246, 0.5); color: #c084fc; font-size: 0.85rem; padding: 8px 16px;">
-              <span>Full Benchmark Shootout &rarr;</span>
+            <a href="voice-studio/" class="btn btn-outline" style="border-color: rgba(2, 210, 227, 0.5); color: #02d2e3; font-size: 0.85rem; padding: 8px 16px;">
+              <span>Open Full Voice Studio &rarr;</span>
             </a>
           </div>
         </div>
 
-        <div style="background: rgba(18, 20, 32, 0.9); border: 1px solid rgba(2, 210, 227, 0.3); border-radius: 16px; padding: 2rem; box-shadow: 0 16px 48px rgba(0,0,0,0.6);">
+        <div style="background: rgba(14, 18, 34, 0.94); border: 1px solid rgba(2, 210, 227, 0.35); border-radius: 18px; padding: 2rem; box-shadow: 0 16px 48px rgba(0,0,0,0.65);">
           
+          <!-- Agent Persona Selector Grid -->
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 700; color: #cbd5e1; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;">
+              1. Select Voice Agent (पात्र चुनें):
+            </label>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;" id="home-agent-grid">
+              
+              <!-- Persona 1 -->
+              <div class="home-persona-card active-persona" data-agent="narrator" style="background: rgba(2, 210, 227, 0.12); border: 2px solid #02d2e3; border-radius: 12px; padding: 0.9rem; cursor: pointer; transition: all 0.2s ease;">
+                <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">🎙️</div>
+                <div style="font-weight: 700; font-size: 0.9rem; color: #fff;">Cosmic Narrator</div>
+                <div style="font-size: 0.72rem; color: #02d2e3; font-weight: 600;">गंभीर वृत्तचित्र (Deep Bass)</div>
+              </div>
+
+              <!-- Persona 2 -->
+              <div class="home-persona-card" data-agent="sage" style="background: rgba(139, 92, 246, 0.06); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: 12px; padding: 0.9rem; cursor: pointer; transition: all 0.2s ease;">
+                <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">🧘</div>
+                <div style="font-weight: 700; font-size: 0.9rem; color: #fff;">Philosopher Sage</div>
+                <div style="font-size: 0.72rem; color: #c084fc; font-weight: 600;">चिंतनशील ऋषि (Poetic)</div>
+              </div>
+
+              <!-- Persona 3 -->
+              <div class="home-persona-card" data-agent="explainer" style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 12px; padding: 0.9rem; cursor: pointer; transition: all 0.2s ease;">
+                <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">⚡</div>
+                <div style="font-weight: 700; font-size: 0.9rem; color: #fff;">Quantum Explainer</div>
+                <div style="font-size: 0.72rem; color: #34d399; font-weight: 600;">उत्साही शिक्षक (Crisp)</div>
+              </div>
+
+              <!-- Persona 4 -->
+              <div class="home-persona-card" data-agent="storyteller" style="background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 12px; padding: 0.9rem; cursor: pointer; transition: all 0.2s ease;">
+                <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">🌟</div>
+                <div style="font-weight: 700; font-size: 0.9rem; color: #fff;">Storyteller</div>
+                <div style="font-size: 0.72rem; color: #fbbf24; font-weight: 600;">रोमांचक कथावाचक (Vivid)</div>
+              </div>
+
+              <!-- Persona 5 -->
+              <div class="home-persona-card" data-agent="swara" style="background: rgba(236, 72, 153, 0.06); border: 1px solid rgba(236, 72, 153, 0.25); border-radius: 12px; padding: 0.9rem; cursor: pointer; transition: all 0.2s ease;">
+                <div style="font-size: 1.2rem; margin-bottom: 0.25rem;">👩</div>
+                <div style="font-weight: 700; font-size: 0.9rem; color: #fff;">Celestial Swara</div>
+                <div style="font-size: 0.72rem; color: #f472b6; font-weight: 600;">मधुर स्त्री स्वर (Luminous)</div>
+              </div>
+
+            </div>
+          </div>
+
           <!-- Quick Presets -->
           <div style="display: flex; gap: 0.6rem; margin-bottom: 1rem; flex-wrap: wrap;">
             <button type="button" id="home-load-hindi" style="background: rgba(2, 210, 227, 0.15); border: 1px solid #02d2e3; color: #02d2e3; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600;">
-              📝 25s Hindi Script (Cosmic Dawn)
+              📝 25s Hindi Benchmark
             </button>
             <button type="button" id="home-load-full" style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600;">
               🌌 Full Act I Passage
             </button>
             <button type="button" id="home-clear-text" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: #94a3b8; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;">
-              ✕ Clear
+              ✕ Clear Text
             </button>
           </div>
 
-          <!-- Textarea Input -->
+          <!-- Textarea Input with Live Telemetry -->
           <div style="margin-bottom: 1.25rem;">
-            <label for="home-tts-text" style="display: block; font-size: 0.85rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.5rem;">
-              Narration Script:
-            </label>
-            <textarea id="home-tts-text" rows="4" style="width: 100%; background: #090a0f; border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; color: #f8fafc; padding: 1rem; font-family: 'Inter', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.6; resize: vertical; outline: none; box-sizing: border-box;" placeholder="Type or paste narration script here...">क्या आपने कभी रात के सन्नाटे में... आकाश की ओर देखा है? जब आप तारों को देखते हैं... तो असल में आप समय में पीछे देख रहे होते हैं। तो सवाल यह उठता है... कि ठोस वैज्ञानिक प्रमाणों के आधार पर... हम समय में कितना पीछे देख सकते हैं?</textarea>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <label for="home-tts-text" style="font-size: 0.85rem; font-weight: 600; color: #cbd5e1;">
+                2. Narration Script (Devanagari or Hinglish):
+              </label>
+              <div style="font-size: 0.75rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">
+                <span id="home-char-count">0</span> chars &bull; <span id="home-word-count">0</span> words &bull; <span id="home-est-duration" style="color: #02d2e3;">~0s</span>
+              </div>
+            </div>
+            <textarea id="home-tts-text" rows="4" style="width: 100%; background: #080a12; border: 1px solid rgba(255,255,255,0.18); border-radius: 10px; color: #f8fafc; padding: 1rem; font-family: 'Inter', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.6; resize: vertical; outline: none; box-sizing: border-box;" placeholder="Type or paste narration script here...">क्या आपने कभी रात के सन्नाटे में... आकाश की ओर देखा है? जब आप तारों को देखते हैं... तो असल में आप समय में पीछे देख रहे होते हैं। तो सवाल यह उठता है... कि ठोस वैज्ञानिक प्रमाणों के आधार पर... हम समय में कितना पीछे देख सकते हैं?</textarea>
           </div>
 
-          <!-- Controls Row -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem; align-items: center;">
-            <div>
-              <label for="home-tts-engine" style="display: block; font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.35rem;">Voice Engine:</label>
-              <select id="home-tts-engine" style="width: 100%; background: #090a0f; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #f8fafc; padding: 8px 12px; font-size: 0.85rem; outline: none;">
-                <option value="cartesia_sonic" selected>⚡ Cartesia Sonic (Voice 4459a9a5... — Master Hindi)</option>
-                <option value="cloud_neural">🌐 Cloud Neural Hindi (Google Authentic Stream)</option>
-                <option value="browser_speech">📱 Browser Device Voices (Web Speech API)</option>
-              </select>
-            </div>
-
+          <!-- Fine-Tuning Tone Controls -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; background: rgba(8, 10, 18, 0.75); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.15rem;">
             <div>
               <label for="home-tts-speed" style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.35rem;">
-                <span>Speaking Rate:</span>
-                <span id="home-tts-speed-val" style="color: #02d2e3;">1.00×</span>
+                <span>Speaking Rate (गति):</span>
+                <span id="home-tts-speed-val" style="color: #02d2e3;">0.92×</span>
               </label>
-              <input type="range" id="home-tts-speed" min="0.75" max="1.30" step="0.05" value="1.00" style="width: 100%; accent-color: #02d2e3;">
+              <input type="range" id="home-tts-speed" min="0.75" max="1.35" step="0.02" value="0.92" style="width: 100%; accent-color: #02d2e3;">
             </div>
-          </div>
 
-          <!-- Cartesia Homepage API Key Box -->
-          <div id="home-cartesia-box" style="display: block; background: rgba(2, 210, 227, 0.08); border: 1px solid rgba(2, 210, 227, 0.3); border-radius: 10px; padding: 0.85rem 1.15rem; margin-bottom: 1.25rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; flex-wrap: wrap; gap: 0.5rem;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: #02d2e3;">⚡ Cartesia Voice ID: 4459a9a5-69d6-4680-b970-e13dc51845b6</span>
-              <a href="https://play.cartesia.ai/" target="_blank" style="font-size: 0.75rem; color: #38bdf8; text-decoration: underline; font-weight: 600;">Get Free Key on play.cartesia.ai ↗</a>
+            <div>
+              <label for="home-tts-pitch" style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.35rem;">
+                <span>Voice Pitch (स्वर पिच):</span>
+                <span id="home-tts-pitch-val" style="color: #8c68ff;">-8%</span>
+              </label>
+              <input type="range" id="home-tts-pitch" min="-25" max="25" step="1" value="-8" style="width: 100%; accent-color: #8c68ff;">
             </div>
-            <div style="display: flex; gap: 0.5rem; align-items: center;">
-              <input type="password" id="home-cartesia-key" placeholder="Enter Cartesia API Key (sk_car_...)" style="flex: 1; background: #090a0f; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: #fff; padding: 6px 10px; font-size: 0.85rem;">
-              <button type="button" id="home-btn-save-key" style="background: #02d2e3; color: #090a0f; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">Save</button>
+
+            <div>
+              <label for="home-tts-pause" style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.35rem;">
+                <span>Breath &amp; Pause (साँस व ठहराव):</span>
+                <span id="home-tts-pause-val" style="color: #10b981;">1.20×</span>
+              </label>
+              <input type="range" id="home-tts-pause" min="0.70" max="1.60" step="0.05" value="1.20" style="width: 100%; accent-color: #10b981;">
             </div>
           </div>
 
           <!-- Action Buttons -->
-          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
-            <button type="button" id="home-btn-speak" style="background: linear-gradient(135deg, #02d2e3, #0284c7); color: #090a0f; font-weight: 700; border: none; padding: 12px 28px; border-radius: 10px; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(2, 210, 227, 0.3); transition: transform 0.15s ease;">
-              <span>▶ Generate &amp; Speak Hindi</span>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; align-items: center;">
+            <button type="button" id="home-btn-speak" style="background: linear-gradient(135deg, #02d2e3, #0284c7); color: #090a0f; font-weight: 700; border: none; padding: 12px 28px; border-radius: 10px; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(2, 210, 227, 0.35); transition: transform 0.15s ease;">
+              <span>▶ Speak Voice Now (100% Free)</span>
             </button>
             <button type="button" id="home-btn-stop" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; font-weight: 600; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-size: 0.9rem;">
               ■ Stop
             </button>
+            <button type="button" id="home-btn-reset" style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.15); color: #94a3b8; font-size: 0.82rem; padding: 10px 14px; border-radius: 8px; cursor: pointer;">
+              🔄 Reset Tone
+            </button>
           </div>
 
           <!-- Telemetry & Waveform Box -->
-          <div style="background: rgba(9, 10, 15, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.75rem; font-weight: 600; color: #94a3b8; text-transform: uppercase;">Audio Output Stream</span>
+          <div style="background: rgba(8, 10, 16, 0.88); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Acoustic Waveform</span>
+                <span id="home-clause-badge" style="font-size: 0.72rem; background: rgba(2, 210, 227, 0.15); color: #02d2e3; padding: 2px 8px; border-radius: 999px; font-weight: 600; display: none;">Clause 1/1</span>
+              </div>
               <span id="home-live-status" style="font-size: 0.75rem; color: #10b981; font-weight: 600;">● Engine Ready</span>
             </div>
             
-            <canvas id="home-audio-visualizer" width="800" height="50" style="width: 100%; height: 50px; background: #050608; border-radius: 6px;"></canvas>
+            <canvas id="home-audio-visualizer" width="800" height="50" style="width: 100%; height: 50px; background: #040508; border-radius: 6px;"></canvas>
 
-            <div id="home-audio-wrap" style="display: none; margin-top: 0.75rem;">
-              <audio id="home-audio-player" controls referrerpolicy="no-referrer" style="width: 100%; border-radius: 6px;"></audio>
-              <div style="margin-top: 0.35rem; display: flex; justify-content: flex-end;">
-                <a id="home-download-link" href="#" download="hindi_narration.mp3" style="font-size: 0.8rem; color: #02d2e3; text-decoration: none; font-weight: 600;">⬇ Download Generated Audio</a>
-              </div>
-            </div>
-
-            <div id="home-audio-log" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #64748b; margin-top: 0.4rem;">
-              Ready. Click "Generate & Speak Hindi" to test instant narration.
+            <div id="home-audio-log" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #64748b; margin-top: 0.5rem;">
+              Ready. Choose a persona above and click "Speak Voice Now" for instant natural speech.
             </div>
           </div>
 
@@ -5221,64 +5265,149 @@
       });
     });
 
-    // 15. Homepage Live Voice Generator Engine
+    // 15. Homepage Live Voice Generator Engine (Multi-Agent Cartesia-Grade Prosody)
     (function initHomeVoiceStudio() {
       const shortHindi = "क्या आपने कभी रात के सन्नाटे में... आकाश की ओर देखा है? जब आप तारों को देखते हैं... तो असल में आप समय में पीछे देख रहे होते हैं। तो सवाल यह उठता है... कि ठोस वैज्ञानिक प्रमाणों के आधार पर... हम समय में कितना पीछे देख सकते हैं?";
       const fullHindi = "जब आप रात के आसमान को देखते हैं, तो आप वास्तव में समय में पीछे देख रहे होते हैं। क्योंकि प्रकाश को यात्रा करने में समय लगता है, आप ब्रह्मांड को कभी वैसा नहीं देख पाते जैसा वह आज है, बल्कि वैसा देखते हैं जैसा वह अतीत में था। तो सवाल यह उठता है कि प्रमाण के आधार पर हम समय में कितना पीछे देख सकते हैं, और कहाँ जाकर हमारे टेलिस्कोप्स की आँखें बंद हो जाती हैं?";
 
       const textArea = document.getElementById("home-tts-text");
-      const engineSelect = document.getElementById("home-tts-engine");
       const speedSlider = document.getElementById("home-tts-speed");
       const speedVal = document.getElementById("home-tts-speed-val");
+      const pitchSlider = document.getElementById("home-tts-pitch");
+      const pitchVal = document.getElementById("home-tts-pitch-val");
+      const pauseSlider = document.getElementById("home-tts-pause");
+      const pauseVal = document.getElementById("home-tts-pause-val");
       const btnSpeak = document.getElementById("home-btn-speak");
       const btnStop = document.getElementById("home-btn-stop");
+      const btnReset = document.getElementById("home-btn-reset");
       const liveStatus = document.getElementById("home-live-status");
-      const audioWrap = document.getElementById("home-audio-wrap");
-      const audioPlayer = document.getElementById("home-audio-player");
-      const downloadLink = document.getElementById("home-download-link");
+      const clauseBadge = document.getElementById("home-clause-badge");
       const logDiv = document.getElementById("home-audio-log");
       const canvas = document.getElementById("home-audio-visualizer");
-      const cartesiaBox = document.getElementById("home-cartesia-box");
-      const cartesiaKeyInput = document.getElementById("home-cartesia-key");
-      const btnSaveKey = document.getElementById("home-btn-save-key");
+      const charCountEl = document.getElementById("home-char-count");
+      const wordCountEl = document.getElementById("home-word-count");
+      const estDurationEl = document.getElementById("home-est-duration");
+      const personaCards = document.querySelectorAll(".home-persona-card");
       if (!canvas || !btnSpeak) return;
       const ctx = canvas.getContext("2d");
 
-      // Load saved Cartesia key
-      const savedKey = localStorage.getItem("cartesia_api_key");
-      if (savedKey && cartesiaKeyInput) cartesiaKeyInput.value = savedKey;
+      // Agent Profiles Configuration
+      const AGENT_PROFILES = {
+        narrator: { rate: 0.92, pitch: -8, pause: 1.20, name: "Cosmic Narrator", color: "#02d2e3" },
+        sage: { rate: 0.85, pitch: -12, pause: 1.40, name: "Philosopher Sage", color: "#8c68ff" },
+        explainer: { rate: 1.08, pitch: 6, pause: 0.85, name: "Quantum Explainer", color: "#10b981" },
+        storyteller: { rate: 0.96, pitch: 0, pause: 1.10, name: "Storyteller", color: "#f59e0b" },
+        swara: { rate: 0.98, pitch: 14, pause: 1.00, name: "Celestial Swara", color: "#ec4899" }
+      };
+      let currentAgent = "narrator";
 
-      if (btnSaveKey) {
-        btnSaveKey.onclick = () => {
-          localStorage.setItem("cartesia_api_key", cartesiaKeyInput.value.trim());
-          alert("✓ Cartesia API Key saved in browser!");
-          liveStatus.innerText = "● Cartesia Key Stored";
-          liveStatus.style.color = "#02d2e3";
+      // Persona Selection Switcher
+      personaCards.forEach(card => {
+        card.addEventListener("click", () => {
+          personaCards.forEach(c => {
+            c.style.borderColor = "rgba(255,255,255,0.15)";
+            c.style.background = "rgba(255,255,255,0.03)";
+          });
+          const agentKey = card.getAttribute("data-agent");
+          const profile = AGENT_PROFILES[agentKey];
+          if (!profile) return;
+          currentAgent = agentKey;
+          card.style.borderColor = profile.color;
+          card.style.background = `rgba(${hexToRgb(profile.color)}, 0.14)`;
+
+          speedSlider.value = profile.rate;
+          pitchSlider.value = profile.pitch;
+          pauseSlider.value = profile.pause;
+          updateSliderDisplays();
+          updateCounts();
+
+          logDiv.innerHTML = `Switched voice persona to <b>${profile.name}</b>. Click "Speak Voice Now" to listen.`;
+        });
+      });
+
+      function hexToRgb(hex) {
+        hex = hex.replace('#', '');
+        if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+        const num = parseInt(hex, 16);
+        return `${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}`;
+      }
+
+      function updateSliderDisplays() {
+        speedVal.innerText = parseFloat(speedSlider.value).toFixed(2) + "×";
+        const p = parseInt(pitchSlider.value, 10);
+        pitchVal.innerText = (p > 0 ? "+" : "") + p + "%";
+        pauseVal.innerText = parseFloat(pauseSlider.value).toFixed(2) + "×";
+      }
+
+      speedSlider.oninput = updateSliderDisplays;
+      pitchSlider.oninput = updateSliderDisplays;
+      pauseSlider.oninput = updateSliderDisplays;
+
+      if (btnReset) {
+        btnReset.onclick = () => {
+          const profile = AGENT_PROFILES[currentAgent] || AGENT_PROFILES.narrator;
+          speedSlider.value = profile.rate;
+          pitchSlider.value = profile.pitch;
+          pauseSlider.value = profile.pause;
+          updateSliderDisplays();
+          updateCounts();
+          logDiv.innerText = `Reset controls for ${profile.name}.`;
         };
       }
 
-      if (engineSelect) {
-        engineSelect.onchange = () => {
-          if (cartesiaBox) {
-            cartesiaBox.style.display = (engineSelect.value === "cartesia_sonic") ? "block" : "none";
-          }
-        };
+      function updateCounts() {
+        const text = textArea.value.trim();
+        const chars = text.length;
+        const words = text ? text.split(/\s+/).length : 0;
+        const rate = parseFloat(speedSlider.value) || 1.0;
+        const estSec = Math.round((words / (120 * rate)) * 60);
+        if (charCountEl) charCountEl.innerText = chars;
+        if (wordCountEl) wordCountEl.innerText = words;
+        if (estDurationEl) estDurationEl.innerText = `~${estSec}s`;
+      }
+      textArea.oninput = updateCounts;
+      updateCounts();
+
+      document.getElementById("home-load-hindi").onclick = () => { textArea.value = shortHindi; updateCounts(); };
+      document.getElementById("home-load-full").onclick = () => { textArea.value = fullHindi; updateCounts(); };
+      document.getElementById("home-clear-text").onclick = () => { textArea.value = ""; updateCounts(); };
+
+      // Cartesia-inspired phonetic preprocessor
+      function preprocessHindiProsody(rawText) {
+        let t = rawText;
+        const loanwords = [
+          [/\b(universe)\b/gi, "ब्रह्मांड"],
+          [/\b(telescope|telescopes)\b/gi, "टेलिस्कोप"],
+          [/\b(light[\s-]?years?)\b/gi, "प्रकाश-वर्ष"],
+          [/\b(big[\s-]?bang)\b/gi, "बिग बैंग"],
+          [/\b(singularity)\b/gi, "सिंगुलैरिटी"],
+          [/\b(radiation)\b/gi, "विकिरण"],
+          [/\b(frequency)\b/gi, "आवृत्ति"],
+          [/\b(wavelength)\b/gi, "तरंग दैर्ध्य"],
+          [/\b(energy)\b/gi, "ऊर्जा"],
+          [/\b(photon|photons)\b/gi, "फ़ोटॉन"]
+        ];
+        loanwords.forEach(([pattern, repl]) => { t = t.replace(pattern, repl); });
+        t = t.replace(/\b13\.8\b/g, "तेरह दशमलव आठ")
+             .replace(/\b300,000\b/g, "तीन लाख")
+             .replace(/\b380,000\b/g, "तीन लाख अस्सी हज़ार")
+             .replace(/\b3,000\b/g, "तीन हज़ार")
+             .replace(/\b75%\b/g, "पचहत्तर प्रतिशत")
+             .replace(/\b25%\b/g, "पच्चीस प्रतिशत");
+        return t;
       }
 
-      document.getElementById("home-load-hindi").onclick = () => { textArea.value = shortHindi; };
-      document.getElementById("home-load-full").onclick = () => { textArea.value = fullHindi; };
-      document.getElementById("home-clear-text").onclick = () => { textArea.value = ""; };
-      speedSlider.oninput = () => { speedVal.innerText = speedSlider.value + "×"; };
-
+      // Visualizer
       let animId = null;
       function drawWave(active) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const bars = 50;
         const barW = canvas.width / bars;
+        const profile = AGENT_PROFILES[currentAgent] || AGENT_PROFILES.narrator;
         for (let i = 0; i < bars; i++) {
           const h = active ? Math.random() * 38 + 6 : 4;
           const grad = ctx.createLinearGradient(0, canvas.height, 0, 0);
-          grad.addColorStop(0, "#02d2e3");
+          grad.addColorStop(0, profile.color);
           grad.addColorStop(1, "#8b5cf6");
           ctx.fillStyle = grad;
           ctx.fillRect(i * barW + 2, (canvas.height - h) / 2, barW - 4, h);
@@ -5287,175 +5416,142 @@
       }
       drawWave(false);
 
+      // Watchdog Timer for Chrome
+      let watchdogTimer = null;
+      function startWatchdog() {
+        stopWatchdog();
+        watchdogTimer = setInterval(() => {
+          if ('speechSynthesis' in window && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+            window.speechSynthesis.pause();
+            window.speechSynthesis.resume();
+          }
+        }, 4500);
+      }
+      function stopWatchdog() {
+        if (watchdogTimer) { clearInterval(watchdogTimer); watchdogTimer = null; }
+      }
+
+      let isSpeaking = false;
+      window.__homeUtterances = [];
+
       btnStop.onclick = () => {
+        isSpeaking = false;
+        stopWatchdog();
         if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-        if (audioPlayer) { audioPlayer.pause(); audioPlayer.currentTime = 0; }
         if (animId) cancelAnimationFrame(animId);
         drawWave(false);
+        if (clauseBadge) clauseBadge.style.display = "none";
         liveStatus.innerText = "● Stopped";
         liveStatus.style.color = "#94a3b8";
+        logDiv.innerText = "Speech stopped.";
       };
 
-      btnSpeak.onclick = async () => {
-        const text = textArea.value.trim();
-        if (!text) return alert("Please enter some narration text!");
+      btnSpeak.onclick = () => {
+        const raw = textArea.value.trim();
+        if (!raw) return alert("Please enter some narration text!");
+
         btnStop.onclick();
+        isSpeaking = true;
 
-        const engine = engineSelect.value;
-
-        // Engine 0: Cartesia Sonic State Space Model
-        if (engine === "cartesia_sonic") {
-          const apiKey = (cartesiaKeyInput ? cartesiaKeyInput.value.trim() : "") || localStorage.getItem("cartesia_api_key");
-          if (!apiKey) {
-            liveStatus.innerText = "⚠️ Cartesia Key Required";
-            liveStatus.style.color = "#f59e0b";
-            logDiv.innerHTML = 'Enter Cartesia API key above, or select <b>"Cloud Neural Hindi"</b> in dropdown for zero-setup stream!';
-            if (cartesiaBox) cartesiaBox.style.display = "block";
-            return;
+        const refinedText = preprocessHindiProsody(raw);
+        const rawClauses = refinedText.split(/([।?!,\n]+)/).filter(c => c.trim().length > 0);
+        const clauses = [];
+        let temp = "";
+        for (let c of rawClauses) {
+          temp += c;
+          if (temp.length > 20 || /[।?!]/.test(c)) {
+            clauses.push(temp.trim());
+            temp = "";
           }
+        }
+        if (temp.trim()) clauses.push(temp.trim());
 
-          liveStatus.innerText = "⏳ Calling Cartesia Sonic SSM (~100ms)...";
-          liveStatus.style.color = "#02d2e3";
-          logDiv.innerText = "Streaming master Hindi from Cartesia Sonic (Voice: 4459a9a5...)...";
-
-          try {
-            const resp = await fetch("https://api.cartesia.ai/tts/bytes", {
-              method: "POST",
-              headers: {
-                "X-API-Key": apiKey,
-                "Cartesia-Version": "2024-06-10",
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                model_id: "sonic-multilingual",
-                transcript: text,
-                voice: {
-                  mode: "id",
-                  id: "4459a9a5-69d6-4680-b970-e13dc51845b6"
-                },
-                language: "hi",
-                output_format: {
-                  container: "mp3",
-                  bit_rate: 128000,
-                  sample_rate: 44100
-                }
-              })
-            });
-
-            if (!resp.ok) {
-              const err = await resp.text();
-              throw new Error(`Cartesia error ${resp.status}: ${err}`);
-            }
-
-            const blob = await resp.blob();
-            const blobUrl = URL.createObjectURL(blob);
-
-            audioWrap.style.display = "block";
-            audioPlayer.src = blobUrl;
-            audioPlayer.playbackRate = parseFloat(speedSlider.value);
-            audioPlayer.play();
-            drawWave(true);
-
-            downloadLink.href = blobUrl;
-            downloadLink.download = `cartesia_hindi_master.mp3`;
-
-            liveStatus.innerText = "✓ Cartesia Sonic Hindi Synthesized";
-            liveStatus.style.color = "#10b981";
-            logDiv.innerText = "Cartesia Sonic SSM audio streamed and played (Voice 4459a9a5...).";
-
-            audioPlayer.onended = () => {
-              if (animId) cancelAnimationFrame(animId);
-              drawWave(false);
-              liveStatus.innerText = "● Playback Complete";
-            };
-
-          } catch (e) {
-            liveStatus.innerText = "⚠️ Cartesia Request Failed";
-            liveStatus.style.color = "#ef4444";
-            logDiv.innerText = "Error: " + e.message;
-          }
+        if (!('speechSynthesis' in window)) {
+          alert("Speech synthesis is not supported by your browser!");
           return;
         }
 
-        // Engine 1: Cloud Neural Google Stream
-        if (engine === "cloud_neural") {
-          liveStatus.innerText = "⏳ Loading Cloud Audio Stream...";
-          liveStatus.style.color = "#02d2e3";
-          logDiv.innerText = "Connecting to Google Cloud Hindi speech stream...";
+        liveStatus.innerText = "● Voice Active";
+        liveStatus.style.color = "#02d2e3";
+        if (clauseBadge) clauseBadge.style.display = "inline-block";
+        drawWave(true);
+        startWatchdog();
 
-          const clauses = text.split(/([।?!,\n]+)/).filter(c => c.trim().length > 0);
-          const combined = [];
-          let cur = "";
-          for (let c of clauses) {
-            cur += c;
-            if (cur.length > 25 || /[।?!]/.test(c)) {
-              combined.push(cur.trim());
-              cur = "";
-            }
+        const allVoices = window.speechSynthesis.getVoices() || [];
+        const isHindiText = /[\u0900-\u097F]/.test(raw);
+
+        let bestVoice = null;
+        if (currentAgent === "swara") {
+          bestVoice = allVoices.find(v => (v.lang.startsWith("hi") || v.lang.startsWith("hi-IN")) && (v.name.toLowerCase().includes("female") || v.name.toLowerCase().includes("swara") || v.name.toLowerCase().includes("kalpana")));
+        }
+        if (!bestVoice && isHindiText) {
+          bestVoice = allVoices.find(v => v.lang.startsWith("hi") || v.lang.startsWith("hi-IN") || v.name.toLowerCase().includes("hindi") || v.name.toLowerCase().includes("lekha"));
+        }
+        if (!bestVoice) {
+          bestVoice = allVoices.find(v => v.lang.startsWith("en-IN") || v.name.toLowerCase().includes("india"));
+        }
+        if (!bestVoice && allVoices.length > 0) {
+          bestVoice = allVoices[0];
+        }
+
+        const speed = parseFloat(speedSlider.value) || 0.95;
+        const pitchOffset = parseInt(pitchSlider.value, 10) || 0;
+        const pitch = Math.max(0.6, Math.min(1.8, 1.0 + (pitchOffset / 100)));
+        const pauseMultiplier = parseFloat(pauseSlider.value) || 1.0;
+
+        let currentIdx = 0;
+        window.__homeUtterances = [];
+
+        function playClause() {
+          if (!isSpeaking || currentIdx >= clauses.length) {
+            btnStop.onclick();
+            liveStatus.innerText = "✓ Speech Complete";
+            liveStatus.style.color = "#10b981";
+            logDiv.innerText = "Playback finished successfully.";
+            return;
           }
-          if (cur.trim()) combined.push(cur.trim());
 
-          let idx = 0;
-          function playNext() {
-            if (idx >= combined.length) {
-              liveStatus.innerText = "● Finished";
-              liveStatus.style.color = "#10b981";
-              if (animId) cancelAnimationFrame(animId);
-              drawWave(false);
-              logDiv.innerText = "Playback complete.";
-              return;
-            }
-            const chunk = combined[idx];
-            const isHindi = /[\u0900-\u097F]/.test(chunk);
-            const lang = isHindi ? "hi" : "en";
-            const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${lang}&client=tw-ob&q=${encodeURIComponent(chunk)}`;
+          const textChunk = clauses[currentIdx];
+          if (clauseBadge) clauseBadge.innerText = `Clause ${currentIdx + 1} of ${clauses.length}`;
+          logDiv.innerHTML = `Speaking [${currentAgent.toUpperCase()}]: <i>"${textChunk.substring(0, 48)}..."</i>`;
 
-            audioWrap.style.display = "block";
-            audioPlayer.src = url;
-            audioPlayer.playbackRate = parseFloat(speedSlider.value);
-            audioPlayer.play().catch(e => console.log(e));
+          const utter = new SpeechSynthesisUtterance(textChunk);
+          window.__homeUtterances.push(utter);
 
-            downloadLink.href = url;
-            downloadLink.download = `hindi_audio_${idx + 1}.mp3`;
-
-            drawWave(true);
-            liveStatus.innerText = `● Speaking clause ${idx + 1}/${combined.length}`;
-            liveStatus.style.color = "#02d2e3";
-            logDiv.innerText = `Speaking [${lang.toUpperCase()}]: "${chunk.substring(0, 45)}..."`;
-
-            audioPlayer.onended = () => {
-              idx++;
-              setTimeout(playNext, 280);
-            };
-          }
-          playNext();
-        } else {
-          // Browser native
-          if (!('speechSynthesis' in window)) return alert("Speech Synthesis not supported in this browser!");
-          const utter = new SpeechSynthesisUtterance(text);
-          utter.rate = parseFloat(speedSlider.value);
-          const isHindi = /[\u0900-\u097F]/.test(text);
-          const allV = window.speechSynthesis.getVoices();
-          if (isHindi) {
-            const hV = allV.find(v => v.lang.startsWith("hi") || v.name.toLowerCase().includes("hindi"));
-            if (hV) utter.voice = hV;
+          utter.rate = speed;
+          utter.pitch = pitch;
+          if (bestVoice) {
+            utter.voice = bestVoice;
+            utter.lang = bestVoice.lang;
+          } else if (isHindiText) {
             utter.lang = "hi-IN";
           }
-          utter.onstart = () => {
-            liveStatus.innerText = "● Speaking via Device Voice";
-            liveStatus.style.color = "#34d399";
-            logDiv.innerText = `Speaking via device voice: ${utter.voice ? utter.voice.name : 'System Default'}...`;
-            drawWave(true);
-          };
+
           utter.onend = () => {
-            liveStatus.innerText = "● Finished";
-            liveStatus.style.color = "#10b981";
-            if (animId) cancelAnimationFrame(animId);
-            drawWave(false);
+            if (!isSpeaking) return;
+            currentIdx++;
+            const isSuspense = /[….]/.test(textChunk);
+            const pauseTime = Math.round((isSuspense ? 450 : 260) * pauseMultiplier);
+            setTimeout(playClause, pauseTime);
           };
+
+          utter.onerror = (e) => {
+            console.warn("Clause playback issue:", e);
+            if (!isSpeaking) return;
+            currentIdx++;
+            setTimeout(playClause, 150);
+          };
+
           window.speechSynthesis.speak(utter);
         }
+
+        playClause();
       };
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+      }
     })();
   </script>
 </body>
